@@ -7,10 +7,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "lg-red": "#ff7376",
-        "lg-yellow": "#fee819",
-        "lg-green": "#51b04f",
-        "lg-blue": "#18BDE8",
+        "apple": "#ff7376",
+        "banana": "#fee819",
+        "avocado": "#51b04f",
+        "grape": "#18BDE8",
       }
     },
   },
