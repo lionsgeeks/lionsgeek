@@ -42,3 +42,7 @@
   font-family: Gotham, sans-serif;
   color: #212529;
 }
+
+.bg-image {
+  background-image: url("./assets/images/visite-ministre-president.jpg");
+}
