@@ -7,6 +7,7 @@ import { Footer } from './layouts/footer';
 import { ContactUs } from './pages/ContactUs/contactUs';
 import Navbar from './layouts/navbar';
 import { CoworkingPage } from './pages/coworking/coworking';
+import { CodingPage } from './pages/Coding/coding';
 function App() {
   return (
     <MyProvider>
@@ -16,6 +17,7 @@ function App() {
         <Route path='/about' element={<AboutPage />} />
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/coworking' element={<CoworkingPage />} />
+        <Route path='/coding' element={<CodingPage />} />
       </Routes >
       <Footer />
     </MyProvider>
