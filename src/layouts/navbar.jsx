@@ -92,7 +92,7 @@ const Navbar = () => {
                             <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">About</a>
                             <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Gallerie</a>
                             {/* <a href="#" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">Contact Us</a> */}
-                            <a href="#" className="bg-alpha text-black  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a>
+                            <a href="#" className="bg-alpha  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a>
                         </nav>
                     </div>
                 </div>
