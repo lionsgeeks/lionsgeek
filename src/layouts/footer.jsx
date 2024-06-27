@@ -4,6 +4,7 @@ import { FaInstagram } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
+import Button from '../components/Button';
 
 
 
@@ -11,12 +12,12 @@ import { FaYoutube } from "react-icons/fa";
 export const Footer = () => {
     return (
         <>
-            <footer className="bg-[#f2f2f2] px-[9vw] border-y-[4px] border-black pt-5">
-                <div className="border-b-[3px] border-gray-500 py-8 flex flex-col gap-10 px-1">
-                    <img src={Logo} alt="" className='w-[6vw]' />
-                    <div className='flex justify-between'>
-                        <div className='flex gap-10'>
-                            <div className='flex flex-col gap-3'>
+            <footer className=" px-16 py-10">
+                <div className=" bg-light_gray pt-10 pb-4 flex flex-col gap-10  rounded-lg px-10">
+                    <div className='flex justify-between px-4'>
+                        <div className='flex justify-center gap-10'>
+                            <img src={Logo} alt="" className='w-[7vw] h-[7vw]' />
+                            <div className='flex flex-col gap-3 ms-5'>
                                 <h1 className='font-bold text-gray-600 text-[1.2rem]'>About</h1>
                                 <div>
                                     <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
@@ -40,7 +41,6 @@ export const Footer = () => {
                                     <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
                                 </div>
                             </div>
-
                         </div>
                         <div className='flex flex-col items-start gap-2'>
                             <h1 className='font-bold text-gray-600 text-[1.2rem]'>STAY IN TOUCH</h1>
@@ -53,19 +53,20 @@ export const Footer = () => {
                                     Type your email
                                 </label>
                             </div>
-                            <button className="bg-alpha mt-2   font-light text-[0.8rem] px-4 py-2 rounded-lg shadow-md">SIGN UP</button>
+                            {/* <button className="bg-alpha mt-2   font-light text-[0.8rem] px-4 py-2 rounded-lg shadow-md">SIGN UP</button> */}
+                            <Button className={'px-4 py-2 shadow-md font-normal mt-2 text-[0.8rem]'}>SIGN UP</Button>
                         </div>
                     </div>
-                </div>
-                <div className='flex flex-col items-center justify-between gap-2 py-4'>
-                    <div className='flex gap-3'>
-                        <FaFacebookF className='text-[1.4rem] fill-gray-400' />
-                        <FaInstagram className='text-[1.4rem] fill-gray-400' />
-                        <BsTwitterX className='text-[1.4rem] fill-gray-400' />
-                        <FaLinkedinIn className='text-[1.4rem] fill-gray-400' />
-                        <FaYoutube className='text-[1.4rem] fill-gray-400' />
+                    <div className='flex flex-col items-center justify-between gap-2 pt-4 border-t-[3px] border-gray-500 border-opacity-50'>
+                        <div className='flex gap-3'>
+                            <FaFacebookF className='text-[1.4rem] fill-gray-400' />
+                            <FaInstagram className='text-[1.4rem] fill-gray-400' />
+                            <BsTwitterX className='text-[1.4rem] fill-gray-400' />
+                            <FaLinkedinIn className='text-[1.4rem] fill-gray-400' />
+                            <FaYoutube className='text-[1.4rem] fill-gray-400' />
+                        </div>
+                        <p className='text-gray-400 text-[0.9rem]'>&copy; Copyright 2024. All Rights Reserved.</p>
                     </div>
-                    <p className='text-gray-400'>&copy; Copyright 2024. All Rights Reserved.</p>
                 </div>
             </footer>
         </>

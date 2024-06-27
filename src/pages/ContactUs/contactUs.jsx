@@ -81,8 +81,8 @@ export const ContactUs = () => {
                                 Message
                             </label>
                         </div>
-                        <button className="bg-alpha mt-2 text-gray-800 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md">Send Message</button>
-                        {/* <Button className={'text-[0.9rem] px-4 py-2 shadow-md font-light mt-2'}>Send Message</Button> */}
+                        {/* <button className="bg-alpha mt-2 text-gray-800 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md">Send Message</button> */}
+                        <Button className={'text-[0.9rem] px-4 py-2 shadow-md font-normal mt-2'}>Send Message</Button>
                     </form>
                 </div>
             </div>

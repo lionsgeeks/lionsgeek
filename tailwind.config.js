@@ -8,6 +8,7 @@ module.exports = {
         error: "#ff7376",
         alpha: "#fee819",
         good: "#51b04f",
+        light_gray: "#f2f2f2",
       },
     },
   },

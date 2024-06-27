@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../components/Button';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -53,11 +54,11 @@ const Navbar = () => {
                                 </svg>
                             </button>
                         </div>
-                        <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-15px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Home</a>
+                        <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
+                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Home</a>
 
                             <div className="relative">
-                                <button onClick={toggleMoreMenu} className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-15px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">
+                                <button onClick={toggleMoreMenu} className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">
                                     <span>Formation</span>
                                     <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${isMoreOpen ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -86,13 +87,12 @@ const Navbar = () => {
                                     </div>
                                 )}
                             </div>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-15px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Coworking</a>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-15px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Events</a>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-15px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">About</a>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-15px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Gallerie</a>
+                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Coworking</a>
+                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Events</a>
+                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">About</a>
+                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Gallerie</a>
                             {/* <a href="#" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">Contact Us</a> */}
-                            <a href="#" className="bg-alpha text-black  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md ">Contact Us</a>
-
+                            <a href="#" className="bg-alpha text-black  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a>
                         </nav>
                     </div>
                 </div>
