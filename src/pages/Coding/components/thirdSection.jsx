@@ -3,9 +3,13 @@ import React from "react";
 export const ThirdSection = () => {
   return (
     <div className="px-16 py-16 flex flex-col gap-8">
-      <h1 className="font-bold text-6xl text-center ">During the journey</h1>
+      {/* <h1 className="font-bold text-6xl text-center ">During the journey</h1> */}
+      <div className="w-full text-center pb-10">
+        <h1 className="text-xl">Testimonials</h1>
+        <h1 className="text-5xl font-bold">During the journey</h1>
+      </div>
       <div className="flex gap-8 justify-center">
-        <div className="w-[25%] bg-beta  p-8 flex flex-col justify-between gap-4 rounded-lg ">
+        <div className="w-[25%] bg-beta  p-8 flex flex-col justify-between gap-4 rounded-lg hover:scale-105 duration-300 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -25,7 +29,7 @@ export const ThirdSection = () => {
             skills, and get help with creating CVs and cover letters.{" "}
           </p>
         </div>
-        <div className="w-[25%] bg-beta text-white p-8 flex flex-col justify-between gap-4 rounded-lg ">
+        <div className="w-[25%] bg-beta text-white p-8 flex flex-col justify-between gap-4 rounded-lg hover:scale-105 duration-300 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -41,7 +45,7 @@ export const ThirdSection = () => {
             development and media industries.
           </p>
         </div>
-        <div className="w-[25%] bg-beta text-white p-8 flex flex-col justify-between gap-4 rounded-lg ">
+        <div className="w-[25%] bg-beta text-white p-8 flex flex-col justify-between gap-4 rounded-lg hover:scale-105 duration-300 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

@@ -5,7 +5,7 @@ import Button from "../../../components/Button";
 export const FirstSection = () => {
   return (
     <div className="flex justify-center ">
-      <div className="w-[50%] py-5 px-16 flex flex-col gap-4">
+      <div className="w-[50%] py-16 px-16 flex flex-col gap-4">
         <h1 className="font-bold text-6xl text-balance">Full Stack Web Developer</h1>
         <p className="text-lg">
           Become a full stack pro and build powerful, responsive web apps. Our

@@ -6,7 +6,8 @@ export const FourthSection = () => {
   const testimoniels = [
     {
       name: "Ilyasse Elyatime",
-      description: "Attending LionsGeek's master classes was a game-changer. The UI/UX Design and Personal Branding sessions boosted my career. I highly recommend LionsGeek for web development and media training.",
+      description:
+        "Attending LionsGeek's master classes was a game-changer. The UI/UX Design and Personal Branding sessions boosted my career. I highly recommend LionsGeek for web development and media training.",
       image: ilyass,
     },
     {
@@ -17,30 +18,39 @@ export const FourthSection = () => {
     },
     {
       name: "Amine Bakrime",
-      description: "LionsGeek offers top-notch web development education. The practical approach, including real-world projects and industry visits, prepared me well for the tech industry.",
+      description:
+        "LionsGeek offers top-notch web development education. The practical approach, including real-world projects and industry visits, prepared me well for the tech industry.",
       image: ilyass,
     },
     {
       name: "Youness Ait Haddou",
-      description: "I loved the media and code crossover classes at LionsGeek. They gave me a comprehensive understanding of both fields, making me a versatile professional.",
+      description:
+        "I loved the media and code crossover classes at LionsGeek. They gave me a comprehensive understanding of both fields, making me a versatile professional.",
       image: ilyass,
     },
     {
       name: "Wissale Chreiba",
-      description: "The personal attention and mentorship at LionsGeek are outstanding. The CV and cover letter workshops helped me land my dream job in web development.",
+      description:
+        "The personal attention and mentorship at LionsGeek are outstanding. The CV and cover letter workshops helped me land my dream job in web development.",
       image: ilyass,
     },
     {
       name: "Youssef Faradi",
-      description: "LionsGeek's immersive bootcamp taught me everything from HTML and CSS to advanced JavaScript and Laravel. The supportive community and networking opportunities were fantastic.",
+      description:
+        "LionsGeek's immersive bootcamp taught me everything from HTML and CSS to advanced JavaScript and Laravel. The supportive community and networking opportunities were fantastic.",
       image: ilyass,
     },
   ];
 
   return (
     <div className="bg-gray-50 flex flex-col gap-6 px-16 py-8 ">
-      <h1 className="font-bold text-6xl text-center ">Testimoniels</h1>
-
+      {/* <h1 className="font-bold text-6xl text-center ">Testimoniels</h1> */}
+      <div className="w-full text-center pb-10">
+        <h1 className="text-xl">Testimonials</h1>
+        <h1 className="text-5xl font-bold">
+          People Who Already Love Us
+        </h1>
+      </div>
       <div className="flex flex-wrap justify-center gap-3">
         {testimoniels.map((element, index) => (
           <div
