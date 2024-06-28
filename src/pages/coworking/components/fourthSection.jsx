@@ -38,25 +38,25 @@ export const FourthSectionCoworking = () => {
         },
     ];
     return (
-        <div className='px-16 py-10 flex flex-col gap-5'>
+        <div className='p-5 lg:px-16 py-10 flex flex-col gap-5'>
             <div className='w-full text-center pb-10'>
-                <h1 className='text-xl'>Testimonials</h1>
-                <h1 className='text-5xl font-bold'>People Who Already Love Us</h1>
+                <h1 className='text-lg lg:text-xl'>Testimonials</h1>
+                <h1 className='text-2xl lg:text-5xl font-bold'>People Who Already Love Us</h1>
             </div>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap  justify-center gap-3">
                 {testimoniels.map((element, index) => (
                     <div
                         key={index}
-                        className="w-[30%] flex flex-col gap-2 relative overflow-hidden bg-white p-8 border-2 border-gray-100 rounded-lg"
+                        className="w-full md:w-[45%] lg:w-[30%] flex flex-col gap-2 relative overflow-hidden bg-white p-5 lg:p-8 border-2 border-gray-100 rounded-lg"
                     >
                         <div className="flex gap-3 items-center">
                             <img className="rounded-full w-10" src={element.image} alt="" />
-                            <p className="font-bold">{element.name}</p>
+                            <p className="text-base font-bold ">{element.name}</p>
                         </div>
                         <div className="absolute -top-4 -right-4 bg-alpha/70 p-5 object-cover rounded-full opacity-80">
                             <RiDoubleQuotesR className="text-5xl" />
                         </div>
-                        <p>{element.description}</p>
+                        <p className='text-xs lg:text-base'>{element.description}</p>
                     </div>
                 ))}
             </div>
