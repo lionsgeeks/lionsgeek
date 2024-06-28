@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const [isOpenn, setIsOpenn] = useState(false)
+    const navigate = useNavigate()
 
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
@@ -16,6 +18,9 @@ const Navbar = () => {
 
     };
 
+
+    const location = useLocation();
+    console.log(location.pathname);
 
     return (
         <div className="">
@@ -55,8 +60,7 @@ const Navbar = () => {
                             </button>
                         </div>
                         <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Home</a>
-
+                            <Link to={'/'} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Home</Link>
                             <div className="relative">
                                 <button onClick={toggleMoreMenu} className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">
                                     <span>Formation</span>
@@ -87,12 +91,13 @@ const Navbar = () => {
                                     </div>
                                 )}
                             </div>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Coworking</a>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Events</a>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">About</a>
-                            <a href="#" className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-14px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">Gallerie</a>
+                            <Link to={''}  className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Coworking</Link>
+                            <Link to={''}  className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Events</Link>
+                            <Link to={''}  className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>About</Link>
+                            <Link to={''}  className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Gallerie</Link>
                             {/* <a href="#" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">Contact Us</a> */}
-                            <a href="#" className="bg-alpha  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a>
+                            {/* <a href="#" className="bg-alpha  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a> */}
+                            <Button onClick={() => navigate('/contact-us')} className={'shadow-md font-normal px-4 text-[0.8rem] mt-0'}>Contact Us</Button>
                         </nav>
                     </div>
                 </div>

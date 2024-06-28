@@ -5,6 +5,7 @@ import { BsTwitterX } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import Button from '../components/Button';
+import { FaTiktok } from "react-icons/fa6";
 
 
 
@@ -54,16 +55,27 @@ export const Footer = () => {
                                 </label>
                             </div>
                             {/* <button className="bg-alpha mt-2   font-light text-[0.8rem] px-4 py-2 rounded-lg shadow-md">SIGN UP</button> */}
-                            <Button className={'px-4 py-2 shadow-md font-normal mt-2 text-[0.8rem]'}>SIGN UP</Button>
+                            <Button className={'shadow-md font-normal mt-2 w-full text-[0.8rem]'}>SIGN UP</Button>
                         </div>
                     </div>
                     <div className='flex flex-col items-center justify-between gap-2 pt-4 border-t-[3px] border-gray-500 border-opacity-50'>
                         <div className='flex gap-3'>
-                            <FaFacebookF className='text-[1.4rem] fill-gray-400' />
-                            <FaInstagram className='text-[1.4rem] fill-gray-400' />
-                            <BsTwitterX className='text-[1.4rem] fill-gray-400' />
-                            <FaLinkedinIn className='text-[1.4rem] fill-gray-400' />
-                            <FaYoutube className='text-[1.4rem] fill-gray-400' />
+                            <a target='blank' href="https://www.facebook.com/LionsGeek"><FaFacebookF className='text-[1.4rem] fill-gray-400 hover:fill-blue-500 transition duration-200' /></a>
+                            <a target='blank' href="https://www.instagram.com/lions_geek/">
+                                <FaInstagram className='text-[1.4rem] fill-gray-400 hover:fill-pink-600 transition duration-200' />
+                            </a>
+                            <a target='blank' href="https://x.com/LionsGeek">
+                                <BsTwitterX className='text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200' />
+                            </a>
+                            <a target='blank' href="https://www.linkedin.com/company/lionsgeek/">
+                                <FaLinkedinIn className='text-[1.4rem] fill-gray-400 hover:fill-[#0a66c2] transition duration-200' />
+                            </a>
+                            <a target='blank' href="https://www.youtube.com/channel/UCmd_wMUuFYbZ_jJgFxErDyA">
+                                <FaYoutube className='text-[1.4rem] fill-gray-400 hover:fill-[#ff0000] transition duration-200' />
+                            </a>
+                            <a target='blank' href="https://www.tiktok.com/@lions_geek">
+                                <FaTiktok className='text-[1.4rem] fill-gray-400 hover:fill-[#ff0000] transition duration-200' />
+                            </a>
                         </div>
                         <p className='text-gray-400 text-[0.9rem]'>&copy; Copyright 2024. All Rights Reserved.</p>
                     </div>
