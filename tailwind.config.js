@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        'event': "url('/images/5641003.jpg')",
+      },
       colors: {
         beta: "#212529",
         error: "#ff7376",
