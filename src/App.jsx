@@ -10,6 +10,7 @@ import { CoworkingPage } from './pages/coworking/coworking';
 import { CodingPage } from './pages/Coding/coding';
 import { EventPage } from './pages/Events/events';
 import { EventDetailPage } from './pages/EventDetails/eventdetail';
+import { MediaPage } from './pages/media/media';
 function App() {
   return (
     <MyProvider>
@@ -24,6 +25,7 @@ function App() {
         <Route path='/event' element={<EventPage />} />
         <Route path="/event/:id" element={<EventDetailPage  />} />
 
+        <Route path='/media' element={<MediaPage />} />
       </Routes >
       <Footer />
     </MyProvider>

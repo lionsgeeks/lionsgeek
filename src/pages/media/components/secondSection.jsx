@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import facebook from "../../../assets/icons/social_media.png";
+import insta from "../../../assets/icons/icons8-instagram.svg";
+import fingerPrint from "../../../assets/icons/fingerprint-5.svg";
+import adobe from "../../../assets/icons/adobe.png";
+import camera from "../../../assets/icons/camera.png";
+import twitterx from "../../../assets/icons/icons8-twitterx.svg";
 import htmlLogo from "../../../assets/icons/icons8-html-5.svg";
 import cssLogo from "../../../assets/icons/icons8-css3.svg";
 import jsLogo from "../../../assets/icons/icons8-javascript.svg";
@@ -6,34 +12,40 @@ import react from "../../../assets/icons/icons8-react.svg";
 import laravel from "../../../assets/icons/laravel.svg";
 
 export const SecondSection = () => {
-  const skill = ["HTML", "CSS", "Javascript", "React", "Laravel"];
-  const [hint, setHint] = useState("HTML");
-  const [activeSkill, setActiveSkill] = useState("HTML");
+  // ' graphic design branding  marketing digital  audio visual'
+  const skill = [
+    "Digital Marketing",
+    "Branding",
+    "Graphic Design",
+    "Audio Visual",
+  ];
+  const [hint, setHint] = useState("Digital Marketing");
+  const [activeSkill, setActiveSkill] = useState("Digital Marketing");
   const programe = {
-    HTML: [
-      "The foundation of web development, HTML structures the content on web pages, creating the backbone of all websites.",
+    "Digital Marketing": [
+      "Learn how to effectively promote your content across various online platforms. Understand the strategies behind SEO, social media marketing, email campaigns, and analytics to reach and engage your target audience.",
       "from-[#dd4b25]",
-      htmlLogo,
+      facebook,
     ],
-    CSS: [
-      "CSS adds style and layout to web pages, making them visually appealing and ensuring they look great on all devices.",
+    Branding: [
+      "Discover the essentials of creating a strong brand identity. Learn how to develop a consistent visual and verbal identity that resonates with your audience and sets you apart from the competition.",
       "from-[#136eb0]",
-      cssLogo,
+      fingerPrint,
     ],
-    Javascript: [
-      "A powerful programming language that enables dynamic and interactive web features, enhancing user experience.",
+    "Graphic Design": [
+      "Master the fundamentals of graphic design, including typography, color theory, and layout. Use industry-standard software to create visually appealing and professional designs for various media.",
       "from-[#e2c430]",
-      jsLogo,
+      adobe,
     ],
-    React: [
-      "A popular JavaScript library for building fast, interactive user interfaces with reusable components.",
+    "Audio Visual": [
+      "Gain expertise in audio and video production. Learn how to capture high-quality sound and visuals, edit recordings, and integrate them into your digital content to enhance the overall viewer experience",
       "from-[#31acd1]",
-      react,
+      camera,
     ],
     Laravel: [
       "A robust PHP framework designed for building modern web applications, featuring elegant syntax and powerful tools.",
       "from-[#f54d3a]",
-      laravel,
+      insta,
     ],
   };
 
@@ -67,7 +79,9 @@ export const SecondSection = () => {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class={`${activeSkill == element ? "stroke-alpha" : ""} size-5 font-bold`}
+                class={`${
+                  activeSkill == element ? "stroke-alpha" : ""
+                } size-5 font-bold`}
               >
                 <path
                   stroke-linecap="round"
@@ -81,15 +95,20 @@ export const SecondSection = () => {
         <div className="w-[50%] p-4 bg-white relative overflow-hidden">
           {/* <div className={`absolute inset-0 -z-30`}></div> */}
           {programe[hint] && (
-            <p className="font-medium text-xl bg-white/25 absolute px-5">
-              {programe[hint][0]}
-            </p>
+            <>
+              <p
+                className="font-medium text-xl bg-white/25 absolute px-5"
+                opacity-5
+              >
+                {programe[hint][0]}
+              </p>
+              <img
+                className="size-[120%] object-cover absolute -right-56 -top-6 opacity-5 -rotate-12"
+                src={programe[hint][2]}
+                alt=""
+              />
+            </>
           )}
-          <img
-            className="size-[120%] object-cover absolute -right-56 -top-6 opacity-5 -rotate-12"
-            src={programe[hint][2]}
-            alt=""
-          />
         </div>
       </div>
     </div>
