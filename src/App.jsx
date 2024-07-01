@@ -24,6 +24,7 @@ function App() {
         <Route path='/coding' element={<CodingPage />} />
         <Route path='/event' element={<EventPage />} />
         <Route path="/event/:id" element={<EventDetailPage  />} />
+        {/* <Route path='*' element={Navigate({to:"/"})} /> */}
 
         <Route path='/media' element={<MediaPage />} />
       </Routes >
