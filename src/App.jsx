@@ -27,6 +27,7 @@ function App() {
         <Route path="/event/:id" element={<EventDetailPage  />} />
         <Route path='/galerie' element={<GaleriePage />} />
 
+        {/* <Route path='*' element={Navigate({to:"/"})} /> */}
 
         <Route path='/media' element={<MediaPage />} />
       </Routes >

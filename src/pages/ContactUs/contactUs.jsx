@@ -19,9 +19,9 @@ export const ContactUs = () => {
     );
     return (
         <>
-            <div className="py-[12vh] flex flex-col justify-center px-16 ">
-                <div className="flex justify-between gap-4 ">
-                    <div className="w-[50%] flex flex-col gap-6">
+            <div className="py-[12vh] flex flex-col justify-center lg:px-16 px-5 ">
+                <div className="flex lg:flex-row flex-col justify-between gap-8">
+                    <div className="lg:w-[50%] flex flex-col gap-6  px-3">
                         <div className="tessst opacity-0 translate-y-12 [clip-path: polygon((0 100%, 100% 100%, 100% 100%, 0% 100%)]">
                             <h1 className='font-bold text-[2.1rem] '>Ready to start? </h1>
                             <h1 className='font-bold text-[2.1rem] '>We've got you covered</h1>
@@ -45,7 +45,7 @@ export const ContactUs = () => {
                             </div>
                         </div>
                     </div>
-                    <form action="" className="w-[40%] py-6 px-7 shadow-md  border border-white/55 rounded-lg flex  items-start flex-col gap-6 bg-200/75">
+                    <form action="" className="lg:w-[40%] py-6 px-7 shadow-md  border border-white/55 rounded-lg flex  items-start flex-col gap-6 bg-200/75">
                         <div class="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
                             <input
                                 class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
@@ -100,9 +100,7 @@ export const ContactUs = () => {
                     </form>
                 </div>
             </div>
-            <div className="">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.0584384950844!2d-7.5364266246542515!3d33.60378817332915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cdb2f812837f%3A0xbbcfc74fbc11b2d9!2sLionsGeek!5e0!3m2!1sen!2sma!4v1719408103931!5m2!1sen!2sma" className='w-full h-[45vh] filter grayscale focus:border-none focus:outline-none map' allowfullscreen="" loading="lazy" ></iframe>
-            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.0584384950844!2d-7.5364266246542515!3d33.60378817332915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cdb2f812837f%3A0xbbcfc74fbc11b2d9!2sLionsGeek!5e0!3m2!1sen!2sma!4v1719408103931!5m2!1sen!2sma" className='w-full h-[45vh] filter grayscale focus:border-none focus:outline-none map' allowfullscreen="" loading="lazy" ></iframe>
         </>
     )
 }
