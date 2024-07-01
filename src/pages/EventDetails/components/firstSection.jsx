@@ -6,6 +6,8 @@ import myImage2 from '../../../assets/images/pexels-bertellifotografia-2608512.j
 import myImage3 from '../../../assets/images/pexels-teddy-2263410.jpg';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 export const FirstSectionEventDetail = () => {
 
     const { id } = useParams()
@@ -44,15 +46,24 @@ export const FirstSectionEventDetail = () => {
         },
 
     ])
+    useGSAP(
+        () => {
+            let animation = gsap.timeline({ defaults: { ease: "pwer4inOut" } })
+            animation.to('.first', { opacity: 1, y: 0, duration: 1.5, 'clip-path': 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' })
+                .to('.last', { opacity: 1, y: 0, duration: 0.2, stagger: .3, 'clip-path': 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }, '-=1.4'
+                )
+        },
+    );
     const check = Event.filter((Event) => Event.Name == id)
     console.log(check);
+    
     return (
         <>
             {
                 check.map((element, index) =>
                     <>
                         <div className=' h-fit p-16  '>
-                            <div className='h-[13vh] w-full gap-5 rounded-l-lg flex '>
+                            <div className='h-[13vh] first w-full gap-5 rounded-l-lg flex '>
                                 {/* date */}
                                 <div className='w-[7%]  '> <div className='bg-alpha rounded-t-lg h-[40%] flex items-center justify-center font-bold text-white text-lg '>JUIN</div>
                                     <div className='bg-beta h-[60%] rounded-b-lg flex items-center justify-center font-semibold text-white text-2xl'>07</div> </div>
@@ -72,19 +83,14 @@ export const FirstSectionEventDetail = () => {
                             </div>
                             {/* <div className="p-2">
                                 <h2 className="font-mono fs-1 fw-bolder p-4"  >{id}</h2>
-                                <h2 className="font-mono fs-1 fw-bolder p-4"  >{element.Name}</h2>
-                                <h2 className="font-mono fs-1 fw-bolder p-4"  >{element.Type}</h2>
                                 <p className="font-mono fs-1 fw-bolder p-4"  >{element.Description}</p>
                                 <h3 className="font-mono p-4 fw-bolder fs-1">{element.Date}</h3>
                             </div> */}
-                            <div className='flex gap-10 h-[100%]  '>
-                                <div className="   w-[70%] py-5 flex flex-col ">
+                            <div className='flex  gap-10 h-[100%] first '>
+                                <div className="   w-[70%] py-5 flex flex-col gap-5 ">
                                     <img className="h-[55vh] w-[100%] rounded-lg " src={element.image} alt="" />
-                                    <div className='w-[100%] flex items-center justify-center py-6'>
-                                        <button className='bg-gray-500/15 px-4 border border-black py-2 rounded-sm'>Partagez</button>
-                                    </div>
-                                    {/* heeeeere */}
-                                    <div className='shadow-xl px-4 border rounded-lg  flex flex-col  py-4 '>
+                                    
+                                    <div className='shadow-xl  px-4 border rounded-lg  flex flex-col  py-4 '>
                                         <div className='border-b-2 border-black py-3'>
 
                                         <h1 className='font-semibold text-xl'>A propos de cet évenement</h1> 
@@ -95,7 +101,7 @@ export const FirstSectionEventDetail = () => {
                                     </div>
 
                                 </div>
-                                <div className='shadow-xl border rounded-lg  h-fit flex flex-col w-[30%]'>
+                                <div className='shadow-xl last border rounded-lg   h-fit flex flex-col w-[30%]'>
                                     <h2 className='p-4 border-b border-gray-500'>Detail de l'Evénement </h2>
                                     <div className='flex gap-2 p-4'>
                                         <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-2xl'>00</p> <p className='text-white'>Jours</p></div>
@@ -110,7 +116,7 @@ export const FirstSectionEventDetail = () => {
                                         <h1 className='font-bold text-2xl py-3'>Total à payer: 0 MAD</h1>
                                     </div>
                                     <div className='p-4 '>
-                                        <button className='bg-alpha w-[100%] py-2 rounded-lg'>Réservez maintenant!</button>
+                                        <button className='bg-alpha w-[100%] py-2 rounded-lg hover:bg-transparent hover:scale-105 hover:text-alpha border'>Réservez maintenant!</button>
                                     </div>
                                 </div>
                             </div>
