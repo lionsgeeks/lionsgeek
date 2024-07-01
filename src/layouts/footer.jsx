@@ -13,12 +13,12 @@ import { FaTiktok } from "react-icons/fa6";
 export const Footer = () => {
     return (
         <>
-            <footer className=" px-16 py-10">
-                <div className=" bg-light_gray pt-10 pb-4 flex flex-col gap-10  rounded-lg px-10">
-                    <div className='flex justify-between px-4'>
-                        <div className='flex justify-center gap-10'>
-                            <img src={Logo} alt="" className='w-[7vw] h-[7vw]' />
-                            <div className='flex flex-col gap-3 ms-5'>
+            <footer className=" lg:px-16 px-5 py-10">
+                <div className=" bg-light_gray pt-10 pb-4 flex flex-col gap-10  rounded-lg lg:px-10 px-5">
+                    <div className='flex lg:flex-row flex-col gap-10 justify-between lg:px-4 '>
+                        <div className='flex lg:flex-row flex-col justify-center lg:gap-10 gap-2'>
+                            <img src={Logo} alt="" className='lg:w-[7vw] lg:h-[7vw] w-[20vw] h-[20vw] lg:mb-0 mb-5' />
+                            <div className='flex flex-col gap-3 lg:ms-5'>
                                 <h1 className='font-bold text-gray-600 text-[1.2rem]'>About</h1>
                                 <div>
                                     <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
@@ -74,10 +74,10 @@ export const Footer = () => {
                                 <FaYoutube className='text-[1.4rem] fill-gray-400 hover:fill-[#ff0000] transition duration-200' />
                             </a>
                             <a target='blank' href="https://www.tiktok.com/@lions_geek">
-                                <FaTiktok className='text-[1.4rem] fill-gray-400 hover:fill-[#ff0000] transition duration-200' />
+                                <FaTiktok className='text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200' />
                             </a>
                         </div>
-                        <p className='text-gray-400 text-[0.9rem]'>&copy; Copyright 2024. All Rights Reserved.</p>
+                        <p className='text-gray-400 text-[0.9rem]'>&copy; Copyright 2024 LionsGeek. All Rights Reserved.</p>
                     </div>
                 </div>
             </footer>
