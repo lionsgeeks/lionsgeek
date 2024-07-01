@@ -110,13 +110,13 @@ export const Stats = () => {
     </div>
 </div>         */}
 {/* <section className='py-[10vh]'>
-    <p className='font-bold text-5xl text-center py-[10vh]'>Stats <span className='text-yellow-400'>:</span></p>
+    <p className='font-bold text-5xl text-center py-[10vh]'>Stats <span className='text-alpha'>:</span></p>
     <div className="all flex flex-row justify-around">
-    <div className="bg-black border-2 border-yellow-400 shadow-xl h-fit w-[25vw] rounded-lg">
+    <div className="bg-black border-2 border-alpha shadow-xl h-fit w-[25vw] rounded-lg">
             <div className="flex justify-center">
                 <img src={logo} alt="" className='w-20'/>
             </div>
-            <p className='text-yellow-400 text-center font-medium'>Amine Bakrim</p>
+            <p className='text-alpha text-center font-medium'>Amine Bakrim</p>
             <p className='text-white text-sm px-4 py-4'>Lorem ipsum,  Lorem ipsum dolor sit amet. lorem tdolor sit amet consectetur adipisicing elit. Id, cupiditate nemo vel accusamus fugiat sint expedita porro impedit facere facilis.</p>
             <div className="flex justify-center">
                 <img src={stars} alt=""  className='w-32'/>
@@ -202,22 +202,22 @@ export const Stats = () => {
     </div>
     <div className="containerr flex px-16">
         <div className="left w-[40vw]">
-            <img src={staff} alt="" className='w-[80%] rounded-lg border-4 border-yellow-400'/>
+            <img src={staff} alt="" className='w-[80%] rounded-lg border-4 border-alpha'/>
         </div>
 
         <div className="right flex flex-col justify-center items-center">
 
         <div className="allcards flex flex-row justify-around w-[50vw]">
-        <div className="card3 border-t-2 border-t-yellow-400 w-[17vw] py-[6vh]  hover:scale-105 transition duration-500 cursor-default">
+        <div className="card3 border-t-2 border-t-alpha w-[17vw] py-[6vh]  hover:scale-105 transition duration-500 cursor-default">
             <div className="text">
-                <p className='text-6xl font-bold px-4 text-yellow-400 mr-4'>+<span className='text-black font-bold'>999</span></p>
+                <p className='text-6xl font-bold px-4 text-alpha mr-4'>+<span className='text-black font-bold'>999</span></p>
                 <p className='text-sm font-medium text-gray-950 ml-4 w-[80%] h-[15vh] flex items-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
         </div>
 
-        <div className="card3 border-t-2 border-t-yellow-400 w-[17vw] py-[6vh]  hover:scale-105 transition duration-500 cursor-default">
+        <div className="card3 border-t-2 border-t-alpha w-[17vw] py-[6vh]  hover:scale-105 transition duration-500 cursor-default">
             <div className="text">
-                <p className='text-6xl font-bold px-4 text-yellow-400 mr-4'>+<span className='text-black font-bold'>999</span></p>
+                <p className='text-6xl font-bold px-4 text-alpha mr-4'>+<span className='text-black font-bold'>999</span></p>
                 <p className='text-sm font-medium text-gray-950 ml-4 w-[80%] h-[15vh] flex items-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
         </div>
@@ -225,9 +225,9 @@ export const Stats = () => {
         </div>
 
         <div className="bottomcard">
-        <div className="card3 border-t-2 border-t-yellow-400 w-[17vw] py-[6vh]  hover:scale-105 transition duration-500 cursor-default">
+        <div className="card3 border-t-2 border-t-alpha w-[17vw] py-[6vh]  hover:scale-105 transition duration-500 cursor-default">
             <div className="text">
-                <p className='text-6xl font-bold px-4 text-yellow-400 mr-4'>+<span className='text-black font-bold'>999</span></p>
+                <p className='text-6xl font-bold px-4 text-alpha mr-4'>+<span className='text-black font-bold'>999</span></p>
                 <p className='text-sm font-medium text-gray-950 ml-4 w-[80%] h-[15vh] flex items-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
         </div>

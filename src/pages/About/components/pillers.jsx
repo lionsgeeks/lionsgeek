@@ -5,7 +5,7 @@ import myImage from '../../../assets/images/visite-ministre-president.jpg'; // A
 
 export default () => {
     return (
-        <div className="flex flex-col items-center justify-between py-14 bg-beta border-t-4 border-t-yellow-400 border-b-4 border-b-yellow-400">
+        <div className="flex flex-col items-center justify-between py-14 bg-beta border-t-4 border-t-alpha border-b-4 border-b-alpha">
             {/* <div className="w-full text-center pb-10">
                 <h1 className="text-xl text-white">Formations</h1>
                 <h1 className="text-5xl font-bold text-white">Level up your digital skills.</h1>
@@ -68,21 +68,21 @@ export default () => {
                 </div>
 
                 <div className="carousel_text w-fit flex h-[70vh] relative right-24 top-8 justify-around items-center flex-col">
-                    <div className="text flex bg-yellow-400 w-[40vw] h-[8vh] rounded-lg">
+                    <div className="text flex bg-alpha w-[40vw] h-[8vh] rounded-lg">
                         <h1 className='text-4xl py-2 text-center w-full font-medium'><span className='font-bold px-4'>MANY</span>CATEGORIES</h1>
                     </div>
-                    <div className="carousel bg-yellow-400 rounded-lg w-[40vw] h-[35vh] flex flex-col items-center">
+                    <div className="carousel bg-alpha rounded-lg w-[40vw] h-[35vh] flex flex-col items-center">
                     <h1 className='text-8xl font-bold text-center'>Coding</h1>
                     <h1 className='text-8xl font-bold text-center'>Shool</h1>
                     </div>
                 </div>
 
                 <div className="bigtext w-[60vw] h-[80vh] flex justify-center items-center">
-                    <h1 className='text-yellow-400 text-[80px] font-extrabold w-[35vw]'>Tons of talents to choose from</h1>
+                    <h1 className='text-alpha text-[80px] font-extrabold w-[35vw]'>Tons of talents to choose from</h1>
                 </div>
             </div> */}
             <div className=" rounded-lg w-[50vw] text-center">
-              <p className='text-6xl font-bold text-yellow-400 pb-10'>Training !</p>
+              <p className='text-6xl font-bold text-alpha pb-10'>Training !</p>
             </div>
             {/* Coding */}
             <div className="bg-[#f9f9f9] relative flex flex-row rounded-lg w-[80vw] h-[40vh] mt-8">
