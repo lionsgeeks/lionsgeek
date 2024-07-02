@@ -19,27 +19,35 @@ export const Footer = () => {
                         <div className='flex lg:flex-row flex-col justify-center lg:gap-10 gap-2'>
                             <img src={Logo} alt="" className='lg:w-[7vw] lg:h-[7vw] w-[20vw] h-[20vw] lg:mb-0 mb-5' />
                             <div className='flex flex-col gap-3 lg:ms-5'>
+                                <h1 className='font-bold text-gray-600 text-[1.2rem]'>Courses</h1>
+                                <div >
+                                    <p className='text-gray-400 text-[0.9rem]'>Coding</p>
+                                    <p className='text-gray-400 text-[0.9rem]'>Media</p>
+                                </div>
+                            </div>
+                            {/* <div className='flex flex-col gap-3'>
                                 <h1 className='font-bold text-gray-600 text-[1.2rem]'>About</h1>
                                 <div>
                                     <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
                                     <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
                                     <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className='flex flex-col gap-3'>
-                                <h1 className='font-bold text-gray-600 text-[1.2rem]'>About</h1>
-                                <div>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
-                                </div>
-                            </div>
-                            <div className='flex flex-col gap-3'>
-                                <h1 className='font-bold text-gray-600 text-[1.2rem]'>About</h1>
-                                <div>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
+                                <h1 className='font-bold text-gray-600 text-[1.2rem]'>Contact</h1>
+                                <div className='flex flex-col gap-1'>
+                                    {/* <div>
+                                        <p className='font-medium text-gray-400 text-[0.9rem]'>Address:</p>
+                                        <p className='text-gray-400 text-[0.9rem] w-[20vw] '>4ème étage, Ain Sebaa Center, Route de Rabat, Casablanca</p>
+                                    </div> */}
+                                    <div>
+                                        <p className='font-medium text-gray-400 text-[0.9rem]'>Email:</p>
+                                        <p className='text-gray-400 text-[0.9rem]'>contact@lionsgeek.ma</p>
+                                    </div>
+                                    <div>
+                                        <p className='font-medium text-gray-400 text-[0.9rem]'>Phone Number:</p>
+                                        <p className='text-gray-400 text-[0.9rem]'>+212 522 662 660</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +68,9 @@ export const Footer = () => {
                     </div>
                     <div className='flex flex-col items-center justify-between gap-2 pt-4 border-t-[3px] border-gray-500 border-opacity-50'>
                         <div className='flex gap-3'>
-                            <a target='blank' href="https://www.facebook.com/LionsGeek"><FaFacebookF className='text-[1.4rem] fill-gray-400 hover:fill-blue-500 transition duration-200' /></a>
+                            <a target='blank' href="https://www.facebook.com/LionsGeek">
+                                <FaFacebookF className='text-[1.4rem] fill-gray-400 hover:fill-blue-500 transition duration-200' />
+                            </a>
                             <a target='blank' href="https://www.instagram.com/lions_geek/">
                                 <FaInstagram className='text-[1.4rem] fill-gray-400 hover:fill-pink-600 transition duration-200' />
                             </a>
