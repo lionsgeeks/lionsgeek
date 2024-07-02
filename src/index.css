@@ -60,16 +60,20 @@
 }
 
 .codingformationpic img:hover {
-  transform: scale(1.05); /* Smooth zoom effect on hover */
+  transform: scale(1.05);
+  /* Smooth zoom effect on hover */
 }
 
 .flipped-svg {
-  transform: scaleX(-1); /* Flip the SVG horizontally */
-  transition: fill 0.3s ease-in-out; /* Smooth transition for color changes */
+  transform: scaleX(-1);
+  /* Flip the SVG horizontally */
+  transition: fill 0.3s ease-in-out;
+  /* Smooth transition for color changes */
 }
 
 .flipped-svg:hover {
-  fill: #e0e0e0; /* Change color on hover for a smoother effect */
+  fill: #e0e0e0;
+  /* Change color on hover for a smoother effect */
 }
 
 
@@ -98,3 +102,36 @@
 .bg-image {
   background-image: url("./assets/images/visite-ministre-president.jpg");
 }
+
+@font-face {
+  font-family: Gotham;
+  src: url(./assets/fonts/Gotham-Font/GothamMedium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Gotham;
+  src: url(./assets/fonts/Gotham-Font/GothamBold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Gotham;
+  src: url(./assets/fonts/Gotham-Font/Gotham-Black.otf);
+  font-weight: 800;
+}
+
+* {
+  font-family: Gotham, sans-serif;
+  color: #212529;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 8px;
+  background: #212529;
+}
+
