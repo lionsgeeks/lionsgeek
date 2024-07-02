@@ -1,6 +1,6 @@
 import { Button } from "../../../components";
 
-export default function HeroCard() {
+export default function HeroSection() {
   return (
     <div className="h-[calc(100vh-64px)] px-16 text-center text-balance py-12 flex flex-col justify-between gap-12">
       <div className="flex flex-col gap-4 items-center w-3/4 self-center">
@@ -25,9 +25,9 @@ export default function HeroCard() {
           {["Traning", "Co-working", "Talks"].map((title, index) => (
             <div
               key={index}
-              className={`w-[32%] border rounded-lg h-full border-beta relative overflow-hidden group cursor-pointer flex justify-end`}
+              className="w-[32%] border rounded-lg rounded-tr-none h-full border-beta relative overflow-hidden group cursor-pointer flex justify-end"
             >
-              {index == 0 ? (
+              {index === 0 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -54,14 +54,10 @@ export default function HeroCard() {
               )}
 
               <div className="flex flex-col justify-end text-start pl-8 pb-6 overflow-hidden">
-                <h1
-                  className={`font-medium text-xl duration-700 transition-all translate-y-[calc(150%+1.75rem)] group-hover:translate-y-0`}
-                >
+                <h1 className="font-medium text-xl duration-700 transition-all translate-y-[calc(150%+1.75rem)] group-hover:translate-y-0">
                   {title}
                 </h1>
-                <div
-                  className={`mt-1/2 duration-700 transition-all translate-y-[150%] group-hover:translate-y-0`}
-                >
+                <div className="duration-700 transition-all translate-y-[150%] group-hover:translate-y-0">
                   Be a Geek in 6 months ready for the world Lorem ipsum dolor sit amet consectetur,
                   adipisicing elit. Quas dolor optio quidem libero laborum.
                 </div>

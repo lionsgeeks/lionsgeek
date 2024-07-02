@@ -27,8 +27,8 @@ const Navbar = () => {
         <div className="">
             <div className="antialiased  dark-mode:bg-gray-900">
                 <div className="w-full text-gray-700 bg-gray-50 dark-mode:text-gray-200 dark-mode:bg-gray-800">
-                    <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-                        <div className="flex flex-row items-center justify-between p-4">
+                    <div className="flex flex-col px-4 md:items-center md:justify-between md:flex-row md:px-8 lg:px-16">
+                        <div className="flex flex-row items-center justify-between py-4">
                             <a href="#" className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="206.551" height="35.121">
                                     <g data-name="Groupe 19" fill="#000000">

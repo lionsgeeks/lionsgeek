@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "../../components";
-import { HeroSection, TrainingSection } from "./partials";
+import { GallerySection, HeroSection, TrainingSection } from "./partials";
 
 export const HomePage = () => {
   return (
@@ -19,9 +19,9 @@ export const HomePage = () => {
             job markets
           </p>
 
-          <Button>
-            <Link to={"/about"}>Learn more</Link>
-          </Button>
+          <Link to={"/about"}>
+            <Button outline>Learn more</Button>
+          </Link>
         </div>
       </div>
 
@@ -35,15 +35,7 @@ export const HomePage = () => {
           <div className="flex w-full px-48 gap-x-16 gap-y-14 justify-center flex-wrap">
             {Array.from({ length: 7 }).map((_, index) => (
               <img
-                className={`h-16 w-[calc(calc(100%-calc(5*4rem))/6)]`}
-                key={index}
-                src={require(`../../assets/images/partners/partner-${index}.png`)}
-                alt={`partner-${index}`}
-              />
-            ))}
-            {Array.from({ length: 7 }).map((_, index) => (
-              <img
-                className={`h-16 w-[calc(calc(100%-calc(5*4rem))/6)]`}
+                className={`h-12 w-[calc(calc(100%-calc(6*4rem))/7)] grayscale saturate-0 brightness-150`}
                 key={index}
                 src={require(`../../assets/images/partners/partner-${index}.png`)}
                 alt={`partner-${index}`}
@@ -61,7 +53,7 @@ export const HomePage = () => {
         />
 
         <div className="h-2/3 flex-1 self-center">
-          <h1 className="text-6xl font-bold text-start text-alpha">Recent Event</h1>
+          <h1 className="text-6xl font-bold text-start text-alpha">Upcoming Event</h1>
           <h4 className="text-white mt-8">GeekTalks</h4>
           <h2 className="text-white text-4xl font-medium mt-2 mb-4">We choose art</h2>
           <h6 className="text-white">31 / 05 / 2024 - LionsGeek</h6>
@@ -73,13 +65,14 @@ export const HomePage = () => {
             </p>
           </div>
 
-          <Button className="mt-6">
-            <Link to={"/about"}>See more</Link>
-          </Button>
+          <Link to={"/about"}>
+            <Button className="mt-6" outline>See more</Button>
+          </Link>
         </div>
       </div>
 
       <TrainingSection />
+      <GallerySection />
     </>
   );
 };
