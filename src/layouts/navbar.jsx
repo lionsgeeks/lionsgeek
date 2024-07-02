@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { IoCodeSlashOutline } from "react-icons/io5";
+import { IoCameraOutline } from "react-icons/io5";
+
+
+
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +26,10 @@ const Navbar = () => {
         navigate(link)
     }
 
+    const closeMore_Open = () => {
+        setIsOpen(false)
+        setIsMoreOpen(false)
+    }
 
 
     return (
@@ -63,31 +72,23 @@ const Navbar = () => {
                         <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
                             <Link to={'/'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Home</Link>
                             <div className="relative">
-                                <button onClick={toggleMoreMenu} className="px-2 py-2 font-normal focus:font-medium text-sm relative after:absolute after:border-b-[2px] after:border-gray-300  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] focus:after:w-[100%] focus:after:border-alpha">
+                                <button onClick={toggleMoreMenu} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/coding' || location.pathname == '/media' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
                                     <span>Formation</span>
                                     <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${isMoreOpen ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </button>
                                 {isMoreOpen && (
-                                    <div className="absolute z-30 left-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right">
-                                        <div className="px-2 pt-2 pb-4 bg-white rounded-md lg:w-[17vw] shadow-lg dark-mode:bg-gray-700">
-                                            <a href="#" className=" flex flex-row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                                <div className="bg-teal-500 text-white rounded-lg p-3">
-                                                    <svg className='fill-white' height="20" viewBox="0 0 1792 1792" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M553 1399l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23t-10 23l-393 393 393 393q10 10 10 23t-10 23zm591-1067l-373 1291q-4 13-15.5 19.5t-23.5 2.5l-62-17q-13-4-19.5-15.5t-2.5-24.5l373-1291q4-13 15.5-19.5t23.5-2.5l62 17q13 4 19.5 15.5t2.5 24.5zm657 651l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23t-10 23z" /></svg>                                                </div>
-                                                <div className="ml-3">
-                                                    <p className="font-semibold">Learn to Code</p>
-                                                    <p className="text-sm text-nowrap">Build Your Future in Tech</p>
-                                                </div>
-                                            </a>
-                                            <a href="#" className=" flex flex-row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                                <div className="bg-pink-500 text-white rounded-lg p-3">
-                                                    <svg className='fill-white' height="20" viewBox="0 0 1792 1792" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M553 1399l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23t-10 23l-393 393 393 393q10 10 10 23t-10 23zm591-1067l-373 1291q-4 13-15.5 19.5t-23.5 2.5l-62-17q-13-4-19.5-15.5t-2.5-24.5l373-1291q4-13 15.5-19.5t23.5-2.5l62 17q13 4 19.5 15.5t2.5 24.5zm657 651l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23t-10 23z" /></svg>                                                </div>
-                                                <div className="ml-3">
-                                                    <p className="font-semibold">Master Media Arts</p>
-                                                    <p className="text-sm text-nowrap">Unleash Your Creativity</p>
-                                                </div>
-                                            </a>
+                                    <div className="absolute z-30 left-0 w-fit mt-2 origin-top-right ">
+                                        <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
+                                            <Link id='codingLink' to={'/coding'} onClick={() => closeMore_Open()} className='cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
+                                                <IoCodeSlashOutline className='text-[1.3rem] stroke-alpha' />
+                                                <p className='text-[0.9rem]'>Learn to code</p>
+                                            </Link>
+                                            <Link id='mediaLink' to={'/media'} onClick={() => closeMore_Open()} className='cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                                <IoCameraOutline className='text-[1.3rem] stroke-alpha' />
+                                                <p className='text-[0.9rem] '>Master Media Arts</p>
+                                            </Link>
                                         </div>
                                     </div>
                                 )}
