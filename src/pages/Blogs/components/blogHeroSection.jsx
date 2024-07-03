@@ -4,7 +4,7 @@ export const BlogHeroSection = () => {
 
     return (
         <>
-                <div className="flex   ">
+                <div className="flex  pt-[10vh] ">
                     <img className="w-1/2 h-[60vh] objectc rounded-xl " src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
 
                     <div className="flex flex-col w-[40%] gap-8 py- px-8">

@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { IoCodeSlashOutline } from "react-icons/io5";
 import { IoCameraOutline } from "react-icons/io5";
+import { LuGalleryHorizontalEnd } from "react-icons/lu";
+import { TbBrandMessenger } from "react-icons/tb";
+import { TbMessageCircleExclamation } from "react-icons/tb";
+
+
 
 
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isMoreOpen, setIsMoreOpen] = useState(false);
+    const [formationMenu, setFormationMenu] = useState(false)
+    const [aboutMenu, setAboutMenu] = useState(false)
     const navigate = useNavigate()
     const location = useLocation();
 
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
-    };
-
-    const toggleMoreMenu = () => {
-        setIsMoreOpen(!isMoreOpen);
     };
 
     const navigateTo = (link) => {
@@ -28,12 +30,33 @@ const Navbar = () => {
 
     const closeMore_Open = () => {
         setIsOpen(false)
-        setIsMoreOpen(false)
+        setFormationMenu(false)
+        setAboutMenu(false)
     }
+
+    const formationRef = useRef(null);
+    const aboutRef = useRef(null);
+
+    const handleClickOutside = (event) => {
+        if (formationRef.current && !formationRef.current.contains(event.target)) {
+            setFormationMenu(false);
+        }
+        if (aboutRef.current && !aboutRef.current.contains(event.target)) {
+            setAboutMenu(false);
+        }
+    };
+
+    useEffect(() => {
+        // Add event listener on document mount
+        document.addEventListener('click', handleClickOutside);
+
+        // // Remove event listener on component unmount
+        // return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
 
 
     return (
-        <div className="">
+        <div className="fixed top-0 right-0 left-0 z-50">
             <div className="antialiased  dark-mode:bg-gray-900">
                 <div className="w-full text-gray-700 bg-gray-50 dark-mode:text-gray-200 dark-mode:bg-gray-800">
                     <div className="flex flex-col px-4 md:items-center md:justify-between md:flex-row md:px-8 lg:px-16">
@@ -71,14 +94,17 @@ const Navbar = () => {
                         </div>
                         <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
                             <Link to={'/'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Home</Link>
-                            <div className="relative">
-                                <button onClick={toggleMoreMenu} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/coding' || location.pathname == '/media' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
+                            <div ref={formationRef} className="relative">
+                                <button onClick={() => {
+                                    setFormationMenu(!formationMenu)
+                                    setAboutMenu(false)
+                                }} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/coding' || location.pathname == '/media' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
                                     <span>Formation</span>
-                                    <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${isMoreOpen ? 'rotate-180' : 'rotate-0'}`}>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${formationMenu ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </button>
-                                {isMoreOpen && (
+                                {formationMenu && (
                                     <div className="absolute z-30 left-0 w-fit mt-2 origin-top-right ">
                                         <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
                                             <Link id='codingLink' to={'/coding'} onClick={() => closeMore_Open()} className='cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
@@ -95,10 +121,37 @@ const Navbar = () => {
                             </div>
                             <Link to={'/coworking'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/coworking' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Coworking</Link>
                             <Link to={'/event'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/event' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Events</Link>
-                            <Link to={'/about'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/about' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>About</Link>
-                            <Link to={'/'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Gallerie</Link>
                             {/* <a href="#" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">Contact Us</a> */}
                             {/* <a href="#" className="bg-alpha  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a> */}
+                            <div ref={aboutRef} className="relative">
+                                <button onClick={() => {
+                                    setAboutMenu(!aboutMenu)
+                                    setFormationMenu(false)
+                                }} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/about' || location.pathname == '/galerie' || location.pathname == '/blog' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
+                                    <span>About</span>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${aboutMenu ? 'rotate-180' : 'rotate-0'}`}>
+                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                                {aboutMenu && (
+                                    <div className="absolute z-30 left-0 w-fit mt-2 origin-top-right ">
+                                        <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
+                                            <Link id='codingLink' to={'/about'} onClick={() => closeMore_Open()} className='cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
+                                                <TbMessageCircleExclamation className='text-[1.3rem] stroke-alpha' />
+                                                <p className='text-[0.9rem]'>Who are we?</p>
+                                            </Link>
+                                            <Link id='mediaLink' to={'/blog'} onClick={() => closeMore_Open()} className='cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                                <TbBrandMessenger className='text-[1.3rem] stroke-alpha' />
+                                                <p className='text-[0.9rem] '>Blog</p>
+                                            </Link>
+                                            <Link id='mediaLink' to={'/galerie'} onClick={() => closeMore_Open()} className='cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                                <LuGalleryHorizontalEnd className='text-[1.3rem] stroke-alpha' />
+                                                <p className='text-[0.9rem] '>Gallerie</p>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                             <Button onClick={() => { navigateTo('contact-us') }} className={'shadow-md font-normal px-4 text-[0.8rem] mt-0'}>Contact Us</Button>
                         </nav>
                     </div>

@@ -60,18 +60,21 @@
 }
 
 .codingformationpic img:hover {
-  transform: scale(1.05); /* Smooth zoom effect on hover */
+  transform: scale(1.05);
+  /* Smooth zoom effect on hover */
 }
 
 .flipped-svg {
-  transform: scaleX(-1); /* Flip the SVG horizontally */
-  transition: fill 0.3s ease-in-out; /* Smooth transition for color changes */
+  transform: scaleX(-1);
+  /* Flip the SVG horizontally */
+  transition: fill 0.3s ease-in-out;
+  /* Smooth transition for color changes */
 }
 
 .flipped-svg:hover {
-  fill: #e0e0e0; /* Change color on hover for a smoother effect */
+  fill: #e0e0e0;
+  /* Change color on hover for a smoother effect */
 }
-
 
 .codingformationpic1 svg {
   position: absolute;
@@ -80,21 +83,21 @@
   height: 100%;
 }
 
-/* 
-.bg-gallery {
-  background-image: url(--image-path);
-} */
-
-.filterff {
-  /* filter: brightness(1) saturate(0) contrast(100%) grayscale(25%); */
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-}
-
-.filterff:hover {
-  filter: none;
-}
-
 .bg-image {
   background-image: url("./assets/images/visite-ministre-president.jpg");
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 8px;
+  background: #212529;
+}
+
+@media (max-width: 640px) {
+  .flex-\[calc\(calc\(100\%-calc\(2\*3\.5rem\)\)\/3\)\] {
+    flex: 1 0 100%;
+  }
 }
