@@ -11,22 +11,28 @@ import { EventPage } from "./pages/Events/events";
 import { EventDetailPage } from "./pages/EventDetails/eventdetail";
 import { MediaPage } from "./pages/media/media";
 import { GaleriePage } from "./pages/Galerie/galerie";
-
+import { AlbumPage } from './pages/Album/album';
 function App() {
   return (
     <MyProvider>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/coworking" element={<CoworkingPage />} />
-        <Route path="/coding" element={<CodingPage />} />
-        <Route path="/event" element={<EventPage />} />
-        <Route path="/event/:id" element={<EventDetailPage />} />
-        <Route path="/galerie" element={<GaleriePage />} />
-        <Route path="/media" element={<MediaPage />} />
-      </Routes>
+      <Routes >
+        {/* <Route path='*' element={Navigate({to:"/"})} /> */}
+        <Route path='/' element={<HomePage />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/contact-us' element={<ContactUs />} />
+        <Route path='/coworking' element={<CoworkingPage />} />
+        <Route path='/coding' element={<CodingPage />} />
+        <Route path='/event' element={<EventPage />} />
+        <Route path="/event/:id" element={<EventDetailPage  />} />
+        <Route path='/galerie' element={<GaleriePage />} />
+        <Route path='/album/:id' element={<AlbumPage />} />
+
+
+        {/* <Route path='*' element={Navigate({to:"/"})} /> */}
+
+        <Route path='/media' element={<MediaPage />} />
+      </Routes >
       <Footer />
     </MyProvider>
   );

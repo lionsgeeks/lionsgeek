@@ -2,10 +2,10 @@ import { Button } from "../../../components";
 
 export default function HeroSection() {
   return (
-    <div className="h-[calc(100vh-64px)] px-16 text-center text-balance py-12 flex flex-col justify-between gap-12">
+    <div className="md:h-[calc(100vh-67.11px)] px-7 md:px-16 text-center text-balance py-12 flex flex-col justify-between gap-6 md:gap-12">
       <div className="flex flex-col gap-4 items-center w-3/4 self-center">
-        <h1 className="text-7xl font-bold">The door to the digital world.</h1>
-        <p className="text-2xl font-normal ">
+        <h1 className="text-4xl md:text-7xl font-bold">The door to the digital world.</h1>
+        <p className="text-lg md:text-2xl font-normal">
           Free training and mentorship to help you thrive in the tech and media industries.
         </p>
 
@@ -18,14 +18,14 @@ export default function HeroSection() {
         </Button>
       </div>
 
-      <div className="h-[50%] flex gap-4 flex-col">
-        <h2 className="text-3xl font-bold text-start">Our pillars</h2>
+      <div className="md:h-1/2 flex gap-4 flex-col">
+        <h2 className="text-xl md:text-3xl font-bold text-start">Our pillars</h2>
 
-        <div className="flex justify-between h-full">
+        <div className="flex flex-col gap-6 md:gap-0 md:flex-row justify-between md:h-full">
           {["Traning", "Co-working", "Talks"].map((title, index) => (
             <div
               key={index}
-              className="w-[32%] border rounded-lg rounded-tr-none h-full border-beta relative overflow-hidden group cursor-pointer flex justify-end"
+              className="md:w-[32%] py-3 md:py-0 border rounded-lg rounded-tr-none md:h-full border-beta relative overflow-hidden group cursor-pointer flex justify-end"
             >
               {index === 0 ? (
                 <svg
@@ -53,11 +53,11 @@ export default function HeroSection() {
                 </svg>
               )}
 
-              <div className="flex flex-col justify-end text-start pl-8 pb-6 overflow-hidden">
-                <h1 className="font-medium text-xl duration-700 transition-all translate-y-[calc(150%+1.75rem)] group-hover:translate-y-0">
+              <div className="flex flex-col justify-end text-start py-4 px-4 md:pl-8 md:pb-6 overflow-hidden">
+                <h1 className="font-medium text-lg md:text-xl md:duration-700 md:transition-all md:translate-y-[calc(150%+1.75rem)] md:group-hover:translate-y-0">
                   {title}
                 </h1>
-                <div className="duration-700 transition-all translate-y-[150%] group-hover:translate-y-0">
+                <div className="md:duration-700 md:transition-all md:translate-y-[150%] md:group-hover:translate-y-0">
                   Be a Geek in 6 months ready for the world Lorem ipsum dolor sit amet consectetur,
                   adipisicing elit. Quas dolor optio quidem libero laborum.
                 </div>
