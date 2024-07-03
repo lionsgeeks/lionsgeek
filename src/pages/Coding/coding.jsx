@@ -3,6 +3,7 @@ import { FirstSection } from './components/firstSection';
 import { SecondSection } from './components/secondSection';
 import { ThirdSection } from './components/thirdSection';
 import { FourthSection } from './components/fourthSection';
+import { FifthSection } from './components/fifthSection';
 
 export const CodingPage = () => {
     return (
@@ -11,6 +12,7 @@ export const CodingPage = () => {
             <SecondSection/>
             <ThirdSection/>
             <FourthSection/>
+            <FifthSection/>
         </>
     );
 };

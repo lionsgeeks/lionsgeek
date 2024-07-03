@@ -4,9 +4,9 @@ import Button from "../../../components/Button";
 
 export const FirstSection = () => {
   return (
-    <div className="flex flex-row-reverse justify-center ">
-      <div className="w-[50%] py-16 px-16 flex flex-col gap-4">
-        <h1 className="font-bold text-6xl text-balance">
+    <div className="flex lg:flex-row-reverse flex-col-reverse items-center justify-center ">
+      <div className="lg:w-[50%] py-16 px-7 lg:px-16 flex flex-col gap-4">
+        <h1 className="font-bold text-6xl lg:text-balance">
           Digital Content Creator
         </h1>
         <p className="text-lg">
@@ -69,8 +69,8 @@ export const FirstSection = () => {
         </div>
         <Button>Apply</Button>
       </div>
-      <div className="w-[50%] flex justify-center">
-        <img className="w-[90%]" src={contentCreature} alt="web developer" />
+      <div className="lg:w-[50%] w-[90%] flex justify-center">
+        <img className="lg:w-[70%]" src={contentCreature} alt="web developer" />
       </div>
     </div>
   );
