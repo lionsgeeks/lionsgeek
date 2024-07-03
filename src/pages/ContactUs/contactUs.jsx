@@ -19,7 +19,7 @@ export const ContactUs = () => {
     );
     return (
         <>
-            <div className="py-[12vh] flex flex-col justify-center lg:px-16 px-5 ">
+            <div className="py-[12vh] flex flex-col justify-center lg:px-16 px-5 mt-16">
                 <div className="flex lg:flex-row flex-col justify-between gap-8">
                     <div className="lg:w-[50%] flex flex-col gap-6  px-3">
                         <div className="tessst opacity-0 translate-y-12 [clip-path: polygon((0 100%, 100% 100%, 100% 100%, 0% 100%)]">
@@ -100,7 +100,7 @@ export const ContactUs = () => {
                     </form>
                 </div>
             </div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.0584384950844!2d-7.5364266246542515!3d33.60378817332915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cdb2f812837f%3A0xbbcfc74fbc11b2d9!2sLionsGeek!5e0!3m2!1sen!2sma!4v1719408103931!5m2!1sen!2sma" className='w-full h-[45vh] filter grayscale focus:border-none focus:outline-none map' allowfullscreen="" loading="lazy" ></iframe>
+            {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.0584384950844!2d-7.5364266246542515!3d33.60378817332915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cdb2f812837f%3A0xbbcfc74fbc11b2d9!2sLionsGeek!5e0!3m2!1sen!2sma!4v1719408103931!5m2!1sen!2sma" className='w-full h-[45vh] filter grayscale focus:border-none focus:outline-none map' allowfullscreen="" loading="lazy" ></iframe> */}
         </>
     )
 }
