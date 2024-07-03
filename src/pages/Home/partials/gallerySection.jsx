@@ -35,11 +35,11 @@ export default function GallerySection() {
   }, [onLoop, count]);
 
   return (
-    <div className="px-16 py-24">
+    <div className="px-7 md:px-16 py-12 md:py-24">
       <div className="overflow-hidden flex flex-col gap-16 transition-all justify-between">
         <div className="w-full text-center">
-          <h1 className="text-xl">Gallery</h1>
-          <h1 className="text-5xl font-bold">Discover our great moments together.</h1>
+          <h1 className="text-lg md:text-xl">Gallery</h1>
+          <h1 className="text-3xl md:text-5xl font-bold">Discover our great moments together.</h1>
         </div>
 
         <div
@@ -52,7 +52,7 @@ export default function GallerySection() {
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
-              className="min-h-[62.5vh] flex flex-col gap-2 cursor-pointer flex-[calc(calc(100%-calc(2*3.5rem))/3)] flex-shrink-0 flex-grow-0 transition-transform duration-300"
+              className="h-[50vh] md:h-[62.5vh] flex flex-col gap-2 cursor-pointer flex-shrink-0 flex-[calc(calc(100%-calc(2*3.5rem))/3)] transition-transform duration-300"
             >
               <div className="flex flex-col justify-end group h-full after:transition-opacity after:duration-[375ms] relative after:absolute after:bg-beta/50 after:opacity-0 hover:after:opacity-100 after:inset-0">
                 <img
