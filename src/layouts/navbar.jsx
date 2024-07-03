@@ -107,12 +107,12 @@ const Navbar = () => {
                                 {formationMenu && (
                                     <div className="absolute z-30 left-0 w-fit mt-2 origin-top-right ">
                                         <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
-                                            <Link id='codingLink' to={'/coding'} onClick={() => closeMore_Open()} className='cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
-                                                <IoCodeSlashOutline className='text-[1.3rem] stroke-alpha' />
+                                            <Link id='codingLink' to={'/coding'} onClick={() => closeMore_Open()} className='group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
+                                                <IoCodeSlashOutline className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem]'>Learn to code</p>
                                             </Link>
-                                            <Link id='mediaLink' to={'/media'} onClick={() => closeMore_Open()} className='cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
-                                                <IoCameraOutline className='text-[1.3rem] stroke-alpha' />
+                                            <Link id='mediaLink' to={'/media'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                                <IoCameraOutline className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem] '>Master Media Arts</p>
                                             </Link>
                                         </div>
@@ -136,16 +136,16 @@ const Navbar = () => {
                                 {aboutMenu && (
                                     <div className="absolute z-30 left-0 w-fit mt-2 origin-top-right ">
                                         <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
-                                            <Link id='codingLink' to={'/about'} onClick={() => closeMore_Open()} className='cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
-                                                <TbMessageCircleExclamation className='text-[1.3rem] stroke-alpha' />
+                                            <Link id='codingLink' to={'/about'} onClick={() => closeMore_Open()} className='group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
+                                                <TbMessageCircleExclamation className='text-[1.3rem]  stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem]'>Who are we?</p>
                                             </Link>
-                                            <Link id='mediaLink' to={'/blog'} onClick={() => closeMore_Open()} className='cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
-                                                <TbBrandMessenger className='text-[1.3rem] stroke-alpha' />
+                                            <Link id='mediaLink' to={'/blog'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                                <TbBrandMessenger className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem] '>Blog</p>
                                             </Link>
-                                            <Link id='mediaLink' to={'/galerie'} onClick={() => closeMore_Open()} className='cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
-                                                <LuGalleryHorizontalEnd className='text-[1.3rem] stroke-alpha' />
+                                            <Link id='mediaLink' to={'/galerie'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                                <LuGalleryHorizontalEnd className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem] '>Gallerie</p>
                                             </Link>
                                         </div>
