@@ -4,7 +4,7 @@ import Button from "../../../components/Button";
 
 export const FirstSection = () => {
   return (
-    <div className="flex lg:flex-row-reverse flex-col-reverse items-center justify-center ">
+    <div className="flex mt-16 lg:flex-row-reverse flex-col-reverse items-center justify-center ">
       <div className="lg:w-[50%] py-16 px-7 lg:px-16 flex flex-col gap-4">
         <h1 className="font-bold text-6xl lg:text-balance">
           Digital Content Creator

@@ -7,11 +7,11 @@ export const AlbumPage = () => {
 
     console.log(Albums[id - 1].images)
     return (
-        <div className='w-full p-16  '>
+        <div className='w-full p-10 lg:p-16  '>
             <h1 className='text-center text-5xl font-bold pb-6'>{Albums[id - 1].name}</h1>
-            <div className=' w-full flex flex-wrap gap-4 justify-center py-16'>
+            <div className=' w-full flex flex-wrap gap-4 justify-center py-10'>
                 {Object.values(Albums[id - 1].images).map((image, index) => (
-                    <div key={index} className='w-[22%] h-80 rounded-xl'>
+                    <div key={index} className='w-full md:w-[30%] lg:w-[22%] h-60 lg:h-80  rounded-xl'>
                         <img src={image} className='w-full h-full object-cover rounded-xl' alt={`img`} />
                     </div>
                 ))}

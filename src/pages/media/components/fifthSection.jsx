@@ -43,7 +43,7 @@ export const FifthSection = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-6 px-16 py-8 ">
+    <div className=" flex flex-col gap-6 px-16 py-8 ">
       <div className="w-full text-center pb-10">
         <h1 className="text-xl">Testimonials</h1>
         <h1 className="text-5xl font-bold">People Who Already Love Us</h1>
