@@ -1,19 +1,17 @@
 import React from "react";
 import developer from "../../../assets/images/Programmer-cuate.svg";
 import Button from "../../../components/Button";
-
+import { useTranslation } from "react-i18next";
 
 export const FirstSection = () => {
-
+  const { t } = useTranslation();
   return (
     <div className="mt-16 flex flex-col-reverse items-center lg:flex-row justify-center">
       <div className="lg:w-[50%] py-16 lg:px-16 px-7 flex flex-col gap-4">
-        <h1 className="font-bold text-6xl text-balance">Full Stack Web Developer</h1>
-        <p className="text-lg">
-          Become a full stack pro and build powerful, responsive web apps. Our
-          bootcamp focuses on hands-on projects to help you master the latest
-          technologies and frameworks .
-        </p>
+        <h1 className="font-bold text-6xl text-balance">
+          Full Stack Web Developer
+        </h1>
+        <p className="text-lg">{t("main.coding")}</p>
         <div className="flex items-center gap-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
