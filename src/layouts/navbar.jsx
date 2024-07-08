@@ -56,7 +56,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="fixed top-0 right-0 left-0 z-50">
+        <div className=" z-50">
             <div className="antialiased  dark-mode:bg-gray-900">
                 <div className="w-full text-gray-700 bg-gray-50 dark-mode:text-gray-200 dark-mode:bg-gray-800">
                     <div className="flex flex-col px-4 md:items-center md:justify-between md:flex-row md:px-8 lg:px-16">
