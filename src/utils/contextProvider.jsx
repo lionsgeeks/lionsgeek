@@ -75,12 +75,19 @@ export const MyProvider = ({ children }) => {
     const path = useLocation()
     useEffect(() => {
         window.scrollTo(0, 0)
-        console.log('change haha');
     }, [path])
+    const savedSelectedLanguage = localStorage.getItem('selectedLanguage')
+    const [selectedLanguage, setSelectedLanguage] = useState(savedSelectedLanguage);
+    useEffect(() => {
+        localStorage.setItem('selectedLanguage', selectedLanguage)
+    })
+
+
+
 
     return (
         <>
-            <MyContext.Provider value={{ Albums, setAlbums }} >
+            <MyContext.Provider value={{ Albums, setAlbums, selectedLanguage, setSelectedLanguage }} >
                 {children}
             </MyContext.Provider>
         </>
