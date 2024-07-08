@@ -1,5 +1,6 @@
 
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 export const MyContext = createContext()
 export const MyProvider = ({ children }) => {
 
@@ -71,6 +72,12 @@ export const MyProvider = ({ children }) => {
             }
         },
     ])
+    const path = useLocation()
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        console.log('change haha');
+    }, [path])
+
     return (
         <>
             <MyContext.Provider value={{ Albums, setAlbums }} >
