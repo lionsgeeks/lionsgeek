@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { IoCodeSlashOutline } from "react-icons/io5";
@@ -6,7 +6,9 @@ import { IoCameraOutline } from "react-icons/io5";
 import { LuGalleryHorizontalEnd } from "react-icons/lu";
 import { TbBrandMessenger } from "react-icons/tb";
 import { TbMessageCircleExclamation } from "react-icons/tb";
-
+import { LANGUAGES } from '../languages';
+import { useTranslation } from 'react-i18next';
+import { MyContext } from '../utils/contextProvider';
 
 
 
@@ -47,13 +49,16 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-        // Add event listener on document mount
         document.addEventListener('click', handleClickOutside);
-
-        // // Remove event listener on component unmount
-        // return () => document.removeEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
     }, []);
 
+    const { t, i18n } = useTranslation();
+    const { selectedLanguage, setSelectedLanguage } = useContext(MyContext)
+    const handleChangeLanguage = (e) => {
+        i18n.changeLanguage(e.target.value);
+        setSelectedLanguage(e.target.value)
+    };
 
     return (
         <div className="fixed top-0 right-0 left-0 z-50">
@@ -93,13 +98,13 @@ const Navbar = () => {
                             </button>
                         </div>
                         <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
-                            <Link to={'/'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Home</Link>
+                            <Link to={'/'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>{t('header.home')}</Link>
                             <div ref={formationRef} className="relative">
                                 <button onClick={() => {
                                     setFormationMenu(!formationMenu)
                                     setAboutMenu(false)
                                 }} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/coding' || location.pathname == '/media' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
-                                    <span>Formation</span>
+                                    <span>{t('header.formation')}</span>
                                     <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${formationMenu ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
@@ -109,18 +114,18 @@ const Navbar = () => {
                                         <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
                                             <Link id='codingLink' to={'/coding'} onClick={() => closeMore_Open()} className='group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
                                                 <IoCodeSlashOutline className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
-                                                <p className='text-[0.9rem]'>Learn to code</p>
+                                                <p className='text-[0.9rem]'>{t('header.coding')}</p>
                                             </Link>
                                             <Link id='mediaLink' to={'/media'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
                                                 <IoCameraOutline className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
-                                                <p className='text-[0.9rem] '>Master Media Arts</p>
+                                                <p className='text-[0.9rem] '>{t('header.media')}</p>
                                             </Link>
                                         </div>
                                     </div>
                                 )}
                             </div>
-                            <Link to={'/coworking'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/coworking' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Coworking</Link>
-                            <Link to={'/event'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/event' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>Events</Link>
+                            <Link to={'/coworking'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/coworking' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>{t('header.coworking')}</Link>
+                            <Link to={'/event'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/event' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>{t('header.events')}</Link>
                             {/* <a href="#" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">Contact Us</a> */}
                             {/* <a href="#" className="bg-alpha  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a> */}
                             <div ref={aboutRef} className="relative">
@@ -128,7 +133,7 @@ const Navbar = () => {
                                     setAboutMenu(!aboutMenu)
                                     setFormationMenu(false)
                                 }} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/about' || location.pathname == '/galerie' || location.pathname == '/blog' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
-                                    <span>About</span>
+                                    <span>{t('header.about')}</span>
                                     <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${aboutMenu ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
@@ -138,21 +143,28 @@ const Navbar = () => {
                                         <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
                                             <Link id='codingLink' to={'/about'} onClick={() => closeMore_Open()} className='group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
                                                 <TbMessageCircleExclamation className='text-[1.3rem]  stroke-beta group-hover:stroke-alpha transition duration-300' />
-                                                <p className='text-[0.9rem]'>Who are we?</p>
+                                                <p className='text-[0.9rem]'>{t('header.who_we_are')}</p>
                                             </Link>
                                             <Link id='mediaLink' to={'/blog'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
                                                 <TbBrandMessenger className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
-                                                <p className='text-[0.9rem] '>Blog</p>
+                                                <p className='text-[0.9rem] '>{t('header.blog')}</p>
                                             </Link>
                                             <Link id='mediaLink' to={'/galerie'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
                                                 <LuGalleryHorizontalEnd className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
-                                                <p className='text-[0.9rem] '>Gallerie</p>
+                                                <p className='text-[0.9rem] '>{t('header.gallerie')}</p>
                                             </Link>
                                         </div>
                                     </div>
                                 )}
                             </div>
-                            <Button onClick={() => { navigateTo('contact-us') }} className={'shadow-md font-normal px-4 text-[0.8rem] mt-0'}>Contact Us</Button>
+                            <select onChange={handleChangeLanguage} value={selectedLanguage}>
+                                {LANGUAGES.map(({ code, label }) => (
+                                    <option key={code} value={code}>
+                                        {label}
+                                    </option>
+                                ))}
+                            </select>
+                            <Button onClick={() => { navigateTo('contact-us') }} className={'shadow-md font-normal px-4 text-[0.8rem] mt-0'}>{t('header.contact_us')}</Button>
                         </nav>
                     </div>
                 </div>
