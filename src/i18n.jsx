@@ -78,7 +78,7 @@ i18n
     .init({
         resources,
         lng: localStorage.getItem('selectedLanguage'),
-        fallbackLng: 'en',
+        fallbackLng: 'fr',
     });
 
 export default i18n;

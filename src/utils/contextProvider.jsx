@@ -78,11 +78,7 @@ export const MyProvider = ({ children }) => {
     }, [path])
     const savedSelectedLanguage = localStorage.getItem('selectedLanguage')
     const [selectedLanguage, setSelectedLanguage] = useState(savedSelectedLanguage);
-    useEffect(() => {
-        localStorage.setItem('selectedLanguage', selectedLanguage)
-    })
-
-
+    localStorage.setItem('selectedLanguage', selectedLanguage ?? 'fr')
 
 
     return (
