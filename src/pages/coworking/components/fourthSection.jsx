@@ -1,9 +1,14 @@
 import React from 'react';
 import ilyass from '../../../assets/images/opinuons.png'
 import { RiDoubleQuotesR } from "react-icons/ri";
+import { useTranslation } from 'react-i18next';
 
 
 export const FourthSectionCoworking = () => {
+    
+    const { t } = useTranslation();
+
+
     const testimoniels = [
         {
             name: "Ilyasse Elyatime",
@@ -40,8 +45,8 @@ export const FourthSectionCoworking = () => {
     return (
         <div className='p-5 lg:px-16 py-10 flex flex-col gap-5'>
             <div className='w-full text-center pb-10'>
-                <h1 className='text-lg lg:text-xl'>Testimonials</h1>
-                <h1 className='text-2xl lg:text-5xl font-bold'>People Who Already Love Us</h1>
+                <h1 className='text-lg lg:text-xl'>{t('main.coworking.section4.title.first')}</h1>
+                <h1 className='text-2xl lg:text-5xl font-bold'>{t('main.coworking.section4.title.second')}</h1>
             </div>
             <div className="flex flex-wrap  justify-center gap-3">
                 {testimoniels.map((element, index) => (

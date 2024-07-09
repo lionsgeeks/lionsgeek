@@ -1,11 +1,13 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useTransition } from 'react';
 import './firstSection.css'
 import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
 import { Link } from 'react-router-dom';
 import { MyContext } from '../../../utils/contextProvider';
+import { useTranslation } from 'react-i18next';
 
 export const FirstSectionGalerie = () => {
 
+    const { t } = useTranslation();
     const { Albums } = useContext(MyContext);
     const slider = useRef(null);
 
@@ -25,7 +27,7 @@ export const FirstSectionGalerie = () => {
                     {Albums?.map((Albums, index) => (
                         <li className='item' style={{ backgroundImage: `url('${Albums.thumbnail}')` }}>
                             <div className='content'>
-                                <h2 className='title text-white'>" {Albums.name}"</h2>
+                                <h2 className='title text-white'>"{Albums.name}"</h2>
                                 <p className='text-white py-4'>
                                     {Albums.Description}</p>
                                 <Link  to={`/album/${Albums.id}`}><button>Read More</button></Link>
