@@ -1,5 +1,5 @@
 
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 export const MyContext = createContext()
 export const MyProvider = ({ children }) => {
@@ -89,3 +89,5 @@ export const MyProvider = ({ children }) => {
         </>
     )
 }
+
+export const useAppContext = () => useContext(MyContext)
