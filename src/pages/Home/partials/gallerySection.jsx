@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { TransText } from "../../../components";
 
 export default function GallerySection() {
   const [count, setCount] = useState(0);
@@ -38,8 +39,16 @@ export default function GallerySection() {
     <div className="px-7 md:px-16 py-12 md:py-24">
       <div className="overflow-hidden flex flex-col gap-16 transition-all justify-between">
         <div className="w-full text-center">
-          <h1 className="text-lg md:text-xl">Gallery</h1>
-          <h1 className="text-3xl md:text-5xl font-bold">Discover our great moments together.</h1>
+          <h1 className="text-lg md:text-xl">
+            <TransText en="Gallery" fr="Galerie" ar="معرض" />
+          </h1>
+          <h1 className="text-3xl md:text-5xl font-bold">
+            <TransText
+              en="Discover our great moments together."
+              fr="Découvrez nos plus beaux moments ensemble."
+              ar="شاركنا أجمل لحظاتنا معًا"
+            />
+          </h1>
         </div>
 
         <div
