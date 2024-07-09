@@ -61,10 +61,10 @@ const Navbar = () => {
     };
 
     return (
-        <div className=" z-50">
+        <div className=" z-50 fixed top-0 right-0 left-0">
             <div className="antialiased  dark-mode:bg-gray-900">
                 <div className="w-full text-gray-700 bg-gray-50 dark-mode:text-gray-200 dark-mode:bg-gray-800">
-                    <div className="flex flex-col px-4 md:items-center md:justify-between md:flex-row md:px-8 lg:px-16">
+                    <div className={`flex flex-col px-4 md:items-center md:justify-between md:flex-row md:px-8 lg:px-16 ${selectedLanguage == 'ar' ? 'md:flex-row-reverse' : ''}`}>
                         <div className="flex flex-row items-center justify-between py-4">
                             <a href="#" className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="206.551" height="35.121">
@@ -97,7 +97,7 @@ const Navbar = () => {
                                 </svg>
                             </button>
                         </div>
-                        <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
+                        <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row ${selectedLanguage == 'ar' ? 'md:flex-row-reverse' : ''}`}>
                             <Link to={'/'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>{t('header.home')}</Link>
                             <div ref={formationRef} className="relative">
                                 <button onClick={() => {
