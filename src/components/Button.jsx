@@ -1,4 +1,4 @@
-export default function Button({ children, className, outline = false, ...rest }) {
+const Button = ({ children, className, outline = false, ...rest }) => {
   return (
     <button
       {...rest}
@@ -11,4 +11,6 @@ export default function Button({ children, className, outline = false, ...rest }
       {children}
     </button>
   );
-}
+};
+
+export default Button;

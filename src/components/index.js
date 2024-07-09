@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "./Button.jsx";
+import TransText from "./TransText.tsx";
 
-export { Button };
-
+export { Button, TransText };
