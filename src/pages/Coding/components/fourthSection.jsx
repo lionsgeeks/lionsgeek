@@ -1,4 +1,5 @@
 import React from "react";
+import { TransText } from "../../../components";
 
 export const FourthSection = () => {
   let cards = [
@@ -18,8 +19,11 @@ export const FourthSection = () => {
         </svg>
       ),
       title: "Master Classes",
-      description: `Join our master classes in UI/UX Design, learn personal branding
-            skills, and get help with creating CVs and cover letters.`,
+      description: {
+        en: `Join our master classes in UI/UX Design, learn personal branding skills, and get help with creating CVs and cover letters.`,
+        ar: "انضم إلى فصول الماجستير لدينا في تصميم واجهة المستخدم / تجربة المستخدم (UI/UX Design)، وتعلم مهارات العلامة التجارية الشخصية، واحصل على مساعدة في إنشاء السيرة الذاتية ورسائل الغلاف.",
+        fr: "Participez à nos master classes en UI/UX Design, apprenez des techniques de personal branding et bénéficiez d'une aide à la création de CV et de lettres de motivation.",
+      },
     },
     {
       icon: (
@@ -33,8 +37,11 @@ export const FourthSection = () => {
         </svg>
       ),
       title: "External Visits",
-      description: `Get inspired by visiting leading schools and institutions in the web
-            development industries.`,
+      description: {
+        en: `Get inspired by visiting leading schools and institutions in the web industries.`,
+        ar: "استلهم من خلال زيارة المدارس والمؤسسات الرائدة في صناعات تطوير الويب.",
+        fr: "اختبر أفضل ما في العالمين من خلال التبديل بين دروس الوسائط والبرمجة.",
+      },
     },
     {
       icon: (
@@ -52,8 +59,11 @@ export const FourthSection = () => {
         </svg>
       ),
       title: "Media and Code Crossover",
-      description: `Experience the best of both worlds by switching classes between
-            media and code.`,
+      description: {
+        en : `Experience the best of both worlds by switching classes between media and code.`,
+        fr : 'Découvrez le meilleur des deux mondes en alternant les cours entre le média et le code.',
+        ar : 'اختبر أفضل ما في العالمين من خلال التبديل بين دروس الوسائط والبرمجة.'
+        },
     },
   ];
   return (
@@ -65,10 +75,13 @@ export const FourthSection = () => {
       </div>
       <div className="flex lg:flex-row flex-col gap-8 justify-center">
         {cards.map((element, index) => (
-          <div key={index} className="lg:w-[25%] bg-beta p-8 flex flex-col justify-between gap-4 rounded-lg hover:scale-105 duration-300 ">
+          <div
+            key={index}
+            className="lg:w-[25%] bg-beta p-8 flex flex-col justify-between gap-4 rounded-lg hover:scale-105 duration-300 "
+          >
             {element.icon}
             <h1 className="text-3xl text-white">{element.title}</h1>
-            <p className="text-white">{element.description}</p>
+            <p className="text-white">{TransText(element.description) }</p>
           </div>
         ))}
       </div>
