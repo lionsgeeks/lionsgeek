@@ -26,7 +26,7 @@ export const FirstSection = () => {
           <TransText
             fr="Devenez un pro du Full Stack et créez des applications web puissantes et responsives. Notre bootcamp met l'accent sur des projets concrets pour vous aider à maîtriser les dernières technologies et frameworks."
             en="Become a full stack pro and build powerful, responsive web apps. Our bootcamp focuses on hands-on projects to help you master the latest technologies and frameworks ."
-            ar="كن خبيرًا في كامل المكدس وبِناء تطبيقات ويب قوية ومتجاوبة. يركز معسكر التدريب الخاص بنا على المشاريع العملية لمساعدتك على إتقان أحدث التقنيات والأطر "
+            ar="أصبح محترفًا في تطوير الويب المتكامل وطور تطبيقات ويب قوية ومتجاوبة. يركز برنامجنا التدريبي على المشاريع العملية لمساعدتك على إتقان أحدث التقنيات والأطر. "
           />
         </p>
         <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>

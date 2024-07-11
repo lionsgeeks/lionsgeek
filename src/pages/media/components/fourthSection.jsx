@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TransText } from "../../../components";
+import { MyContext } from "../../../utils/contextProvider";
 
 export const FourthSection = () => {
+  const {selectedLanguage} = useContext(MyContext)
   let cards = [
     {
       icon: (
@@ -18,7 +21,12 @@ export const FourthSection = () => {
         </svg>
       ),
       title: "Master Classes",
-      description: `Join our master classes with specialists in audiovisual and editing. Learn top techniques and tools from industry experts to enhance your media production skills.`,
+      description: 
+      {
+        en : `Join our master classes with specialists in audiovisual and editing. Learn top techniques and tools from industry experts to enhance your media production skills.`,
+        ar : "انضم إلى دوراتنا المتقدمة مع المتخصصين في الصوتيات والمونتاج. تعلم أفضل التقنيات والأدوات من خبراء الصناعة لتعزيز مهاراتك في إنتاج الوسائط",
+        fr : "Rejoignez nos master classes avec des spécialistes en audiovisuel et montage. Apprenez les meilleures techniques et outils des experts de l'industrie pour améliorer vos compétences en production médiatique"
+      }
     },
     {
       icon: (
@@ -32,7 +40,13 @@ export const FourthSection = () => {
         </svg>
       ),
       title: "External Visits",
-      description: `Get inspired by visiting leading schools and institutions in the media industries.`,
+      description: 
+      {
+        en : `Get inspired by visiting leading schools and institutions in the media industries.`,
+        fr : "Inspirez-vous en visitant les meilleures écoles et institutions des industries médiatiques.",
+        ar : "استلهم من زيارة المدارس والمؤسسات الرائدة في صناعات الإعلام"
+      }
+      
     },
     {
       icon: (
@@ -50,8 +64,12 @@ export const FourthSection = () => {
         </svg>
       ),
       title: "Media and Code Crossover",
-      description: `Experience the best of both worlds by switching classes between
-            media and code.`,
+      description:
+      {
+        en : `Experience the best of both worlds by switching classes between media and code.`,
+        fr : 'Découvrez le meilleur des deux mondes en alternant les cours entre le média et le code.',
+        ar : "اختبر أفضل ما في العالمين من خلال التبديل بين دروس الوسائط والبرمجة"
+      }
     },
   ];
 
@@ -70,10 +88,11 @@ export const FourthSection = () => {
           >
             {element.icon}
             <h1 className="text-3xl text-white">{element.title}</h1>
-            <p className="text-white">{element.description}</p>
+            <p className={`text-white ${selectedLanguage === 'ar' ? "text-right" : "" }`}>{TransText(element.description)}</p>
           </div>
         ))}
       </div>
     </div>
   );
 };
+

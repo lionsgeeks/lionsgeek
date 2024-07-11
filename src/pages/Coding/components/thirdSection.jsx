@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaUserCheck } from "react-icons/fa";
 import { RiInformation2Fill } from "react-icons/ri";
 import { FaRegComments } from "react-icons/fa6";
@@ -8,8 +8,10 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { TransText } from "../../../components";
+import { MyContext } from "../../../utils/contextProvider";
 gsap.registerPlugin(ScrollTrigger);
 export const ThirdSection = () => {
+  const { selectedLanguage } = useContext(MyContext)
   useGSAP(() => {
     let ctx = gsap.from(".animateSection", {
       stagger: 0.7,
@@ -81,7 +83,7 @@ export const ThirdSection = () => {
       <div className="flex lg:flex-row lg:flex-wrap flex-col items-center gap-10 justify-center">
         {road.map(({ description, title, Icon }, index) => (
           <div
-            className={`bg-gray-50 p-7 flex flex-col lg:w-[30%] w-[90%] gap-4 rounded-lg relative`}
+            className={`bg-gray-50 p-7 flex flex-col lg:w-[30%] w-[90%] gap-4 rounded-lg relative `}
           >
             <svg
               className={`hidden lg:flex animateSection absolute inset-0 top-1/2 -z-20 -translate-y-1/2 ${
@@ -108,7 +110,7 @@ export const ThirdSection = () => {
             <h1 className="font-bold text-2xl">
               <span className="text-alpha">{index + 1}. </span> {title}
             </h1>
-            <p>{TransText(description)}</p>
+            <p className={`${selectedLanguage === 'ar' ? 'text-right' : ''}`}>{TransText(description)}</p>
           </div>
         ))}
       </div>

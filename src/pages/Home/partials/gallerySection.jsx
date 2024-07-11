@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { TransText } from "../../../components";
 
 export default function GallerySection() {
   const [count, setCount] = useState(0);
   const [onLoop, setOnLoop] = useState(true);
-  const [currentItemIndex, setCurrentItemIndex] = useState(1);
+  const [onScroll, setOnScroll] = useState(false);
 
   const duration = 3750;
   const transition = `transform ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
 
   useEffect(() => {
-    if (onLoop) {
+    if (onLoop && !onScroll) {
+      setOnScroll(true);
       const caroussel = document.getElementById("caroussel");
       const firstItem = caroussel.firstChild;
 
-      const nextIndex = currentItemIndex < 4 - 1 ? currentItemIndex + 1 : 0;
       caroussel.style.transform = `translateX(calc( -${firstItem.clientWidth}px - 3.5rem ))`;
-
-      setTimeout(() => setCurrentItemIndex(-1), duration / 3);
-      setTimeout(() => setCurrentItemIndex(nextIndex), duration / 2);
 
       setTimeout(() => {
         firstItem.remove();
@@ -29,6 +27,7 @@ export default function GallerySection() {
         setTimeout(() => {
           caroussel.style.transition = transition;
           setCount((prev) => prev + 1);
+          setOnScroll(false);
         }, 100);
       }, duration);
     }
@@ -38,8 +37,16 @@ export default function GallerySection() {
     <div className="px-7 md:px-16 py-12 md:py-24">
       <div className="overflow-hidden flex flex-col gap-16 transition-all justify-between">
         <div className="w-full text-center">
-          <h1 className="text-lg md:text-xl">Gallery</h1>
-          <h1 className="text-3xl md:text-5xl font-bold">Discover our great moments together.</h1>
+          <h1 className="text-lg md:text-xl">
+            <TransText en="Gallery" fr="Galerie" ar="معرض" />
+          </h1>
+          <h1 className="text-3xl md:text-5xl font-bold">
+            <TransText
+              en="Discover our great moments together."
+              fr="Découvrez nos plus beaux moments ensemble."
+              ar="شاركنا أجمل لحظاتنا معًا"
+            />
+          </h1>
         </div>
 
         <div

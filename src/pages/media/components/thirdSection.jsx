@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaUserCheck } from "react-icons/fa";
 import { RiInformation2Fill } from "react-icons/ri";
 import { FaRegComments } from "react-icons/fa6";
@@ -7,8 +7,12 @@ import { TbSchool } from "react-icons/tb";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { TransText } from "../../../components";
+import { MyContext } from "../../../utils/contextProvider";
 gsap.registerPlugin(ScrollTrigger);
 export const ThirdSection = () => {
+  const { selectedLanguage } = useContext(MyContext);
+
   useGSAP(() => {
     let ctx = gsap.from(".animateSection", {
       stagger: 0.7,
@@ -23,30 +27,49 @@ export const ThirdSection = () => {
   const road = [
     {
       title: "Check-in",
-      description:
-        "Start your journey by filling out a simple form with your information. This step ensures we have all the details we need to personalize your experience at LionsGeek.",
+      description:{
+        en :"Start your journey by filling out a simple form with your information. This step ensures we have all the details we need to personalize your experience at LionsGeek.",
+        ar : "ابدأ رحلتك بملء استمارة بسيطة بمعلوماتك. تضمن هذه الخطوة أن نحصل على جميع التفاصيل التي نحتاجها لتخصيص تجربتك في لاينز جيك",
+        fr : "Commencez votre voyage en remplissant un simple formulaire avec vos informations. Cette étape nous permet de nous assurer que nous disposons de tous les détails nécessaires pour personnaliser votre expérience chez LionsGeek."
+      },
       Icon: FaUserCheck,
     },
     {
       title: "Information Session",
       description:
-        "Attend a detailed session where our coach will explain the program, its structure, and what you can expect. This session sets the stage for your learning journey, providing you with a clear roadmap.",
+      {
+        en : "Attend a detailed session where our coach will explain the program, its structure, and what you can expect. This session sets the stage for your learning journey, providing you with a clear roadmap.",
+        ar : "احضر جلسة تفصيلية حيث سيشرح مدربنا البرنامج وهيكله وما يمكنك توقعه. تضع هذه الجلسة الأساس لرحلة التعلم الخاصة بك، حيث توفر لك خريطة طريق واضحة",
+        fr : "Assistez à une session détaillée où notre coach vous expliquera le programme, sa structure et ce à quoi vous pouvez vous attendre. Cette session pose les bases de votre apprentissage, en vous fournissant une feuille de route claire"
+      },
       Icon: RiInformation2Fill,
     },
     {
       title: "Interview",
       description:
-        "Have an interview with our team to discuss your goals, current skills, and expectations. This conversation helps us understand how best to support you and tailor the program to meet your needs.",
+      {
+        en : "Have an interview with our team to discuss your goals, current skills, and expectations. This conversation helps us understand how best to support you and tailor the program to meet your needs.",
+        fr : "Passez un entretien avec notre équipe pour discuter de vos objectifs, de vos compétences actuelles et de vos attentes. Cette conversation nous aide à comprendre comment vous soutenir au mieux et à adapter le programme à vos besoins.",
+        ar : " اجر مقابلة مع فريقنا لمناقشة أهدافك ومهاراتك الحالية وتوقعاتك. تساعدنا هذه المحادثة على فهم كيفية دعمك على أفضل وجه وتخصيص البرنامج لتلبية احتياجاتك"
+      },
       Icon: FaRegComments,
     },
     {
       title: "Jungle",
-      description: `Immerse yourself in a week-long bootcamp where you'll learn the basics of web development. By the end of the week, you'll create a project and present it for evaluation. This hands-on experience is crucial for building a strong foundation.`,
+      description: {
+        en : "Immerse yourself in a week-long bootcamp where you'll learn the basics of web development. By the end of the week, you'll create a project and present it for evaluation. This hands-on experience is crucial for building a strong foundation.`",
+        fr : "Plongez-vous dans un bootcamp d'une semaine où vous apprendrez les bases du développement web. À la fin de la semaine, vous créerez un projet et le présenterez pour évaluation. Cette expérience pratique est cruciale pour bâtir une base solide.",
+        ar : "اغمر نفسك في برنامج تدريبي مكثف لمدة أسبوع حيث ستتعلم أساسيات تطوير الويب. في نهاية الأسبوع، ستقوم بإنشاء مشروع وتقديمه للتقييم. هذه التجربة العملية ضرورية لبناء أساس قوي"
+      },
       Icon: GiPalmTree,
     },
     {
       title: "Media School",
-      description: `Begin the intensive 6-month media program, diving deep into audiovisual techniques and editing. You'll master camera use, lighting, sound, and video editing through practical projects and mentorship from industry professionals. This is where your journey to becoming a skilled content creator truly begins.`,
+      description: {
+        en : "Begin the intensive 6-month media program, diving deep into audiovisual techniques and editing. You'll master camera use, lighting, sound, and video editing through practical projects and mentorship from industry professionals. This is where your journey to becoming a skilled content creator truly begins.",
+        fr : "Commencez le programme intensif de 6 mois en médias, en plongeant profondément dans les techniques audiovisuelles et le montage. Vous maîtriserez l'utilisation de la caméra, l'éclairage, le son et le montage vidéo à travers des projets pratiques et un mentorat de professionnels de l'industrie. C'est ici que commence véritablement votre parcours pour devenir un créateur de contenu qualifié",
+        ar : "ابدأ البرنامج المكثف لمدة 6 أشهر في الإعلام، والتعمق في تقنيات الصوت والفيديو والمونتاج. ستتقن استخدام الكاميرا، والإضاءة، والصوت، وتحرير الفيديو من خلال المشاريع العملية والإرشاد من قبل محترفين في الصناعة. هنا تبدأ رحلتك لتصبح منشئ محتوى ماهر حقًا."
+      },
       Icon: TbSchool,
     },
   ];
@@ -86,7 +109,7 @@ export const ThirdSection = () => {
             <h1 className="font-bold text-2xl">
               <span className="text-alpha">{index + 1}. </span> {title}
             </h1>
-            <p>{description}</p>
+            <p className={`${selectedLanguage === 'ar' ? 'text-right': ''}`}>{TransText(description)}</p>
           </div>
         ))}
       </div>

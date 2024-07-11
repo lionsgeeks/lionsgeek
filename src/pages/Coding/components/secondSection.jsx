@@ -21,7 +21,7 @@ export const SecondSection = () => {
     "Front-End": [
       [
         <p className={`flex gap-3 ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''}`}>
-          <span className="font-bold">HTML:</span>{" "}
+          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': HTML ' : 'HTML : '}`}</span>
           <TransText
             fr="Maîtriser les blocs de construction du web. Apprenez à structurer efficacement votre contenu."
             en="Master the building blocks of
@@ -30,7 +30,7 @@ export const SecondSection = () => {
           />
         </p>,
         <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold">CSS:</span> .
+          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': CSS ' : 'CSS : '}`}</span> .
           <TransText
             fr="Appliquez des styles à vos pages web avec précision. Comprenez les techniques de mise en page, la conception adaptative et les frameworks CSS modernes"
             en="Style your web pages with precision. Understand layout techniques, responsive design, and modern CSS frameworks"
@@ -38,7 +38,7 @@ export const SecondSection = () => {
           />
         </p>,
         <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold">JavaScript:</span>
+          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': JavaScript ' : 'JavaScript : '}`}</span>
           <TransText
             fr="Donnez vie à vos pages web grâce à l'interactivité. Apprenez les concepts JavaScript de base et la manipulation du DOM"
             en="Bring your web pages to life with interactivity. Learn core JavaScript concepts and how to manipulate the DOM."
@@ -46,7 +46,7 @@ export const SecondSection = () => {
           />
         </p>,
         <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold">React:</span>
+          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': React ' : 'React : '}`} </span>
           <TransText
             fr="Plongez dans l'une des bibliothèques JavaScript les plus populaires pour la création d'interfaces utilisateur. Apprenez l'architecture basée sur les composants et la gestion d'état."
             en="Dive into one of the most popular JavaScript libraries for building user interfaces. Learn component-based architecture and state management."
@@ -60,7 +60,7 @@ export const SecondSection = () => {
     "Back-End": [
       [
         <p className={`flex gap-3 ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold ">Laravel : </span>
+          <span className="font-bold  text-nowrap"> {`${selectedLanguage == 'ar' ? ': Laravel ' : 'Laravel : '}`} </span>
           <TransText
             fr="Familiarisez-vous avec ce puissant framework PHP. Apprenez à construire des applications côté serveur robustes et évolutives, à gérer des bases de données et à créer des API RESTful"
             en="Get hands-on with this powerful PHP framework. Learn to build robust and scalable server-side applications, manage databases, and create RESTful APIs."
@@ -74,7 +74,7 @@ export const SecondSection = () => {
     "Version Control": [
       [
         <p className={`flex gap-3 ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold"> Git:</span>
+          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': Git ' : 'Git : '}`} </span>
           <TransText
             fr="Comprendre les notions essentielles du contrôle de version. Apprenez à suivre les modifications de votre base de code, à collaborer avec d'autres et à gérer les versions de projet"
             en="Understand the essentials of version control. Learn how to track changes in your codebase, collaborate with others, and manage project versions."
@@ -82,7 +82,7 @@ export const SecondSection = () => {
           />
         </p>,
         <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold">GitHub:</span>
+          <span className="font-bold  text-nowrap">{`${selectedLanguage == 'ar' ? ': GitHub ' : 'GitHub : '}`}</span>
           <TransText
             fr="Explorez cette plateforme populaire d'hébergement et de partage de code. Apprenez à utiliser GitHub pour le contrôle de version, la collaboration et la gestion de projet"
             en="Explore this popular platform for hosting and sharing code. Learn how to use GitHub for version control, collaboration, and project management."
@@ -96,7 +96,7 @@ export const SecondSection = () => {
     "Shell Scripting": [
       [
         <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold">Shell Scripting : </span>
+          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ' : Shell Scripting' : 'Shell Scripting : '}`}</span>
           <TransText
             fr="Automatisez des tâches et améliorez votre workflow. Apprenez les bases du scripting shell, les outils en ligne de commande et comment écrire des scripts pour exécuter efficacement des tâches répétitives."
             en="Automate tasks and improve your workflow. Learn the basics of shell scripting, command-line tools, and how to write scripts to perform repetitive tasks efficiently."
@@ -111,11 +111,6 @@ export const SecondSection = () => {
       },
       [shellLogo],
     ],
-    // Laravel: [
-    //   "A robust PHP framework designed for building modern web applications, featuring elegant syntax and powerful tools.",
-    //   "from-[#f54d3a]",
-    //   laravel,
-    // ],
   };
   const [anime, setAnime] = useState(true);
   return (
@@ -153,9 +148,9 @@ export const SecondSection = () => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class={`lg:rotate-0 ${
+                  className={`lg:rotate-0 ${
                     activeSkill === element ? "stroke-alpha" : ""
-                  } ${element === hint ? "rotate-90" : ""} ${selectedLanguage === 'ar' ? 'lg:-rotate-180': ''} size-5 font-bold`}
+                  } ${element === hint ? "rotate-90" : ""} ${selectedLanguage === 'ar' ? 'lg:rotate-180': ''} size-5 font-bold`}
                 >
                   <path
                     stroke-linecap="round"

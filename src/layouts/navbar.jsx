@@ -61,10 +61,10 @@ const Navbar = () => {
     };
 
     return (
-        <div className=" z-50">
+        <div className=" z-50 fixed top-0 right-0 left-0">
             <div className="antialiased  dark-mode:bg-gray-900">
                 <div className="w-full text-gray-700 bg-gray-50 dark-mode:text-gray-200 dark-mode:bg-gray-800">
-                    <div className="flex flex-col px-4 md:items-center md:justify-between md:flex-row md:px-8 lg:px-16">
+                    <div className={`flex flex-col px-4 md:items-center md:justify-between md:flex-row md:px-8 lg:px-16 ${selectedLanguage == 'ar' ? 'md:flex-row-reverse' : ''}`}>
                         <div className="flex flex-row items-center justify-between py-4">
                             <a href="#" className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="206.551" height="35.121">
@@ -97,26 +97,26 @@ const Navbar = () => {
                                 </svg>
                             </button>
                         </div>
-                        <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
+                        <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row  ${selectedLanguage == 'ar' ? 'md:flex-row-reverse items-end' : ''}`}>
                             <Link to={'/'} onClick={() => setIsOpen(false)} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>{t('header.home')}</Link>
                             <div ref={formationRef} className="relative">
                                 <button onClick={() => {
                                     setFormationMenu(!formationMenu)
                                     setAboutMenu(false)
-                                }} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/coding' || location.pathname == '/media' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
-                                    <span>{t('header.formation')}</span>
+                                }} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-15px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/coding' || location.pathname == '/media' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
+                                    <span className=''>{t('header.formation')}</span>
                                     <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${formationMenu ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </button>
                                 {formationMenu && (
-                                    <div className="absolute z-30 left-0 w-fit mt-2 origin-top-right ">
-                                        <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
-                                            <Link id='codingLink' to={'/coding'} onClick={() => closeMore_Open()} className='group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
+                                    <div className={`absolute z-30 ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  mt-2 origin-top-right`}>
+                                        <div className="py-2 bg-white rounded-md lg:min-w-[15vw] min-w-[40vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
+                                            <Link id='codingLink' to={'/coding'} onClick={() => closeMore_Open()} className={`group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''} items-center gap-3 px-3 py-1 transition duration-300`}>
                                                 <IoCodeSlashOutline className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem]'>{t('header.coding')}</p>
                                             </Link>
-                                            <Link id='mediaLink' to={'/media'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                            <Link id='mediaLink' to={'/media'} onClick={() => closeMore_Open()} className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''} items-center gap-3 px-3 py-1 transition duration-300`} >
                                                 <IoCameraOutline className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem] '>{t('header.media')}</p>
                                             </Link>
@@ -132,24 +132,24 @@ const Navbar = () => {
                                 <button onClick={() => {
                                     setAboutMenu(!aboutMenu)
                                     setFormationMenu(false)
-                                }} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-17px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/about' || location.pathname == '/galerie' || location.pathname == '/blog' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
+                                }} className={`px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-15px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/blog' || location.pathname == '/about' || location.pathname == '/galerie' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>
                                     <span>{t('header.about')}</span>
                                     <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${aboutMenu ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </button>
                                 {aboutMenu && (
-                                    <div className="absolute z-30 left-0 w-fit mt-2 origin-top-right ">
-                                        <div className="py-2 bg-white rounded-md min-w-[15vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ">
-                                            <Link id='codingLink' to={'/about'} onClick={() => closeMore_Open()} className='group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300'>
+                                    <div className={`absolute z-30 ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}   mt-2 origin-top-right`}>
+                                        <div className="py-2 bg-white rounded-md lg:min-w-[15vw] min-w-[40vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2">
+                                            <Link id='codingLink' to={'/about'} onClick={() => closeMore_Open()} className={`group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''} items-center gap-3 px-3 py-1 transition duration-300`}>
                                                 <TbMessageCircleExclamation className='text-[1.3rem]  stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem]'>{t('header.who_we_are')}</p>
                                             </Link>
-                                            <Link id='mediaLink' to={'/blog'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                            <Link id='mediaLink' to={'/blog'} onClick={() => closeMore_Open()} className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''} items-center gap-3 px-3 py-1 transition duration-300 `}>
                                                 <TbBrandMessenger className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem] '>{t('header.blog')}</p>
                                             </Link>
-                                            <Link id='mediaLink' to={'/galerie'} onClick={() => closeMore_Open()} className='group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex items-center gap-3 px-3 py-1 transition duration-300 '>
+                                            <Link id='mediaLink' to={'/galerie'} onClick={() => closeMore_Open()} className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''} items-center gap-3 px-3 py-1 transition duration-300 `}>
                                                 <LuGalleryHorizontalEnd className='text-[1.3rem] stroke-beta group-hover:stroke-alpha transition duration-300' />
                                                 <p className='text-[0.9rem] '>{t('header.gallerie')}</p>
                                             </Link>
@@ -168,8 +168,8 @@ const Navbar = () => {
                         </nav>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

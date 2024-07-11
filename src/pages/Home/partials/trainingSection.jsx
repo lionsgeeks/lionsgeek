@@ -1,17 +1,43 @@
 import { Link } from "react-router-dom";
+import { TransText } from "../../../components";
+import { useAppContext } from "../../../utils/contextProvider";
 
-export default function TrainingSection() {
+const TrainingSection = () => {
+  const { selectedLanguage } = useAppContext();
+
   return (
-    <div id="trainings" className="flex flex-col items-center justify-between px-7 md:px-16 py-12 md:py-24">
+    <div
+      id="trainings"
+      className="flex flex-col items-center justify-between px-7 md:px-16 py-12 md:py-24"
+    >
       <div className="w-full text-center pb-10">
-        <h1 className="text-lg md:text-xl">Trainings</h1>
-        <h1 className="text-3xl md:text-5xl font-bold">Level up your digital skills.</h1>
+        <h1 className="text-lg md:text-xl">
+          <TransText en="Trainings" fr="Formations" ar="برامج التدريب" />
+        </h1>
+        <h1 className="text-3xl md:text-5xl font-bold">
+          <TransText
+            en="Level up your digital skills."
+            fr="Développez vos compétences digitales"
+            ar="ارتقِ بمهاراتك الرقمية"
+          />
+        </h1>
       </div>
 
       <div className="flex flex-col w-full gap-3">
-        <Link to={"/coding"} className="group/coding rounded-lg flex flex-col md:flex-row bg-alpha">
-          <div className="flex-1 pt-20 pb-28 md:pb-32 pl-6 relative overflow-hidden">
-            <h1 className="text-3xl md:text-4xl text-balance">Full Stack Web Development</h1>
+        <Link
+          to={"/coding"}
+          className={`group/coding rounded-lg flex flex-col bg-alpha ${
+            selectedLanguage === "ar" ? "md:flex-row-reverse text-end" : "md:flex-row"
+          }`}
+        >
+          <div className="flex-1 pt-20 pb-28 md:pb-32 px-6 relative overflow-hidden">
+            <h1 className="text-3xl md:text-4xl text-balance">
+              <TransText
+                en="Full Stack Web Development"
+                fr="Développement Web Full Stack"
+                ar="تطوير الويب الكامل"
+              />
+            </h1>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +58,20 @@ export default function TrainingSection() {
           </div>
         </Link>
 
-        <Link to={"/media"} className="group/media rounded-lg flex flex-col bg-alpha md:flex-row-reverse">
-          <div className="flex-1 pt-20 pb-28 md:pb-32 pl-6 relative overflow-hidden">
-            <h1 className="text-3xl md:text-4xl text-balance">Content Creation & Digital Marketing</h1>
+        <Link
+          to={"/media"}
+          className={`group/media rounded-lg flex flex-col bg-alpha ${
+            selectedLanguage === "ar" ? "md:flex-row text-end" : "md:flex-row-reverse"
+          }`}
+        >
+          <div className="flex-1 pt-20 pb-28 md:pb-32 px-6 relative overflow-hidden">
+            <h1 className="text-3xl md:text-4xl text-balance">
+              <TransText
+                en="Content Creation & Digital Marketing"
+                fr="Création de contenu et marketing digital"
+                ar="إنشاء المحتوى والتسويق الرقمي"
+              />
+            </h1>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,4 +101,6 @@ export default function TrainingSection() {
       </div>
     </div>
   );
-}
+};
+
+export default TrainingSection;
