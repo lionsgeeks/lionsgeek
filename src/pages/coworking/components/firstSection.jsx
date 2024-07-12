@@ -15,8 +15,8 @@ export const FirstSectionCoworking = () => {
     const rightside = useRef(null);
 
     useEffect(() => {
-        gsap.fromTo(leftside.current, {x: "-100%" , opacity: "0" }, { x: "0%" , duration: 1 ,delay : 0.5, opacity : "1",ease : "power2.out" });
-        gsap.fromTo(rightside.current, {x: "100%" , opacity: "0" }, { x: "0%" , duration: 1 ,delay : 0.5, opacity : "1",ease : "power2.out" });
+        gsap.fromTo(leftside.current, {x: "-100%" , opacity: "0" }, { x: "0%" , duration: 0.5 ,delay : 0.5, opacity : "1",ease : "power2.out" });
+        gsap.fromTo(rightside.current, {x: "100%" , opacity: "0" }, { x: "0%" , duration: 0.5 ,delay : 0.5, opacity : "1",ease : "power2.out" });
 
     }, []);
 
