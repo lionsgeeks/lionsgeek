@@ -9,6 +9,7 @@ import { FaTiktok } from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
 import { useContext } from 'react';
 import { MyContext } from '../utils/contextProvider';
+import { Link } from 'react-router-dom';
 
 
 
@@ -16,6 +17,8 @@ import { MyContext } from '../utils/contextProvider';
 export const Footer = () => {
     const { t } = useTranslation()
     const { selectedLanguage } = useContext(MyContext)
+    const date = new Date()
+    const currentYear = date.getFullYear()
 
     return (
         <>
@@ -28,9 +31,9 @@ export const Footer = () => {
                             </div>
                             <div className={`flex flex-col  gap-3 lg:ms-5 ${selectedLanguage == 'ar' ? 'text-end' : ''}`}>
                                 <h1 className='font-bold text-gray-600 text-[1.2rem]'>{t('footer.part1.title')}</h1>
-                                <div>
-                                    <p className={`text-gray-400 text-[0.9rem] ${selectedLanguage == 'ar' ? 'text-end' : ''}`}>{t('footer.part1.phrase1')}</p>
-                                    <p className={`text-gray-400 text-[0.9rem] ${selectedLanguage == 'ar' ? 'text-end' : ''}`}>{t('footer.part1.phrase2')}</p>
+                                <div className='flex flex-col gap-1'>
+                                    <Link to={'/coding'} className={`cursor-pointer  text-gray-400 text-[0.9rem] ${selectedLanguage == 'ar' ? 'text-end' : ''}`}>{t('footer.part1.phrase1')}</Link>
+                                    <Link to={'/media'} className={`cursor-pointer text-gray-400 text-[0.9rem] ${selectedLanguage == 'ar' ? 'text-end' : ''}`}>{t('footer.part1.phrase2')}</Link>
                                 </div>
                             </div>
                             {/* <div className='flex flex-col gap-3'>
@@ -95,7 +98,7 @@ export const Footer = () => {
                                 <FaTiktok className='text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200' />
                             </a>
                         </div>
-                        <p className='text-gray-400 text-[0.9rem]'>&copy; Copyright 2024 LionsGeek. All Rights Reserved.</p>
+                        <p className='text-gray-400 text-[0.9rem]'>&copy; Copyright {currentYear} LionsGeek. All Rights Reserved.</p>
                     </div>
                 </div>
             </footer>

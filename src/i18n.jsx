@@ -524,30 +524,30 @@ const resources = {
             },
             footer: {
                 part1: {
-                    title: "دورات", // Dawraat (Courses)
-                    phrase1: "الترميز", // At-tarmeez (Coding)
-                    phrase2: "وسائط الإعلام", // Wasaa'it al-i'lam (Media)
+                    title: "دورات",
+                    phrase1: "الترميز",
+                    phrase2: "وسائط الإعلام",
                 },
                 part2: {
-                    title: "اتصل بنا", // اتصل بنا (Ittasil bina - Contact Us)
+                    title: "اتصل بنا",
                     area1: {
-                        title: "البريد الإلكتروني:", // al-bridu l-iléktroniyy (Email:)
+                        title: ":البريد الإلكتروني",
                         content: "contact@lionsgeek.ma"
                     },
                     area2: {
-                        title: "رقم الهاتف:", // Raqam al-hātif (Phone Number:)
+                        title: ":رقم الهاتف",
                         content: "+212 522 662 660"
                     },
                 },
                 part3: {
-                    title: "ابق على اتصال", // Ibaq 'ala ittisaal (Stay in Touch)
-                    input: "اكتب بريدك الالكتروني", // Iktub briidak al-iléktroniyy (Type your email)
-                    button: "اشترك", // Ishtirak (Sign Up)
+                    title: "ابق على اتصال",
+                    input: "اكتب بريدك الالكتروني",
+                    button: "اشترك",
                 }
             }
         },
     },
-  }
+}
 i18n
     .use(initReactI18next)
     .init({
