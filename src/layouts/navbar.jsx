@@ -9,7 +9,7 @@ import { TbMessageCircleExclamation } from "react-icons/tb";
 import { LANGUAGES } from '../languages';
 import { useTranslation } from 'react-i18next';
 import { MyContext } from '../utils/contextProvider';
-
+import { HiOutlineLanguage } from "react-icons/hi2";
 
 
 
@@ -18,8 +18,13 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [formationMenu, setFormationMenu] = useState(false)
     const [aboutMenu, setAboutMenu] = useState(false)
+    const [languageIsOpen, setLanguageIsOpen] = useState(false)
     const navigate = useNavigate()
     const location = useLocation();
+
+    const toggleLanguageIsOpen = () => {
+        setLanguageIsOpen(!languageIsOpen)
+    }
 
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
@@ -38,6 +43,7 @@ const Navbar = () => {
 
     const formationRef = useRef(null);
     const aboutRef = useRef(null);
+    const selectRef = useRef(null);
 
     const handleClickOutside = (event) => {
         if (formationRef.current && !formationRef.current.contains(event.target)) {
@@ -45,6 +51,9 @@ const Navbar = () => {
         }
         if (aboutRef.current && !aboutRef.current.contains(event.target)) {
             setAboutMenu(false);
+        }
+        if (selectRef.current && !selectRef.current.contains(event.target)) {
+            setLanguageIsOpen(false);
         }
     };
 
@@ -56,8 +65,11 @@ const Navbar = () => {
     const { t, i18n } = useTranslation();
     const { selectedLanguage, setSelectedLanguage } = useContext(MyContext)
     const handleChangeLanguage = (e) => {
-        i18n.changeLanguage(e.target.value);
-        setSelectedLanguage(e.target.value)
+        let code = e.currentTarget.dataset.code
+        if (code) {
+            i18n.changeLanguage(code);
+            setSelectedLanguage(code)
+        }
     };
 
     return (
@@ -103,9 +115,9 @@ const Navbar = () => {
                                 <button onClick={() => {
                                     setFormationMenu(!formationMenu)
                                     setAboutMenu(false)
-                                }} className={`px-2 py-2 text-sm relative `}>
-                                    {t('header.formation')}
-                                    <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${formationMenu ? 'rotate-180' : 'rotate-0'}`}>
+                                }} className={`px-2 py-2 text-sm relative flex items-center ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''} `}>
+                                    <span>{t('header.formation')}</span>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ${selectedLanguage == 'ar' ? 'mr-1' : 'ml-1'} transition-transform duration-200 transform ${formationMenu ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </button>
@@ -132,9 +144,9 @@ const Navbar = () => {
                                 <button onClick={() => {
                                     setAboutMenu(!aboutMenu)
                                     setFormationMenu(false)
-                                }} className={`px-2 py-2 text-sm relative `}>
+                                }} className={`px-2 py-2 text-sm relative flex items-center ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''} `}>
                                     <span>{t('header.about')}</span>
-                                    <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ml-1 transition-transform duration-200 transform ${aboutMenu ? 'rotate-180' : 'rotate-0'}`}>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4 ${selectedLanguage == 'ar' ? 'mr-1' : 'ml-1'} transition-transform duration-200 transform ${aboutMenu ? 'rotate-180' : 'rotate-0'}`}>
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </button>
@@ -157,13 +169,31 @@ const Navbar = () => {
                                     </div>
                                 )}
                             </div>
-                            <select onChange={handleChangeLanguage} value={selectedLanguage}>
-                                {LANGUAGES.map(({ code, label }) => (
-                                    <option key={code} value={code}>
-                                        {label}
-                                    </option>
-                                ))}
-                            </select>
+                            <div ref={selectRef} className={`relative flex items-center`} onClick={toggleLanguageIsOpen} >
+                                <div className={`cursor-pointer flex gap-1 ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''} items-center `}>
+                                    <HiOutlineLanguage className='h-[5vh]' />
+                                    <p className=''>{LANGUAGES.find(element => element.code == selectedLanguage)?.code}</p>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" className={`inline w-4 h-4  ${selectedLanguage == 'ar' ? 'mr-1' : 'ml-1'} transition-transform duration-75 transform ${languageIsOpen ? 'rotate-180' : 'rotate-0'}`}>
+                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                {languageIsOpen && (
+                                    <div className={`absolute top-10 z-30 mt-2 `}>
+                                        <div className=" rounded-md  flex flex-col items-start gap-2 shadow-lg bg-white  py-2">
+                                            {
+                                                LANGUAGES.map(({ code, label, flag }) => {
+                                                    return <div onClick={handleChangeLanguage} data-code={code} className='flex justify-start gap-2 px-3 py-1 hover:bg-gray-100 w-full transition duration-200' >
+                                                        {flag}
+                                                        <p className='cursor-pointer'>
+                                                            {label}
+                                                        </p>
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                             <Button onClick={() => { navigateTo('contact-us') }} className={'shadow-md font-normal px-4 text-[0.8rem] mt-0'}>{t('header.contact_us')}</Button>
                         </nav>
                     </div>
