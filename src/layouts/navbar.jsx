@@ -10,10 +10,6 @@ import { LANGUAGES } from '../languages';
 import { useTranslation } from 'react-i18next';
 import { MyContext } from '../utils/contextProvider';
 
-
-
-
-
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [formationMenu, setFormationMenu] = useState(false)
@@ -59,7 +55,6 @@ const Navbar = () => {
         i18n.changeLanguage(e.target.value);
         setSelectedLanguage(e.target.value)
     };
-
     return (
         <div className=" z-50">
             <div className="antialiased  dark-mode:bg-gray-900">

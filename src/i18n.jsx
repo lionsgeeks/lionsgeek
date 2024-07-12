@@ -78,6 +78,61 @@ const resources = {
 
                     },
 
+                },
+                lionsgeekpro: {
+                    header:{
+                        "title":'Feeling overwhelmed? We offer a range of services to streamline your operations, boost efficiency, and help you achieve your goals.'
+                    },
+                    firstsection: {
+                        "first-title": "OUR SERVICES",
+                        "title1": "Web Development",
+                        "title2": "Website Design and Development",
+                        "desc1": "Creation and redesign of websites to improve user experience and communication of NGO missions",
+                        "title3": "Maintenance and Technical Support",
+                        "desc3": "Ongoing support and regular updates to ensure the smooth functioning of websites",
+                        "title4": "Web and Mobile Application Development",
+                        "desc4": " Custom solutions for volunteer and donor management",
+                    },
+                    Secondsection: {
+                        "title1": "Audiovisual Production",
+                        "title2": "Institutional Films",
+                        "desc1": "Design films to present the missions and impacts of NGOs",
+                        "title3": "Viral Videos",
+                        "desc3": "Production of engaging videos designed to be shared widely on social networks",
+                        "title4": "Podcasts",
+                        "desc4": " Create podcasts to discuss relevant topics and engage a wide audience",
+                        "title5": "Event Coverage",
+                        "desc5": " Professional video and photography to document events",
+                        "title6": "Live Social Media Broadcasts",
+                        "desc6": " Organize live broadcasts for real-time events and interactive sessions",
+                    },
+                    section3: {
+                        "title1": "Digital Marketing",
+                        "title2": "User Generated Content (UGC)",
+                        "desc1": "Training on creating and using user-generated content to increase community engagement",
+                        "title3": "Social Media Management",
+                        "desc3": "Develop customized strategies and manage content to optimize online presence",
+                        "title4": "SEO and Content Marketing",
+                        "desc4": "SEO audits and content strategies to improve search engine visibility",
+                        "title5": "Online Advertising",
+                        "desc5": "Create, manage, and optimize online advertising campaigns",
+                    },
+                    section4: {
+                        "title1": "Events and Hackathons",
+                        "title2": "Organizing Hackathons",
+                        "desc1": "Plan and manage hackathons to stimulate innovation and find technological solutions to NGO challenges.",
+                        "title3": "Workshops and Trainings",
+                        "desc3": "Training sessions to improve the technical skills of NGO volunteers and members",
+                    }
+
+                },
+                Events: {
+                    "title":"Inovation & Inspiration ",
+                    "desc":"Join our tech innovation events and ignite your creativity. Be inspired by visionary ideas and transform your perspective. Discover new possibilities and expand your horizons. ",
+                    "Title1":"Events",
+                    "Desc1":"Discover Our Events",
+                    "button":"Get your ticket",
+
                 }
             },
             footer: {
@@ -178,6 +233,72 @@ const resources = {
                         description: "jneijnfjjjn"
                     },
 
+                },
+                
+                lionsgeekpro: {
+                    header:{
+                        "title":'Vous vous sentez submergé ? Nous proposons une gamme de services pour rationaliser vos opérations, améliorer le fficacité et vous aider à atteindre vos objectifs'
+                    },
+                    firstsection: {
+                        "first-title": "NOS SERVICES",
+                        "title1": "Développement Web",
+                        "title2": "Conception et développement de sites Web",
+                        "desc1": "Création et refonte de sites Web pour améliorer l'expérience utilisateur et la communication des missions des ONG",
+                        "title3": "Maintenance et Support Technique",
+                        "desc3": "Support continu et mises à jour régulières pour garantir le bon fonctionnement des sites Web",
+                        "title4": "Développement d'Applications Web et Mobiles",
+                        "desc4": "Solutions sur mesure pour la gestion des bénévoles et des donateurs",
+                    },
+                    Secondsection: {
+                        "title1": "Production Audiovisuelle",
+                        "title2": "Films Institutionnels",
+                        "desc1": "Conception de films pour présenter les missions et les impacts des ONG",
+                        "title3": "Vidéos Virales",
+                        "desc3": "Production de vidéos engageantes destinées à être partagées massivement sur les réseaux sociaux",
+                        "title4": "Podcasts",
+                        "desc4": " Création de podcasts pour discuter de sujets pertinents et engager un large public",
+                        "title5": "Couverture d’Événements",
+                        "desc5": " Captation vidéo et photographie professionnelle pour documenter les événements.",
+                        "title6": "Live sur les Réseaux Sociaux",
+                        "desc6": "  Organisation de diffusions en direct pour des événements en temps réel et des sessions interactivesc",
+                    },
+                    section3: {
+                        "title1": "Marketing Digital",
+                        "title2": "Création de Contenu Utilisateur (UGC)",
+                        "desc1": "Formation à la création et à l'utilisation de contenu généré par les utilisateurs pour augmenter l'engagement communautaire.",
+                        "title3": "Gestion des Réseaux Sociaux",
+                        "desc3": "Développement de stratégies sur mesure et gestion de contenu pour optimiser la présence en ligne",
+                        "title4": "SEO et Marketing de Contenu",
+                        "desc4": " Audits SEO et stratégies de contenu pour améliorer la visibilité sur les moteurs de recherche.",
+                        "title5": "Publicité en Ligne",
+                        "desc5": " Création, gestion et optimisation de campagnes publicitaires en ligne",
+                    },
+                    section3: {
+                        "title1": "Marketing Digital",
+                        "title2": "Création de Contenu Utilisateur (UGC)",
+                        "desc1": "Formation à la création et à l'utilisation de contenu généré par les utilisateurs pour augmenter l'engagement communautaire.",
+                        "title3": "Gestion des Réseaux Sociaux",
+                        "desc3": "Développement de stratégies sur mesure et gestion de contenu pour optimiser la présence en ligne",
+                        "title4": "SEO et Marketing de Contenu",
+                        "desc4": " Audits SEO et stratégies de contenu pour améliorer la visibilité sur les moteurs de recherche.",
+                        "title5": "Publicité en Ligne",
+                        "desc5": " Création, gestion et optimisation de campagnes publicitaires en ligne",
+                    },
+                    section4: {
+                        "title1": "Événements et Hackathons",
+                        "title2": "Organisation de Hackathons",
+                        "desc1": "Planification et gestion de hackathons pour stimuler l'innovation et trouver des solutions technologiques aux défis des ONG",
+                        "title3": "Ateliers et Formations",
+                        "desc3": "Sessions de formation pour améliorer les compétences techniques des bénévoles et des membres des ONG.",
+                    }
+                },
+                Events: {
+                    "title":"Innovation et Inspiration    ",
+                    "desc":"Participez à nos événements d'innovation technologique et stimulez votre créativité. Inspirez-vous d'idées visionnaires et transformez votre perspective. Découvrez de nouvelles possibilités et élargissez vos horizons .",
+                    "Title1":"Événements",
+                    "Desc1":"Découvrez nos événements",
+                    "button":"prends ton billett",
+
                 }
 
 
@@ -257,7 +378,61 @@ const resources = {
                             second: "الأشخاص الذين يحبوننا بالفعل"
                         }
                     },
+                },
+                lionsgeekpro: {
+                    header:{
+                        "title":'تشعر بالإرهاق؟ نحن نقدم مجموعة من الخدمات لتبسيط عملياتك وتعزيز الكفاءة ومساعدتك على تحقيق أهدافك.'
+                    },
+                    firstsection: {
+                        "first-title": "خدماتنا",
+                        "title1": "تطوير الويب",
+                        "title2": "تصميم وتطوير مواقع الويب",
+                        "desc1": "إنشاء وإعادة تصميم مواقع الويب لتحسين تجربة المستخدم والتواصل برسائل المنظمات غير الحكومية",
+                        "title3": "الصيانة والدعم الفني",
+                        "desc3": "دعم مستمر وتحديثات منتظمة لضمان حسن سير عمل مواقع الويب",
+                        "title4": "تطوير تطبيقات الويب والجوال",
+                        "desc4": "حلول مخصصة لإدارة المتطوعين والجهات المانحة",
+                    },
+                    Secondsection: {
+                        "title1": "الإنتاج السمعي البصري",
+                        "title2": "أفلام مؤسسية",
+                        "desc1": "تصميم أفلام لعرض مهام ومؤثرات المنظمات غير الحكومية",
+                        "title3": "فيديوهات فيروسية",
+                        "desc3": "إنتاج فيديوهات جذابة مخصصة للمشاركة على نطاق واسع على مواقع التواصل الاجتماعي",
+                        "title4": "بودكاست",
+                        "desc4": " إنشاء بودكاست لمناقشة الموضوعات ذات الصلة وجذب جمهور عريض",
+                        "title5": "تغطية الحدث",
+                        "desc5": " تصوير فيديو احترافي وتصوير فوتوغرافي لتوثيق الأحداث",
+                        "title6": "البث المباشر على مواقع التواصل الاجتماعي",
+                        "desc6": "  تنظيم بث مباشر للأحداث في الوقت الفعلي والجلسات التفاعلية",
+                    },
+                    section3: {
+                        "title1": "التسويق الرقمي",
+                        "title2": " إنشاء محتوى المستخدم (UGC)",
+                        "desc1": "تدريب على إنشاء واستخدام محتوى من إنشاء المستخدم لزيادة مشاركة المجتمع.",
+                        "title3": "إدارة وسائل التواصل الاجتماعي",
+                        "desc3": "تطوير استراتيجيات مخصصة وإدارة المحتوى لتحسين التواجد عبر الإنترنت",
+                        "title4": "SEO وتسويق المحتوى:",
+                        "desc4": "عمليات تدقيق SEO واستراتيجيات المحتوى لتحسين الرؤية على محركات البحث.",
+                        "title5": "الإعلانات عبر الإنترنت",
+                        "desc5": "إنشاء وإدارة وتحسين حملات الإعلانات عبر الإنترنت",
+                    },
+                    section4: {
+                        "title1": "الأحداث والهاكاثون",
+                        "title2": "تنظيم الهاكاثون:",
+                        "desc1": "التخطيط وإدارة الهاكاثون لتحفيز الابتكار وإيجاد حلول تقنية لتحديات المنظمات غير الحكومية.",
+                        "title3": "الورش والدورات التدريبية",
+                        "desc3": "جلسات تدريبية لتحسين المهارات التقنية للمتطوعين وأعضاء المنظمات غير الحكومية",
+                    }
+                },
+                Events: {
+                    "title":"الابتكار والإلهام ",
+                    "desc":"نضم إلى فعاليات الابتكار التكنولوجي لدينا وأطلق العنان لإبداعك. استلهم من الأفكار الرؤيوية وغير وجهة نظرك. اكتشف إمكانيات جديدة ووسّع آفاقك ",
+                    "Title1":"الأحداث",
+                    "Desc1":"اكتشف أحداثنا",
+                    "button":"احصل على تذكرتك",
                 }
+                
 
 
             },

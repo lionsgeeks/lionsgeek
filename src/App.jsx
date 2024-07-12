@@ -15,6 +15,8 @@ import { AlbumPage } from "./pages/Album/album";
 import { Errors } from './layouts/errors';
 import { BlogPage } from './pages/Blogs/blog';
 import { BlogDetailPage } from './pages/BlogDetails/blogDetails';
+import { Propage } from "./pages/Pro/Pro";
+
 function App() {
   return (
     <MyProvider>
@@ -34,6 +36,7 @@ function App() {
         <Route path="/event/:id" element={<EventDetailPage  />} />
         <Route path='/galerie' element={<GaleriePage />} />
         <Route path='/album/:id' element={<AlbumPage />} />
+        <Route path="/pro" element={<Propage />} />
       </Routes >
       <Footer />
     </MyProvider>
