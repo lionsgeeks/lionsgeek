@@ -88,7 +88,7 @@ export default function HeroSection() {
 
   return (
     <div className=" mt-[67.11px] px-7 md:px-16 text- text-balance pt-6 py-12 flex flex-col justify-between gap-6 md:gap-12">
-      <div className="bg-image md:h-[calc(calc(100vh-67.11px)*2/3)] rounded-lg overflow-hidden p-12 relative after:absolute after:size-full after:inset-0 after:bg-beta/50">
+      <div className="bg-image bg-no-repeat bg-center bg-cover md:h-[calc(calc(100vh-67.11px)*2/3)] rounded-lg overflow-hidden p-12 relative after:absolute after:size-full after:inset-0 after:bg-beta/50">
         <div
           className={`flex flex-col gap-4 absolute z-10 top-1/2 -translate-y-1/2 w-[calc(calc(100%-6rem)*0.5)] ${
             selectedLanguage === "ar" ? "items-end right-12" : "items-start left-12"
