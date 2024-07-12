@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaWifi, FaUsers } from "react-icons/fa";
 import { PiSecurityCameraDuotone } from "react-icons/pi";
+import gsap from 'gsap';
 
 export const SecondSectionCoworking = () => {
     const { t } = useTranslation();
+
+    
+    const leftside = useRef(null);
+    const rightside = useRef(null);
+
+    useEffect(() => {
+        gsap.fromTo(leftside.current, {x: "-100%" , opacity: "0" }, { x: "0%" , duration: 1 ,delay : 0.5, opacity : "1",ease : "power2.out" });
+        gsap.fromTo(rightside.current, {x: "100%" , opacity: "0" }, { x: "0%" , duration: 1 ,delay : 0.5, opacity : "1",ease : "power2.out" });
+
+    }, []);
+    
     return (
         <div className='p-5 lg:px-16 py-20 flex flex-col gap-5'>
             <div className='w-full text-center pb-10'>

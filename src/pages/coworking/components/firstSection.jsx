@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MyContext } from '../../../utils/contextProvider';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
 
 
 export const FirstSectionCoworking = () => {
@@ -17,39 +15,8 @@ export const FirstSectionCoworking = () => {
     const rightside = useRef(null);
 
     useEffect(() => {
-        gsap.fromTo(leftside.current,
-            { x: "-100%", opacity: "0" },
-            {
-                x: "0%",
-                duration: 1,
-                delay: 0.5,
-                opacity: "1",
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: leftside.current,
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    toggleActions: "play none none reverse"
-                }
-            }
-        );
-
-        gsap.fromTo(rightside.current,
-            { x: "100%", opacity: "0" },
-            {
-                x: "0%",
-                duration: 1,
-                delay: 0.5,
-                opacity: "1",
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: rightside.current,
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    toggleActions: "play none none reverse"
-                }
-            }
-        );
+        gsap.fromTo(leftside.current, {x: "-100%" , opacity: "0" }, { x: "0%" , duration: 1 ,delay : 0.5, opacity : "1",ease : "power2.out" });
+        gsap.fromTo(rightside.current, {x: "100%" , opacity: "0" }, { x: "0%" , duration: 1 ,delay : 0.5, opacity : "1",ease : "power2.out" });
 
     }, []);
 
