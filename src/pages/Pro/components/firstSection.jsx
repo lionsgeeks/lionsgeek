@@ -16,7 +16,7 @@ FirstSectionPro = () => {
         <>
             <div className="w-full">
                 {/* hero section */}
-                <div className="flex flex-col gap-4 w-full items-center py-8  self-center">
+                <div className="flex flex-col gap-4 w-full items-center py-8  self-center ">
                     <h1 className="lg:text-7xl text-3xl font-bold">{t('main.lionsgeekpro.firstsection.first-title')}</h1>
                     <p className="lg:text-2xl  font-normal lg:w-[50%] w-[95%] text-center ">
                         {t('main.lionsgeekpro.header.title')}

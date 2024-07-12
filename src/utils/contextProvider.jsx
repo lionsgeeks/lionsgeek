@@ -1,9 +1,8 @@
 
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 export const MyContext = createContext()
 export const MyProvider = ({ children }) => {
-
 
     const [Albums, setAlbums] = useState([
         {
@@ -77,7 +76,7 @@ export const MyProvider = ({ children }) => {
         window.scrollTo(0, 0)
     }, [path])
     const savedSelectedLanguage = localStorage.getItem('selectedLanguage')
-    const [selectedLanguage, setSelectedLanguage] = useState(savedSelectedLanguage);
+    const [selectedLanguage, setSelectedLanguage] = useState(savedSelectedLanguage ?? 'fr');
     localStorage.setItem('selectedLanguage', selectedLanguage ?? 'fr')
 
 
@@ -89,3 +88,5 @@ export const MyProvider = ({ children }) => {
         </>
     )
 }
+
+export const useAppContext = () => useContext(MyContext)

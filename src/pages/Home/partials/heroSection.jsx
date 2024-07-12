@@ -87,30 +87,38 @@ export default function HeroSection() {
   ];
 
   return (
-    <div className="md:h-[calc(100vh-67.11px)] px-7 md:px-16 text-center text-balance py-12 flex flex-col justify-between gap-6 md:gap-12">
-      <div className="flex flex-col gap-4 items-center w-3/4 self-center">
-        <h1 className="text-4xl md:text-7xl font-bold">
-          <TransText
-            fr="Le portail vers le monde numérique."
-            en="The door to the digital world."
-            ar=".بوابة إلى العالم الرقمي"
-          />
-        </h1>
-        <p className="text-lg md:text-2xl font-normal">
-          <TransText
-            fr="Formation et mentorat gratuits pour vous aider à prospérer dans les secteurs de la technologie et des médias."
-            en="Free training and mentorship to help you thrive in the tech and media industries."
-            ar=".تدريب مجاني وتوجيه لمساعدتك على النجاح في مجالي التكنولوجيا والإعلام"
-          />
-        </p>
-
-        <Button
-          onClick={() =>
-            document.getElementById("trainings")?.scrollIntoView({ behavior: "smooth" })
-          }
+    <div className=" mt-[67.11px] px-7 md:px-16 text- text-balance pt-6 py-12 flex flex-col justify-between gap-6 md:gap-12">
+      <div className="bg-image md:h-[calc(calc(100vh-67.11px)*2/3)] rounded-lg overflow-hidden p-12 relative after:absolute after:size-full after:inset-0 after:bg-beta/50">
+        <div
+          className={`flex flex-col gap-4 absolute z-10 top-1/2 -translate-y-1/2 w-[calc(calc(100%-6rem)*0.5)] ${
+            selectedLanguage === "ar" ? "items-end right-12" : "items-start left-12"
+          }`}
         >
-          <TransText fr="Lancez-vous" en="Get Started" ar="ابدأ الآن" />
-        </Button>
+          <h1 className="text-4xl md:text-6xl font-bold text-white text-balance">
+            <TransText
+              fr="Le portail vers le monde numérique."
+              en="The door to the digital world."
+              ar=".بوابة إلى العالم الرقمي"
+            />
+          </h1>
+          <p className="text-lg md:text-xl font-normal text-white text-balance">
+            <TransText
+              fr="Formation et mentorat gratuits pour vous aider à prospérer dans les secteurs de la technologie et des médias."
+              en="Free training and mentorship to help you thrive in the tech and media industries."
+              ar=".تدريب مجاني وتوجيه لمساعدتك على النجاح في مجالي التكنولوجيا والإعلام"
+            />
+          </p>
+
+          <Button
+            className="mt-3"
+            onClick={() =>
+              document.getElementById("trainings")?.scrollIntoView({ behavior: "smooth" })
+            }
+            outline
+          >
+            <TransText fr="Lancez-vous" en="Get Started" ar="ابدأ الآن" />
+          </Button>
+        </div>
       </div>
 
       <div className="md:h-1/2 flex gap-4 flex-col">
@@ -130,7 +138,7 @@ export default function HeroSection() {
           {pillars.map(({ title, description, icon }, index) => (
             <div
               key={index}
-              className="md:w-[32%] py-3 md:py-0 border rounded-lg rounded-tr-none md:h-full border-beta relative overflow-hidden group cursor-pointer flex justify-end"
+              className="md:w-[32%] py-3 md:pt-8 md:pb-4 border rounded-lg rounded-tr-none md:h-full border-beta relative overflow-hidden group cursor-pointer flex justify-end"
             >
               {icon}
 

@@ -3,6 +3,48 @@ import { initReactI18next } from "react-i18next";
 import { FaWifi, FaUsers } from "react-icons/fa";
 import { PiSecurityCameraDuotone } from "react-icons/pi";
 
+const contactUsEn = {
+    'title1': `Ready to start?`,
+    'title2': `We've got you covered`,
+    'paragraphe1': `Have a question?`,
+    'paragraphe2': `An idea you're bursting to share? We're all ears! Drop us a line and let's get this conversation started.`,
+    'address': `4th floor, Route de Rabat Ain Sbaa Casablanca`,
+    'first_name': 'First Name',
+    'last_name': 'Last Name',
+    'phone_number': 'Phone Number',
+    'email': 'Email',
+    'message': 'Message',
+    'send_message': 'Send Message',
+}
+
+const contactUsFr = {
+    'title1': `Prêt à commencer ?`,
+    'title2': `On est là pour vous accompagner.`,
+    'paragraphe1': `Vous avez une question ?`,
+    'paragraphe2': `Une idée que vous avez hâte de partager ? Nous sommes à votre écoute ! Envoyez-nous un message et lançons la conversation.`,
+    'address': `4ème étage, Route de Rabat Ain Sbaa Casablanca`,
+    'first_name': 'Prénom',
+    'last_name': 'Nom',
+    'phone_number': 'Téléphone',
+    'email': 'Email',
+    'message': 'Message',
+    'send_message': 'Envoyer',
+}
+
+const contactUsAr = {
+    'title1': `جاهز للبدء؟`,
+    'title2': `نحن نوفر لك التغطية`,
+    'paragraphe1': `هل لديك سؤال؟`,
+    'paragraphe2': `فكرة تتحمس لمشاركتها؟ نحن نرحب بآرائكم! أرسل لنا رسالة لنبدأ هذه المحادثة.`,
+    'address': `الطابق الرابع ، طريق الرباط عين السبع الدار البيضاء`,
+    'first_name': 'الاسم الأول',
+    'last_name': 'اللقب',
+    'phone_number': 'رقم الهاتف ',
+    'email': 'البريد الإلكتروني ',
+    'message': 'الرسالة ',
+    'send_message': 'إرسال رسالة ',
+}
+
 
 const resources = {
     en: {
@@ -133,10 +175,31 @@ const resources = {
                     "Desc1":"Discover Our Events",
                     "button":"Get your ticket",
 
-                }
+                },
+                contactUs: contactUsEn
             },
             footer: {
-
+                part1: {
+                    title: "Courses",
+                    phrase1: "Coding",
+                    phrase2: "Media"
+                },
+                part2: {
+                    title: "Contact",
+                    area1: {
+                        title: "Email:",
+                        content: "contact@lionsgeek.ma"
+                    },
+                    area2: {
+                        title: "Phone Number:",
+                        content: "+212 522 662 660"
+                    },
+                },
+                part3: {
+                    title: "STAY IN TOUCH",
+                    input: "Type your email",
+                    button: "SIGN UP"
+                }
             }
         },
     },
@@ -299,12 +362,34 @@ const resources = {
                     "Desc1":"Découvrez nos événements",
                     "button":"prends ton billett",
 
-                }
+                },
 
+
+                contactUs: contactUsFr
 
             },
             footer: {
-
+                part1: {
+                    title: "Cours", // Courses
+                    phrase1: "Codage", // Coding
+                    phrase2: "Média", // Media
+                },
+                part2: {
+                    title: "Contact", // Contact
+                    area1: {
+                        title: "Email :", // Email:
+                        content: "contact@lionsgeek.ma"
+                    },
+                    area2: {
+                        title: "Numéro de téléphone :", // Phone Number:
+                        content: "+212 522 662 660"
+                    },
+                },
+                part3: {
+                    title: "RESTEZ CONNECTÉ", // STAY IN TOUCH
+                    input: "Tapez votre email", // Type your email
+                    button: "INSCRIRE", // SIGN UP
+                }
             }
         },
     },
@@ -431,17 +516,38 @@ const resources = {
                     "Title1":"الأحداث",
                     "Desc1":"اكتشف أحداثنا",
                     "button":"احصل على تذكرتك",
-                }
+                },
                 
 
+                contactUs: contactUsAr
 
             },
             footer: {
-
+                part1: {
+                    title: "دورات", // Dawraat (Courses)
+                    phrase1: "الترميز", // At-tarmeez (Coding)
+                    phrase2: "وسائط الإعلام", // Wasaa'it al-i'lam (Media)
+                },
+                part2: {
+                    title: "اتصل بنا", // اتصل بنا (Ittasil bina - Contact Us)
+                    area1: {
+                        title: "البريد الإلكتروني:", // al-bridu l-iléktroniyy (Email:)
+                        content: "contact@lionsgeek.ma"
+                    },
+                    area2: {
+                        title: "رقم الهاتف:", // Raqam al-hātif (Phone Number:)
+                        content: "+212 522 662 660"
+                    },
+                },
+                part3: {
+                    title: "ابق على اتصال", // Ibaq 'ala ittisaal (Stay in Touch)
+                    input: "اكتب بريدك الالكتروني", // Iktub briidak al-iléktroniyy (Type your email)
+                    button: "اشترك", // Ishtirak (Sign Up)
+                }
             }
         },
     },
-};
+  }
 i18n
     .use(initReactI18next)
     .init({

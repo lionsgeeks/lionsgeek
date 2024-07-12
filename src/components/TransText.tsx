@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { MyContext } from "../utils/contextProvider";
+import React from "react";
+import { useAppContext } from "../utils/contextProvider";
 
 interface TextProps {
   ar: string;
@@ -8,7 +8,7 @@ interface TextProps {
 }
 
 const TransText: React.FC<TextProps> = (props) => {
-  const { selectedLanguage } = useContext(MyContext);
+  const { selectedLanguage } = useAppContext();
 
   const allowedLanguages = ["ar", "fr", "en"];
 

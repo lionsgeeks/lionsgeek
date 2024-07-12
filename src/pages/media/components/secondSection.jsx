@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import facebook from "../../../assets/icons/icons8-facebook.svg";
 import instaLogo from "../../../assets/icons/icons8-instagram.svg";
 import tiktok from "../../../assets/icons/icons8-tic-tac.svg";
@@ -13,8 +13,12 @@ import photoshop from "../../../assets/icons/icons8-adobe-photoshop.svg";
 import linkedinLogo from "../../../assets/icons/icons8-linkedin.svg";
 import mic from "../../../assets/icons/microphone-svgrepo-com.svg";
 import screen from "../../../assets/icons/screen-desktop-svgrepo-com.svg";
+import { TransText } from "../../../components";
+import { MyContext } from "../../../utils/contextProvider";
 
 export const SecondSection = () => {
+  const { selectedLanguage } = useContext(MyContext);
+
   const skill = [
     "Digital Marketing",
     "Branding",
@@ -26,23 +30,43 @@ export const SecondSection = () => {
   const [anime, setAnime] = useState(true);
   const programe = {
     "Digital Marketing": [
-      "Learn how to effectively promote your content across various online platforms. Understand the strategies behind SEO, social media marketing, email campaigns, and analytics to reach and engage your target audience.",
-      "from-[#dd4b25]",
+      {
+        ar: "تعلم كيفية الترويج لمحتواك بفعالية عبر مختلف المنصات عبر الإنترنت. فهم الاستراتيجيات وراء تحسين محركات البحث (SEO) والتسويق عبر وسائل التواصل الاجتماعي والحملات البريدية والتحليلات للوصول إلى جمهورك المستهدف وجذبهم",
+        fr: "Apprenez à promouvoir efficacement votre contenu sur diverses plateformes en ligne. Comprenez les stratégies derrière le SEO, le marketing sur les réseaux sociaux, les campagnes par e-mail et les analyses pour atteindre et engager votre audience cible.",
+        en: "Learn how to effectively promote your content across various online platforms. Understand the strategies behind SEO, social media marketing, email campaigns, and analytics to reach and engage your target audience.",
+      },
+      {
+        en: "Digital Marketing",
+        ar: "التسويق الرقمي",
+        fr: "Marketing Digital",
+      },
       [facebook, instaLogo, twitterx, tiktok],
     ],
     Branding: [
-      "Discover the essentials of creating a strong brand identity. Learn how to develop a consistent visual and verbal identity that resonates with your audience and sets you apart from the competition.",
-      "from-[#136eb0]",
+      {
+        ar: "اكتشف أساسيات إنشاء هوية علامة تجارية قوية. تعلم كيفية تطوير هوية بصرية ولفظية متسقة تتجاوب مع جمهورك وتتميز عن المنافسة",
+        fr: "Découvrez les essentiels de la création d'une identité de marque forte. Apprenez à développer une identité visuelle et verbale cohérente qui résonne avec votre audience et vous distingue de la concurrence",
+        en: "Discover the essentials of creating a strong brand identity. Learn how to develop a consistent visual and verbal identity that resonates with your audience and sets you apart from the competition.",
+      },
+      { en: "Branding", ar: "العلامة التجارية ", fr: "Branding" },
       [fingerPrint, linkedinLogo],
     ],
     "Graphic Design": [
-      "Master the fundamentals of graphic design, including typography, color theory, and layout. Use industry-standard software to create visually appealing and professional designs for various media.",
-      "from-[#e2c430]",
+      {
+        ar: "أتقن أساسيات تصميم الجرافيك، بما في ذلك الطباعة ونظرية الألوان والتخطيط. استخدم برامج الصناعة القياسية لإنشاء تصاميم جذابة واحترافية لمختلف الوسائط",
+        fr: "Maîtrisez les fondamentaux du design graphique, y compris la typographie, la théorie des couleurs et la mise en page. Utilisez des logiciels standard de l'industrie pour créer des designs visuellement attrayants et professionnels pour divers médias.",
+        en: "Master the fundamentals of graphic design, including typography, color theory, and layout. Use industry-standard software to create visually appealing and professional designs for various media.",
+      },
+      { en: "Graphic Design", ar: " تصميم الجرافيك ", fr: "Design Graphique" },
       [premierPro, illustrator, afterEffect, photoshop],
     ],
     "Audio Visual": [
-      "Gain expertise in audio and video production. Learn how to capture high-quality sound and visuals, edit recordings, and integrate them into your digital content to enhance the overall viewer experience",
-      "from-[#31acd1]",
+      {
+        ar: "اكتسب خبرة في إنتاج الصوت والفيديو. تعلم كيفية التقاط صوت وصور عالية الجودة، وتحرير التسجيلات، ودمجها في محتواك الرقمي لتعزيز تجربة المشاهد الإجمالية.",
+        fr: "Acquérez une expertise en production audio et vidéo. Apprenez à capturer des sons et des images de haute qualité, à éditer les enregistrements et à les intégrer dans votre contenu numérique pour améliorer l'expérience globale des spectateurs.",
+        en: "Gain expertise in audio and video production. Learn how to capture high-quality sound and visuals, edit recordings, and integrate them into your digital content to enhance the overall viewer experience",
+      },
+      { en: "Audio Visual", ar: " الصوتيات والمرئيات", fr: "Audiovisuel" },
       [mic, camera, screen],
     ],
   };
@@ -53,7 +77,11 @@ export const SecondSection = () => {
         <h1 className="text-xl">Testimonials</h1>
         <h1 className="text-5xl font-bold">Program</h1>
       </div>
-      <div className="flex gap-2 flex-col lg:flex-row">
+      <div
+        className={`flex gap-2 flex-col lg:flex-row ${
+          selectedLanguage === "ar" ? "text-right lg:flex-row-reverse" : ""
+        }`}
+      >
         <div className="lg:w-[40%] flex flex-col gap-2">
           {skill.map((element, index) => (
             <>
@@ -64,25 +92,49 @@ export const SecondSection = () => {
                   setActiveSkill(element);
                   setAnime(true);
                 }}
-                className={` bg-white cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center`}
+                className={` bg-white cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${
+                  selectedLanguage === "ar"
+                    ? "text-right lg:flex-row-reverse"
+                    : ""
+                }`}
               >
                 <h1
-                  className={`${
-                    activeSkill == element ? "text-alpha" : ""
-                  } font-bold`}
+                  className={`flex gap-3 ${
+                    selectedLanguage === "ar"
+                      ? "text-right lg:flex-row-reverse"
+                      : ""
+                  }`}
                 >
-                  {index + 1}. {element}
+                  <span
+                    className={`${
+                      activeSkill === element ? "text-alpha" : ""
+                    } font-bold`}
+                  >
+                    {" "}
+                    {index + 1}{" "}
+                  </span>
+                  <span
+                    className={`${
+                      activeSkill === element ? "text-alpha" : ""
+                    } font-bold`}
+                  >
+                    {" "}
+                    {TransText(programe[element][1])}{" "}
+                  </span>
                 </h1>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class={`${activeSkill == element ? "stroke-alpha" : ""} ${
-                    element === hint ? "rotate-90" : ""
-                  } size-5 font-bold lg:rotate-0`}
-                >
+                  className={`lg:rotate-0 ${
+                    activeSkill === element ? "stroke-alpha" : ""
+                  } ${element === hint ? "rotate-90" : ""} ${
+                    selectedLanguage === "ar" ? "lg:rotate-180" : ""
+                  } size-5 font-bold`} 
+                  >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -95,7 +147,7 @@ export const SecondSection = () => {
                   element === hint ? "h-auto " : "h-0 hidden"
                 }  gap-2 lg:hidden flex flex-col bg-white p-4`}
               >
-                {programe[element][0]}
+                {TransText(programe[element][0])}
               </div>
             </>
           ))}
@@ -104,10 +156,11 @@ export const SecondSection = () => {
           {programe[hint] && (
             <>
               <p
-                className="font-medium text-xl bg-white/25 absolute px-5"
-                
+                className={`font-medium text-xl bg-white/25 absolute px-5 ${
+                  selectedLanguage == "ar" ? "text-right " : ""
+                }`}
               >
-                {programe[hint][0]}
+                {TransText(programe[hint][0])}
               </p>
               <img
                 className={`hidden lg:flex size-[120%] object-cover absolute duration-700 ${
