@@ -7,7 +7,7 @@ export const AlbumPage = () => {
 
     console.log(Albums[id - 1].images)
     return (
-        <div className='w-full p-10 lg:p-16  '>
+        <div className='w-full p-10 lg:px-16 py-24 '>
             <h1 className='text-center text-5xl font-bold pb-6'>{Albums[id - 1].name}</h1>
             <div className=' w-full flex flex-wrap gap-4 justify-center py-10'>
                 {Object.values(Albums[id - 1].images).map((image, index) => (

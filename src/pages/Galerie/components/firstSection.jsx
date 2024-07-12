@@ -21,7 +21,7 @@ export const FirstSectionGalerie = () => {
     };
 
     return (
-        <div className='h-screen w-full overflow-hidden grid place-items-center'>
+        <div className='h-screen w-full overflow-hidden grid place-items-center pt-14'>
             <main>
                 <ul className='slider' ref={slider}>
                     {Albums?.map((Albums, index) => (
