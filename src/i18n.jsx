@@ -51,6 +51,7 @@ const resources = {
         translation: {
             header: {
                 "home": "Home",
+                "pro": "Services",
                 "formation": "Formation",
                 "coding": "Learn to code",
                 "media": "Master media arts",
@@ -122,8 +123,8 @@ const resources = {
 
                 },
                 lionsgeekpro: {
-                    header:{
-                        "title":'Feeling overwhelmed? We offer a range of services to streamline your operations, boost efficiency, and help you achieve your goals.'
+                    header: {
+                        "title": 'Feeling overwhelmed? We offer a range of services to streamline your operations, boost efficiency, and help you achieve your goals.'
                     },
                     firstsection: {
                         "first-title": "OUR SERVICES",
@@ -169,11 +170,11 @@ const resources = {
 
                 },
                 Events: {
-                    "title":"Inovation & Inspiration ",
-                    "desc":"Join our tech innovation events and ignite your creativity. Be inspired by visionary ideas and transform your perspective. Discover new possibilities and expand your horizons. ",
-                    "Title1":"Events",
-                    "Desc1":"Discover Our Events",
-                    "button":"Get your ticket",
+                    "title": "Inovation & Inspiration ",
+                    "desc": "Join our tech innovation events and ignite your creativity. Be inspired by visionary ideas and transform your perspective. Discover new possibilities and expand your horizons. ",
+                    "Title1": "Events",
+                    "Desc1": "Discover Our Events",
+                    "button": "Get your ticket",
 
                 },
                 contactUs: contactUsEn
@@ -207,6 +208,7 @@ const resources = {
         translation: {
             header: {
                 "home": "Accueil",
+                "pro": "Services",
                 "formation": "Formation",
                 "coding": "Apprenez à coder",
                 "media": "Maîtriser les arts médiatiques",
@@ -297,10 +299,10 @@ const resources = {
                     },
 
                 },
-                
+
                 lionsgeekpro: {
-                    header:{
-                        "title":'Vous vous sentez submergé ? Nous proposons une gamme de services pour rationaliser vos opérations, améliorer le fficacité et vous aider à atteindre vos objectifs'
+                    header: {
+                        "title": 'Vous vous sentez submergé ? Nous proposons une gamme de services pour rationaliser vos opérations, améliorer le fficacité et vous aider à atteindre vos objectifs'
                     },
                     firstsection: {
                         "first-title": "NOS SERVICES",
@@ -356,11 +358,11 @@ const resources = {
                     }
                 },
                 Events: {
-                    "title":"Innovation et Inspiration    ",
-                    "desc":"Participez à nos événements d'innovation technologique et stimulez votre créativité. Inspirez-vous d'idées visionnaires et transformez votre perspective. Découvrez de nouvelles possibilités et élargissez vos horizons .",
-                    "Title1":"Événements",
-                    "Desc1":"Découvrez nos événements",
-                    "button":"prends ton billett",
+                    "title": "Innovation et Inspiration    ",
+                    "desc": "Participez à nos événements d'innovation technologique et stimulez votre créativité. Inspirez-vous d'idées visionnaires et transformez votre perspective. Découvrez de nouvelles possibilités et élargissez vos horizons .",
+                    "Title1": "Événements",
+                    "Desc1": "Découvrez nos événements",
+                    "button": "prends ton billett",
 
                 },
 
@@ -397,6 +399,7 @@ const resources = {
         translation: {
             header: {
                 "home": "الرئيسية",
+                "pro": "خدمات",
                 "formation": "التكوين",
                 "coding": "تعلم البرمجة",
                 "media": "إتقان فنون الإعلام",
@@ -465,8 +468,8 @@ const resources = {
                     },
                 },
                 lionsgeekpro: {
-                    header:{
-                        "title":'تشعر بالإرهاق؟ نحن نقدم مجموعة من الخدمات لتبسيط عملياتك وتعزيز الكفاءة ومساعدتك على تحقيق أهدافك.'
+                    header: {
+                        "title": 'تشعر بالإرهاق؟ نحن نقدم مجموعة من الخدمات لتبسيط عملياتك وتعزيز الكفاءة ومساعدتك على تحقيق أهدافك.'
                     },
                     firstsection: {
                         "first-title": "خدماتنا",
@@ -511,13 +514,13 @@ const resources = {
                     }
                 },
                 Events: {
-                    "title":"الابتكار والإلهام ",
-                    "desc":"نضم إلى فعاليات الابتكار التكنولوجي لدينا وأطلق العنان لإبداعك. استلهم من الأفكار الرؤيوية وغير وجهة نظرك. اكتشف إمكانيات جديدة ووسّع آفاقك ",
-                    "Title1":"الأحداث",
-                    "Desc1":"اكتشف أحداثنا",
-                    "button":"احصل على تذكرتك",
+                    "title": "الابتكار والإلهام ",
+                    "desc": "نضم إلى فعاليات الابتكار التكنولوجي لدينا وأطلق العنان لإبداعك. استلهم من الأفكار الرؤيوية وغير وجهة نظرك. اكتشف إمكانيات جديدة ووسّع آفاقك ",
+                    "Title1": "الأحداث",
+                    "Desc1": "اكتشف أحداثنا",
+                    "button": "احصل على تذكرتك",
                 },
-                
+
 
                 contactUs: contactUsAr
 
