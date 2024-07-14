@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import htmlLogo from "../../../assets/icons/icons8-html-5.svg";
 import cssLogo from "../../../assets/icons/icons8-css3.svg";
 import jsLogo from "../../../assets/icons/icons8-javascript.svg";
@@ -11,17 +11,63 @@ import phpLogo from "../../../assets/icons/icons8-logo-php.svg";
 import { useTranslation } from "react-i18next";
 import { TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
+import gsap from "gsap";
 
 export const SecondSection = () => {
   const skill = ["Front-End", "Back-End", "Version Control", "Shell Scripting"];
   const [hint, setHint] = useState("Front-End");
   const [activeSkill, setActiveSkill] = useState("Front-End");
   const { selectedLanguage } = useContext(MyContext);
+  const rightside = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      ".leftside",
+      { x: "-100%", opacity: "0" },
+      {
+        x: "0%",
+        stagger: 0.2,
+        duration: 0.4,
+        // delay: 0.1,
+        opacity: "1",
+        scrollTrigger: {
+          trigger: ".leftside",
+          start: "top bottom",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      rightside.current,
+      { y: "100%", opacity: "0" },
+      {
+        y: "0%",
+        duration: 1,
+        stagger: 0.2,
+        delay: 0.1,
+        opacity: "1",
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: rightside.current,
+          start: "top bottom",
+          // end: "bottom 20%",
+          // toggleActions: "play none none reverse",
+        },
+      }
+    );
+  }, []);
+
   const programe = {
     "Front-End": [
       [
-        <p className={`flex gap-3 ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''}`}>
-          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': HTML ' : 'HTML : '}`}</span>
+        <p
+          className={`flex gap-2 ${
+            selectedLanguage == "ar" ? "flex-row-reverse" : ""
+          }`}
+        >
+          <span className="font-bold text-nowrap">{`${
+            selectedLanguage == "ar" ? ": HTML " : "HTML : "
+          }`}</span>
           <TransText
             fr="Maîtriser les blocs de construction du web. Apprenez à structurer efficacement votre contenu."
             en="Master the building blocks of
@@ -29,24 +75,42 @@ export const SecondSection = () => {
             ar="إتقان اللبنات الأساسية للويب. تعلم كيفية بناء المحتوى الخاص بك بشكل فعال "
           />
         </p>,
-        <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': CSS ' : 'CSS : '}`}</span> .
+        <p
+          className={`flex gap-2  ${
+            selectedLanguage == "ar" ? "flex-row-reverse " : ""
+          }`}
+        >
+          <span className="font-bold text-nowrap">{`${
+            selectedLanguage == "ar" ? ": CSS " : "CSS : "
+          }`}</span>
           <TransText
             fr="Appliquez des styles à vos pages web avec précision. Comprenez les techniques de mise en page, la conception adaptative et les frameworks CSS modernes"
             en="Style your web pages with precision. Understand layout techniques, responsive design, and modern CSS frameworks"
             ar="الحديثة CSS صمم صفحات الويب الخاصة بك بدقة تفهّم تقنيات التخطيط والتصميم المتجاوب وإطارات"
           />
         </p>,
-        <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': JavaScript ' : 'JavaScript : '}`}</span>
+        <p
+          className={`flex gap-2  ${
+            selectedLanguage == "ar" ? "flex-row-reverse " : ""
+          }`}
+        >
+          <span className="font-bold text-nowrap">{`${
+            selectedLanguage == "ar" ? ": JavaScript " : "JavaScript : "
+          }`}</span>
           <TransText
             fr="Donnez vie à vos pages web grâce à l'interactivité. Apprenez les concepts JavaScript de base et la manipulation du DOM"
             en="Bring your web pages to life with interactivity. Learn core JavaScript concepts and how to manipulate the DOM."
             ar="  DOM وكيفية معالجة  JavaScriptأضف الحيوية إلى صفحات الويب الخاصة بك من خلال التفاعلية. تعلم المفاهيم الأساسية لـ "
           />
         </p>,
-        <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': React ' : 'React : '}`} </span>
+        <p
+          className={`flex gap-2  ${
+            selectedLanguage == "ar" ? "flex-row-reverse " : ""
+          }`}
+        >
+          <span className="font-bold text-nowrap">
+            {`${selectedLanguage == "ar" ? ": React " : "React : "}`}{" "}
+          </span>
           <TransText
             fr="Plongez dans l'une des bibliothèques JavaScript les plus populaires pour la création d'interfaces utilisateur. Apprenez l'architecture basée sur les composants et la gestion d'état."
             en="Dive into one of the most popular JavaScript libraries for building user interfaces. Learn component-based architecture and state management."
@@ -59,8 +123,15 @@ export const SecondSection = () => {
     ],
     "Back-End": [
       [
-        <p className={`flex gap-3 ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold  text-nowrap"> {`${selectedLanguage == 'ar' ? ': Laravel ' : 'Laravel : '}`} </span>
+        <p
+          className={`flex gap-2 ${
+            selectedLanguage == "ar" ? "flex-row-reverse " : ""
+          }`}
+        >
+          <span className="font-bold  text-nowrap">
+            {" "}
+            {`${selectedLanguage == "ar" ? ": Laravel " : "Laravel : "}`}{" "}
+          </span>
           <TransText
             fr="Familiarisez-vous avec ce puissant framework PHP. Apprenez à construire des applications côté serveur robustes et évolutives, à gérer des bases de données et à créer des API RESTful"
             en="Get hands-on with this powerful PHP framework. Learn to build robust and scalable server-side applications, manage databases, and create RESTful APIs."
@@ -73,16 +144,28 @@ export const SecondSection = () => {
     ],
     "Version Control": [
       [
-        <p className={`flex gap-3 ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ': Git ' : 'Git : '}`} </span>
+        <p
+          className={`flex gap-2 ${
+            selectedLanguage == "ar" ? "flex-row-reverse " : ""
+          }`}
+        >
+          <span className="font-bold text-nowrap">
+            {`${selectedLanguage == "ar" ? ": Git " : "Git : "}`}{" "}
+          </span>
           <TransText
             fr="Comprendre les notions essentielles du contrôle de version. Apprenez à suivre les modifications de votre base de code, à collaborer avec d'autres et à gérer les versions de projet"
             en="Understand the essentials of version control. Learn how to track changes in your codebase, collaborate with others, and manage project versions."
             ar="فهم أساسيات مراقبة الإصدارات. تعلم كيفية تتبع التغييرات في قاعدة الكود الخاصة بك, والتعاون مع الآخرين, وإدارة إصدارات المشروع"
           />
         </p>,
-        <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold  text-nowrap">{`${selectedLanguage == 'ar' ? ': GitHub ' : 'GitHub : '}`}</span>
+        <p
+          className={`flex gap-2  ${
+            selectedLanguage == "ar" ? "flex-row-reverse " : ""
+          }`}
+        >
+          <span className="font-bold  text-nowrap">{`${
+            selectedLanguage == "ar" ? ": GitHub " : "GitHub : "
+          }`}</span>
           <TransText
             fr="Explorez cette plateforme populaire d'hébergement et de partage de code. Apprenez à utiliser GitHub pour le contrôle de version, la collaboration et la gestion de projet"
             en="Explore this popular platform for hosting and sharing code. Learn how to use GitHub for version control, collaboration, and project management."
@@ -95,8 +178,16 @@ export const SecondSection = () => {
     ],
     "Shell Scripting": [
       [
-        <p className={`flex gap-3  ${selectedLanguage == 'ar' ? 'flex-row-reverse ' : ''}`}>
-          <span className="font-bold text-nowrap">{`${selectedLanguage == 'ar' ? ' : Shell Scripting' : 'Shell Scripting : '}`}</span>
+        <p
+          className={`flex gap-2  ${
+            selectedLanguage == "ar" ? "flex-row-reverse " : ""
+          }`}
+        >
+          <span className="font-bold text-nowrap">{`${
+            selectedLanguage == "ar"
+              ? " : Shell Scripting"
+              : "Shell Scripting : "
+          }`}</span>
           <TransText
             fr="Automatisez des tâches et améliorez votre workflow. Apprenez les bases du scripting shell, les outils en ligne de commande et comment écrire des scripts pour exécuter efficacement des tâches répétitives."
             en="Automate tasks and improve your workflow. Learn the basics of shell scripting, command-line tools, and how to write scripts to perform repetitive tasks efficiently."
@@ -116,7 +207,10 @@ export const SecondSection = () => {
   return (
     <div className="flex flex-col gap-8 lg:px-16 px-7 py-7 bg-gray-50 ">
       <div className="w-full text-center pb-10">
-        <h1 className="text-xl">Testimonials</h1>
+        <h1 className="text-xl">
+          {" "}
+          <TransText fr="Nos cours" ar="دوراتنا" en="Our Courses" />
+        </h1>
         <h1 className="text-5xl font-bold">
           <TransText fr="Programme" en="Program" ar="البرنامج" />
         </h1>
@@ -136,11 +230,35 @@ export const SecondSection = () => {
                   setActiveSkill(element);
                   setAnime(true);
                 }}
-                className={`bg-white cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse': ''}`}
+                className={`leftside overflow-x-hidden bg-white cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${
+                  selectedLanguage === "ar"
+                    ? "text-right lg:flex-row-reverse"
+                    : ""
+                }`}
               >
-                <h1 className={`flex gap-3 ${selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse': ''}`}>
-                  <span className={`${activeSkill === element ? "text-alpha" : "" } font-bold`}>  {index + 1} </span> 
-                  <span className={`${activeSkill === element ? "text-alpha" : "" } font-bold`}> {TransText(programe[element][1])} </span>
+                <h1
+                  className={`flex gap-3 ${
+                    selectedLanguage === "ar"
+                      ? "text-right lg:flex-row-reverse"
+                      : ""
+                  }`}
+                >
+                  <span
+                    className={`${
+                      activeSkill === element ? "text-alpha" : ""
+                    } font-bold`}
+                  >
+                    {" "}
+                    {index + 1}{" "}
+                  </span>
+                  <span
+                    className={`${
+                      activeSkill === element ? "text-alpha" : ""
+                    } font-bold`}
+                  >
+                    {" "}
+                    {TransText(programe[element][1])}{" "}
+                  </span>
                 </h1>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +268,9 @@ export const SecondSection = () => {
                   stroke="currentColor"
                   className={`lg:rotate-0 ${
                     activeSkill === element ? "stroke-alpha" : ""
-                  } ${element === hint ? "rotate-90" : ""} ${selectedLanguage === 'ar' ? 'lg:rotate-180': ''} size-5 font-bold`}
+                  } ${element === hint ? "rotate-90" : ""} ${
+                    selectedLanguage === "ar" ? "lg:rotate-180" : ""
+                  } size-5 font-bold`}
                 >
                   <path
                     stroke-linecap="round"
@@ -159,7 +279,6 @@ export const SecondSection = () => {
                   />
                 </svg>
               </div>
-
               <div
                 className={`${
                   element === hint ? "h-auto " : "h-0 hidden"
@@ -188,7 +307,7 @@ export const SecondSection = () => {
             alt="-rotate-12 -right-56 "
           />
         </div>
-        <div className="lg:flex hidden lg:flex-col w-[10%]">
+        <div ref={rightside} className="lg:flex hidden lg:flex-col w-[10%]">
           {programe[hint][2].map((element, index) => (
             <img key={index} className="w-[40%]" src={element} alt="" />
           ))}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import facebook from "../../../assets/icons/icons8-facebook.svg";
 import instaLogo from "../../../assets/icons/icons8-instagram.svg";
 import tiktok from "../../../assets/icons/icons8-tic-tac.svg";
@@ -15,6 +15,7 @@ import mic from "../../../assets/icons/microphone-svgrepo-com.svg";
 import screen from "../../../assets/icons/screen-desktop-svgrepo-com.svg";
 import { TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
+import gsap from "gsap";
 
 export const SecondSection = () => {
   const { selectedLanguage } = useContext(MyContext);
@@ -28,6 +29,41 @@ export const SecondSection = () => {
   const [hint, setHint] = useState("Digital Marketing");
   const [activeSkill, setActiveSkill] = useState("Digital Marketing");
   const [anime, setAnime] = useState(true);
+  const rightside = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      ".leftside",
+      { x: "-100%", opacity: "0" },
+      {
+        x: "0%",
+        stagger: 0.2,
+        duration: 0.4,
+        // delay: 0.1,
+        opacity: "1",
+        scrollTrigger: {
+          trigger: ".leftside",
+          start: "top bottom",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      rightside.current,
+      { y: "100%", opacity: "0" },
+      {
+        y: "0%",
+        duration: 1,
+        stagger: 0.2,
+        opacity: "1",
+        scrollTrigger: {
+          trigger: rightside.current,
+          start: "top bottom",
+        },
+      }
+    );
+  }, []);
+
   const programe = {
     "Digital Marketing": [
       {
@@ -74,8 +110,12 @@ export const SecondSection = () => {
   return (
     <div className="flex flex-col gap-8 lg:px-16 px-7 py-7 bg-gray-50 ">
       <div className="w-full text-center pb-10">
-        <h1 className="text-xl">Testimonials</h1>
-        <h1 className="text-5xl font-bold">Program</h1>
+        <h1 className="text-xl">
+          <TransText fr="Nos cours" ar="دوراتنا" en="Our Courses" />
+        </h1>
+        <h1 className="text-5xl font-bold">
+          <TransText fr="Programme" en="Program" ar="البرنامج" />
+        </h1>
       </div>
       <div
         className={`flex gap-2 flex-col lg:flex-row ${
@@ -92,7 +132,7 @@ export const SecondSection = () => {
                   setActiveSkill(element);
                   setAnime(true);
                 }}
-                className={` bg-white cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${
+                className={`leftside overflow-x-hidden bg-white cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${
                   selectedLanguage === "ar"
                     ? "text-right lg:flex-row-reverse"
                     : ""
@@ -133,8 +173,8 @@ export const SecondSection = () => {
                     activeSkill === element ? "stroke-alpha" : ""
                   } ${element === hint ? "rotate-90" : ""} ${
                     selectedLanguage === "ar" ? "lg:rotate-180" : ""
-                  } size-5 font-bold`} 
-                  >
+                  } size-5 font-bold`}
+                >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -152,7 +192,9 @@ export const SecondSection = () => {
             </>
           ))}
         </div>
-        <div className="hidden lg:flex lg:w-[50%] p-4 bg-white relative overflow-hidden">
+        <div
+          className="hidden lg:flex lg:w-[50%] p-4 bg-white relative overflow-hidden"
+        >
           {programe[hint] && (
             <>
               <p
@@ -176,7 +218,7 @@ export const SecondSection = () => {
             </>
           )}
         </div>
-        <div className="lg:flex lg:flex-col hidden w-[10%] gap-2">
+        <div ref={rightside} className="lg:flex lg:flex-col hidden w-[10%] gap-2">
           {programe[hint][2].map((element, index) => (
             <img key={index} className="w-[40%]" src={element} alt="" />
           ))}
