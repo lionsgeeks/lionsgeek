@@ -98,7 +98,7 @@ export const Footer = () => {
                                 <FaTiktok className='text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200' />
                             </a>
                         </div>
-                        <p className='text-gray-400 text-[0.9rem]'>&copy; Copyright {currentYear} LionsGeek. All Rights Reserved.</p>
+                        <p className='text-gray-400 text-[0.9rem] text-center'>&copy; Copyright {currentYear} LionsGeek. All Rights Reserved.</p>
                     </div>
                 </div>
             </footer>

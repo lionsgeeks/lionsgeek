@@ -110,6 +110,7 @@ const Navbar = () => {
                         </div>
                         <nav className={`flex-col ${isOpen ? 'flex' : 'hidden'} gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row  ${selectedLanguage == 'ar' ? 'md:flex-row-reverse items-end' : ''}`}>
                             <Link to={'/'} onClick={() => setIsOpen(false)} className={` px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>{t('header.home')}</Link>
+                            <Link to={'/pro'} onClick={() => setIsOpen(false)} className={` px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == '/pro' ? 'font-medium  after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`}>{t('header.pro')}</Link>
                             <div ref={formationRef} className={`relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == '/coding' || location.pathname == '/media' ? 'font-medium after:border-alpha after:w-[100%]' : 'after:border-gray-300'}`} >
                                 <button onClick={() => {
                                     setFormationMenu(!formationMenu)

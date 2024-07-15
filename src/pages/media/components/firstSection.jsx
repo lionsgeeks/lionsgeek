@@ -1,19 +1,61 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import contentCreature from "../../../assets/images/recording_a_movie.svg";
 import Button from "../../../components/Button";
 import { TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
+import gsap from "gsap";
+
 
 export const FirstSection = () => {
+  const leftside = useRef(null);
+  const rightside = useRef(null);
   const { selectedLanguage } = useContext(MyContext);
+  useEffect(() => {
+    gsap.fromTo(
+      leftside.current,
+      { x: "-100%", opacity: "0" },
+      {
+        x: "0%",
+        duration: 1,
+        delay: 0.1,
+        opacity: "1",
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: leftside.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      rightside.current,
+      { x: "100%", opacity: "0" },
+      {
+        x: "0%",
+        duration: 1,
+        delay: 0.1,
+        opacity: "1",
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: rightside.current,
+          // start: "top 80%",
+          // end: "bottom 20%",
+          // toggleActions: "play none none reverse",
+        },
+      }
+    );
+  }, []);
+
 
   return (
     <div
-      className={`mt-16 flex flex-col-reverse items-center lg:flex-row justify-center ${
+      className={`overflow-x-hidden mt-16 flex flex-col-reverse items-center lg:flex-row justify-center ${
         selectedLanguage === "ar" ? "lg:flex-row-reverse text-right" : ""
       }`}
     >
-      <div className="lg:w-[50%] py-16 px-7 lg:px-16 flex flex-col gap-4">
+      <div ref={leftside} className=" lg:w-[50%] py-16 px-7 lg:px-16 flex flex-col gap-4">
         <h1 className="font-bold text-6xl lg:text-balance">
           <TransText
             en="Digital Content Creator"
@@ -60,6 +102,7 @@ export const FirstSection = () => {
           </p>
         </div>
         <div
+        
           className={`flex items-center gap-4 ${
             selectedLanguage === "ar" ? "flex-row-reverse" : ""
           }`}
@@ -119,7 +162,7 @@ export const FirstSection = () => {
           </Button>
         </div>
       </div>
-      <div className="lg:w-[50%] w-[90%] flex justify-center">
+      <div ref={rightside} className="lg:w-[50%] w-[90%] flex justify-center">
         <img className="lg:w-[70%]" src={contentCreature} alt="web developer" />
       </div>
     </div>
