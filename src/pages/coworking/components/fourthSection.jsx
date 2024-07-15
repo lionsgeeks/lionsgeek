@@ -22,7 +22,7 @@ export const FourthSectionCoworking = () => {
             image: ilyass,
         },
         {
-            name: "Amine Bakrime",
+            name: "Amine Bakrim",
             description: "LionsGeek offers top-notch web development education. The practical approach, including real-world projects and industry visits, prepared me well for the tech industry.",
             image: ilyass,
         },
