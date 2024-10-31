@@ -87,7 +87,7 @@ export const MyProvider = ({ children }) => {
     useEffect(() => {
         const fetchBlogs = () => {
             axios.get(URL + 'blogs').then((res) => {
-                
+
                 setBlogs(res.data)
             }).catch((err) => {
                 console.log('Blog fetching error', err)
@@ -103,7 +103,7 @@ export const MyProvider = ({ children }) => {
 
     return (
         <>
-            <MyContext.Provider value={{ Albums, setAlbums, selectedLanguage, setSelectedLanguage, blogs, IMAGEURL, formatDate}} >
+            <MyContext.Provider value={{ Albums, setAlbums, selectedLanguage, setSelectedLanguage, blogs, URL, IMAGEURL, formatDate }} >
                 {children}
             </MyContext.Provider>
         </>

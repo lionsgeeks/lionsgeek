@@ -6,14 +6,15 @@ import { useLocation } from "react-router-dom";
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useTranslation } from "react-i18next";
-import { useContext } from "react";
-import { MyContext } from "../../utils/contextProvider";
+import { useContext, useState } from "react";
+import { MyContext, useAppContext } from "../../utils/contextProvider";
+import axios from "axios";
 
 
 export const ContactUs = () => {
 
     const { t } = useTranslation()
-    const { selectedLanguage } = useContext(MyContext)
+    const { selectedLanguage, URL } = useAppContext();
     useGSAP(
         () => {
             let tl = gsap.timeline({ defaults: { ease: "pwer4inOut" } })
@@ -22,6 +23,51 @@ export const ContactUs = () => {
                 )
         },
     );
+
+    const [formInfo, setFormInfo] = useState({
+        first: '',
+        last: '',
+        phone: '',
+        email: '',
+        message: '',
+    });
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormInfo((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const formFilled = Object.values(formInfo).every(value => value.trim() !== '');
+    const [loading, setLoading] = useState(false);
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true)
+        const formData = new FormData();
+        Object.keys(formInfo).forEach(key => {
+            formData.append(key, formInfo[key]);
+        });
+        axios.post(URL + 'contact',
+            formInfo
+        )
+            .then(() => {
+                setFormInfo({
+                    first: '',
+                    last: '',
+                    phone: '',
+                    email: '',
+                    message: '',
+                })
+                alert('Message Received.');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        setLoading(false);
+    }
+
     return (
         <>
             <div className="py-[12vh] flex flex-col justify-center lg:px-16 px-5 mt-16">
@@ -50,56 +96,81 @@ export const ContactUs = () => {
                             </div>
                         </div>
                     </div>
-                    <form action="" className={`lg:w-[40%] py-6 px-7 shadow-md  border border-white/55 rounded-lg flex  ${selectedLanguage == 'ar' ? 'items-end' : 'items-start'} flex-col gap-6 bg-200/75`}>
-                        <div class="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
+                    <form onSubmit={onFormSubmit} className={`lg:w-[40%] py-6 px-7 shadow-md  border border-white/55 rounded-lg flex  ${selectedLanguage == 'ar' ? 'items-end' : 'items-start'} flex-col gap-6 bg-200/75`}>
+                        <div className="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
                             <input
-                                class={`${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 `}
+                                onChange={handleInputChange}
+                                value={formInfo.first} type="text" name="first" id="first"
+                                className={`${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 `}
                                 placeholder=" "
                             />
-                            <label class={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
                                 {t('main.contactUs.first_name')}
                             </label>
                         </div>
-                        <div class="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
+                        <div className="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
                             <input
-                                class={` ${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
+                                onChange={handleInputChange}
+                                value={formInfo.last} type="text" name="last" id="last"
+                                className={` ${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
                                 placeholder=" "
                             />
-                            <label class={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
                                 {t('main.contactUs.last_name')}
                             </label>
                         </div>
-                        <div class="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
+                        <div className="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
                             <input
-                                class={` ${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
+                                onChange={handleInputChange}
+                                value={formInfo.phone} type="tel" name="phone" id="phone"
+                                className={` ${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
                                 placeholder=" "
                             />
-                            <label class={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' ']  peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' ']  peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
                                 {t('main.contactUs.phone_number')}
                             </label>
                         </div>
-                        <div class="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
+                        <div className="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
                             <input
-                                class={`${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
+                                onChange={handleInputChange}
+                                value={formInfo.email} type="email" name="email" id="email"
+                                className={`${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
                                 placeholder=" "
                             />
-                            <label class={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' ']  peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' ']  peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
                                 {t('main.contactUs.email')}
                             </label>
                         </div>
-                        <div class="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
+                        <div className="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">
                             {/* <input
-                                class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                                className="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                                 placeholder=" "
                             /> */}
-                            <textarea name="" id="" class={`${selectedLanguage == 'ar' ? 'text-end' : ''} resize-none  peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
-                                placeholder=" "></textarea>
-                            <label class={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
+                            <textarea name="message" id="message"
+                                onChange={handleInputChange} value={formInfo.message}
+                                className={`${selectedLanguage == 'ar' ? 'text-end' : ''} resize-none  peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
+                                placeholder=" " />
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
                                 {t('main.contactUs.message')}
                             </label>
                         </div>
                         <div className="input opacity-0 translate-y-12 [clip-path:polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)]">
-                            <Button className={' text-[0.9rem]  font-normal mt-2 px-4'}>{t('main.contactUs.send_message')}</Button>
+                            <Button disabled={!formFilled} className={' text-[0.9rem]  font-normal mt-2 px-4'}>
+                                {
+                                    loading ?
+                                        <div role="status" className="flex items-center justify-center">
+                                            <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin fill-[#fee819]" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                                            </svg>
+                                            
+                                        </div>
+                                        :
+                                        <>
+                                            {t('main.contactUs.send_message')}
+                                        </>
+                                }
+                            </Button>
                         </div>
                         {/* <button className="bg-alpha mt-2 text-gray-800 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md">Send Message</button> */}
                     </form>
