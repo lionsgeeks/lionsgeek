@@ -96,6 +96,12 @@
   background: #212529;
 }
 
+/* To Reset Tailwind Classes in a div and it's children */
+.reset-tw,
+.reset-tw * {
+    all: revert ;
+}
+
 @media (max-width: 640px) {
   .flex-\[calc\(calc\(100\%-calc\(2\*3\.5rem\)\)\/3\)\] {
     flex: 1 0 100%;

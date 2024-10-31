@@ -1,4 +1,5 @@
 
+import axios from 'axios'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 export const MyContext = createContext()
@@ -79,10 +80,30 @@ export const MyProvider = ({ children }) => {
     const [selectedLanguage, setSelectedLanguage] = useState(savedSelectedLanguage ?? 'fr');
     localStorage.setItem('selectedLanguage', selectedLanguage ?? 'fr')
 
+    const URL = 'http://172.28.0.135:8000/api/'
+    const IMAGEURL = 'http://172.28.0.135:8000/storage/images/'
+
+    const [blogs, setBlogs] = useState()
+    useEffect(() => {
+        const fetchBlogs = () => {
+            axios.get(URL + 'blogs').then((res) => {
+                
+                setBlogs(res.data)
+            }).catch((err) => {
+                console.log('Blog fetching error', err)
+            })
+        }
+
+        fetchBlogs();
+    }, [])
+
+    const formatDate = (date) => {
+        return new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    }
 
     return (
         <>
-            <MyContext.Provider value={{ Albums, setAlbums, selectedLanguage, setSelectedLanguage }} >
+            <MyContext.Provider value={{ Albums, setAlbums, selectedLanguage, setSelectedLanguage, blogs, IMAGEURL, formatDate}} >
                 {children}
             </MyContext.Provider>
         </>

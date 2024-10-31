@@ -64,12 +64,12 @@ export const Footer = () => {
                         </div>
                         <div className='flex flex-col items-start gap-2'>
                             <h1 className={`font-bold text-gray-600 text-[1.2rem] w-full  ${selectedLanguage == 'ar' ? 'text-end' : ''}`}>{t('footer.part3.title')}</h1>
-                            <div class="relative h-11 w-full min-w-[200px]">
+                            <div className="relative h-11 w-full min-w-[200px]">
                                 <input
-                                    class={`${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
+                                    className={`${selectedLanguage == 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
                                     placeholder=" "
                                 />
-                                <label class={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
+                                <label className={`pt-1 pointer-events-none absolute ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`}>
                                     {t('footer.part3.input')}
                                 </label>
                             </div>
