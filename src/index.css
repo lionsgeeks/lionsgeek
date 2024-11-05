@@ -102,6 +102,16 @@
     all: revert ;
 }
 
+input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #fee819;
+}
+
+input[type="radio"]{
+  accent-color: black;
+}
+
 @media (max-width: 640px) {
   .flex-\[calc\(calc\(100\%-calc\(2\*3\.5rem\)\)\/3\)\] {
     flex: 1 0 100%;

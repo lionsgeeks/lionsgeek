@@ -16,6 +16,7 @@ import { Errors } from "./layouts/errors";
 import { BlogPage } from "./pages/Blogs/blog";
 import { BlogDetailPage } from "./pages/BlogDetails/blogDetails";
 import { Propage } from "./pages/Pro/Pro";
+import CoworkingForm from "./pages/coworking/partials/coworkingForm";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/blog/:id" element={<BlogDetailPage />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/coworking" element={<CoworkingPage />} />
+        <Route path="/coworking/form" element={<CoworkingForm />} />
         <Route path="/coding" element={<CodingPage />} />
         <Route path="/event" element={<EventPage />} />
         <Route path="/event/:id" element={<EventDetailPage />} />
