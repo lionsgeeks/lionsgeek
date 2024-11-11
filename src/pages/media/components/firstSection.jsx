@@ -4,6 +4,7 @@ import Button from "../../../components/Button";
 import { TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
 import gsap from "gsap";
+import { NavLink } from "react-router-dom";
 
 
 export const FirstSection = () => {
@@ -51,9 +52,8 @@ export const FirstSection = () => {
 
   return (
     <div
-      className={`overflow-x-hidden mt-16 flex flex-col-reverse items-center lg:flex-row justify-center ${
-        selectedLanguage === "ar" ? "lg:flex-row-reverse text-right" : ""
-      }`}
+      className={`overflow-x-hidden mt-16 flex flex-col-reverse items-center lg:flex-row justify-center ${selectedLanguage === "ar" ? "lg:flex-row-reverse text-right" : ""
+        }`}
     >
       <div ref={leftside} className=" lg:w-[50%] py-16 px-7 lg:px-16 flex flex-col gap-4">
         <h1 className="font-bold text-6xl lg:text-balance">
@@ -75,9 +75,8 @@ export const FirstSection = () => {
           />
         </p>
         <div
-          className={`flex items-center gap-4 ${
-            selectedLanguage === "ar" ? "flex-row-reverse" : ""
-          }`}
+          className={`flex items-center gap-4 ${selectedLanguage === "ar" ? "flex-row-reverse" : ""
+            }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -102,10 +101,9 @@ export const FirstSection = () => {
           </p>
         </div>
         <div
-        
-          className={`flex items-center gap-4 ${
-            selectedLanguage === "ar" ? "flex-row-reverse" : ""
-          }`}
+
+          className={`flex items-center gap-4 ${selectedLanguage === "ar" ? "flex-row-reverse" : ""
+            }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -130,9 +128,8 @@ export const FirstSection = () => {
           </p>
         </div>
         <div
-          className={`flex items-center gap-4 ${
-            selectedLanguage === "ar" ? "flex-row-reverse" : ""
-          }`}
+          className={`flex items-center gap-4 ${selectedLanguage === "ar" ? "flex-row-reverse" : ""
+            }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -157,9 +154,11 @@ export const FirstSection = () => {
           </p>
         </div>
         <div>
-          <Button>
-            <TransText fr="Apply" en="Postuler" ar="تقدم بطلب" />
-          </Button>
+          <NavLink to={'/postuler'}>
+            <Button>
+              <TransText fr="Apply" en="Postuler" ar="تقدم بطلب" />
+            </Button>
+          </NavLink>
         </div>
       </div>
       <div ref={rightside} className="lg:w-[50%] w-[90%] flex justify-center">

@@ -17,6 +17,7 @@ import { BlogPage } from "./pages/Blogs/blog";
 import { BlogDetailPage } from "./pages/BlogDetails/blogDetails";
 import { Propage } from "./pages/Pro/Pro";
 import CoworkingForm from "./pages/coworking/partials/coworkingForm";
+import InfoSession from "./pages/infoSession/infoSession";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/galerie" element={<GaleriePage />} />
         <Route path="/album/:id" element={<AlbumPage />} />
         <Route path="/pro" element={<Propage />} />
+        <Route path="/postuler" element={<InfoSession />} />
       </Routes>
       <Footer />
     </MyProvider>
