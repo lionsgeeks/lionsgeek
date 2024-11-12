@@ -80,8 +80,8 @@ export const MyProvider = ({ children }) => {
     const [selectedLanguage, setSelectedLanguage] = useState(savedSelectedLanguage ?? 'fr');
     localStorage.setItem('selectedLanguage', selectedLanguage ?? 'fr')
 
-    const URL = 'http://172.28.0.135:8000/api/'
-    const IMAGEURL = 'http://172.28.0.135:8000/storage/images/'
+    const URL = 'http://172.28.0.201:8000/api/'
+    const IMAGEURL = 'http://172.28.0.201:8000/storage/images/'
 
     const [blogs, setBlogs] = useState()
     useEffect(() => {
