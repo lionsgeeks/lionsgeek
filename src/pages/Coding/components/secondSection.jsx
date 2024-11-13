@@ -222,7 +222,7 @@ export const SecondSection = () => {
       >
         <div className="lg:w-[40%] flex flex-col gap-2">
           {skill.map((element, index) => (
-            <>
+            <div key={index}>
               <div
                 onMouseDown={() => setAnime(false)}
                 onClick={() => {
@@ -264,7 +264,7 @@ export const SecondSection = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className={`lg:rotate-0 ${
                     activeSkill === element ? "stroke-alpha" : ""
@@ -273,8 +273,8 @@ export const SecondSection = () => {
                   } size-5 font-bold`}
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="m8.25 4.5 7.5 7.5-7.5 7.5"
                   />
                 </svg>
@@ -286,7 +286,7 @@ export const SecondSection = () => {
               >
                 {programe[element][0]}
               </div>
-            </>
+            </div>
           ))}
         </div>
         <div className="hidden lg:flex lg:w-[50%] p-4 bg-white relative lg:overflow-hidden">

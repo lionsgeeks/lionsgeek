@@ -105,9 +105,14 @@ export const ThirdSection = () => {
           />
         </h1>
       </div>
-      <div className={`flex lg:flex-row lg:flex-wrap flex-col items-center gap-10 justify-center ${selectedLanguage === 'ar' ? 'lg:flex-row-reverse text-right' : ''} `}>
+      <div
+        className={`flex lg:flex-row lg:flex-wrap flex-col items-center gap-10 justify-center ${
+          selectedLanguage === "ar" ? "lg:flex-row-reverse text-right" : ""
+        } `}
+      >
         {road.map(({ description, title, Icon }, index) => (
           <div
+            key={index}
             className={`bg-gray-50 p-7 flex flex-col lg:w-[30%] gap-4 rounded-lg relative`}
           >
             <svg
@@ -122,8 +127,8 @@ export const ThirdSection = () => {
                 id="path"
                 fill="none"
                 stroke="#333"
-                stroke-miterlimit="10"
-                stroke-width="2"
+                strokeMiterlimit="10"
+                strokeWidth="2"
                 d="M0,75 L200,75"
               />
             </svg>
@@ -132,8 +137,17 @@ export const ThirdSection = () => {
                 title.en === "Media School" ? "stroke-alpha" : "fill-alpha"
               } `}
             />
-            <h1 className={`font-bold text-2xl flex gap-2 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ""} `}>
-              <span className="text-alpha">{selectedLanguage === "ar" ? ` . ${index + 1}`  : `${index + 1} . `} </span> {TransText(title)}
+            <h1
+              className={`font-bold text-2xl flex gap-2 ${
+                selectedLanguage === "ar" ? "flex-row-reverse" : ""
+              } `}
+            >
+              <span className="text-alpha">
+                {selectedLanguage === "ar"
+                  ? ` . ${index + 1}`
+                  : `${index + 1} . `}{" "}
+              </span>{" "}
+              {TransText(title)}
             </h1>
             <p className={`${selectedLanguage === "ar" ? "text-right" : ""}`}>
               {TransText(description)}

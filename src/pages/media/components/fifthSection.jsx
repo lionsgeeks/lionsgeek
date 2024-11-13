@@ -46,8 +46,16 @@ export const FifthSection = () => {
   return (
     <div className=" flex flex-col gap-6 px-16 py-8 ">
       <div className="w-full text-center pb-10">
-        <h1 className="text-xl"><TransText fr="Témoignages" ar="شهادات" en="Testimonials" /></h1>
-        <h1 className="text-5xl font-bold"><TransText fr=" Les gens qui nous aiment déjà" ar="الأشخاص الذين يحبوننا بالفعل" en="People Who Already Love Us"/> </h1>
+        <h1 className="text-xl">
+          <TransText fr="Témoignages" ar="شهادات" en="Testimonials" />
+        </h1>
+        <h1 className="text-5xl font-bold">
+          <TransText
+            fr=" Les gens qui nous aiment déjà"
+            ar="الأشخاص الذين يحبوننا بالفعل"
+            en="People Who Already Love Us"
+          />{" "}
+        </h1>
       </div>
       <div className="flex flex-wrap justify-center gap-3">
         {testimoniels.map((element, index) => (

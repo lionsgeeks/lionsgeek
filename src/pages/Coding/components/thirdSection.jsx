@@ -29,21 +29,19 @@ export const ThirdSection = () => {
         en: "Check-in",
         ar: "تسجيل الوصول",
         fr: "Enregistrement",
-      }, 
-      description
-        : {
-            en: "Start your journey by filling out a simple form with your information. This step ensures we have all the details we need to personalize your experience at LionsGeek.",
-            ar: "ابدأ رحلتك بملء استمارة بسيطة بمعلوماتك. تضمن هذه الخطوة أن نحصل على جميع التفاصيل التي نحتاجها لتخصيص تجربتك في لاينز جيك",
-            fr: "Commencez votre voyage en remplissant un simple formulaire avec vos informations. Cette étape nous permet de nous assurer que nous disposons de tous les détails nécessaires pour personnaliser votre expérience chez LionsGeek.",
-          },
+      },
+      description: {
+        en: "Start your journey by filling out a simple form with your information. This step ensures we have all the details we need to personalize your experience at LionsGeek.",
+        ar: "ابدأ رحلتك بملء استمارة بسيطة بمعلوماتك. تضمن هذه الخطوة أن نحصل على جميع التفاصيل التي نحتاجها لتخصيص تجربتك في لاينز جيك",
+        fr: "Commencez votre voyage en remplissant un simple formulaire avec vos informations. Cette étape nous permet de nous assurer que nous disposons de tous les détails nécessaires pour personnaliser votre expérience chez LionsGeek.",
+      },
       Icon: FaUserCheck,
     },
     {
-      title: 
-      {
-        en : "Information Session",
-        fr : "Session d'information",
-        ar : "جلسة معلومات",
+      title: {
+        en: "Information Session",
+        fr: "Session d'information",
+        ar: "جلسة معلومات",
       },
       description: {
         en: "Attend a detailed session where our coach will explain the program, its structure, and what you can expect. This session sets the stage for your learning journey, providing you with a clear roadmap.",
@@ -53,11 +51,10 @@ export const ThirdSection = () => {
       Icon: RiInformation2Fill,
     },
     {
-      title: 
-      {
-        en : "Interview",
-        fr : "Entretien",
-        ar : "مقابلة",
+      title: {
+        en: "Interview",
+        fr: "Entretien",
+        ar: "مقابلة",
       },
       description: {
         en: "Have an interview with our team to discuss your goals, current skills, and expectations. This conversation helps us understand how best to support you and tailor the program to meet your needs.",
@@ -67,11 +64,10 @@ export const ThirdSection = () => {
       Icon: FaRegComments,
     },
     {
-      title: 
-      {
-        en : "Jungle",
-        fr : "Jungle",
-        ar : "الأدغال",
+      title: {
+        en: "Jungle",
+        fr: "Jungle",
+        ar: "الأدغال",
       },
       description: {
         en: `Immerse yourself in a week-long bootcamp where you'll learn the basics of web development. By the end of the week, you'll create a project and present it for evaluation. This hands-on experience is crucial for building a strong foundation.`,
@@ -81,11 +77,10 @@ export const ThirdSection = () => {
       Icon: GiPalmTree,
     },
     {
-      title: 
-      {
-        en : "Coding School",
-        fr : "École de codage",
-        ar : "مدرسة البرمجة",
+      title: {
+        en: "Coding School",
+        fr: "École de codage",
+        ar: "مدرسة البرمجة",
       },
       description: {
         en: `Begin the intensive 6-month coding program, diving deep into web development. You'll master HTML, CSS, JavaScript, React, and Laravel through practical projects and mentorship from industry professionals. This is where your journey to becoming a skilled developer truly begins.`,
@@ -109,9 +104,14 @@ export const ThirdSection = () => {
           />
         </h1>
       </div>
-      <div className={`flex lg:flex-row lg:flex-wrap flex-col items-center gap-10 justify-center ${selectedLanguage === 'ar' ? 'lg:flex-row-reverse text-right' : ''} `}>
+      <div
+        className={`flex lg:flex-row lg:flex-wrap flex-col items-center gap-10 justify-center ${
+          selectedLanguage === "ar" ? "lg:flex-row-reverse text-right" : ""
+        } `}
+      >
         {road.map(({ description, title, Icon }, index) => (
           <div
+            key={index}
             className={`bg-gray-50 p-7 flex flex-col lg:w-[30%] w-[90%] gap-4 rounded-lg relative`}
           >
             <svg
@@ -126,17 +126,27 @@ export const ThirdSection = () => {
                 id="path"
                 fill="none"
                 stroke="#333"
-                stroke-miterlimit="10"
-                stroke-width="2"
+                strokeMiterlimit="10"
+                strokeWidth="2"
                 d="M0,75 L200,75"
               />
             </svg>
             <Icon
               className={`text-5xl absolute -top-6 ${
-                title.en === "Coding School" ? "stroke-alpha" : "fill-alpha" } `}
+                title.en === "Coding School" ? "stroke-alpha" : "fill-alpha"
+              } `}
             />
-            <h1 className={`font-bold text-2xl flex gap-2 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ""} `}>
-              <span className="text-alpha">{selectedLanguage === "ar" ? ` . ${index + 1}`  : `${index + 1} . `}</span> {TransText(title)}
+            <h1
+              className={`font-bold text-2xl flex gap-2 ${
+                selectedLanguage === "ar" ? "flex-row-reverse" : ""
+              } `}
+            >
+              <span className="text-alpha">
+                {selectedLanguage === "ar"
+                  ? ` . ${index + 1}`
+                  : `${index + 1} . `}
+              </span>{" "}
+              {TransText(title)}
             </h1>
             <p className={`${selectedLanguage === "ar" ? "text-right" : ""}`}>
               {TransText(description)}
