@@ -1,8 +1,8 @@
 import "./loading.sass";
 
-const LoadingPage = () => {
+const LoadingPage = ({load}) => {
   return (
-    <div className="h-screen flex justify-center flex-col gap-8 items-center relative overflow-hidden group">
+    <div className={`h-screen flex justify-center flex-col gap-8 items-center relative overflow-hidden group `}>
       <svg
         viewBox="0 0 37 36"
         fill="#212529"

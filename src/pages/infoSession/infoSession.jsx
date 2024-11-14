@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppContext } from "../../utils/contextProvider";
 import axios from "axios";
+import Modal from "../../components/Modal";
+import LoadingPage from "../Loading";
 
 const InfoSession = () => {
   //* TODO add info session drop down or radio
   const { selectedLanguage, URL, sessions } = useAppContext();
   const [chosenSession, setChosenSession] = useState("");
   const [sending, setSending] = useState(false);
-  // useEffect(() => {
-  //   axios
-  //     .get(URL + "infosessions")
-  //     .then((res) => {
-  //       setSessions(res.data.infos);
-  //     })
-  //     .catch((err) => {
-  //       console.log("info session form errrr", err);
-  //     });
-  // }, []);
+  const [validate, setValidate] = useState(false);
+  const [confirmation, setConfirmation] = useState(false);
 
   const formFields = [
     { name: "first_name", label: "First Name", type: "text" },
@@ -42,6 +36,7 @@ const InfoSession = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     setSending(true);
     const allData = {
       ...formData,
@@ -58,9 +53,15 @@ const InfoSession = () => {
       .then((res) => {
         setFormData(initialState);
         setSending(false);
+        setConfirmation(true);
+        if (res.status === 200) {
+          setValidate(true);
+        } else {
+          setValidate(false);
+        }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -91,69 +92,91 @@ const InfoSession = () => {
   return (
     <div
       className="px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden"
-      dir={selectedLanguage == "ar" ? "rtl" : "ltr"}
+      dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
     >
-      <h1 className="font-semibold text-2xl tracking-wide">
-        Sign Up to Start Your Adventure with Us
-      </h1>
-      <form
-        onSubmit={handleSubmit}
-        className="mx-auto p-6 bg-white rounded-lg shadow-md space-y-4"
-      >
-        {sessions && (
-          <div className="flex flex-col space-y-2">
-            <label htmlFor="sessions" className="text-gray-700">
-              Choose a Session: <Required />
-            </label>
-            <select
-              name="sessions"
-              id="sessions"
-              onChange={(e) => {
-                setChosenSession(e.target.value);
-              }}
-              className="w-full rounded border border-gray-300 px-4 py-2"
-              required
-            >
-              <option value="">Choose a Session</option>
-              {sessions.map(
-                (opt, ind) =>
-                  opt.isAvailable && (
-                    <option key={ind} className="text-lg" value={opt.id}>
-                      {opt.formation} {opt.name} {formatDate(opt.start_date)}
-                    </option>
-                  )
-              )}
-            </select>
-          </div>
-        )}
-        {formFields.map((field) => (
-          <div key={field.name} className="flex flex-col space-y-2">
-            <label htmlFor={field.name} className="text-gray-700">
-              {field.label}: <Required />
-            </label>
-            <input
-              type={field.type}
-              id={field.name}
-              name={field.name}
-              placeholder={field.label + "..."}
-              value={formData[field.name]}
-              onChange={handleChange}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-        ))}
-
-        <div className="mt-4">
-          <button
-            type="submit"
-            disabled={sending}
-            className="w-full py-2 px-4 bg-alpha font-semibold rounded-md hover:bg-beta hover:text-alpha focus:outline-none"
+      {!sending ? (
+        <>
+          <h1 className="font-semibold text-2xl tracking-wide">
+            Sign Up to Start Your Adventure with Us
+          </h1>
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto p-6 bg-white rounded-lg shadow-md space-y-4"
           >
-            Submit
-          </button>
-        </div>
-      </form>
+            {sessions && (
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="sessions" className="text-gray-700">
+                  Choose a Session: <Required />
+                </label>
+                <select
+                  name="sessions"
+                  id="sessions"
+                  onChange={(e) => {
+                    setChosenSession(e.target.value);
+                  }}
+                  className="w-full rounded border border-gray-300 px-4 py-2"
+                  required
+                >
+                  <option value="">Choose a Session</option>
+                  {sessions.map(
+                    (opt, ind) =>
+                      opt.isAvailable && (
+                        <option key={ind} className="text-lg" value={opt.id}>
+                          {opt.formation} {opt.name}{" "}
+                          {formatDate(opt.start_date)}
+                        </option>
+                      )
+                  )}
+                </select>
+              </div>
+            )}
+            {formFields.map((field) => (
+              <div key={field.name} className="flex flex-col space-y-2">
+                <label htmlFor={field.name} className="text-gray-700">
+                  {field.label}: <Required />
+                </label>
+                <input
+                  type={field.type}
+                  id={field.name}
+                  name={field.name}
+                  placeholder={field.label + "..."}
+                  value={formData[field.name]}
+                  onChange={handleChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+            ))}
+            <div className="mt-4">
+              <button
+                type="submit"
+                disabled={sending}
+                className="w-full py-2 px-4 bg-alpha font-semibold rounded-md hover:bg-beta hover:text-alpha focus:outline-none"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </>
+      ) : (
+        <LoadingPage load={true} />
+      )}
+      {!sending && confirmation && (
+        <Modal
+          validate={validate}
+          confirm={confirmation}
+          action={
+            <button
+              onClick={() => {
+                setConfirmation(false);
+              }}
+              className="px-5 py-2 font-medium bg-alpha rounded"
+            >
+              Close
+            </button>
+          }
+        />
+      )}
     </div>
   );
 };
