@@ -8,6 +8,8 @@ const ApplicationForm = () => {
     const [cv, setCV] = useState(null);
     const [projPresentation, setProjectPresentation] = useState(null);
 
+    const [gender, setGender] = useState('');
+
     const [domain, setDomain] = useState([]);
     const [otherDom, setOtherDom] = useState('');
     const [reasons, setReasons] = useState([]);
@@ -53,7 +55,8 @@ const ApplicationForm = () => {
             presentation: projPresentation,
             domain: domain + otherDom,
             reasons: reasons + otherReasons,
-            needs: needs + otherNeeds
+            needs: needs + otherNeeds,
+            gender: gender,
         }
 
         const newForm = new FormData();
@@ -129,12 +132,12 @@ const ApplicationForm = () => {
 
     const isFormComplete = Object.keys(formInfo)
         .filter(key => key !== 'prev_proj')
-        .every(key => formInfo[key].trim() !== '') && reasons && domain;
+        .every(key => formInfo[key].trim() !== '') && gender && reasons && domain && (reasons.includes('other') ? otherReasons.trim() : true) && (domain.includes('other') ? otherDom.trim() : true);
 
 
     return (
-        <div className='px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden' dir={selectedLanguage == "ar" ? 'rtl' : 'ltr'}>
-            <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md">
+        <div className='px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden' dir={selectedLanguage === "ar" ? 'rtl' : 'ltr'}>
+            <form onSubmit={handleSubmit} className="p-6 bg-gray-50/50 rounded-lg shadow-md mb-4">
                 <h1 className="text-2xl font-bold mb-4">Application Form</h1>
 
                 <h2 className='underline font-semibold mb-2 text-lg'>Personal Information</h2>
@@ -153,7 +156,7 @@ const ApplicationForm = () => {
                             name="full_name"
                             value={formInfo.full_name}
                             onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                             required
                         />
                     </div>
@@ -172,7 +175,7 @@ const ApplicationForm = () => {
                             name="email"
                             value={formInfo.email}
                             onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-beta"
                             required
                         />
                     </div>
@@ -194,7 +197,7 @@ const ApplicationForm = () => {
                             name="phone"
                             value={formInfo.phone}
                             onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                             required
                         />
                     </div>
@@ -213,7 +216,7 @@ const ApplicationForm = () => {
                             name="birthday"
                             value={formInfo.birthday}
                             onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                             required
                         />
                     </div>
@@ -234,28 +237,58 @@ const ApplicationForm = () => {
                             name="formation"
                             value={formInfo.formation}
                             onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow border rounded w-full p-3 text-gray-700 fo focus:outline-beta"
                             required
                         />
                     </div>
 
-                    <div className="mb-4 w-full">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cv">
+                    <div className="mb-6 w-full">
+                        <p className='mb-3 text-sm font-bold'>
                             <TransText
-                                en='Upload CV'
-                                fr='Télécharger le CV'
-                                ar='رفع السيرة الذاتية'
-                            />
+                                en="Upload CV"
+                                fr="Télécharger le CV"
+                                ar="رفع السيرة الذاتية"
+                            /> <Required />
+                        </p>
+                        <label
+                            htmlFor="cv"
+                            className={`flex items-center gap-2  border shadow p-[11px] rounded cursor-pointer ${cv ? 'bg-alpha' : 'bg-white'}`}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                            </svg>
+
+                            <span className="text-sm font-medium">
+                                <TransText
+                                    en="Upload CV"
+                                    fr="Télécharger le CV"
+                                    ar="رفع السيرة الذاتية"
+                                />
+                            </span>
                             <Required />
                         </label>
+
                         <input
                             type="file"
+                            id="cv"
                             accept=".pdf,.doc,.docx"
                             onChange={(e) => handleFileChange(e, setCV)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-
+                            className="hidden"
                         />
                     </div>
+
+
+                </div>
+
+                <div className="flex flex-col mb-6 w-[48%]">
+                    <label htmlFor="gender" className="text-gray-700">Gender: <Required /></label>
+                    <select name="gender" id="gender"
+                        onChange={(e) => { setGender(e.target.value) }}
+                        className="w-full rounded border border-gray-300 p-[10px]" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
                 </div>
 
 
@@ -282,7 +315,7 @@ const ApplicationForm = () => {
                         name="proj_name"
                         value={formInfo.proj_name}
                         onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                         required
                     />
                 </div>
@@ -299,7 +332,7 @@ const ApplicationForm = () => {
                         name="proj_desc"
                         value={formInfo.proj_desc}
                         onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                         required
                     />
                 </div>
@@ -334,7 +367,7 @@ const ApplicationForm = () => {
                             placeholder="Other..."
                             value={otherDom} required
                             onChange={(e) => setOtherDom(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                         />
                     }
                 </fieldset>
@@ -354,26 +387,43 @@ const ApplicationForm = () => {
                         name="proj_plan"
                         value={formInfo.proj_plan}
                         onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                         required
                     />
                 </div>
 
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="projPresentation">
+                <div className="mb-6 w-full">
+                    <p className='mb-3 text-sm font-bold'>
                         <TransText
                             en='Upload Project Presentation'
                             fr='Télécharger la Présentation du Projet'
                             ar='رفع عرض المشروع'
-                        />
+                        /><Required />
+                    </p>
+                    <label
+                        htmlFor="projPresentation"
+                        className={`flex items-center gap-2  border border-gray p-2 rounded cursor-pointer ${projPresentation ? 'bg-alpha' : 'bg-white'}`}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                        </svg>
 
+                        <span className="text-sm font-medium">
+                            <TransText
+                                en='Upload Project Presentation'
+                                fr='Télécharger la Présentation du Projet'
+                                ar='رفع عرض المشروع'
+                            />
+                        </span>
+                        <Required />
                     </label>
+
                     <input
                         type="file"
-                        accept=".pdf"
+                        id="projPresentation"
+                        accept=".pdf,.doc,.docx"
                         onChange={(e) => handleFileChange(e, setProjectPresentation)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-
+                        className="hidden"
                     />
                 </div>
 
@@ -392,7 +442,7 @@ const ApplicationForm = () => {
                         name="prev_proj"
                         value={formInfo.prev_proj}
                         onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
 
                     />
                 </div>
@@ -426,7 +476,7 @@ const ApplicationForm = () => {
                             placeholder="Other..."
                             value={otherReasons} required
                             onChange={(e) => setOtherReasons(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                         />
                     }
                 </fieldset>
@@ -453,13 +503,13 @@ const ApplicationForm = () => {
                         </div>
                     ))}
                     {
-                        needs == "other" &&
+                        needs === "other" &&
                         <input
                             type="text"
                             placeholder="Other..."
                             value={otherNeeds} required
                             onChange={(e) => setOtherNeeds(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
                         />
                     }
                 </fieldset>
