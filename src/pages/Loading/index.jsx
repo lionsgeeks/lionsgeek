@@ -1,6 +1,6 @@
 import "./loading.sass";
 
-const LoadingPage = ({load}) => {
+const LoadingPage = () => {
   return (
     <div className={`h-screen flex justify-center flex-col gap-8 items-center relative overflow-hidden group `}>
       <svg

@@ -61,6 +61,7 @@ export const SecondSection = () => {
     "Front-End": [
       [
         <p
+        key={"Front-End0"}
           className={`flex gap-2 ${
             selectedLanguage == "ar" ? "flex-row-reverse" : ""
           }`}
@@ -76,6 +77,7 @@ export const SecondSection = () => {
           />
         </p>,
         <p
+        key={"Front-End1"}
           className={`flex gap-2  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
@@ -90,6 +92,7 @@ export const SecondSection = () => {
           />
         </p>,
         <p
+        key={"Front-End2"}
           className={`flex gap-2  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
@@ -104,6 +107,7 @@ export const SecondSection = () => {
           />
         </p>,
         <p
+        key={"Front-End3"}
           className={`flex gap-2  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
@@ -124,6 +128,7 @@ export const SecondSection = () => {
     "Back-End": [
       [
         <p
+        key={"Back-End0"}
           className={`flex gap-2 ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
@@ -145,6 +150,7 @@ export const SecondSection = () => {
     "Version Control": [
       [
         <p
+        key={"Back-End0"}
           className={`flex gap-2 ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
@@ -159,6 +165,7 @@ export const SecondSection = () => {
           />
         </p>,
         <p
+        key={"Back-End1"}
           className={`flex gap-2  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
@@ -179,6 +186,7 @@ export const SecondSection = () => {
     "Shell Scripting": [
       [
         <p
+        key={0}
           className={`flex gap-2  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}

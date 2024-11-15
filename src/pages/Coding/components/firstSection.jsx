@@ -12,6 +12,8 @@ export const FirstSection = () => {
   const { selectedLanguage, sessions } = useContext(MyContext);
   const leftside = useRef(null);
   const rightside = useRef(null);
+  console.log(sessions);
+
 
   useEffect(() => {
     gsap.fromTo(

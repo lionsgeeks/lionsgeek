@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppContext } from "../../utils/contextProvider";
 import axios from "axios";
 import Modal from "../../components/Modal";
@@ -11,8 +11,13 @@ const InfoSession = () => {
   const [sending, setSending] = useState(false);
   const [validate, setValidate] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
-  const [gender, setGender] = useState('');
-
+  const [gender, setGender] = useState("");
+  const [error, setError] = useState("");
+  const dateLanguage = {
+    en: "US",
+    fr: "FR",
+    ar: "AR",
+  };
   const formFields = [
     { name: "first_name", label: "First Name", type: "text" },
     { name: "last_name", label: "Last Name", type: "text" },
@@ -29,7 +34,6 @@ const InfoSession = () => {
   }, {});
 
   const [formData, setFormData] = useState(initialState);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -64,8 +68,21 @@ const InfoSession = () => {
       })
       .catch((err) => {
         console.log(err);
+        setError(err);
       });
   };
+
+  useEffect(() => {
+    if (error) {
+      setFormData(initialState);
+      setValidate(false);
+      setSending(false);
+      setConfirmation(true);
+    }
+    return () => {
+      setError("");
+    };
+  }, [error]);
 
   const Required = () => {
     return <span className="text-lg font-bold text-red-500">*</span>;
@@ -75,12 +92,15 @@ const InfoSession = () => {
     const date = new Date(dateString);
 
     // Get formatted date: Monday 20 novembre 2024
-    const formattedDate = date.toLocaleDateString("fr-FR", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
+    const formattedDate = date.toLocaleDateString(
+      `${selectedLanguage}-${dateLanguage[selectedLanguage]}`,
+      {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }
+    );
 
     // Get formatted time: 16:49
     const formattedTime = date.toLocaleTimeString("fr-FR", {
@@ -102,8 +122,7 @@ const InfoSession = () => {
             Sign Up to Start Your Adventure with Us
           </h1>
 
-          {
-            sessions &&
+          {sessions && (
             <form
               onSubmit={handleSubmit}
               className="mx-auto p-6 bg-white rounded-lg shadow-md space-y-4"
@@ -135,9 +154,11 @@ const InfoSession = () => {
               </div>
 
               <div className="flex flex-wrap gap-2">
-
                 {formFields.map((field) => (
-                  <div key={field.name} className="flex flex-col space-y-2 w-[48%]">
+                  <div
+                    key={field.name}
+                    className="flex flex-col space-y-2 w-[48%]"
+                  >
                     <label htmlFor={field.name} className="text-gray-700">
                       {field.label}: <Required />
                     </label>
@@ -167,7 +188,9 @@ const InfoSession = () => {
                     className="w-full rounded border border-gray-300 px-4 py-2"
                     required
                   >
-                    <option value="" defaultValue={''} disabled>Gender</option>
+                    <option value="" defaultValue={""} disabled>
+                      Gender
+                    </option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
@@ -183,8 +206,7 @@ const InfoSession = () => {
                 </button>
               </div>
             </form>
-            
-          }
+          )}
         </>
       ) : (
         <LoadingPage load={true} />
