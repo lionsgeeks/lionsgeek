@@ -11,6 +11,7 @@ const InfoSession = () => {
   const [sending, setSending] = useState(false);
   const [validate, setValidate] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
+  const [gender, setGender] = useState('');
 
   const formFields = [
     { name: "first_name", label: "First Name", type: "text" },
@@ -41,6 +42,7 @@ const InfoSession = () => {
     const allData = {
       ...formData,
       info_session_id: chosenSession,
+      gender: gender,
     };
 
     const newForm = new FormData();
@@ -61,7 +63,7 @@ const InfoSession = () => {
         }
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   };
 
@@ -99,11 +101,13 @@ const InfoSession = () => {
           <h1 className="font-semibold text-2xl tracking-wide">
             Sign Up to Start Your Adventure with Us
           </h1>
-          <form
-            onSubmit={handleSubmit}
-            className="mx-auto p-6 bg-white rounded-lg shadow-md space-y-4"
-          >
-            {sessions && (
+
+          {
+            sessions &&
+            <form
+              onSubmit={handleSubmit}
+              className="mx-auto p-6 bg-white rounded-lg shadow-md space-y-4"
+            >
               <div className="flex flex-col space-y-2">
                 <label htmlFor="sessions" className="text-gray-700">
                   Choose a Session: <Required />
@@ -129,34 +133,58 @@ const InfoSession = () => {
                   )}
                 </select>
               </div>
-            )}
-            {formFields.map((field) => (
-              <div key={field.name} className="flex flex-col space-y-2">
-                <label htmlFor={field.name} className="text-gray-700">
-                  {field.label}: <Required />
-                </label>
-                <input
-                  type={field.type}
-                  id={field.name}
-                  name={field.name}
-                  placeholder={field.label + "..."}
-                  value={formData[field.name]}
-                  onChange={handleChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
+
+              <div className="flex flex-wrap gap-2">
+
+                {formFields.map((field) => (
+                  <div key={field.name} className="flex flex-col space-y-2 w-[48%]">
+                    <label htmlFor={field.name} className="text-gray-700">
+                      {field.label}: <Required />
+                    </label>
+                    <input
+                      type={field.type}
+                      id={field.name}
+                      name={field.name}
+                      placeholder={field.label + "..."}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    />
+                  </div>
+                ))}
+
+                <div className="flex flex-col space-y-2 w-[48%]">
+                  <label htmlFor="gender" className="text-gray-700">
+                    Gender: <Required />
+                  </label>
+                  <select
+                    name="gender"
+                    id="gender"
+                    onChange={(e) => {
+                      setGender(e.target.value);
+                    }}
+                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    required
+                  >
+                    <option value="" defaultValue={''} disabled>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
               </div>
-            ))}
-            <div className="mt-4">
-              <button
-                type="submit"
-                disabled={sending}
-                className="w-full py-2 px-4 bg-alpha font-semibold rounded-md hover:bg-beta hover:text-alpha focus:outline-none"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
+              <div className="mt-4">
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="w-full py-2 px-4 bg-alpha font-semibold rounded-md hover:bg-beta hover:text-alpha focus:outline-none"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+            
+          }
         </>
       ) : (
         <LoadingPage load={true} />
