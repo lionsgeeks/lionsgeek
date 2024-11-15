@@ -3,8 +3,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  const URL = "http://172.28.0.201:8000/api/";
-  const IMAGEURL = "http://172.28.0.201:8000/storage/images/";
+  const URL = "http://172.28.0.87:8000/api/";
+  const IMAGEURL = "http://172.28.0.87:8000/storage/images/";
 
   // ? Galleries Data fetching
 

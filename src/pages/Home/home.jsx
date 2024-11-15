@@ -1,4 +1,5 @@
 import { TransText } from "../../components";
+import { useAppContext } from "../../utils/contextProvider";
 import {
   EventSection,
   GallerySection,
@@ -9,7 +10,10 @@ import {
 } from "./partials";
 
 export const HomePage = () => {
+  const { upcomingEvent } = useAppContext();
+
   return (
+
     <>
       <HeroSection />
       <WhoSection />
@@ -42,8 +46,12 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
+      {
+        upcomingEvent && (
 
-      <EventSection />
+          <EventSection />
+        )
+      }
       <TrainingSection />
       <GallerySection />
     </>
