@@ -3,7 +3,7 @@ import { BlogDetailContentsSection } from './components/blogDetailContentsSectio
 import { Link, useParams } from 'react-router-dom';
 import { useAppContext } from '../../utils/contextProvider';
 
-import 'quill/dist/quill.snow.css'; 
+import 'quill/dist/quill.snow.css';
 
 
 export const BlogDetailPage = () => {
@@ -15,15 +15,18 @@ export const BlogDetailPage = () => {
     useEffect(() => {
         if (blogs) {
             const thisBlog = blogs.find((blg) => blg.id == id);
-
             setCurrentBlog(thisBlog);
         }
     }, [blogs, id])
 
+    // if (currentBlog) {
+        console.log(currentBlog);
+    // }
     return (
         <>
             {
-                currentBlog && <div className="p-16">
+                currentBlog &&
+                <div className="p-16">
                     <div className="">
                         <img className="w-full h-96 rounded-2xl  object-cover object-center -z-2" src={IMAGEURL + currentBlog.image} alt="" />
                     </div>
