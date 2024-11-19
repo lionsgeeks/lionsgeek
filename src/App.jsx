@@ -18,12 +18,22 @@ import { BlogDetailPage } from "./pages/BlogDetails/blogDetails";
 import { Propage } from "./pages/Pro/Pro";
 import CoworkingForm from "./pages/coworking/partials/coworkingForm";
 import InfoSession from "./pages/infoSession/infoSession";
+import LoadingPage from "./pages/Loading";
 
 function App() {
+
+  function Redirect(params) {
+    window.location.href = 'https://management.lionsgeek.ma/login';
+    return (
+      <LoadingPage />
+    )
+  }
+
   return (
     <MyProvider>
       <Navbar />
       <Routes>
+        <Route path="/management" element={<Redirect />} />
         <Route path="/media" element={<MediaPage />} />
         <Route path="*" element={<Errors />} />
         <Route path="/" element={<HomePage />} />

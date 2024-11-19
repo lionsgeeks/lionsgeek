@@ -183,17 +183,6 @@ const Navbar = () => {
               >
                 {t("header.home")}
               </Link>
-              <Link
-                to={"/pro"}
-                onClick={() => setIsOpen(false)}
-                className={` px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${
-                  location.pathname == "/pro"
-                    ? "font-medium  after:border-alpha after:w-[100%]"
-                    : "after:border-gray-300"
-                }`}
-              >
-                {t("header.pro")}
-              </Link>
               <div
                 ref={formationRef}
                 className={`relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${
@@ -283,6 +272,17 @@ const Navbar = () => {
                 }`}
               >
                 {t("header.events")}
+              </Link>
+              <Link
+                to={"/pro"}
+                onClick={() => setIsOpen(false)}
+                className={` px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${
+                  location.pathname == "/pro"
+                    ? "font-medium  after:border-alpha after:w-[100%]"
+                    : "after:border-gray-300"
+                }`}
+              >
+                {t("header.pro")}
               </Link>
               {/* <a href="#" className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">Contact Us</a> */}
               {/* <a href="#" className="bg-alpha  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a> */}

@@ -85,7 +85,13 @@
 
 .bg-image {
   background-image: url("./assets/images/gallery/gallery-1.jpg");
+  /* background-size: 125%;
+  background-position: top; */
+  
+  
 }
+
+
 
 ::-webkit-scrollbar {
   width: 4px;
@@ -99,7 +105,7 @@
 /* To Reset Tailwind Classes in a div and it's children */
 .reset-tw,
 .reset-tw * {
-    all: revert ;
+  all: revert;
 }
 
 input[type="checkbox"] {
@@ -108,8 +114,17 @@ input[type="checkbox"] {
   accent-color: #fee819;
 }
 
-input[type="radio"]{
+input[type="radio"] {
   accent-color: black;
+}
+
+.projects {
+  transition: 0.5s ease;
+}
+
+.projects:hover>.preview {
+  margin-top: 0;
+  transition: 0.5s ease;
 }
 
 @media (max-width: 640px) {
@@ -117,4 +132,3 @@ input[type="radio"]{
     flex: 1 0 100%;
   }
 }
-
