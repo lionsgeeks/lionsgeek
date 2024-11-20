@@ -7,7 +7,7 @@ import { useGSAP } from '@gsap/react';
 import { MyContext } from '../../../utils/contextProvider';
 import { TransText } from '../../../components';
 export const FirstSectionEventDetail = () => {
-    const { events, setEvents, URL, IMAGEURL, selectedLanguage, setSelectedLanguage } = useContext(MyContext);
+    const { events, setEvents, URL, IMAGEURL } = useContext(MyContext);
 
     const { id } = useParams()
 
@@ -16,86 +16,14 @@ export const FirstSectionEventDetail = () => {
 
     useEffect(() => {
         if (events) {
-            const findEvent = events?.filter((element) => element?.id == id)
             console.log(events);
-
+            const findEvent = events?.filter((element) => element?.id == id)
             setEvent(findEvent)
         }
     }, [events])
 
+    console.log(event);
 
-    function EventDate(date, type) {
-
-        const lang = {
-            fr: 'FR',
-            ar: 'AR',
-            en: 'US'
-        }
-
-        let dateData = new Date(`${date}`)
-        let monthName = new Intl.DateTimeFormat(`${selectedLanguage}-${lang[selectedLanguage]}`, { month: "long" }).format(dateData);
-        let dayNum = new Intl.DateTimeFormat('en-US', { day: "2-digit" }).format(dateData);
-
-        // console.log(dayNum, monthName);
-
-        return type == "month" ? monthName : dayNum;
-    }
-
-
-    // function updateCountdown(type) {
-    //     if (event) {
-    //         const eventDate = new Date(`${event[0].date}`)
-
-    //     const now = new Date(); // Current date and time
-    //     const difference = eventDate - now; // Difference in milliseconds
-
-    //     // Calculate time parts
-    //     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    //     const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-    //     const minutes = Math.floor((difference / (1000 * 60)) % 60);
-    //     const seconds = Math.floor((difference / 1000) % 60);
-
-    //     // Update the countdown display
-    //     // document.getElementById('countdown').textContent = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-
-    //     return type == "day" ? `${days}` :
-    //         type == "hour" ? `${hours}` :
-    //         type == "min" ? `${minutes}` : 
-    //         `${seconds}`
-    //     }
-    // }
-
-    // ? Countdown
-
-    const [timeLeft, setTimeLeft] = useState({})
-
-    function calculateTimeLeft() {
-
-        const eventDate = new Date(`${event[0].date}`)
-        const now = new Date();
-        const difference = eventDate - now;
-
-        if (difference <= 0) {
-            return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-        }
-
-        return {
-            days: String(Math.floor(difference / (1000 * 60 * 60 * 24))).padStart(2,0),
-            hours: String(Math.floor((difference / (1000 * 60 * 60)) % 24)).padStart(2,0) ,
-            minutes: String(Math.floor((difference / (1000 * 60)) % 60)).padStart(2,0) ,
-            seconds: String(Math.floor((difference / 1000) % 60)).padStart(2,0)
-        };
-    }
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000);
-
-        // Clean up the interval on component unmount
-        return () => clearInterval(interval);
-    }, [event]);
-    
 
 
     useGSAP(
@@ -111,11 +39,11 @@ export const FirstSectionEventDetail = () => {
         <>
             {
                 event &&
-                <div dir={selectedLanguage == "ar" ? "rtl" : "ltr"} className='h-fit lg:p-16 p-7 lg:pt-24 pt-40  '>
+                <div className=' h-fit lg:p-16 p-7 lg:pt-24 pt-40  '>
                     <div className='lg:h-[13vh] first w-full gap-5 rounded-l-lg flex '>
                         {/* date */}
-                        <div className='lg:flex lg:flex-col min-w-[7%] '> <div className='bg-alpha rounded-t-lg p-1 flex items-center justify-center font-bold text-white text-lg '>{EventDate(event[0].date, "month")}</div>
-                            <div className='bg-beta  h-[60%] rounded-b-lg flex items-center justify-center font-semibold text-white text-2xl'>{EventDate(event[0].date, "day")}</div> </div>
+                        <div className='w-[7%] lg:flex lg:flex-col  '> <div className='bg-alpha rounded-t-lg h-[40%] flex items-center justify-center font-bold text-white text-lg '>JUIN</div>
+                            <div className='bg-beta  h-[60%] rounded-b-lg flex items-center justify-center font-semibold text-white text-2xl'>07</div> </div>
                         <div className='flex flex-col gap-3'>
                             <div className='lg:flex gap-2  lg:text-3xl text-xl  px-2'>
                                 <div><h1><TransText {...event[0].name} /></h1></div>
@@ -151,17 +79,11 @@ export const FirstSectionEventDetail = () => {
                         </div>
                         <div className='shadow-xl last border rounded-lg   h-fit flex flex-col lg:w-[30%]'>
                             <h2 className='p-4 border-b border-gray-500'><TransText ar='تفاصيل الحدث' fr="Détail de l'Événement" en='Event Details' /></h2>
-                            {/* <div className='flex gap-2 p-4'>
+                            <div className='flex gap-2 p-4'>
                                 <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-sm lg:text-2xl'>00</p> <p className='text-white'>Jours</p></div>
                                 <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-sm lg:text-2xl'>24</p> <p className='text-white'>Heurs</p></div>
                                 <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-sm lg:text-2xl'>54</p> <p className='text-white'>Minutes</p></div>
                                 <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-sm lg:text-2xl'>33</p> <p className='text-white'>Seconds</p></div>
-                            </div> */}
-                            <div className='flex gap-2 p-4'>
-                                <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-sm lg:text-2xl'>{timeLeft.days}</p> <p className='text-white'>Jours</p></div>
-                                <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-sm lg:text-2xl'>{timeLeft.hours}</p> <p className='text-white'>Heurs</p></div>
-                                <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-sm lg:text-2xl'>{timeLeft.minutes}</p> <p className='text-white'>Minutes</p></div>
-                                <div className='w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold'> <p className='text-white text-sm lg:text-2xl'>{timeLeft.seconds}</p> <p className='text-white'>Seconds</p></div>
                             </div>
                             {/* <h2 className='p-4 border-b-2 '>Sélection des tickets </h2> */}
                             {/* <div className='p-4 '>

@@ -152,9 +152,9 @@ export const FirstSection = () => {
           </svg>
           <p>
             <TransText
-              fr="Engagement : 8 heures/semaine"
-              en="Commitment: 8 hours/week"
-              ar="الالتزام: 8 ساعات / أسبوع"
+              fr="Engagement : 5 jours/semaine"
+              en="Commitment: 5 days/week"
+              ar="الالتزام: 5 أيام / أسبوع"
             />
           </p>
         </div>
