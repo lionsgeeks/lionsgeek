@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
   
-  const URL = "https://management.lionsgeek.ma/api/";
-  const IMAGEURL = "https://management.lionsgeek.ma/storage/images/";
+  const URL = "http://172.28.0.52:8000/api/";
+  const IMAGEURL = "http://172.28.0.52:8000/storage/images/";
 
   // ? Galleries Data fetching
 
@@ -73,12 +73,25 @@ export const MyProvider = ({ children }) => {
     }
   };
 
+  const [projects, setProjects] = useState();
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${URL}projects`);
+      setProjects(response.data);
+      console.log(response.data);
+      
+    } catch (error) {
+      console.error("Error fetching up coming Projects data:", error);
+    }
+  };
+
   useEffect(() => {
     fetchEventsData();
     fetchBlogs();
     fetchInfosession();
     fetchGalleriesData();
     fetchUpcomingEvent();
+    fetchProjects();
   }, []);
 
   const formatDate = (date) => {
@@ -108,6 +121,7 @@ export const MyProvider = ({ children }) => {
           setSessions,
           upcomingEvent,
           setUpcomingEvent,
+          projects,
         }}
       >
         {children}
