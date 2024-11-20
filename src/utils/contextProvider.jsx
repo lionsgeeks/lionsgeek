@@ -3,8 +3,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  const URL = "http://172.28.0.87:8000/api/";
-  const IMAGEURL = "http://172.28.0.87:8000/storage/images/";
+  const URL = "http://172.28.0.201:8000/api/";
+  const IMAGEURL = "http://172.28.0.201:8000/storage/images/";
 
   // ? Galleries Data fetching
 
@@ -65,8 +65,11 @@ export const MyProvider = ({ children }) => {
   const [upcomingEvent, setUpcomingEvent] = useState();
   const fetchUpcomingEvent = async () => {
     try {
-      const response = await axios.get(`${URL}events`);
-      setUpcomingEvent(response.data[0]);
+      const response = await axios.get(`${URL}upcoming`);
+      setUpcomingEvent(response.data.upcoming);
+      if (!upcomingEvent) {
+        setUpcomingEvent(response.data.latest);
+      }
     } catch (error) {
       console.error("Error fetching up coming events data:", error);
     }
@@ -78,7 +81,6 @@ export const MyProvider = ({ children }) => {
       const response = await axios.get(`${URL}projects`);
       setProjects(response.data);
       console.log(response.data);
-      
     } catch (error) {
       console.error("Error fetching up coming Projects data:", error);
     }

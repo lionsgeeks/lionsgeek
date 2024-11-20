@@ -8,12 +8,9 @@ import gsap from "gsap";
 import { NavLink } from "react-router-dom";
 
 export const FirstSection = () => {
-  const { t } = useTranslation();
   const { selectedLanguage, sessions } = useContext(MyContext);
   const leftside = useRef(null);
   const rightside = useRef(null);
-  console.log(sessions);
-
 
   useEffect(() => {
     gsap.fromTo(
@@ -151,9 +148,9 @@ export const FirstSection = () => {
           </svg>
           <p>
             <TransText
-              fr="Engagement : 8 heures/semaine"
-              en="Commitment: 8 hours/week"
-              ar="الالتزام: 8 ساعات / أسبوع"
+              fr="Engagement : 5 jours/semaine"
+              en="Commitment: 5 days/week"
+              ar="الالتزام:  5 أيام/ أسبوع"
             />
           </p>
         </div>

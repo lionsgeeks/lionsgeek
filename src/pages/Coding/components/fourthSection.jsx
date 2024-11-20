@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
-import gsap from "gsap";
 
 export const FourthSection = () => {
   const { selectedLanguage } = useContext(MyContext);

@@ -8,7 +8,6 @@ import gitLogo from "../../../assets/icons/icons8-git.svg";
 import githubLogo from "../../../assets/icons/icons8-github.svg";
 import shellLogo from "../../../assets/icons/icons8-frapper.svg";
 import phpLogo from "../../../assets/icons/icons8-logo-php.svg";
-import { useTranslation } from "react-i18next";
 import { TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
 import gsap from "gsap";

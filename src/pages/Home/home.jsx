@@ -13,7 +13,6 @@ export const HomePage = () => {
   const { upcomingEvent } = useAppContext();
 
   return (
-
     <>
       <HeroSection />
       <WhoSection />
@@ -46,12 +45,7 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-      {
-        upcomingEvent && (
-
-          <EventSection />
-        )
-      }
+      {upcomingEvent && <EventSection />}
       <TrainingSection />
       <GallerySection />
     </>
