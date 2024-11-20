@@ -122,8 +122,16 @@ input[type="radio"] {
   transition: 0.5s ease;
 }
 
+.preview {
+  position: absolute;
+  top: 120vh;
+  left: 0;
+  transition: 0.5s ease;
+
+}
+
 .projects:hover>.preview {
-  margin-top: 0;
+  top: 0;
   transition: 0.5s ease;
 }
 

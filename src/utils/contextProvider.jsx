@@ -72,12 +72,25 @@ export const MyProvider = ({ children }) => {
     }
   };
 
+  const [projects, setProjects] = useState();
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${URL}projects`);
+      setProjects(response.data);
+      console.log(response.data);
+      
+    } catch (error) {
+      console.error("Error fetching up coming Projects data:", error);
+    }
+  };
+
   useEffect(() => {
     fetchEventsData();
     fetchBlogs();
     fetchInfosession();
     fetchGalleriesData();
     fetchUpcomingEvent();
+    fetchProjects();
   }, []);
 
   const formatDate = (date) => {
@@ -107,6 +120,7 @@ export const MyProvider = ({ children }) => {
           setSessions,
           upcomingEvent,
           setUpcomingEvent,
+          projects,
         }}
       >
         {children}

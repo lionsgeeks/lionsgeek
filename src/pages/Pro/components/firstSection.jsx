@@ -5,15 +5,14 @@ import marketingPic from '../../../assets/images/marketing.jpg'
 import { useGSAP } from '@gsap/react';
 import { useTranslation } from 'react-i18next';
 import { useContext } from 'react';
-import { MyContext } from '../../../utils/contextProvider';
+import { MyContext, useAppContext } from '../../../utils/contextProvider';
 import { FaArrowLeft, FaChartBar, FaCode, FaTrophy, FaVideo } from 'react-icons/fa';
 import { Button, TransText } from '../../../components';
 import { Link } from 'react-router-dom';
 export const
     FirstSectionPro = () => {
         const { t, i18n } = useTranslation();
-        const { selectedLanguage, setSelectedLanguage } = useContext(MyContext)
-
+        const { projects, selectedLanguage, setSelectedLanguage, IMAGEURL } = useAppContext()
         const services = [
             {
                 id: 1,
@@ -123,41 +122,6 @@ export const
                     </div>
 
 
-
-                    {/* <div className="px-8">
-                        {
-                            services.map((e, i) =>
-                                <>
-                                    <div key={i} className="   lg:p-10  ">
-                                        <div className={`lg:flex ${e.id % 2 == 0 && "lg:flex-row-reverse"}  flex flex-col-reverse   ${selectedLanguage === "ar" ? "md:flex-row-reverse " : "md:flex-row"}`} >
-                                            <div className={`lg:w-[50%] w-full   ${selectedLanguage === "ar" ? "  text-end w-[100%]  " : "md:"}`}>
-                                                <div className={`flex flex-col  gap-4   ${selectedLanguage === "ar" ? "lg:w-[100%]" : "lg:w-[70%]"}`}>
-
-                                                    <h1 className='text-9xl font-bold text-alpha'>{e.id}</h1>
-                                                    <h1 className="lg:text-6xl text-4xl font-bold"> {t(e.header)}</h1>
-
-                                                    {
-                                                        e.descriptions.map(({ title, description }) =>
-                                                            <>
-                                                                <h2 className="text-2xl font-bold">{t(title)} </h2>
-                                                                <p> {t(description)}</p>
-                                                            </>
-                                                        )
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div className="lg:w-[50%]   relative scroll-smooth "> <img className='lg:w-[80%] sticky top-[10vh]  ' src={e.photo} alt="" /></div>
-                                        </div>
-                                    </div>
-                                </>
-                            )
-                        }
-                    </div> */}
-
-
-
-
-
                     <div className="w-full  px-3  flex justify-between flex-wrap gap-3">
 
                         {
@@ -224,14 +188,20 @@ export const
                     {/* projects */}
                     <div className="py-10 px-5 flex items-center flex-wrap gap-5">
 
-                        <div className="lg:w-[32%] w-full projects relative p-5 transition-all overflow-hidden  border border-black rounded-lg">
-                            <div className="flex items-center justify-between w-full">
-                                <p className='font-bold'>Partner Name</p>
-                                <img className='w-16 h-16 object-cover rounded-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR-6hLn2qXMicpCb7rc5WJDSZeH6FYeXelYw&s" alt="" />
-                            </div>
-                            <p className='py-6 h-[25vh] overflow-y-auto text-base'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste dolorum incidunt ipsam debitis distinctio. Veniam quaerat ipsam, error incidunt aliquid explicabo ut tempore, repellat mollitia recusandae neque. Ab, ut delectus!</p>
-                            {/* <div className="absolute w-full h-full left-0 top-0 mt-[40vh] preview rounded-lg bg-black"></div> */}
-                        </div>
+                        {
+                            projects && projects.map((ele, idx) =>
+                                <div className="lg:w-[32%] w-full projects relative p-5 transition-all overflow-hidden  border border-black rounded-lg">
+                                    <div className="flex items-center justify-between w-full">
+                                        <p className='font-bold'>{ele.name}</p>
+                                        <img className='w-16 h-16 object-cover rounded-full' src={IMAGEURL + "projects/" + ele.logo} alt="" />
+                                    </div>
+                                    <p className={`py-6 h-[25vh] overflow-y-auto text-base ${selectedLanguage == "ar" && "text-end"}`}>{JSON.parse(ele.description)[selectedLanguage]}</p>
+                                    <div className=" preview rounded-lg ">
+                                        <img className='w-full h-full object-cover ' src={IMAGEURL + "projects/" + (ele.preview ? ele.preview : ele.logo)} alt="" />
+                                    </div>
+                                </div>
+                            )
+                        }
 
 
 

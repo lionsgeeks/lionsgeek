@@ -8,13 +8,13 @@ import Button from "../components/Button";
 import { FaTiktok } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
 import { useContext, useState } from "react";
-import { MyContext } from "../utils/contextProvider";
+import { MyContext, useAppContext } from "../utils/contextProvider";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 export const Footer = () => {
   const { t } = useTranslation();
-  const { selectedLanguage } = useContext(MyContext);
+  const { selectedLanguage , URL } = useAppContext();
   const date = new Date();
   const currentYear = date.getFullYear();
   const [subscriber, setSubscriber] = useState("");
@@ -22,7 +22,7 @@ export const Footer = () => {
     try {
       const data = { email: subscriber };
       if (subscriber) {
-        axios.post("http://172.28.0.201:8000/api/subscriber", data);
+        axios.post(URL+"subscriber", data);
       }
     } catch (error) {
       console.log(error);
