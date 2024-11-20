@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { TransText } from "../../../components";
+import { useContext } from "react";
+import { MyContext } from "../../../utils/contextProvider";
 
 export default function GallerySection() {
   const [count, setCount] = useState(0);
   const [onLoop, setOnLoop] = useState(true);
   const [onScroll, setOnScroll] = useState(false);
+  const {galleries} = useContext(MyContext)
+  
 
   const duration = 3750;
   const transition = `transform ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
