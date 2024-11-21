@@ -13,7 +13,7 @@ export const BlogContentsSection = () => {
 
             <div className="py-2 flex flex-wrap gap-3">
                 {
-                    blogs && blogs.slice(1,4).map((blog, index) => (
+                    blogs && blogs.map((blog, index) => (
                         <Link
                         to={`/blog/${blog.id}`}
                             key={index}

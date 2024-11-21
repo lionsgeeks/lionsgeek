@@ -3,7 +3,9 @@ import { BlogDetailContentsSection } from './components/blogDetailContentsSectio
 import { Link, useParams } from 'react-router-dom';
 import { useAppContext } from '../../utils/contextProvider';
 
-import 'quill/dist/quill.snow.css';
+// import 'quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.snow.css';
+
 
 
 export const BlogDetailPage = () => {
@@ -36,14 +38,18 @@ export const BlogDetailPage = () => {
                         <div className="pe-14 w-3/4">
 
                             <div className='view ql-editor reset-tw'>
-                                {
+                                {/* {
                                     selectedLanguage == "ar" ?
-                                        <div dangerouslySetInnerHTML={{ __html: currentBlog.description.ar }} />
+                                        <div>
+                                            <div dangerouslySetInnerHTML={{ __html: currentBlog.description.ar }} />
+                                        </div>
                                         : selectedLanguage == "en" ?
                                             <div dangerouslySetInnerHTML={{ __html: currentBlog.description.en }} />
                                             :
                                             <div dangerouslySetInnerHTML={{ __html: currentBlog.description.fr }} />
-                                }
+                                } */}
+                                <div dangerouslySetInnerHTML={{ __html: currentBlog.description[selectedLanguage] }} />
+
                             </div>
                         </div>
 
