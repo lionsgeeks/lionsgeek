@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { MyContext } from '../../../utils/contextProvider';
 import { useTranslation } from 'react-i18next';
 import TransText from '../../../components/TransText.tsx';
+import SubstringText from '../../../components/SubstringText.jsx';
 
 export const FirstSectionGalerie = () => {
 
@@ -22,22 +23,23 @@ export const FirstSectionGalerie = () => {
         }
     };
 
-    const { galleries, setGalleries ,URL, IMAGEURL } = useContext(MyContext);
+    const { galleries, setGalleries ,URL, IMAGEURL , selectedLanguage } = useContext(MyContext);
 
 
 
     return (
-        <div className='h-screen w-full overflow-hidden grid place-items-center pt-14'>
+        <div className='md:h-screen h-[80vh] w-full overflow-hidden grid place-items-center pt-14'>
             <main>
                 <ul className='slider' ref={slider}>
                     {galleries?.map((gallery, index) => (
                         <li className='item z10 ' key={index} style={{ backgroundImage:  `url('${IMAGEURL}${gallery.couverture}')` }}  >
-                            <div className='content'>
-                                <h2 className='title text-black text-[20px] '>
-                                    <TransText fr={gallery.title.fr} ar={gallery.title.ar} en={gallery.title.en} />
+                            <div className='content '>
+                                <h2 className=' text-white truncate text-[25px] font-bold '>
+                                    <TransText fr={`${gallery.title.fr}`} ar={`${gallery.title.ar}`} en={`${gallery.title.en}`} />
                                 </h2>
-                                <p className='text-black py-4'>
-                                    <TransText fr={gallery.description.fr} ar={gallery.description.ar} en={gallery.description.en} /> {}
+                                <p className='font-semibold text-white py-4 lg:text-[17px]'>
+                                    <SubstringText text={gallery.description[selectedLanguage]} length={150} />
+                                    {/* <TransText fr={gallery.description.fr} ar={gallery.description.ar} en={gallery.description.en} /> {} */}
                                 </p>
                                 <Link to={`/album/${gallery.id}`}><button>Read More</button></Link>
                             </div>
