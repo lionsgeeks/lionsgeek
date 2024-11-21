@@ -11,10 +11,10 @@ export const Partners = () => {
             <h1 className="xl:text-5xl text-3xl font-bold">{t('main.about.section5.title.description')}</h1>
           </div>
 
-          <div className="flex w-full px-48 gap-x-16 gap-y-14 justify-center flex-wrap">
+          <div className="flex w-full md:px-48 gap-x-7 md:gap-x-16 gap-5 md:gap-y-14 justify-center flex-wrap">
             {Array.from({ length: 7 }).map((_, index) => (
               <img
-                className={`h-12 w-[calc(calc(100%-calc(6*4rem))/7)] grayscale saturate-0 brightness-150`}
+                className={`h-12 w-[calc(calc(100%-calc(3*1.75rem))/4)] md:w-[calc(calc(100%-calc(6*4rem))/7)] object-contain`}
                 key={index}
                 src={require(`../../../assets/images/partners/partner-${index}.png`)}
                 alt={`partner-${index}`}

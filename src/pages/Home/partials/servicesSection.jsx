@@ -23,7 +23,11 @@ const ServicesSection = () => {
 
   const services = [
     [
-      { en: "Digital Marketing", fr: "Marketing Digital", ar: "التسويق الرقمي" },
+      {
+        en: "Digital Marketing",
+        fr: "Marketing Digital",
+        ar: "التسويق الرقمي",
+      },
       {
         en: "Unleash the power of community-driven content, strategic social media management, search-optimized content creation, and targeted online advertising to ignite brand engagement and soar in online visibility.",
         fr: "Libérez le pouvoir du contenu communautaire, de la gestion stratégique des réseaux sociaux, de la création de contenu optimisé pour la recherche et de la publicité en ligne ciblée pour stimuler l'engagement de la marque et s'envoler dans la visibilité en ligne.",
@@ -60,7 +64,10 @@ const ServicesSection = () => {
         "Technical Maintenance & Support",
         "Web & Mobile App Development",
       ],
-      <ServiceSvg fill="currentColor" className="fill-alpha group-hover:fill-beta">
+      <ServiceSvg
+        fill="currentColor"
+        className="fill-alpha group-hover:fill-beta"
+      >
         <path
           fillRule="evenodd"
           d="M14.447 3.026a.75.75 0 0 1 .527.921l-4.5 16.5a.75.75 0 0 1-1.448-.394l4.5-16.5a.75.75 0 0 1 .921-.527ZM16.72 6.22a.75.75 0 0 1 1.06 0l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 1 1-1.06-1.06L21.44 12l-4.72-4.72a.75.75 0 0 1 0-1.06Zm-9.44 0a.75.75 0 0 1 0 1.06L2.56 12l4.72 4.72a.75.75 0 0 1-1.06 1.06L.97 12.53a.75.75 0 0 1 0-1.06l5.25-5.25a.75.75 0 0 1 1.06 0Z"
@@ -69,13 +76,23 @@ const ServicesSection = () => {
       </ServiceSvg>,
     ],
     [
-      { en: "Audiovisual Production", fr: "Marketing Digital", ar: "التسويق الرقمي" },
+      {
+        en: "Audiovisual Production",
+        fr: "Marketing Digital",
+        ar: "التسويق الرقمي",
+      },
       {
         en: "Craft compelling corporate films, viral videos, and engaging podcasts to showcase NGO missions, spark online buzz, foster meaningful discussions, capture events, and host live social media interactions.",
         fr: "Réalisez des films d'entreprise captivants, des vidéos virales et des podcasts engageants pour mettre en valeur les missions des ONG, susciter le buzz en ligne, favoriser des discussions significatives, capturer des événements et organiser des interactions en direct sur les réseaux sociaux.",
         ar: " صناعة أفلام شركات جذابة ومقاطع فيديو فيروسية ومدونات صوتية شيقة لعرض مهمات المنظمات غير الحكومية وإثارة ضجة عبر الإنترنت وتعزيز مناقشات هادفة وتوثيق الأحداث واستضافة تفاعلات مباشرة على وسائل التواصل الاجتماعي",
       },
-      ["Corporate Films", "Viral Videos", "Podcasts", "Event Coverage", "Live Social Media"],
+      [
+        "Corporate Films",
+        "Viral Videos",
+        "Podcasts",
+        "Event Coverage",
+        "Live Social Media",
+      ],
       <ServiceSvg
         fill="none"
         strokeWidth="1.5"
@@ -95,7 +112,11 @@ const ServicesSection = () => {
       </ServiceSvg>,
     ],
     [
-      { en: "Events & Hackathons", fr: "Événements et Hackathons", ar: "المناسبات والهاكاثون" },
+      {
+        en: "Events & Hackathons",
+        fr: "Événements et Hackathons",
+        ar: "المناسبات والهاكاثون",
+      },
       {
         en: "Spark NGO innovation through hackathons and skill-building programs for members and volunteers.",
         fr: "Stimulez l'innovation des ONG grâce à des hackathons et des programmes de renforcement des compétences pour les membres et les bénévoles.",
@@ -126,72 +147,41 @@ const ServicesSection = () => {
               <TransText fr="Services" en="Services" ar="الخدمات" />
             </h1>
             <h1 className="text-3xl md:text-5xl font-bold">
-              <TransText fr="Nos LionsGeek Pro. " en="Our lionsGeek Pro." ar="المحترف الخاص بنا" />
+              <TransText
+                fr="Nos LionsGeek Pro. "
+                en="Our lionsGeek Pro."
+                ar="المحترف الخاص بنا"
+              />
             </h1>
           </div>
 
           <div className="flex justify-between">
             <div className="gap-x-10 gap-y-12 flex justify-center flex-wrap">
-              {services.map(([macroService, serviceDescription, microServices, icon], index) => (
-                <div
-                  key={index}
-                  className={`flex flex-col gap-4 relative md:w-[calc(calc(100%-calc(1*2.5rem))/2)] group cursor-pointer bg-light_gray rounded-lg pt-10 pb-8 px-8 border-b-8 border-transparent hover:scale-105 duration-300 hover:border- hover:bg-transparent hover:after:w-full after:absolute after:h-2 after:w-0 after:duration-300 after:left-0 after:bottom-0 after:translate-y-full after:bg-alpha after:rounded-b-lg ${
-                    selectedLanguage === "ar" && "text-end"
-                  }`}
-                >
-                  {icon}
-                  <h2 className="text-2xl font-extrabold">
-                    <TransText {...macroService} />
-                  </h2>
-                  <p>
-                    <TransText {...serviceDescription} />
-                  </p>
-                </div>
-              ))}
+              {services.map(
+                (
+                  [macroService, serviceDescription, microServices, icon],
+                  index
+                ) => (
+                  <div
+                    key={index}
+                    className={`flex flex-col gap-4 relative md:w-[calc(calc(100%-calc(1*2.5rem))/2)] group cursor-pointer bg-light_gray rounded-lg pt-10 pb-8 px-8 border-b-8 border-transparent hover:scale-105 duration-300 hover:border- hover:bg-transparent hover:after:w-full after:absolute after:h-2 after:w-0 after:duration-300 after:left-0 after:bottom-0 after:translate-y-full after:bg-alpha after:rounded-b-lg ${
+                      selectedLanguage === "ar" && "text-end"
+                    }`}
+                  >
+                    {icon}
+                    <h2 className="text-2xl font-extrabold">
+                      <TransText {...macroService} />
+                    </h2>
+                    <p>
+                      <TransText {...serviceDescription} />
+                    </p>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div className="px-16 py-24">
-        <div className="overflow- flex flex-col gap-16 transition-all justify-between">
-          <div className="w-full text-center">
-            <h1 className="text-xl">Services</h1>
-            <h1 className="text-5xl font-bold">Our lionsGeek Pro.</h1>
-          </div>
-
-          <div className="flex justify-between">
-            <div className="gap-x-16 gap-y-12 flex items-center flex-wrap">
-              {services.map(([macroService, serviceDescription, microServices], index) => (
-                <div
-                  key={index}
-                  className="flex flex-col gap-3 w-[calc(calc(100%-4rem)/2)] cursor-pointer group"
-                >
-                  <h2 className={`text-4xl font-extrabold group-:text-alpha flex gap-2`}>
-                    <span className="text-alpha/75 text-2xl -translate-y-[12.5%]">{`${
-                      index + 1
-                    }/`}</span>
-                    <span>{macroService}</span>
-                  </h2>
-
-                  <div className="flex gap-2 flex-wrap mb-1">
-                    {microServices.map((microService, index) => (
-                      <span
-                        key={index}
-                        className="border border-alpha/[32.5%] hover:border-alpha cursor-pointer rounded-3xl px-3.5 py-1.5 text-nowrap text-sm font-medium"
-                      >
-                        {microService}
-                      </span>
-                    ))}
-                  </div>
-
-                  <p>{serviceDescription}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };
