@@ -1,6 +1,7 @@
 import codePic from "../../../assets/images/code.jpg";
 import audioviuelPic from "../../../assets/images/audiovisuelle.jpg";
 import marketingPic from "../../../assets/images/marketing.jpg";
+import eventspic from "../../../assets/images/events.jpg";
 import { useTranslation } from "react-i18next";
 import { useAppContext } from "../../../utils/contextProvider";
 import { FaChartBar, FaCode, FaTrophy, FaVideo } from "react-icons/fa";
@@ -89,7 +90,7 @@ export const FirstSectionPro = () => {
     {
       id: 4,
       icon: <FaTrophy size={25} />,
-      photo: codePic,
+      photo: eventspic,
       header: "main.lionsgeekpro.section4.title1",
       subHeader: "",
       descriptions: [
