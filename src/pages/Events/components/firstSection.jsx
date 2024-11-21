@@ -1,11 +1,27 @@
 import "./firstSection.sass";
 import eventHero from "../../../assets/images/event_hero.png";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { MyContext } from "../../../utils/contextProvider";
+import gsap from "gsap";
+
 export const FirstSectionEvent = () => {
   const { t } = useTranslation();
-  const { selectedLanguage} = useContext(MyContext);
+  const { selectedLanguage } = useContext(MyContext);
+  const leftside = useRef(null);
+  const rightside = useRef(null);
+  useEffect(() => {
+    gsap.fromTo(
+      leftside.current,
+      { x: "-100%", opacity: "0" },
+      { x: "0%", duration: 0.5, delay: 0.5, opacity: "1", ease: "power2.out" }
+    );
+    gsap.fromTo(
+      rightside.current,
+      { x: "100%", opacity: "0" },
+      { x: "0%", duration: 0.5, delay: 0.5, opacity: "1", ease: "power2.out" }
+    );
+  }, []);
   return (
     <>
       {/* herosection */}
@@ -14,7 +30,7 @@ export const FirstSectionEvent = () => {
           selectedLanguage === "ar" ? "   flex-row-reverse" : "md:"
         }`}
       >
-        <div className="flex justify-center items-center lg:w-[50%] w-[100%] ">
+        <div ref={leftside} className="flex justify-center items-center lg:w-[50%] w-[100%] ">
           <div
             className={`lg:px-16 lg:py-0 py-20 px-3 flex flex-col gap-6 w-[100%] b${
               selectedLanguage === "ar"
@@ -72,7 +88,7 @@ export const FirstSectionEvent = () => {
             </button>
           </div>
         </div>
-        <div className="lg:w-[35vw] ">
+        <div ref={rightside} className="lg:w-[35vw]">
           <img
             className="h-full w-full rounded-lg "
             src={eventHero}
