@@ -22,7 +22,7 @@ export const BlogDetailPage = () => {
     }, [blogs, id])
 
     // if (currentBlog) {
-        console.log(currentBlog);
+    // console.log(currentBlog);
     // }
     return (
         <>

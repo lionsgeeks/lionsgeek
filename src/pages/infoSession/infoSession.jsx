@@ -3,28 +3,30 @@ import { useAppContext } from "../../utils/contextProvider";
 import axios from "axios";
 import Modal from "../../components/Modal";
 import LoadingPage from "../Loading";
+import TransText from "../../components/TransText.tsx";
 
 const InfoSession = () => {
-  //* TODO add info session drop down or radio
   const { selectedLanguage, URL, sessions } = useAppContext();
   const [chosenSession, setChosenSession] = useState("");
   const [sending, setSending] = useState(false);
   const [validate, setValidate] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
   const [gender, setGender] = useState("");
+  const [city, setCity] = useState('');
+  const [pref, setPref] = useState('');
   const [error, setError] = useState("");
   const dateLanguage = {
     en: "US",
     fr: "FR",
     ar: "AR",
   };
+
+  const [motivation, setMotivation] = useState('');
+  const [source, setSource] = useState('');
   const formFields = [
-    { name: "first_name", label: "First Name", type: "text" },
-    { name: "last_name", label: "Last Name", type: "text" },
-    { name: "birthday", label: "Birthday", type: "date" },
+    { name: "full_name", label: "Full Name", type: "text" },
     { name: "email", label: "Email", type: "email" },
-    { name: "city", label: "City", type: "text" },
-    { name: "address", label: "Address", type: "text" },
+    { name: "birthday", label: "Birthday", type: "date" },
     { name: "phone", label: "Phone", type: "tel" },
   ];
 
@@ -41,35 +43,43 @@ const InfoSession = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.scrollTo(0, 0);
-    setSending(true);
-    const allData = {
-      ...formData,
-      info_session_id: chosenSession,
-      gender: gender,
-    };
+    if (motivation && motivation.length < 150) {
+      alert('Please Write 150 Characters in Your Motivation')
+    } else {
+      window.scrollTo(0, 0);
+      setSending(true);
+      const allData = {
+        ...formData,
+        info_session_id: chosenSession,
+        motivation: motivation,
+        source: source,
+        gender: gender,
+        city: city,
+        prefecture: pref,
+      };
 
-    const newForm = new FormData();
-    Object.keys(allData).forEach((key) => {
-      newForm.append(key, allData[key]);
-    });
-
-    axios
-      .post(URL + "participate", newForm)
-      .then((res) => {
-        setFormData(initialState);
-        setSending(false);
-        setConfirmation(true);
-        if (res.status === 200) {
-          setValidate(true);
-        } else {
-          setValidate(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setError(err);
+      const newForm = new FormData();
+      Object.keys(allData).forEach((key) => {
+        newForm.append(key, allData[key]);
       });
+
+      axios
+        .post(URL + "participate", newForm)
+        .then((res) => {
+          setFormData(initialState);
+          setSending(false);
+          setConfirmation(true);
+          if (res.status === 200) {
+            setValidate(true);
+          } else {
+            setValidate(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -122,7 +132,7 @@ const InfoSession = () => {
             Sign Up to Start Your Adventure with Us
           </h1>
 
-          {sessions && (
+          {(sessions && sessions.length > 0) && (
             <form
               onSubmit={handleSubmit}
               className="mx-auto p-6 bg-white rounded-lg shadow-md space-y-4"
@@ -169,11 +179,70 @@ const InfoSession = () => {
                       placeholder={field.label + "..."}
                       value={formData[field.name]}
                       onChange={handleChange}
-                      className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta"
                       required
                     />
                   </div>
                 ))}
+
+                <div className="flex flex-col space-y-2 w-[48%]">
+                  <label htmlFor="city" className="text-gray-700">
+                    City: <Required />
+                  </label>
+                  <select
+                    name="city"
+                    id="city"
+                    onChange={(e) => {
+                      setCity(e.target.value);
+                    }}
+                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    required
+                  >
+                    <option value="" defaultValue={""} disabled>
+                      City
+                    </option>
+                    <option value="casablanca">Casablanca</option>
+                    <option value="mohammedia">Mohammedia</option>
+                    <option value="other">
+                      <TransText en="Other" fr="Autres" ar="اخر" />
+                    </option>
+                  </select>
+                </div>
+
+                <div className="flex flex-col space-y-2 w-[48%]">
+                  <label htmlFor="prefecture" className="text-gray-700">
+                    Prefecture: <Required />
+                  </label>
+                  <select
+                    name="prefecture"
+                    id="prefecture"
+                    onChange={(e) => {
+                      setPref(e.target.value);
+                    }}
+                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    required
+                  >
+                    <option value="" defaultValue={""} disabled>
+                      Prefecture
+                    </option>
+                    <option value="none">None</option>
+                    {
+                      [
+                        "Casablanca Anfa",
+                        "Sidi Bernoussi",
+                        "Ain Sbaa Hay Mohammedi",
+                        "Al Fida Mers Sultan",
+                        "Moulay Rachid",
+                        "Ain Chock",
+                        "Ben M'Sick Sidi Othmane",
+                        "Hay Hassani"
+                      ].map((el, ind) => (
+                        <option value={el.toLowerCase().replace(/ /g, '_')}>{el}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+
 
                 <div className="flex flex-col space-y-2 w-[48%]">
                   <label htmlFor="gender" className="text-gray-700">
@@ -195,6 +264,25 @@ const InfoSession = () => {
                     <option value="female">Female</option>
                   </select>
                 </div>
+
+                <div className="flex flex-col space-y-2 w-[48%]">
+                  <label htmlFor="source">Where Have you Heard of LionsGeek: <Required /></label>
+                  <input type="text" name="source" id="source"
+                    placeholder="Source..."
+                    onChange={(e) => { setSource(e.target.value) }}
+                    className="px-4 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta" required />
+                </div>
+
+                <div className="flex flex-col space-y-2 w-[97%]">
+                  <label htmlFor="motivation">Motivation:
+                    <Required />
+                    <span className={`text-sm ${motivation.length < 150 ? 'text-red-600' : 'text-green-500'}`}> {motivation.length}/150</span>
+                  </label>
+                  <textarea name="motivation" id="motivation"
+                    className="border border-gray-400 rounded p-[6px]"
+                    onChange={(e) => setMotivation(e.target.value)} placeholder="Motivation"></textarea>
+                </div>
+
               </div>
               <div className="mt-4">
                 <button
