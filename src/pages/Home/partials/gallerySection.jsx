@@ -21,16 +21,17 @@ export default function GallerySection() {
       setOnScroll(true);
       const caroussel = document.getElementById("caroussel");
       const firstItem = caroussel.firstChild;
-
-      caroussel.style.transform = `translateX(calc( -${firstItem.clientWidth}px - 3.5rem ))`;
-
-      setTimeout(() => {
+      if (firstItem) {
+        
+        caroussel.style.transform = `translateX(calc( -${firstItem.clientWidth}px - 3.5rem ))`;
+        
+        setTimeout(() => {
         firstItem.remove();
         caroussel.appendChild(firstItem);
-
+        
         caroussel.style.transition = "none";
         caroussel.style.transform = `translate(0)`;
-
+        
         setTimeout(() => {
           caroussel.style.transition = transition;
           setCount((prev) => prev + 1);
@@ -38,6 +39,7 @@ export default function GallerySection() {
         }, 100);
       }, duration);
     }
+  }
   }, [onLoop, count]);
 
   return (

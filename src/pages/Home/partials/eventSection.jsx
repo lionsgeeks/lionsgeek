@@ -58,7 +58,7 @@ const EventSection = () => {
         <h6 className="text-white text-sm md:text-base">
           {formatDate(upcomingEvent?.date)} - LionsGeek
         </h6>
-        <div className="*:text-white my-3 lg:text-start text-center md:my-6">
+        <div className="text-white my-3 lg:text-start text-center md:my-6">
           <SubstringText
             text={upcomingEvent?.description[selectedLanguage]}
             length={170}

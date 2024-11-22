@@ -29,9 +29,6 @@ export const Press = () => {
               <p className="font-bold py-1 text-center">
                 {el.title[selectedLanguage]}
               </p>
-              {/* <p className="font-normal w-full text-md rounded-xl text-black text-center">
-                {el.title[selectedLanguage]}
-              </p> */}
             </div>
           </div>
         </div>
