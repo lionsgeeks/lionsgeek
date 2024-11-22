@@ -23,7 +23,7 @@ export const Press = () => {
         >
           <div className="flex flex-col items-center w-full md:w-auto mb-12 md:mb-0">
             <div className=" w-[80vw] md:w-[20vw] rounded-lg hover:scale-105 transition-all duration-300">
-              <img src={`${IMAGEURL}${el.image}`} alt="" />
+              <img loading="lazy" src={`${IMAGEURL}${el.image}`} alt="" />
             </div>
             <div className="text w-[80vw] md:w-[20vw] flex flex-col mt-3">
               <p className="font-bold py-1 text-center">

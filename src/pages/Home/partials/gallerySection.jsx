@@ -8,17 +8,17 @@ export default function GallerySection() {
   const [count, setCount] = useState(0);
   const [onLoop, setOnLoop] = useState(true);
   const [onScroll, setOnScroll] = useState(false);
-  const {galleries,IMAGEURL,selectedLanguage} = useContext(MyContext)
-  
+  const { galleries, IMAGEURL, selectedLanguage } = useContext(MyContext)
+
   // console.log(galleries);
 
   console.log();
-  
+
 
   const duration = 3750;
   const transition = `transform ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
 
-  
+
 
 
   useEffect(() => {
@@ -27,24 +27,24 @@ export default function GallerySection() {
       const caroussel = document.getElementById("caroussel");
       const firstItem = caroussel.firstChild;
       if (firstItem) {
-        
+
         caroussel.style.transform = `translateX(calc( -${firstItem.clientWidth}px - 3.5rem ))`;
-        
+
         setTimeout(() => {
-        firstItem.remove();
-        caroussel.appendChild(firstItem);
-        
-        caroussel.style.transition = "none";
-        caroussel.style.transform = `translate(0)`;
-        
-        setTimeout(() => {
-          caroussel.style.transition = transition;
-          setCount((prev) => prev + 1);
-          setOnScroll(false);
-        }, 100);
-      }, duration);
+          firstItem.remove();
+          caroussel.appendChild(firstItem);
+
+          caroussel.style.transition = "none";
+          caroussel.style.transform = `translate(0)`;
+
+          setTimeout(() => {
+            caroussel.style.transition = transition;
+            setCount((prev) => prev + 1);
+            setOnScroll(false);
+          }, 100);
+        }, duration);
+      }
     }
-  }
   }, [onLoop, count]);
 
   return galleries ? (
@@ -77,6 +77,7 @@ export default function GallerySection() {
             >
               <div className="flex flex-col justify-end group h-full after:transition-opacity after:duration-[375ms] relative after:absolute after:bg-beta/50 after:opacity-0 hover:after:opacity-100 after:inset-0">
                 <img
+                  loading="lazy"
                   className="size-full object-cover"
                   src={`${IMAGEURL}${element.couverture}`}
                   alt="gallery"

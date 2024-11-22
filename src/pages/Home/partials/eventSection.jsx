@@ -23,6 +23,7 @@ const EventSection = () => {
       }`}
     >
       <img
+      loading="lazy"
         className="md:size-1/2"
         src={`${IMAGEURL}${upcomingEvent?.cover}`}
         alt="we-choose-art-event"

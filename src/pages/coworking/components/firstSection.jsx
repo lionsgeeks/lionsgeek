@@ -58,7 +58,7 @@ export const FirstSectionCoworking = () => {
             ref={rightside}
             className="w-full md:w-1/2  lg:w-1/2 flex justify-center md:items-center"
           >
-            <img className="w-[80%]" src={herocowork} alt="img" />
+            <img loading="lazy" className="w-[80%]" src={herocowork} alt="img" />
           </div>
         </div>
       </div>

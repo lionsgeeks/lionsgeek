@@ -50,6 +50,7 @@ export const Footer = () => {
                 }`}
               >
                 <img
+                loading="lazy"
                   src={Logo}
                   alt=""
                   className="lg:w-[7vw] lg:h-[7vw] w-[20vw] h-[20vw] lg:mb-0 mb-5"

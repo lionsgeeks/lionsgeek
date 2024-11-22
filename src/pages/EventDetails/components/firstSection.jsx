@@ -101,6 +101,7 @@ export const FirstSectionEventDetail = () => {
           <div className="lg:flex lg:flex-row flex-col  gap-10 h-[100%] first ">
             <div className="   lg:w-[70%] py-5 flex flex-col gap-5 ">
               <img
+              loading="lazy"
                 className="lg:h-[55vh] w-[100%] rounded-lg  object-cover"
                 src={`${IMAGEURL}${event[0].cover}`}
                 alt=""

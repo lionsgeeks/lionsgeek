@@ -80,7 +80,7 @@ export const Stats = () => {
   return (
     <>
       <section className="p-7 flex lg:flex-row flex-col justify-center items-center gap-10">
-        <img className="lg:w-[40%] rounded-lg" src={staff} alt="" />
+        <img loading="lazy" className="lg:w-[40%] rounded-lg" src={staff} alt="" />
         <div
           dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
           className="flex gap-5 flex-col"

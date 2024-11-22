@@ -128,6 +128,7 @@ export const FirstSectionPro = () => {
               }  overflow-hidden rounded-xl`}
             >
               <img
+              loading="lazy"
                 className="absolute top-0 w-full h-full  object-cover -z-20 opacity-90"
                 src={ele.photo}
                 alt=""
@@ -220,6 +221,7 @@ export const FirstSectionPro = () => {
                 <div className="flex items-center justify-between w-full">
                   <p className="font-bold">{ele.name}</p>
                   <img
+                  loading="lazy"
                     className="w-16 h-16 object-cover rounded-full"
                     src={IMAGEURL + "projects/" + ele.logo}
                     alt=""
@@ -234,6 +236,7 @@ export const FirstSectionPro = () => {
                 </p>
                 <div className=" preview rounded-lg ">
                   <img
+                  loading="lazy"
                     className="w-full h-full object-cover "
                     src={
                       IMAGEURL +

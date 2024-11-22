@@ -7,7 +7,7 @@ export const BlogDetailContentsSection = () => {
 
             <div className="">
 
-                <img className="w-full h-96 rounded-2xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                <img loading="lazy" className="w-full h-96 rounded-2xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
             </div>
 
             <h1 className="font-extrabold text-3xl py-16">Lorem ipsum dolor sit amet consectetur.</h1>
@@ -23,7 +23,7 @@ export const BlogDetailContentsSection = () => {
                 <div className=" h-[70vh] overflow-auto flex flex-col gap-6 w-1/4 ">
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -32,7 +32,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -41,7 +41,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -50,7 +50,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -59,7 +59,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -68,7 +68,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -77,7 +77,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -86,7 +86,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -95,7 +95,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -104,7 +104,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -113,7 +113,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -122,7 +122,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>
@@ -131,7 +131,7 @@ export const BlogDetailContentsSection = () => {
                     </div>
                     <div className="flex gap-3">
 
-                        <img className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
+                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={require("../../../assets/images/visite-ministre-president.jpg")} alt="" />
                         <div className="flex flex-col gap-3 overflow-hidden">
                             <h1 className="font-extrabold text-sm">Lorem ipsum dolor sit amet consectetur.</h1>
                             <p className="text-sm truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cumque officia dolorum.</p>

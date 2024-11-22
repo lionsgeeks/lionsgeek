@@ -11,9 +11,8 @@ export const FirstSectionAbout = () => {
     <>
       <section
         dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
-        className={`xl:py-[17vh] py-[10vh] flex xl:flex-row flex-col-reverse xl:px-16 px-7 justify-between drop-shadow-2xl ${
-          selectedLanguage === "ar" ? "lg:flex-row-reverse" : ""
-        }`}
+        className={`xl:py-[17vh] py-[10vh] flex xl:flex-row flex-col-reverse xl:px-16 px-7 justify-between drop-shadow-2xl ${selectedLanguage === "ar" ? "lg:flex-row-reverse" : ""
+          }`}
       >
         <div className="flex flex-col w-[50%]">
           <p className={`text-6xl xl:w-[30vw] w-[70vw] font-bold py-2 `}>
@@ -37,6 +36,7 @@ export const FirstSectionAbout = () => {
         </div>
         <div className="imgdiv">
           <img
+            loading="lazy"
             src={logo}
             alt=""
             className="xl:w-[20vw] xl:block hidden rounded-full"

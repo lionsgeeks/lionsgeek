@@ -165,7 +165,7 @@ export const FirstSection = () => {
         </div>
       </div>
       <div ref={rightside} className="lg:w-[50%] w-[90%] flex justify-center">
-        <img className="lg:w-[70%]" src={developer} alt="web developer" />
+        <img loading="lazy" className="lg:w-[70%]" src={developer} alt="web developer" />
       </div>
     </div>
   );

@@ -28,6 +28,7 @@ export default () => {
         <div className="relative w-[50%] h-full">
           <div className="relative w-full h-full codingformationpic">
             <img
+              loading="lazy"
               src={myImage2}
               alt="Curved Effect"
               className="w-full h-full object-cover"
@@ -79,6 +80,7 @@ export default () => {
         <div className="relative w-[50%] h-full">
           <div className="relative w-[100%] h-[300px] codingformationpic">
             <img
+            loading="lazy"
               src={myImage}
               alt="Curved Effect"
               className="w-full h-full object-cover"
@@ -129,7 +131,7 @@ export default () => {
       {/* responsivity cards */}
       <div className="xl:hidden block bg-gray-100 w-[80vw]  rounded-lg mt-10">
         <div className="image w-full h-[50%] flex justify-center">
-          <img src={myImage2} alt="" className="rounded-b-lg object-cover object-left" />
+          <img loading="lazy" src={myImage2} alt="" className="rounded-b-lg object-cover object-left" />
         </div>
         <div className="text h-[50%] border-b-4 rounded-lg border-b-alpha flex flex-col justify-around">
           <h1 className="font-bold text-2xl text-center">
@@ -147,7 +149,7 @@ export default () => {
 
       <div className="xl:hidden block bg-gray-100 w-[80vw] rounded-lg mt-10">
         <div className="image w-full h-[50%] flex justify-center">
-          <img src={myImage} alt="" className="rounded-b-lg object-cover object-left" />
+          <img loading="lazy" src={myImage} alt="" className="rounded-b-lg object-cover object-left" />
         </div>
         <div className="text h-[50%] border-b-4 rounded-lg border-b-alpha flex flex-col justify-around">
           <h1 className="font-bold text-2xl text-center">

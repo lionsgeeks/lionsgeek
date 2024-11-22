@@ -55,7 +55,7 @@ export const FourthSectionCoworking = () => {
                         className="w-full md:w-[45%] lg:w-[30%] flex flex-col gap-2 relative overflow-hidden bg-white p-5 lg:p-8 border-2 border-gray-100 rounded-lg"
                     >
                         <div className="flex gap-3 items-center">
-                            <img className="rounded-full w-10" src={element.image} alt="" />
+                            <img loading="lazy" className="rounded-full w-10" src={element.image} alt="" />
                             <p className="text-base font-bold ">{element.name}</p>
                         </div>
                         <div className="absolute -top-4 -right-4 bg-alpha/70 p-5 object-cover rounded-full opacity-80">

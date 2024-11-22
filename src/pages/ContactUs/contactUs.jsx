@@ -109,7 +109,7 @@ export const ContactUs = () => {
 
                     <form onSubmit={onFormSubmit} className={`lg:w-[40%] relative py-6 px-7 shadow-md  border border-white/55 rounded-lg flex  ${selectedLanguage === 'ar' ? 'items-end' : 'items-start'} flex-col gap-6 bg-200/75`}>
                         <div ref={womenRef} className={`absolute w-[17rem] lg:flex hidden  -z-10  top-0 ${selectedLanguage === 'ar' ? 'left-full ' : 'right-full'}`}>
-                            <img className={`  object-cover  ${selectedLanguage == 'ar' && 'transform scale-x-[-1]'} `} src={require("../../assets/images/women_pointing.png")} alt="" />
+                            <img loading="lazy" className={`  object-cover  ${selectedLanguage == 'ar' && 'transform scale-x-[-1]'} `} src={require("../../assets/images/women_pointing.png")} alt="" />
 
                         </div>
                         <div className="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">

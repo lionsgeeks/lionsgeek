@@ -203,6 +203,7 @@ export const SecondSection = () => {
                 {TransText(programe[hint][0])}
               </p>
               <img
+              loading="lazy"
                 className={`hidden lg:flex size-[120%] object-cover absolute duration-700 ${
                   anime ? "-rotate-12 -right-56 duration-500" : "-right-96"
                 } -top-6 opacity-5`}
@@ -221,7 +222,7 @@ export const SecondSection = () => {
           className="lg:flex lg:flex-col hidden w-[10%] gap-2"
         >
           {programe[hint][2].map((element, index) => (
-            <img key={index} className="w-[40%]" src={element} alt="" />
+            <img loading="lazy" key={index} className="w-[40%]" src={element} alt="" />
           ))}
         </div>
       </div>

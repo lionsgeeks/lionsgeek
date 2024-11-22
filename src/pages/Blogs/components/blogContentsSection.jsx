@@ -20,7 +20,7 @@ export const BlogContentsSection = () => {
                             className={`w-[32%]  border rounded-lg h-80 border-beta relative overflow-hidden group cursor-pointer flex `}
                         >
 
-                            <img className="w-full absolute h-full object-cover -z-2" src={IMAGEURL + blog.image} alt="" />
+                            <img loading="lazy" className="w-full absolute h-full object-cover -z-2" src={IMAGEURL + blog.image} alt="" />
                             <div className="w-full h-1/6 top-0 bg-gradient-to-t to-black/80 from-black/10 absolute "></div>
                             <div className="w-full h-1/4 bottom-0 bg-gradient-to-t from-black transparent absolute "></div>
                             <div className="flex flex-col justify-between  w-full  px-8 py-5 static z-20">

@@ -10,7 +10,7 @@ export const BlogHeroSection = () => {
         <>
             {
                 blogs && <div className="flex  pt-[10vh] ">
-                    <img className="w-1/2 h-[60vh] objectc rounded-xl " src={IMAGEURL + blogs[0]?.image} alt="" />
+                    <img loading="lazy" className="w-1/2 h-[60vh] objectc rounded-xl " src={IMAGEURL + blogs[0]?.image} alt="" />
 
                     <div className="flex flex-col w-[40%] gap-8 py- px-8">
                         <p className="text-beta/50 ">{formatDate(blogs[0]?.created_at)}</p>

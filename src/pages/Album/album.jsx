@@ -24,7 +24,7 @@ export const AlbumPage = () => {
                 {
                     gallery?.images.map((image, index) => (
                         <div key={index} className='w-full md:w-[30%] lg:w-[22%] h-60 lg:h-80  rounded-xl'>
-                            <img src={`${IMAGEURL}${image.path}`} className='w-full h-full object-cover rounded-xl' alt={`img`} />
+                            <img loading="lazy" src={`${IMAGEURL}${image.path}`} className='w-full h-full object-cover rounded-xl' alt={`img`} />
                         </div>
                     ))
                 }
