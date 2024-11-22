@@ -81,6 +81,8 @@ export const MyProvider = ({ children }) => {
     try {
       const response = await axios.get(`${URL}projects`);
       setProjects(response.data);
+      // console.log(response.data);
+      
     } catch (error) {
       console.error("Error fetching up coming Projects data:", error);
     }

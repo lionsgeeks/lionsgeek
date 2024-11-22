@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import { TransText } from "../../../components";
 import { useContext } from "react";
 import { MyContext } from "../../../utils/contextProvider";
+import SubstringText from "../../../components/SubstringText";
 
 export default function GallerySection() {
   const [count, setCount] = useState(0);
   const [onLoop, setOnLoop] = useState(true);
   const [onScroll, setOnScroll] = useState(false);
-  const {galleries,IMAGEURL,URL} = useContext(MyContext)
+  const {galleries,IMAGEURL,selectedLanguage} = useContext(MyContext)
+  
+  // console.log(galleries);
+
+  console.log();
   
 
   const duration = 3750;
@@ -42,7 +47,7 @@ export default function GallerySection() {
   }
   }, [onLoop, count]);
 
-  return (
+  return galleries ? (
     <div className="px-7 md:px-16 py-12 md:py-24">
       <div className="overflow-hidden flex flex-col gap-16 transition-all justify-between">
         <div className="w-full text-center">
@@ -76,12 +81,12 @@ export default function GallerySection() {
                   src={`${IMAGEURL}${element.couverture}`}
                   alt="gallery"
                 />
-                <div className="absolute z-10 duration-700 transition-all translate-y-[150%] group-hover:translate-y-0 pl-6 pr-4 pb-4">
-                  <h1 className="font-medium text-xl duration-700 transition-all text-white">
+                <div className="w-full absolute z-10 duration-700 transition-all flex flex-col translate-y-[150%] group-hover:translate-y-0 pl-6 pr-4 pb-4">
+                  <h1 className="font-medium text-xl duration-700 truncate transition-all text-white">
                     <TransText {...element.title} />
                   </h1>
                   <p className="text-white">
-                    <TransText {...element.description} />
+                    <SubstringText text={element.description[selectedLanguage]} length={120} />
                   </p>
                 </div>
               </div>
@@ -90,5 +95,5 @@ export default function GallerySection() {
         </div>
       </div>
     </div>
-  );
+  ) : <></>
 }
