@@ -69,15 +69,16 @@ const Navbar = () => {
     }
   };
   return (
-    <div className=" z-50 fixed top-0 right-0 left-0">
+    <div className=" z-50 fixed top-0 right-0 left-0 ">
       <div className="antialiased  dark-mode:bg-gray-900">
         <div className="w-full text-gray-700 bg-gray-50 dark-mode:text-gray-200 dark-mode:bg-gray-800">
           <div
-            className={`flex flex-col px-4 md:items-center md:justify-between md:flex-row md:px-8 lg:px-16 ${
-              selectedLanguage == "ar" ? "md:flex-row-reverse" : ""
+            className={`flex flex-col px-4 lg:items-center lg:justify-between lg:flex-row md:px-8 lg:px-16 ${
+              selectedLanguage == "ar" ? "lg:flex-row-reverse" : ""
             }`}
           >
             <div className="flex flex-row items-center justify-between py-4">
+              {/* logo */}
               <Link
                 to={"/"}
                 href="#"
@@ -140,8 +141,9 @@ const Navbar = () => {
                   </g>
                 </svg>
               </Link>
+              {/* toggle */}
               <button
-                className="rounded-lg md:hidden focus:outline-none focus:shadow-outline"
+                className="rounded-lg lg:hidden focus:outline-none focus:shadow-outline"
                 onClick={toggleNavbar}
               >
                 <svg
@@ -168,8 +170,8 @@ const Navbar = () => {
             <nav
               className={`flex-col ${
                 isOpen ? "flex" : "hidden"
-              } gap-6 pb-4 md:pb-0 md:flex md:justify-end md:flex-row  ${
-                selectedLanguage == "ar" ? "md:flex-row-reverse items-end" : ""
+              } gap-6 xl:gap-6 lg:gap-2 pb-4 lg:pb-0 lg:flex lg:justify-end lg:items-center lg:flex-row bg--500  ${
+                selectedLanguage == "ar" ? "lg:flex-row-reverse items-end" : ""
               }`}
             >
               <Link

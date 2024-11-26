@@ -5,8 +5,8 @@ export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
   // const URL = "http://172.28.0.201:8000/api/";
   // const IMAGEURL = "http://172.28.0.201:8000/storage/images/";
-  const URL = "http://management.lionsgeek.ma/api/";
-  const IMAGEURL = "http://management.lionsgeek.ma/storage/images/";
+  const URL = "https://backend.mylionsgeek.ma/api/";
+  const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
   const path = useLocation();
@@ -25,6 +25,7 @@ export const MyProvider = ({ children }) => {
       const response = await axios.get(`${URL}galleries`);
       setGalleries(response.data);
     } catch (error) {
+      window.location.href = "https://backend.mylionsgeek.ma";
       console.error("Error fetching galleries data:", error);
     }
   };

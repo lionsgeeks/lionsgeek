@@ -51,7 +51,7 @@ export const FourthSection = () => {
       description: {
         en: `Get inspired by visiting leading schools and institutions in the web industries.`,
         ar: "استلهم من خلال زيارة المدارس والمؤسسات الرائدة في صناعات تطوير الويب.",
-        fr: "اختبر أفضل ما في العالمين من خلال التبديل بين دروس الوسائط والبرمجة.",
+        fr: "Inspirez-vous en visitant des écoles et institutions de premier plan dans les industries du web. ",
       },
     },
     {

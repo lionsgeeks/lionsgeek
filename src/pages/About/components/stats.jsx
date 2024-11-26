@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../../assets/images/logolionsgeek.png";
 import stars from "../../../assets/images/fivestars.png";
-import staff from "../../../assets/images/team.jpg";
+import staff from "../../../assets/images/ceremonie.jpeg";
 import { useTranslation } from "react-i18next";
 import { useAppContext } from "../../../utils/contextProvider";
 import { TransText } from "../../../components";
