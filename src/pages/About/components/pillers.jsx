@@ -1,13 +1,11 @@
 import React from "react";
-import logo from "../../../assets/images/logolionsgeek.png";
-import formation from "../../../assets/images/formation_illustration.png";
-import myImage from "../../../assets/images/coding_afiche.png";
-import myImage2 from "../../../assets/images/media_affiche.png"; // Adjust the path to your image
+import myImage from "../../../assets/images/coding_afiche.jpg";
+import myImage2 from "../../../assets/images/media_affiche.jpg"; // Adjust the path to your image
 import { useTranslation } from "react-i18next";
 import { useAppContext } from "../../../utils/contextProvider";
 import { TransText } from "../../../components";
 
-export default () => {
+export const Pillers = () => {
   const { t } = useTranslation();
   const { selectedLanguage } = useAppContext();
 

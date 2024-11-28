@@ -19,6 +19,7 @@ import { Propage } from "./pages/Pro/Pro";
 import CoworkingForm from "./pages/coworking/partials/coworkingForm";
 import InfoSession from "./pages/infoSession/infoSession";
 import LoadingPage from "./pages/Loading";
+import WhatisLg from "./pages/WhatisLg/whatisLg";
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
         <Route path="/album/:id" element={<AlbumPage />} />
         <Route path="/pro" element={<Propage />} />
         <Route path="/postuler" element={<InfoSession />} />
+        <Route path="/whatislionsgeek" element={<WhatisLg />} />
       </Routes>
       <Footer />
     </MyProvider>

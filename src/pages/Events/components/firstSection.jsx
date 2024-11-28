@@ -26,8 +26,7 @@ export const FirstSectionEvent = () => {
     <>
       {/* herosection */}
       <div
-        className={`flex lg:flex-row flex-col-reverse justify-between w-[100%]  lg:px-5 lg:pt-[3.5em] pt-[3rem] pb-[5em]   ${selectedLanguage === "ar" ? "  lg:flex-row-reverse" : "md:"
-          }`}
+        className={`flex lg:flex-row flex-col-reverse overflow-x-hidden  justify-between w-[100%]  lg:px-5 lg:pt-[3.5em] pt-[3rem] pb-[5em]   ${selectedLanguage === "ar" ? "  lg:flex-row-reverse" : "" }`}
       >
         <div ref={leftside} className="flex justify-center items-center lg:w-[50%] w-[100%] ">
           <div

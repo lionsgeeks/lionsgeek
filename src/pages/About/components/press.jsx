@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useAppContext } from "../../../utils/contextProvider";
+import { useNavigate } from "react-router-dom";
 export const Press = () => {
   const { t } = useTranslation();
   const { selectedLanguage, blogs, IMAGEURL } = useAppContext();
-  console.log(blogs);
-
+  const navigate = useNavigate();
+  // console.log(blogs);
   return (
     <section className="py-[4vh]">
       <div className="w-full text-center pb-10">
@@ -18,8 +19,9 @@ export const Press = () => {
       {/* blog */}
       {blogs?.map((el, index) => (
         <div
+          onClick={() => navigate(`/blog/${el.id}`)}
           key={index}
-          className="cards flex flex-wrap justify-center md:justify-around px-4 md:px-16"
+          className="cards flex flex-wrap justify-center md:justify-around px-4 md:px-16 cursor-pointer "
         >
           <div className="flex flex-col items-center w-full md:w-auto mb-12 md:mb-0">
             <div className=" w-[80vw] md:w-[20vw] rounded-lg hover:scale-105 transition-all duration-300">
