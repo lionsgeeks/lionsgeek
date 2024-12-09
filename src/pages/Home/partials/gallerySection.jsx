@@ -87,7 +87,7 @@ export default function GallerySection() {
                     <TransText {...element.title} />
                   </h1>
                   <p className="text-white">
-                    <SubstringText text={element.description[selectedLanguage]} length={120} />
+                    <SubstringText text={element.description[selectedLanguage]} length={120} />j
                   </p>
                 </div>
               </div>

@@ -41,6 +41,7 @@ export const CardsSection = () => {
               key={index}
               className="shadow-lg h-fit overflow-hidden  lg:w-[30%] md:w-[48%] w-[100%] rounded-xl cursor-pointer"
               onClick={() => navigate(`/event/${element.id}`)}
+              dir={selectedLanguage == "ar" ? "rtl" : "ltr"}
             >
               <div className="w-[100%]  ">
                 <img
@@ -62,12 +63,12 @@ export const CardsSection = () => {
                   <div className="text-[15px] flex items-center gap-1">
                     <p className="flex items-center gap-1 text-[#8b96af] truncate">
                       <MdLocationPin className="fill-[#8b96af]" />
-                      Location:
-                      {selectedLanguage === "en"
+                      Location : <TransText {...element.location} /> 
+                      {/* {selectedLanguage === "en"
                         ? element.location.en
                         : selectedLanguage === "fr"
                         ? element.location.fr
-                        : element.location.ar}{" "}
+                        : element.location.ar}{" "} */}
                     </p>
                   </div>
                 </div>

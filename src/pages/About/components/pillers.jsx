@@ -11,9 +11,9 @@ export const Pillers = () => {
 
   return (
     <div
-      className={`flex flex-col items-center justify-between py-14 bg-beta border-t- border-t-alpha border-b- border-b-alpha`}
+      className={`flex flex-col items-center justify-between py-14 bg-beta border-t- border-t-alpha border-b-alpha`}
     >
-      <div className=" rounded-lg xl:w-[50vw] w-[100vw] px-1 text-center">
+      <div className=" rounded-lg xl:w-[50vw] w-[100vw]  px-1 text-center">
         <h1 className="xl:text-7xl text-4xl text-alpha font-bold py-4">
           {t("main.about.section2.title.first")}
         </h1>
@@ -22,14 +22,14 @@ export const Pillers = () => {
         </p>
       </div>
       {/* Coding */}
-      <div className="bg-[#f9f9f9] relative xl:flex hidden flex-row rounded-lg w-[80vw] h-[40vh] mt-8">
-        <div className="relative w-[50%] h-full">
-          <div className="relative w-full h-full codingformationpic">
+      <div className="bg-[#f9f9f9] relative xl:flex hidden flex-row rounded-lg w-[80vw] lg:h-fit h-[40vh] mt-8 ">
+        <div className="relative w-[50%]">
+          <div className="relative w-full codingformationpic">
             <img
               loading="lazy"
               src={myImage2}
               alt="Curved Effect"
-              className="w-full h-full object-cover"
+              className="w-full object-cover"
             />
             <svg
               locale="fr"
@@ -57,9 +57,10 @@ export const Pillers = () => {
             </svg>
           </div>
         </div>
+
         <div
           dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
-          className="w-[50%] h-[70%] gap-4 flex flex-col justify-around px-6"
+          className="w-[50%] h-[70%] gap-4 flex flex-col justify-around py-8 px-5"
         >
           <p className={`text-4xl font-semibold py-3`}>
             {t("main.about.section2.coding.title")}
@@ -73,15 +74,17 @@ export const Pillers = () => {
           </p>
         </div>
       </div>
+
+
       {/* Media */}
-      <div className="bg-[#f9f9f9] relative xl:flex hidden flex-row-reverse rounded-lg w-[80vw] h-[40vh] mt-8">
-        <div className="relative w-[50%] h-full">
-          <div className="relative w-[100%] h-[300px] codingformationpic">
+      <div className="bg-[#f9f9f9] relative xl:flex hidden flex-row-reverse rounded-lg w-[80vw] lg:h-fit h-[40vh] mt-8">
+        <div className="relative w-[50%]">
+          <div className="relative w-[100%] codingformationpic">
             <img
             loading="lazy"
               src={myImage}
               alt="Curved Effect"
-              className="w-full h-full object-cover"
+              className="w-full object-cover"
             />
             <svg
               locale="fr"
@@ -112,7 +115,7 @@ export const Pillers = () => {
 
         <div
           dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
-          className="w-[50%] h-[70%] gap-4 flex flex-col justify-around px-6"
+          className="w-[50%] h-[70%] gap-4 flex flex-col justify-around  py-8 px-5"
         >
           <p className={`text-4xl font-semibold py-3 `}>
             {t("main.about.section2.media.title")}

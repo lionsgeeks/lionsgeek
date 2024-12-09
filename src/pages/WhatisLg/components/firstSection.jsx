@@ -2,7 +2,7 @@ import React from "react";
 
 const FirstSection = () => {
   return (
-    <div className="flex flex-col gap-3 justify-center items-center px-2 py-20">
+    <div className="flex flex-col gap-10 justify-center items-center px-2 py-[7rem]">
       <h1 className="text-5xl font-bold text-center">About Our Organization</h1>
       <iframe
         className="md:w-[95%] w-full h-[20rem] md:h-[28rem] lg:w-[90%] xl:w-[75%] lg:h-[36rem]"

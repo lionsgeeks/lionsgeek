@@ -9,9 +9,9 @@ export default function HeroSection() {
     {
       title: { en: "Traning", fr: "Formation", ar: "تدريب" },
       description: {
-        en: "Master tech in 6 months! Conquer the digital world with in-demand skills. Build a career or projects, join our community, and become the tech pro you were meant to be.",
-        fr: "Devenez un pro de la tech en 6 mois ! Maîtrisez les compétences recherchées pour conquérir le monde numérique. Construisez une carrière ou des projets.",
-        ar: "أتقن المجال التقني في 6 أشهر فقط! سيطر على العالم الرقمي بمهارات مطلوبة بشدة. ابني مهنة أو مشاريع، انضم إلى مجتمعنا وكن خبير التقنية الذي يجب أن تكونه.",
+        en: "Master tech in 6 months! Gain the skills to thrive in the digital world. Build your career, start projects, and join a community of future tech pros.",
+        fr: "Devenez expert en tech en 6 mois! Acquérez des compétences recherchées pour réussir dans le digital. Lancez vous, créez des projets et rejoignez une communauté.",
+        ar: "أتقن التقنية في 6 أشهر! اكتسب مهارات مطلوبة لتزدهر في العالم الرقمي. ابدأ مسيرتك المهنية، أنشئ مشاريعك، وانضم إلى مجتمع الخبراء التقنيين",
       },
       icon: (
         <svg
@@ -34,9 +34,9 @@ export default function HeroSection() {
     {
       title: { en: "Co-working", fr: "Coworking", ar: "العمل المشترك" },
       description: {
-        en: "Master tech in 6 months! Conquer the digital world with in-demand skills. Build a career or projects, join our community, and become the tech pro you were meant to be.",
-        fr: "Devenez un pro de la tech en 6 mois ! Maîtrisez les compétences recherchées pour conquérir le monde numérique. Construisez une carrière ou des projets.",
-        ar: "أتقن المجال التقني في 6 أشهر فقط! سيطر على العالم الرقمي بمهارات مطلوبة بشدة. ابني مهنة أو مشاريع، انضم إلى مجتمعنا وكن خبير التقنية الذي يجب أن تكونه.",
+        en: "A lively coworking hub where ideas flourish. Connect with peers, collaborate on projects, and take your work to the next level.",
+        fr: "Un espace de coworking dynamique où les idées s'épanouissent. Connectez-vous à des esprits similaires, collaborez sur des projets et améliorez votre travail.",
+        ar: "مساحة عمل مشتركة نابضة حيث تزدهر الأفكار. تواصل مع أشخاص يشاركونك الفكر، وتعاون على المشاريع، وارفع مستوى عملك.",
       },
       icon: (
         <svg
@@ -99,9 +99,9 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
     {
       title: { en: "Event", fr: "Évènement", ar: "فعالية" },
       description: {
-        en: "Master tech in 6 months! Conquer the digital world with in-demand skills. Build a career or projects, join our community, and become the tech pro you were meant to be.",
-        fr: "Devenez un pro de la tech en 6 mois ! Maîtrisez les compétences recherchées pour conquérir le monde numérique. Construisez une carrière ou des projets.",
-        ar: "أتقن المجال التقني في 6 أشهر فقط! سيطر على العالم الرقمي بمهارات مطلوبة بشدة. ابني مهنة أو مشاريع، انضم إلى مجتمعنا وكن خبير التقنية الذي يجب أن تكونه.",
+        en: "Dive into inspiring workshops, thrilling hackathons, and networking events. Be part of a community of developers, designers, and innovators",
+        fr: "Participez à des ateliers inspirants, hackathons palpitants et événements réseau enrichissants. Rejoignez une communauté créative de développeurs et designers.",
+        ar: "انضم إلى ورش عمل ملهمة، ومسابقات برمجية مثيرة، وفعاليات تواصل مؤثرة. كن جزءًا من مجتمع مبدع من المطورين والمصممين."
       },
       icon: (
         <svg

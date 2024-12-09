@@ -11,15 +11,12 @@ export const FirstSectionAbout = () => {
     <>
       <section
         dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
-        className={`py-7 lg:py-2 flex lg:flex-row flex-col-reverse lg:px-16 px-7 justify-between drop-shadow-2xl `}
+        className={`py-7 lg:py-12 flex lg:flex-row flex-col-reverse lg:px-16 px-7 justify-between `}
       >
         <div className="lg:py-14 flex flex-col justify-center gap-7">
-          <h1 className="text-6xl font-bold">
-            <TransText en="What is" fr="Qu'est-ce que" ar="ماهي" />{" "}
+          <h1 dir={selectedLanguage === "ar" ? "ltr" : "rtl"} className={`text-6xl font-bold ${selectedLanguage=="ar" && "text-end"}`}>
+            <TransText en="What is Lionsgeek ?" fr="Qu'est-ce que Lionsgeek ?" ar="؟ Lionsgeek ماهي" />{" "}
           </h1>
-          <span className="text-6xl font-bold">
-            <TransText en="Lionsgeek ?" fr="Lionsgeek ?" ar="Lionsgeek ؟" />{" "}
-          </span>
           <p className="">
             <TransText
               fr="LionsGeek est une organisation à but non lucratif qui vise à autonomiser les jeunes Marocains en leur offrant des compétences numériques. Nous proposons des programmes de formation gratuits de six mois en développement web et en production de contenu numérique, favorisant ainsi une nouvelle génération de personnes technologiquement compétentes. Notre approche inclusive accueille les jeunes âgés de 18 à 30 ans, indépendamment de leur parcours éducatif. Au-delà de la formation, nous fournissons des espaces d'incubation et de coworking pour soutenir les jeunes entrepreneurs et innovateurs. Rejoignez-nous pour façonner l'avenir du paysage numérique du Maroc."
