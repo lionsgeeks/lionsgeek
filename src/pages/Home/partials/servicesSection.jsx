@@ -78,8 +78,8 @@ const ServicesSection = () => {
     [
       {
         en: "Audiovisual Production",
-        fr: "Marketing Digital",
-        ar: "التسويق الرقمي",
+        fr: "Production audiovisuelle",
+        ar: "الإنتاج السمعي البصري",
       },
       {
         en: "Craft compelling corporate films, viral videos, and engaging podcasts to showcase NGO missions, spark online buzz, foster meaningful discussions, capture events, and host live social media interactions.",
