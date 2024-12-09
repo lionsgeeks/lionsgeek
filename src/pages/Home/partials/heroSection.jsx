@@ -34,7 +34,7 @@ export default function HeroSection() {
     {
       title: { en: "Co-working", fr: "Coworking", ar: "العمل المشترك" },
       description: {
-        en: "A lively coworking hub where ideas flourish. Connect with peers, collaborate on projects, and take your work to the next level.",
+        en: "Thrive in a dynamic coworking space! Collaborate, network, and elevate your work. Build ideas, create projects, and join a vibrant community of professionals.",
         fr: "Un espace de coworking dynamique où les idées s'épanouissent. Connectez-vous à des esprits similaires, collaborez sur des projets et améliorez votre travail.",
         ar: "مساحة عمل مشتركة نابضة حيث تزدهر الأفكار. تواصل مع أشخاص يشاركونك الفكر، وتعاون على المشاريع، وارفع مستوى عملك.",
       },
