@@ -38,18 +38,7 @@ export const BlogDetailPage = () => {
                         <div className="pe-14 w-3/4">
 
                             <div className='view ql-editor reset-tw'>
-                                {/* {
-                                    selectedLanguage == "ar" ?
-                                        <div>
-                                            <div dangerouslySetInnerHTML={{ __html: currentBlog.description.ar }} />
-                                        </div>
-                                        : selectedLanguage == "en" ?
-                                            <div dangerouslySetInnerHTML={{ __html: currentBlog.description.en }} />
-                                            :
-                                            <div dangerouslySetInnerHTML={{ __html: currentBlog.description.fr }} />
-                                } */}
                                 <div dangerouslySetInnerHTML={{ __html: currentBlog.description[selectedLanguage] }} />
-
                             </div>
                         </div>
 
@@ -63,15 +52,8 @@ export const BlogDetailPage = () => {
                                         <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={IMAGEURL + blog.image} alt="" />
                                         <div className="flex flex-col gap-3 overflow-hidden">
                                             <h1 className="font-extrabold text-sm">{blog.title[selectedLanguage]}</h1>
-                                            {
-                                                selectedLanguage == "ar" ?
-                                                    <div dangerouslySetInnerHTML={{ __html: blog.description.ar.length > 70 ? blog.description.ar.slice(0, 70) + '...' : blog.description.ar }} />
-                                                    : selectedLanguage == "en" ?
-                                                        <div dangerouslySetInnerHTML={{ __html: blog.description.en.length > 70 ? blog.description.en.slice(0, 70) + '...' : blog.description.en }} />
-                                                        :
-                                                        <div dangerouslySetInnerHTML={{ __html: blog.description.fr.length > 70 ? blog.description.fr.slice(0, 70) + '...' : blog.description.fr }} />
-                                            }
-
+                                            
+                                            <div dangerouslySetInnerHTML={{ __html: blog.description[selectedLanguage].length > 70 ? blog.description[selectedLanguage].slice(0, 70) + '...' : blog.description[selectedLanguage] }} />
                                         </div>
                                     </Link>
                                 ))
