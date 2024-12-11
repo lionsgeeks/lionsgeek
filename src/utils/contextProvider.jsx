@@ -25,11 +25,7 @@ export const MyProvider = ({ children }) => {
       const response = await axios.get(`${URL}galleries`);
       setGalleries(response.data);
     } catch (error) {
-<<<<<<< Updated upstream
-      // window.location.href = "https://backend.mylionsgeek.ma";
-=======
       window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
->>>>>>> Stashed changes
       console.error("Error fetching galleries data:", error);
     }
   };
