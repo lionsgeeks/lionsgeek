@@ -24,7 +24,7 @@ import WhatisLg from "./pages/WhatisLg/whatisLg";
 function App() {
 
   function Redirect(params) {
-    window.location.href = 'https://management.lionsgeek.ma/login';
+    window.location.href = 'https://backend.mylionsgeek.ma/login';
     return (
       <LoadingPage />
     )

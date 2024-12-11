@@ -1,5 +1,5 @@
 import React from "react";
-import ilyass from "../../../assets/images/ilyass.jpg";
+import ilyass from "../../../assets/images/testimonial/ilyass.jpg";
 import { RiDoubleQuotesR } from "react-icons/ri";
 import { TransText } from "../../../components";
 

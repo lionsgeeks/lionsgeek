@@ -1,5 +1,8 @@
 import React from "react";
-import ilyass from "../../../assets/images/bojo.jpg";
+import ilyass from "../../../assets/images/testimonial/ilyass.jpg";
+import osama from "../../../assets/images/testimonial/osama.jpg";
+import aymen from "../../../assets/images/testimonial/aymen.jpg";
+import wissal from "../../../assets/images/testimonial/wissal.jpg";
 import { RiDoubleQuotesR } from "react-icons/ri";
 import { TransText } from "../../../components";
 
@@ -11,7 +14,7 @@ export const FifthSection = () => {
       name: "Ilyasse Elyatime",
       description:
         "Attending LionsGeek's master classes was a game-changer. The UI/UX Design and Personal Branding sessions boosted my career. I highly recommend LionsGeek for web development and media training.",
-      image: ilyass,
+      image: osama,
     },
     {
       name: "Oufkir Hamza",
@@ -26,16 +29,16 @@ export const FifthSection = () => {
       image: ilyass,
     },
     {
-      name: "Youness Ait Haddou",
-      description:
-        "I loved the media and code crossover classes at LionsGeek. They gave me a comprehensive understanding of both fields, making me a versatile professional.",
-      image: ilyass,
-    },
-    {
       name: "Wissale Chreiba",
       description:
+        "I loved the media and code crossover classes at LionsGeek. They gave me a comprehensive understanding of both fields, making me a versatile professional.",
+      image: wissal,
+    },
+    {
+      name: "Aymen Boujjar",
+      description:
         "The personal attention and mentorship at LionsGeek are outstanding. The CV and cover letter workshops helped me land my dream job in web development.",
-      image: ilyass,
+      image: aymen,
     },
     {
       name: "Youssef Faradi",
@@ -58,7 +61,7 @@ export const FifthSection = () => {
             className="lg:w-[30%] flex flex-col gap-2 relative overflow-hidden bg-white p-8 border-2 border-gray-100 rounded-lg"
           >
             <div className="flex gap-3 items-center">
-              <img loading="lazy" className="rounded-full h-10  w-10" src={element.image} alt="" />
+              <img loading="lazy" className="rounded-full w-10 h-10 bg-cover object-cover " src={element.image} alt="" />
               <p className="font-bold">{element.name}</p>
             </div>
             <div className="absolute -top-4 -right-4 bg-alpha/70 p-5 object-cover rounded-full opacity-80">
