@@ -1,26 +1,133 @@
-import "./firstSection.sass";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { MyContext } from "../../../utils/contextProvider";
 import { TransText } from "../../../components";
+import "./firstSection.sass";
+import { BookingModal } from "./bookingmodal";
+const calculateTimeLeft = (targetDate) => {
+  const difference = new Date(targetDate).getTime() - new Date().getTime();
+  
+  if (difference <= 0) {
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    };
+  }
+
+  return {
+    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((difference / 1000 / 60) % 60),
+    seconds: Math.floor((difference / 1000) % 60)
+  };
+};
+
+const hasEventPassed = (eventDate) => {
+  if (!eventDate) return true;
+  const now = new Date().getTime();
+  const eventTime = new Date(eventDate).getTime();
+  return now > eventTime;
+};
+
+const TimeBlock = ({ value, label }) => {
+  const formattedValue = value.toString().padStart(2, '0');
+  
+  return (
+    <div className="w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold">
+      <p className="text-white text-sm lg:text-2xl">{formattedValue}</p>
+      <p className="text-white">{label}</p>
+    </div>
+  );
+};
+
+const BookingSection = ({ event }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  if (!hasEventPassed(event.date)) {
+    
+    return (
+
+      <>
+        <div className="p-4">
+          <h1 className="font-bold text-2xl py-3">
+            <TransText
+            fr="Total à payer"
+            en="Total to pay"
+            ar="المبلغ الإجمالي للدفع"
+          />
+            : {event.price}{" "}
+            <TransText en="MAD" fr="Dirham" ar="درهم" />
+          </h1>
+        </div>
+        <div className="p-4">
+          <button 
+            className="bg-alpha text-black rounded-md px-4 py-2 transition w-full"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <TransText
+              fr="Réserver maintenant"
+              en="Book now"
+              ar="احجز الآن"
+            />
+          </button>
+        </div>
+        <BookingModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          event={event}
+        />
+      </>
+    );
+  }
+
+  return (
+    <>
+    <div className="p-4">
+      <button
+        className="border border-gray-300 bg-gray-100 text-red-500 w-full py-3 rounded-lg cursor-not-allowed font-medium shadow-sm"
+        disabled
+      >
+        <TransText
+          fr="L'événement est terminé."
+          en="The event has ended."
+          ar="لقد انتهى الحدث."
+        />
+      </button>
+    </div>
+  </>
+  );
+};
+
 export const FirstSectionEventDetail = () => {
-  const { events, setEvents, URL, IMAGEURL } = useContext(MyContext);
-
+  const { events, IMAGEURL } = useContext(MyContext);
   const { id } = useParams();
-
   const [event, setEvent] = useState();
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     if (events) {
-      console.log(events);
       const findEvent = events?.filter((element) => element?.id == id);
       setEvent(findEvent);
     }
   }, [events]);
+  
+  useEffect(() => {
+    if (event && event[0]?.date) {
+      const timer = setInterval(() => {
+        const updatedTimeLeft = calculateTimeLeft(event[0].date);
+        setTimeLeft(updatedTimeLeft);
 
-  console.log(event);
+        if (Object.values(updatedTimeLeft).every(value => value === 0)) {
+          clearInterval(timer);
+        }
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [event]);
 
   useGSAP(() => {
     let animation = gsap.timeline({ defaults: { ease: "pwer4inOut" } });
@@ -44,23 +151,55 @@ export const FirstSectionEventDetail = () => {
       );
   });
 
+
+
+<div id="modelConfirm" className="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
+  <div className="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+    <div className="flex justify-end p-2">
+      <button onclick="closeModal('modelConfirm')" type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+        </svg>
+      </button>
+    </div>
+    <div className="p-6 pt-0 text-center">
+      <svg className="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <h3 className="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete this user?</h3>
+      <a href="#" onclick="closeModal('modelConfirm')" className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+        Yes, I'm sure
+      </a>
+      <a href="#" onclick="closeModal('modelConfirm')" className="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center" data-modal-toggle="delete-user-modal">
+        No, cancel
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
   return (
     <>
-      {event && (
-        <div className=" h-fit lg:p-16 p-7 lg:pt-24 pt-40  ">
-          <div className="lg:h-[13vh] first w-full gap-5 rounded-l-lg flex ">
-            {/* date */}
-            <div className="w-[7%] lg:flex lg:flex-col  ">
-              {" "}
-              <div className="bg-alpha rounded-t-lg h-[40%] flex items-center justify-center font-bold text-white text-lg ">
-                JUIN
+      {event && event[0] && (
+        <div className="h-fit lg:p-16 p-7 lg:pt-24 md:pt-40 pt-28">
+          {/* Event Header */}
+          <div className="lg:h-[13vh] first w-full gap-5 rounded-l-lg flex">
+            <div className="md:w-[7vw] w-[30vw] lg:flex lg:flex-col">
+              <div className="bg-alpha rounded-t-lg h-[40%] flex items-center justify-center font-bold text-white text-lg">
+              <TransText
+                  en={new Date(event[0]?.date).toLocaleDateString('en-US', { month: 'long' })}
+                  fr={new Date(event[0]?.date).toLocaleDateString('fr-FR', { month: 'long' })}
+                  ar={new Date(event[0]?.date).toLocaleDateString('ar-EG', { month: 'long' })}
+                />{" "}
               </div>
-              <div className="bg-beta  h-[60%] rounded-b-lg flex items-center justify-center font-semibold text-white text-2xl">
-                07
-              </div>{" "}
+              <div className="bg-beta h-[60%] rounded-b-lg flex items-center justify-center font-semibold text-white text-2xl">
+              {new Date(new Date(event[0]?.date).setDate(new Date(event[0]?.date).getDate())).getDate()}
+              </div>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="lg:flex gap-2  lg:text-3xl text-xl  px-2">
+              <div className="lg:flex gap-2 lg:text-3xl text-xl px-2">
                 <div>
                   <h1>
                     <TransText {...event[0].name} />
@@ -93,24 +232,23 @@ export const FirstSectionEventDetail = () => {
               </div>
             </div>
           </div>
-          {/* <div className="p-2">
-                                <h2 className="font-mono fs-1 fw-bolder p-4"  >{id}</h2>
-                                <p className="font-mono fs-1 fw-bolder p-4"  >{Description}</p>
-                                <h3 className="font-mono p-4 fw-bolder fs-1">{Date}</h3>
-                            </div> */}
-          <div className="lg:flex lg:flex-row flex-col  gap-10 h-[100%] first ">
-            <div className="   lg:w-[70%] py-5 flex flex-col gap-5 ">
+
+          <div className="lg:flex lg:flex-row flex-col gap-10 h-[100%] first">
+            <div className="lg:w-[70%] py-5 flex flex-col gap-5">
               <img
-              loading="lazy"
-                className="lg:h-[55vh] w-[100%] rounded-lg  object-cover"
+                loading="lazy"
+                className="lg:h-[55vh] w-[100%] rounded-lg object-cover"
                 src={`${IMAGEURL}${event[0].cover}`}
                 alt=""
               />
-
-              <div className="shadow-sm  px-4 border rounded-lg  flex flex-col  py-4 ">
+              <div className="shadow-sm px-4 border rounded-lg flex flex-col py-4">
                 <div className="border-b-2 border-black py-3">
                   <h1 className="font-semibold text-xl">
-                    A propos de cet évenement
+                  <TransText
+                  ar="حول هذا الحدث"
+                  fr="A propos de cet évenement"
+                  en="About this event"
+                />
                   </h1>
                 </div>
                 <div className="py-4">
@@ -120,7 +258,8 @@ export const FirstSectionEventDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="shadow-xl last border rounded-lg   h-fit flex flex-col lg:w-[30%]">
+
+            <div className="shadow-xl last border rounded-lg h-fit flex flex-col md:mt-10 lg:w-[30%]">
               <h2 className="p-4 border-b border-gray-500">
                 <TransText
                   ar="تفاصيل الحدث"
@@ -129,43 +268,33 @@ export const FirstSectionEventDetail = () => {
                 />
               </h2>
               <div className="flex gap-2 p-4">
-                <div className="w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold">
-                  {" "}
-                  <p className="text-white text-sm lg:text-2xl">00</p>{" "}
-                  <p className="text-white">Jours</p>
-                </div>
-                <div className="w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold">
-                  {" "}
-                  <p className="text-white text-sm lg:text-2xl">24</p>{" "}
-                  <p className="text-white">Heurs</p>
-                </div>
-                <div className="w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold">
-                  {" "}
-                  <p className="text-white text-sm lg:text-2xl">54</p>{" "}
-                  <p className="text-white">Minutes</p>
-                </div>
-                <div className="w-[25%] bg-beta py-3 rounded-md text-center flex flex-col gap-2 text-sm font-semibold">
-                  {" "}
-                  <p className="text-white text-sm lg:text-2xl">33</p>{" "}
-                  <p className="text-white">Seconds</p>
-                </div>
+                <TimeBlock
+                  value={timeLeft.days}
+                  label={
+                    <TransText ar="أيام" fr="Jours" en="Days" />
+                  }
+                />
+                <TimeBlock
+                  value={timeLeft.hours}
+                  label={
+                    <TransText ar="ساعات" fr="Heures" en="Hours" />
+                  }
+                />
+                <TimeBlock
+                  value={timeLeft.minutes}
+                  label={
+                    <TransText ar="دقائق" fr="Minutes" en="Minutes" />
+                  }
+                />
+                <TimeBlock
+                  value={timeLeft.seconds}
+                  label={
+                    <TransText ar="ثواني" fr="Secondes" en="Seconds" />
+                  }
+                />
               </div>
-              {/* <h2 className='p-4 border-b-2 '>Sélection des tickets </h2> */}
-              {/* <div className='p-4 '>
-                                <h1 className='border-b-2 py-4' >Tickets - Free</h1>
-                            </div> */}
-              <div className="p-4">
-                {/* <p className='text-sm text-gray-500'>0X tickets</p> */}
-                <h1 className="font-bold text-2xl py-3">
-                  Total à payer: {event[0].price}{" "}
-                  <TransText fr="MAD" en="Dirham" ar="درهم" />
-                </h1>
-              </div>
-              <div className="p-4 ">
-                <button className="bg-alpha w-[100%] py-2 rounded-lg hover:bg-transparent hover:scale-105 hover:text-alpha border">
-                  Réservez maintenant!
-                </button>
-              </div>
+
+              <BookingSection event={event[0]} />
             </div>
           </div>
         </div>
