@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import contentCreature from "../../../assets/images/recording_a_movie.svg";
 import Button from "../../../components/Button";
 import { TransText } from "../../../components";
@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 
 export const FirstSection = () => {
   const leftside = useRef(null);
+  const [checkFormation, setCheckFormation] = useState(false);
 
   const rightside = useRef(null);
   const { selectedLanguage, sessions } = useContext(MyContext);
@@ -48,6 +49,14 @@ export const FirstSection = () => {
       }
     );
   }, []);
+
+  useEffect(() => {
+    sessions?.forEach((element) => {
+      if (element.formation === "Media") {
+        setCheckFormation(true);
+      }
+    });
+  }, [sessions]);
 
   return (
     <div
@@ -159,7 +168,7 @@ export const FirstSection = () => {
           </p>
         </div>
         <div>
-          {sessions?.length > 0 && (
+          {checkFormation && (
             <NavLink to={"/postuler"}>
               <Button>
                 <TransText fr="Apply" en="Postuler" ar="تقدم بطلب" />
@@ -169,7 +178,12 @@ export const FirstSection = () => {
         </div>
       </div>
       <div ref={rightside} className="lg:w-[50%] w-[90%] flex justify-center">
-        <img loading="lazy" className="lg:w-[100%]" src={contentCreature} alt="web developer" />
+        <img
+          loading="lazy"
+          className="lg:w-[100%]"
+          src={contentCreature}
+          alt="web developer"
+        />
       </div>
     </div>
   );
