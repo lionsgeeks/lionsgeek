@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import developer from "../../../assets/images/Programmer-cuate.svg";
 import Button from "../../../components/Button";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,7 @@ export const FirstSection = () => {
   const { selectedLanguage, sessions } = useContext(MyContext);
   const leftside = useRef(null);
   const rightside = useRef(null);
-
+  const [checkFormationCode, setCheckFormationCode] = useState(false);
   useEffect(() => {
     gsap.fromTo(
       leftside.current,
@@ -49,6 +49,15 @@ export const FirstSection = () => {
       }
     );
   }, []);
+
+  useEffect(() => {
+    sessions?.forEach((element) => {
+      if (element.formation === "Coding") {
+        setCheckFormationCode(true);
+      }
+    });
+  }, [sessions]);
+
   return (
     <div
       className={`mt-16 flex flex-col-reverse items-center lg:flex-row justify-center overflow-x-hidden ${
@@ -155,17 +164,22 @@ export const FirstSection = () => {
           </p>
         </div>
         <div>
-          {sessions?.length > 0 && (
+          {checkFormationCode && (
             <NavLink to={"/postuler"}>
               <Button>
-                <TransText fr="Apply" en="Postuler" ar="تقدم بطلب" />
+                <TransText en="Apply" fr="Postuler" ar="تقدم بطلب" />
               </Button>
             </NavLink>
           )}
         </div>
       </div>
       <div ref={rightside} className="lg:w-[50%] w-[90%] flex justify-center">
-        <img loading="lazy" className="lg:w-[70%]" src={developer} alt="web developer" />
+        <img
+          loading="lazy"
+          className="lg:w-[70%]"
+          src={developer}
+          alt="web developer"
+        />
       </div>
     </div>
   );
