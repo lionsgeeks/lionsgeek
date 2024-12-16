@@ -30,7 +30,7 @@ export const FirstSectionEvent = () => {
       >
         <div ref={leftside} className="flex justify-center items-center lg:w-[50%] w-[100%] ">
           <div
-            className={`lg:px-16 lg:py-0 py-20 px-3 flex flex-col gap-6 w-[100%] b${selectedLanguage === "ar"
+            className={`lg:px-16 lg:py-0 py-1 px-3 flex flex-col gap-6 w-[100%] b${selectedLanguage === "ar"
                 ? "    text-end w-[100%] flex  items-end  "
                 : "md:"
               }`}

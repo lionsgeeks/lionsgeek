@@ -188,7 +188,7 @@ export const FirstSectionPro = () => {
         </div>
 
         <div className="text-center py-5 mt-5">
-          <Link className="bg-alpha py-3 px-7 rounded-lg" to={"/contact-us"}>
+          <Link className="bg-alpha py-3 md:px-7 px-3 rounded-lg" to={"/contact-us"}>
             <TransText en="Contact Us" fr="Contactez-nous" ar="اتصل بنا" />
           </Link>
         </div>
