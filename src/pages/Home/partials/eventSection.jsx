@@ -18,23 +18,23 @@ const EventSection = () => {
   };
   return (
     <div
-      className={`flex flex-col lg:gap-16 px-7 md:px-16 py-7 md:py-12 relative before:absolute before:bg-beta before:h-[87.5%] md:before:h-2/3 before:inset-0 before:top-1/2 before:-translate-y-1/2 before:-z-10 ${
+      className={`flex md:mb-0 mb-10 flex-col lg:gap-16 px-7 md:px-16 py-2 md:py-12 relative before:absolute before:bg-beta before:h-[87.5%] md:before:h-2/3 before:inset-0 md:before:top-1/2 before:top-2/3  before:-translate-y-1/2 before:-z-10 ${
         selectedLanguage === "ar" ? "md:flex-row-reverse" : "md:flex-row"
       }`}
     >
       <img
       loading="lazy"
-        className="md:size-1/2"
+        className="md:w-1/2 md:h-[50vh] h-[20vh] object-cover"
         src={`${IMAGEURL}${upcomingEvent?.cover}`}
         alt="we-choose-art-event"
       />
 
       <div
-        className={`h-[87.5%] md:h-2/3 flex-1 self-center lg:block lg:text-start flex flex-col p-6 text-center items-center justify-center ${
+        className={`h-[87.5%]  md:h-2/3 flex-1 self-center lg:block lg:text-start flex flex-col lg:p-6 md:p-4 p-6 text-center items-center md:items-start justify-center  ${
           selectedLanguage === "ar" ? "text-end" : "text-start"
         }`}
       >
-        <h1 className="text-4xl md:text-6xl font-bold text-alpha">
+        <h1 className="text-3xl  md:w-full  lg:text-6xl md:text-4xl  font-bold text-alpha">
           {checkDate() ? (
             <TransText
               en="Upcoming Event"
@@ -52,7 +52,7 @@ const EventSection = () => {
         {/* <h4 className="text-white mt-4 md:mt-8 text-sm md:text-base">
           <TransText en="GeekTalks" fr="Conférences Geek" ar="دردشات جيك" />
         </h4> */}
-        <h2 className="text-white text-2xl md:text-4xl font-medium mt-1 md:mt-2 mb-2 md:mb-4">
+        <h2 className="text-white text-2xl  md:text-3xl font-medium mt-1 md:mt-2 mb-2 md:mb-4">
           <TransText {...upcomingEvent?.name} />
           {/* {event?.name.en} */}
         </h2>
