@@ -12,17 +12,19 @@ const InfoSession = () => {
   const [validate, setValidate] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
   const [gender, setGender] = useState("");
-  const [city, setCity] = useState('');
-  const [pref, setPref] = useState('');
+  const [city, setCity] = useState("");
+  const [pref, setPref] = useState("");
   const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState(false);
+
   const dateLanguage = {
     en: "US",
     fr: "FR",
     ar: "AR",
   };
 
-  const [motivation, setMotivation] = useState('');
-  const [source, setSource] = useState('');
+  const [motivation, setMotivation] = useState("");
+  const [source, setSource] = useState("");
   const formFields = [
     { name: "full_name", label: "Full Name", type: "text" },
     { name: "email", label: "Email", type: "email" },
@@ -38,13 +40,16 @@ const InfoSession = () => {
   const [formData, setFormData] = useState(initialState);
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "email") {
+      setEmailError(false);
+    }
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (motivation && motivation.length < 150) {
-      alert('Please Write 150 Characters in Your Motivation')
+      alert("Please Write 150 Characters in Your Motivation");
     } else {
       window.scrollTo(0, 0);
       setSending(true);
@@ -66,9 +71,13 @@ const InfoSession = () => {
       axios
         .post(URL + "participate", newForm)
         .then((res) => {
-          setFormData(initialState);
-          setMotivation('');
           setSending(false);
+          if (res.data.status === 69) {
+            setEmailError(true);
+            return;
+          }
+          setFormData(initialState);
+          setMotivation("");
           setConfirmation(true);
           if (res.status === 200) {
             setValidate(true);
@@ -122,12 +131,22 @@ const InfoSession = () => {
     return `${formattedDate} ${formattedTime}`;
   }
 
-  const today = chosenSession ? new Date(sessions?.find(s => s.id == chosenSession)?.start_date) : new Date();
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-  const minDate = new Date(today.getFullYear() - 30, today.getMonth(), today.getDate());
+  const today = chosenSession
+    ? new Date(sessions?.find((s) => s.id == chosenSession)?.start_date)
+    : new Date();
+  const maxDate = new Date(
+    today.getFullYear() - 18,
+    today.getMonth(),
+    today.getDate()
+  );
+  const minDate = new Date(
+    today.getFullYear() - 30,
+    today.getMonth(),
+    today.getDate()
+  );
   // Format dates as YYYY-MM-DD
-  const maxDateString = maxDate.toISOString().split('T')[0];
-  const minDateString = minDate.toISOString().split('T')[0];
+  const maxDateString = maxDate.toISOString().split("T")[0];
+  const minDateString = minDate.toISOString().split("T")[0];
 
   return (
     <div
@@ -140,7 +159,7 @@ const InfoSession = () => {
             Sign Up to Start Your Adventure with Us
           </h1>
 
-          {(sessions && sessions.length > 0) && (
+          {sessions && sessions.length > 0 && (
             <form
               onSubmit={handleSubmit}
               className="mx-auto p-6 bg-white rounded-lg shadow-md space-y-4"
@@ -152,6 +171,7 @@ const InfoSession = () => {
                 <select
                   name="sessions"
                   id="sessions"
+                  value={chosenSession}
                   onChange={(e) => {
                     setChosenSession(e.target.value);
                   }}
@@ -189,9 +209,18 @@ const InfoSession = () => {
                       placeholder={field.label + "..."}
                       value={formData[field.name]}
                       onChange={handleChange}
-                      className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta"
+                      className={`px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta ${
+                        emailError && field.name === "email"
+                          ? "text-red-500 border-red-500"
+                          : "border-gray-300 text-black"
+                      }`}
                       required
                     />
+                    {emailError && field.name === "email" && (
+                      <span className="text-red-500 text-sm ">
+                        The email is already exist
+                      </span>
+                    )}
                   </div>
                 ))}
 
@@ -205,6 +234,7 @@ const InfoSession = () => {
                     onChange={(e) => {
                       setCity(e.target.value);
                     }}
+                    value={city}
                     className="w-full rounded border border-gray-300 px-4 py-[11px]"
                     required
                   >
@@ -225,6 +255,7 @@ const InfoSession = () => {
                   </label>
                   <select
                     name="prefecture"
+                    value={pref}
                     id="prefecture"
                     onChange={(e) => {
                       setPref(e.target.value);
@@ -236,23 +267,25 @@ const InfoSession = () => {
                       Prefecture
                     </option>
                     <option value="none">None</option>
-                    {
-                      [
-                        "Casablanca Anfa",
-                        "Sidi Bernoussi",
-                        "Ain Sbaa Hay Mohammedi",
-                        "Al Fida Mers Sultan",
-                        "Moulay Rachid",
-                        "Ain Chock",
-                        "Ben M'Sick Sidi Othmane",
-                        "Hay Hassani"
-                      ].map((el, ind) => (
-                        <option key={ind} value={el.toLowerCase().replace(/ /g, '_')}>{el}</option>
-                      ))
-                    }
+                    {[
+                      "Casablanca Anfa",
+                      "Sidi Bernoussi",
+                      "Ain Sbaa Hay Mohammedi",
+                      "Al Fida Mers Sultan",
+                      "Moulay Rachid",
+                      "Ain Chock",
+                      "Ben M'Sick Sidi Othmane",
+                      "Hay Hassani",
+                    ].map((el, ind) => (
+                      <option
+                        key={ind}
+                        value={el.toLowerCase().replace(/ /g, "_")}
+                      >
+                        {el}
+                      </option>
+                    ))}
                   </select>
                 </div>
-
 
                 <div className="flex flex-col space-y-2 w-[49.7%]">
                   <label htmlFor="gender" className="text-gray-700">
@@ -281,23 +314,47 @@ const InfoSession = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-[49.7%]">
-                  <label htmlFor="source">Where Have you Heard of LionsGeek: <Required /></label>
-                  <input type="text" name="source" id="source"
+                  <label htmlFor="source">
+                    Where Have you Heard of LionsGeek: <Required />
+                  </label>
+                  <input
+                    type="text"
+                    value={source}
+                    name="source"
+                    id="source"
                     placeholder="Source..."
-                    onChange={(e) => { setSource(e.target.value) }}
-                    className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta" required />
+                    onChange={(e) => {
+                      setSource(e.target.value);
+                    }}
+                    className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta"
+                    required
+                  />
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full">
-                  <label htmlFor="motivation">Motivation:
+                  <label htmlFor="motivation">
+                    Motivation:
                     <Required />
-                    <span className={`text-sm ${motivation.length < 150 ? 'text-red-600' : 'text-green-500'}`}> {motivation.length}/150</span>
+                    <span
+                      className={`text-sm ${
+                        motivation.length < 150
+                          ? "text-red-600"
+                          : "text-green-500"
+                      }`}
+                    >
+                      {" "}
+                      {motivation.length}/150
+                    </span>
                   </label>
-                  <textarea name="motivation" id="motivation"
+                  <textarea
+                    name="motivation"
+                    id="motivation"
                     className="border border-gray-400 rounded p-[6px]"
-                    onChange={(e) => setMotivation(e.target.value)} placeholder="Motivation"></textarea>
+                    onChange={(e) => setMotivation(e.target.value)}
+                    placeholder="Motivation"
+                    value={motivation}
+                  ></textarea>
                 </div>
-
               </div>
               <div className="mt-4">
                 <button

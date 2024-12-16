@@ -1,5 +1,5 @@
 import Logo from "../assets/images/lionsgeek_logo_2.png";
-import { FaFacebookF } from "react-icons/fa";
+import { FaDiscord, FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -14,21 +14,27 @@ import axios from "axios";
 
 export const Footer = () => {
   const { t } = useTranslation();
-  const { selectedLanguage , URL } = useAppContext();
+  const { selectedLanguage, URL } = useAppContext();
   const date = new Date();
   const currentYear = date.getFullYear();
   const [subscriber, setSubscriber] = useState("");
+  const [inputError, setInputError] = useState(false);
   const sendEmail = () => {
     try {
       const data = { email: subscriber };
       if (subscriber) {
-        axios.post(URL+"subscriber", data);
+        axios.post(URL + "subscriber", data).then((response) => {
+          if (response.data.status === 69) {
+            setInputError(true);
+          }
+          else if (response.data.status === 200) {
+            setSubscriber("");
+          }
+        });
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      setSubscriber("");
-    }
+    } 
   };
   return (
     <>
@@ -50,7 +56,7 @@ export const Footer = () => {
                 }`}
               >
                 <img
-                loading="lazy"
+                  loading="lazy"
                   src={Logo}
                   alt=""
                   className="lg:w-[7vw] lg:h-[7vw] w-[20vw] h-[20vw] lg:mb-0 mb-5"
@@ -83,14 +89,6 @@ export const Footer = () => {
                   </Link>
                 </div>
               </div>
-              {/* <div className='flex flex-col gap-3'>
-                                <h1 className='font-bold text-gray-600 text-[1.2rem]'>About</h1>
-                                <div>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
-                                    <p className='text-gray-400 text-[0.9rem]'>Become Affitiale</p>
-                                </div>
-                            </div> */}
               <div className="flex flex-col gap-3">
                 <h1
                   className={`font-bold text-gray-600 text-[1.2rem]  ${
@@ -139,7 +137,7 @@ export const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col items-start gap-2">
+            <div className="flex flex-col items-start gap-2 lg:w-[20%]">
               <h1
                 className={`font-bold text-gray-600 text-[1.2rem] w-full  ${
                   selectedLanguage == "ar" ? "text-end" : ""
@@ -149,13 +147,23 @@ export const Footer = () => {
               </h1>
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
-                  onChange={(e) => setSubscriber(e.target.value)}
+                  onChange={(e) => {
+                    setSubscriber(e.target.value);
+                    setInputError(false);
+                  }}
                   value={subscriber}
                   className={`${
                     selectedLanguage == "ar" ? "text-end" : ""
-                  } peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
+                  } peer h-full w-full border-b  ${
+                    inputError
+                      ? " border-red-500 rounded text-red-500 text-blue-gray-700"
+                      : " border-blue-gray-200"
+                  } bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal  outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
                   placeholder=" "
                 />
+                {inputError && (
+                  <span className="text-red-500 text-sm">This email already exist</span>
+                )}
                 <label
                   className={`pt-1 pointer-events-none absolute ${
                     selectedLanguage == "ar" ? "right-0" : "left-0"
@@ -166,7 +174,7 @@ export const Footer = () => {
               </div>
               {/* <button className="bg-alpha mt-2   font-light text-[0.8rem] px-4 py-2 rounded-lg shadow-md">SIGN UP</button> */}
               <Button
-                className={"shadow-md font-normal mt-2 w-full text-[0.8rem]"}
+                className={"shadow-md font-normal w-full mt-5 text-[0.8rem]"}
                 onClick={sendEmail}
               >
                 {t("footer.part3.button")}
@@ -198,6 +206,9 @@ export const Footer = () => {
               </a>
               <a target="blank" href="https://www.tiktok.com/@lions_geek">
                 <FaTiktok className="text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200" />
+              </a>
+              <a target="blank" href="https://discord.com/channels/1219261183803129929/1219261184314839133">
+                <FaDiscord className="text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200" />
               </a>
             </div>
             <p className="text-gray-400 text-[0.9rem] text-center">
