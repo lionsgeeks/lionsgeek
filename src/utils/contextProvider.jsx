@@ -25,7 +25,7 @@ export const MyProvider = ({ children }) => {
       const response = await axios.get(`${URL}galleries`);
       setGalleries(response.data);
     } catch (error) {
-      // window.location.href = "https://backend.mylionsgeek.ma";
+      window.location.href = "https://backend.mylionsgeek.ma";
       console.error("Error fetching galleries data:", error);
     }
   };
