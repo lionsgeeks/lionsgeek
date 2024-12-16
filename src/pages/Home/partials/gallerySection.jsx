@@ -12,7 +12,7 @@ export default function GallerySection() {
 
   // console.log(galleries);
 
-  console.log();
+
 
 
   const duration = 3750;
