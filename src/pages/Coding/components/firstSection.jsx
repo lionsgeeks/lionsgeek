@@ -57,9 +57,9 @@ export const FirstSection = () => {
     >
       <div
         ref={leftside}
-        className="lg:w-[50%] py-16 lg:px-16 px-7 flex flex-col gap-4"
+        className="lg:w-[50%] md:py-16 py-8 lg:px-16 px-7 flex flex-col gap-4"
       >
-        <h1 className="font-bold text-5xl text-balance">
+        <h1 className="font-bold md:text-5xl text-3xl text-balance">
           <TransText
             fr="Développeur Web Full Stack."
             en="Full Stack Web Developer."

@@ -51,6 +51,7 @@ export const ContactUs = () => {
 
     const formFilled = Object.values(formInfo).every(value => value.trim() !== '');
     const [loading, setLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const onFormSubmit = (e) => {
         e.preventDefault();
         setLoading(true)
@@ -69,7 +70,7 @@ export const ContactUs = () => {
                     email: '',
                     message: '',
                 })
-                alert('Message Received.');
+                setShowModal(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -192,6 +193,20 @@ export const ContactUs = () => {
                 </div>
             </div>
             {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.0584384950844!2d-7.5364266246542515!3d33.60378817332915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cdb2f812837f%3A0xbbcfc74fbc11b2d9!2sLionsGeek!5e0!3m2!1sen!2sma!4v1719408103931!5m2!1sen!2sma" className='w-full h-[45vh] filter grayscale focus:border-none focus:outline-none map' allowfullscreen="" loading="lazy" ></iframe> */}
+
+            {showModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white md:w-[38vw] w-64 h-64 p-6 rounded shadow-lg flex flex-col items-center justify-center text-center space-y-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#22c55e" className="size-9">
+                            <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+                        </svg>
+                        <h2 className="text-lg font-medium text-gray-500">Success!</h2>
+                        <p>Thank you , your message has been received!</p>
+                        <button onClick={() => setShowModal(false)} className="px-4 py-2 bg-alpha font-medium rounded">Close</button>
+                    </div>
+                </div>
+            )}
+
         </>
     )
 }
