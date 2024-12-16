@@ -67,6 +67,7 @@ const InfoSession = () => {
         .post(URL + "participate", newForm)
         .then((res) => {
           setFormData(initialState);
+          setMotivation('');
           setSending(false);
           setConfirmation(true);
           if (res.status === 200) {
@@ -121,6 +122,13 @@ const InfoSession = () => {
     return `${formattedDate} ${formattedTime}`;
   }
 
+  const today = chosenSession ? new Date(sessions?.find(s => s.id == chosenSession)?.start_date) : new Date();
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+  const minDate = new Date(today.getFullYear() - 30, today.getMonth(), today.getDate());
+  // Format dates as YYYY-MM-DD
+  const maxDateString = maxDate.toISOString().split('T')[0];
+  const minDateString = minDate.toISOString().split('T')[0];
+
   return (
     <div
       className="px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden"
@@ -163,11 +171,11 @@ const InfoSession = () => {
                 </select>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1">
                 {formFields.map((field) => (
                   <div
                     key={field.name}
-                    className="flex flex-col space-y-2 w-[48%]"
+                    className="flex flex-col space-y-2 w-[49.7%]"
                   >
                     <label htmlFor={field.name} className="text-gray-700">
                       {field.label}: <Required />
@@ -176,6 +184,8 @@ const InfoSession = () => {
                       type={field.type}
                       id={field.name}
                       name={field.name}
+                      min={minDateString}
+                      max={maxDateString}
                       placeholder={field.label + "..."}
                       value={formData[field.name]}
                       onChange={handleChange}
@@ -185,7 +195,7 @@ const InfoSession = () => {
                   </div>
                 ))}
 
-                <div className="flex flex-col space-y-2 w-[48%]">
+                <div className="flex flex-col space-y-2 w-[49.7%]">
                   <label htmlFor="city" className="text-gray-700">
                     City: <Required />
                   </label>
@@ -195,7 +205,7 @@ const InfoSession = () => {
                     onChange={(e) => {
                       setCity(e.target.value);
                     }}
-                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    className="w-full rounded border border-gray-300 px-4 py-[11px]"
                     required
                   >
                     <option value="" defaultValue={""} disabled>
@@ -209,7 +219,7 @@ const InfoSession = () => {
                   </select>
                 </div>
 
-                <div className="flex flex-col space-y-2 w-[48%]">
+                <div className="flex flex-col space-y-2 w-[49.7%]">
                   <label htmlFor="prefecture" className="text-gray-700">
                     Prefecture: <Required />
                   </label>
@@ -219,7 +229,7 @@ const InfoSession = () => {
                     onChange={(e) => {
                       setPref(e.target.value);
                     }}
-                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    className="w-full rounded border border-gray-300 px-4 py-[11px]"
                     required
                   >
                     <option value="" defaultValue={""} disabled>
@@ -237,16 +247,17 @@ const InfoSession = () => {
                         "Ben M'Sick Sidi Othmane",
                         "Hay Hassani"
                       ].map((el, ind) => (
-                        <option value={el.toLowerCase().replace(/ /g, '_')}>{el}</option>
+                        <option key={ind} value={el.toLowerCase().replace(/ /g, '_')}>{el}</option>
                       ))
                     }
                   </select>
                 </div>
 
 
-                <div className="flex flex-col space-y-2 w-[48%]">
+                <div className="flex flex-col space-y-2 w-[49.7%]">
                   <label htmlFor="gender" className="text-gray-700">
-                    Gender: <Required />
+                    <TransText en="Gender" fr="Genre" ar="الجنس" />
+                    <Required />
                   </label>
                   <select
                     name="gender"
@@ -254,26 +265,30 @@ const InfoSession = () => {
                     onChange={(e) => {
                       setGender(e.target.value);
                     }}
-                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    className="w-full rounded border border-gray-300 px-4 py-[11px]"
                     required
                   >
                     <option value="" defaultValue={""} disabled>
                       Gender
                     </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="male">
+                      <TransText en="Male" fr="Homme" ar="ذكر" />
+                    </option>
+                    <option value="female">
+                      <TransText en="Female" fr="Female" ar="أنثى" />
+                    </option>
                   </select>
                 </div>
 
-                <div className="flex flex-col space-y-2 w-[48%]">
+                <div className="flex flex-col space-y-2 w-[49.7%]">
                   <label htmlFor="source">Where Have you Heard of LionsGeek: <Required /></label>
                   <input type="text" name="source" id="source"
                     placeholder="Source..."
                     onChange={(e) => { setSource(e.target.value) }}
-                    className="px-4 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta" required />
+                    className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta" required />
                 </div>
 
-                <div className="flex flex-col space-y-2 w-[97%]">
+                <div className="flex flex-col space-y-2 w-full">
                   <label htmlFor="motivation">Motivation:
                     <Required />
                     <span className={`text-sm ${motivation.length < 150 ? 'text-red-600' : 'text-green-500'}`}> {motivation.length}/150</span>

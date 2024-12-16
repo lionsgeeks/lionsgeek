@@ -53,7 +53,8 @@ export const CardsSection = () => {
               </div>
               <div className="flex flex-col font-mono gap-3 py-[1rem] px-[1rem] ">
                 <h3 className="text-[22px] font-bold truncate">
-                  Even Name Even Name Even NameEven NameEven NameEven Name
+                <TransText {...element.name} /> 
+
                 </h3>
                 <div className="flex flex-col gap-2 overflow-hidden text-[#8b96af]">
                   <p className="text-[15px] flex items-center gap-1  text-[#8b96af] ">

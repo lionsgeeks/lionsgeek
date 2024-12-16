@@ -3,10 +3,10 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  const URL = "http://172.28.0.58:8000/api/";
-  const IMAGEURL = "http://172.28.0.58:8000/storage/images/";
-  // const URL = "https://backend.mylionsgeek.ma/api/";
-  // const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
+  // const URL = "http://172.28.0.31:8000/api/";
+  // const IMAGEURL = "http://172.28.0.31:8000/storage/images/";
+  const URL = "https://backend.mylionsgeek.ma/api/";
+  const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
   const path = useLocation();
@@ -25,7 +25,7 @@ export const MyProvider = ({ children }) => {
       const response = await axios.get(`${URL}galleries`);
       setGalleries(response.data);
     } catch (error) {
-      // window.location.href = "https://backend.mylionsgeek.ma";
+      window.location.href = "https://backend.mylionsgeek.ma";
       console.error("Error fetching galleries data:", error);
     }
   };
