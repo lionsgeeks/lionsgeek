@@ -68,7 +68,7 @@ export const FirstSection = () => {
         ref={leftside}
         className=" lg:w-[50%] py-16 px-7 lg:px-16 flex flex-col gap-4"
       >
-        <h1 className="font-bold text-6xl lg:text-balance">
+        <h1 className="font-bold md:text-6xl text-4xl lg:text-balance">
           <TransText
             en="Digital Content Creator"
             fr="Créateur de contenu digital"
@@ -177,7 +177,7 @@ export const FirstSection = () => {
           )}
         </div>
       </div>
-      <div ref={rightside} className="lg:w-[50%] w-[90%] flex justify-center">
+      <div ref={rightside} className="lg:w-[50%] w-[100%] flex justify-center">
         <img
           loading="lazy"
           className="lg:w-[100%]"
