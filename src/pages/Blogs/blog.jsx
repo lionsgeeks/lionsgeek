@@ -7,7 +7,7 @@ import { BlogContentsSection } from './components/blogContentsSection';
 export const BlogPage = () => {
     return (
         <>
-            <div className="p-16  ">
+            <div className="lg:p-16 p-6  ">
 
                 <BlogHeroSection />
                 <BlogContentsSection />
