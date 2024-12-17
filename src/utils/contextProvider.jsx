@@ -3,10 +3,10 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  const URL = "http://172.28.0.186:8000/api/";
-  const IMAGEURL = "http://172.28.0.186:8000/storage/images/";
-  // const URL = "https://backend.mylionsgeek.ma/api/";
-  // const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
+  // const URL = "http://172.28.0.135:8000/api/";
+  // const IMAGEURL = "http://172.28.0.135:8000/storage/images/";
+  const URL = "https://backend.mylionsgeek.ma/api/";
+  const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
 
@@ -104,8 +104,11 @@ export const MyProvider = ({ children }) => {
   };
 
   const views = async() => {
+    const data = {
+      tempoToken : "3c6b27df90dbc68b8b24fdf744bc94558daebaf3da836d58c360794c6384b6d2",
+    };
     try {
-      axios.post(URL + 'views').then((res) => {
+      axios.post(URL + 'views', data).then((res) => {
         // console.log(res);
       })
     } catch (error) {
