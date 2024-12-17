@@ -1,47 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TransText } from "../../../components";
+import { useTranslation } from "react-i18next";
+import { MyContext } from "../../../utils/contextProvider";
 import axios from "axios";
 
-const i = "http://172.28.0.186:8000/api/";
+const API_URL = "http://172.28.0.186:8000/api/";
 
 export const BookingModal = ({ isOpen, onClose, event }) => {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
+  const { selectedLanguage } = useContext(MyContext);
 
   if (!isOpen) return null;
 
-  const getPlaceholderText = () => {
-    const language = "en"; // Adjust the language as needed
-    switch (language) {
-      case "en":
-        return "Enter your Name Please";
-      case "fr":
-        return "Veuillez entrer votre nom";
-      case "ar":
-        return "الرجاء إدخال اسمك";
-      default:
-        return "Enter your Name Please";
-    }
+  const getPlaceholder = (field) => {
+    const placeholders = {
+      name: {
+        en: "Enter your name",
+        fr: "Entrez votre nom",
+        ar: "أدخل اسمك",
+      },
+      email: {
+        en: "Enter your email",
+        fr: "Entrez votre email",
+        ar: "أدخل بريدك الإلكتروني",
+      }
+    };
+    return placeholders[field][selectedLanguage] || placeholders[field].en;
   };
 
   const submit = async () => {
     if (!nameInput || !emailInput) {
-      setSuccessMessage("Please fill out both fields.");
+      const message = {
+        en: "Please fill out both fields.",
+        fr: "Veuillez remplir tous les champs.",
+        ar: "يرجى ملء جميع الحقول."
+      }[selectedLanguage] || "Please fill out both fields.";
+      
+      setSuccessMessage(message);
       return;
     }
 
-    let formdata = new FormData();
+    const formdata = new FormData();
     formdata.append("email", emailInput);
     formdata.append("name", nameInput);
     formdata.append("event_id", event.id);
 
     try {
-      let response = await axios.post(i + "booking/store", formdata);
-      
+      const response = await axios.post(API_URL + "booking/store", formdata);
       setSuccessMessage(response.data.message);
     } catch (error) {
-      console.log("Error submitting the booking.");
+      const errorMessage = {
+        en: "Error submitting the booking.",
+        fr: "Erreur lors de la soumission de la réservation.",
+        ar: "خطأ في تقديم الحجز."
+      }[selectedLanguage] || "Error submitting the booking.";
+      
+      setSuccessMessage(errorMessage);
+      console.error("Booking error:", error);
     }
   };
 
@@ -51,6 +68,14 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
     setEmailInput("");
     onClose();
   };
+
+  const inputClassName = `border p-2 w-full border-black rounded-lg ${
+    selectedLanguage === "ar" ? "text-right" : "text-left"
+  }`;
+
+  const containerClassName = `mb-6 text-gray-600 flex flex-col gap-x-4 items-start ${
+    selectedLanguage === "ar" ? "lg:flex-col" : ""
+  }`;
 
   return (
     <>
@@ -92,36 +117,38 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
               </h3>
               <p className="text-sm text-gray-400 mb-4">
                 <TransText
-                  en="Enter your details to book this event. You will receive a confirmation email."
+                  en="Enter your details to book this event. You will receive a confirmation email." 
                   fr="Entrez vos coordonnées pour réserver cet événement. Vous recevrez un e-mail de confirmation."
                   ar="أدخل تفاصيلك لحجز هذا الحدث. ستتلقى بريدًا إلكترونيًا للتأكيد."
                 />
               </p>
-              <div className="mb-6 text-gray-600 flex flex-col gap-x-4 items-start">
+              <div className={containerClassName} >
                 <div className="flex flex-col items-start gap-y-2 w-full">
-                  <label htmlFor="name">
+                  <label htmlFor="name" className={selectedLanguage === "ar" ? "self-end" : ""}>
                     <TransText en="Name" fr="Nom" ar="الاسم" />
                   </label>
                   <input
                     id="name"
-                    className="border p-2 w-full border-black"
+                    className={inputClassName}
                     type="text"
-                    placeholder={getPlaceholderText()}
+                    placeholder={getPlaceholder("name")}
                     value={nameInput}
                     onChange={(e) => setNameInput(e.target.value)}
+                    dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
                   />
                 </div>
                 <div className="flex flex-col items-start gap-y-2 mt-3 w-full">
-                  <label htmlFor="email">
+                  <label htmlFor="email" className={selectedLanguage === "ar" ? "self-end" : ""}>
                     <TransText en="Email" fr="Email" ar="البريد الإلكتروني" />
                   </label>
-                  <input
+                  <input 
                     id="email"
-                    className="border p-2 w-full border-black"
+                    className={inputClassName}
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder={getPlaceholder("email")}
                     value={emailInput}
                     onChange={(e) => setEmailInput(e.target.value)}
+                    dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
                   />
                 </div>
               </div>
@@ -144,13 +171,15 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
       {successMessage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-60">
           <div className="md:w-full w-[91%] max-w-md p-6 rounded-lg bg-white text-center shadow-lg">
-            <h2 className="text-lg font-semibold mb-4 text-gray-900">Booking Status</h2>
+            <h2 className="text-lg font-semibold mb-4 text-gray-900">
+              <TransText en="Booking Status" fr="État de la réservation" ar="حالة الحجز" />
+            </h2>
             <p className="text-gray-700">{successMessage}</p>
             <button
               onClick={closeSuccessModal}
               className="mt-4 px-4 py-2 bg-alpha text-black rounded-lg"
             >
-              Close
+              <TransText en="Close" fr="Fermer" ar="إغلاق" />
             </button>
           </div>
         </div>
