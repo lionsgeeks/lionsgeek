@@ -9,6 +9,21 @@ export const MyProvider = ({ children }) => {
   // const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
+
+  const storedDarkMode = localStorage.getItem("darkMode") === "true";
+
+  const [darkMode, setDarkMode] = useState(storedDarkMode);
+
+  const toggleDarkMode = () => {
+    setDarkMode((ele) => {
+      const newMode = !ele;
+      localStorage.setItem("darkMode", newMode); 
+      return newMode;
+    });
+  };
+
+
+
   const path = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -136,6 +151,8 @@ export const MyProvider = ({ children }) => {
           upcomingEvent,
           setUpcomingEvent,
           projects,
+          darkMode,
+          toggleDarkMode
         }}
       >
         {children}

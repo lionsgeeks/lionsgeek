@@ -11,6 +11,7 @@ import {
 
 export const HomePage = () => {
   const { upcomingEvent } = useAppContext();
+  
 
   return (
     <>
@@ -18,7 +19,7 @@ export const HomePage = () => {
       <WhoSection />
       <ServicesSection />
 
-      <div className="px-7 md:px-16 py-12">
+      <div className="px-7 md:px-16 py-12"  >
         <div className="overflow-hidden flex flex-col gap-10 md:gap-16 items-center justify-between">
           <div className="w-full text-center">
             <h1 className="text-lg md:text-xl">

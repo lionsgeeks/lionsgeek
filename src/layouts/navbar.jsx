@@ -8,9 +8,9 @@ import { TbBrandMessenger } from "react-icons/tb";
 import { TbMessageCircleExclamation } from "react-icons/tb";
 import { LANGUAGES } from "../languages";
 import { useTranslation } from "react-i18next";
-import { MyContext } from "../utils/contextProvider";
+import { MyContext, useAppContext } from "../utils/contextProvider";
 import { HiOutlineLanguage } from "react-icons/hi2";
-
+import { FaMoon,FaSun } from "react-icons/fa";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formationMenu, setFormationMenu] = useState(false);
@@ -18,6 +18,10 @@ const Navbar = () => {
   const [languageIsOpen, setLanguageIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+// dark Mode
+  const { darkMode, toggleDarkMode } = useAppContext();
+
 
   const toggleLanguageIsOpen = () => {
     setLanguageIsOpen(!languageIsOpen);
@@ -431,6 +435,7 @@ const Navbar = () => {
               >
                 {t("header.contact_us")}
               </Button>
+              <button onClick={toggleDarkMode} >{darkMode ? <FaSun /> : <FaMoon />}</button>
             </nav>
           </div>
         </div>
