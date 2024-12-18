@@ -39,7 +39,7 @@ export const Footer = () => {
   return (
     <>
       <footer className={`lg:px-16 px-5 py-10  ${ darkMode && "bg-[#0f0f0f]" }`}>
-        <div className={`bg-light_gray pt-10 pb-4 flex flex-col gap-10  rounded-lg lg:px-10 px-5 ${ darkMode && "bg-[#212529]" } `}>
+        <div className={` pt-10 ${ darkMode && "bg-[#0f0f0f]" } pb-4 flex flex-col gap-10  rounded-lg lg:px-10 px-5 ${ darkMode ? "bg-[#212529]" : "bg-light_gray" } `}>
           <div
             className={`flex lg:flex-row flex-col gap-10 justify-between lg:px-4 ${
               selectedLanguage == "ar" ? "lg:flex-row-reverse" : ""
