@@ -14,7 +14,7 @@ import axios from "axios";
 
 export const Footer = () => {
   const { t } = useTranslation();
-  const { selectedLanguage, URL } = useAppContext();
+  const { selectedLanguage, URL,darkMode } = useAppContext();
   const date = new Date();
   const currentYear = date.getFullYear();
   const [subscriber, setSubscriber] = useState("");
@@ -38,8 +38,8 @@ export const Footer = () => {
   };
   return (
     <>
-      <footer className=" lg:px-16 px-5 py-10">
-        <div className=" bg-light_gray pt-10 pb-4 flex flex-col gap-10  rounded-lg lg:px-10 px-5">
+      <footer className={`lg:px-16 px-5 py-10  ${ darkMode && "bg-[#0f0f0f]" }`}>
+        <div className={`bg-light_gray pt-10 pb-4 flex flex-col gap-10  rounded-lg lg:px-10 px-5 ${ darkMode && "bg-[#212529]" } `}>
           <div
             className={`flex lg:flex-row flex-col gap-10 justify-between lg:px-4 ${
               selectedLanguage == "ar" ? "lg:flex-row-reverse" : ""
@@ -59,7 +59,7 @@ export const Footer = () => {
                   loading="lazy"
                   src={Logo}
                   alt=""
-                  className="lg:w-[7vw] lg:h-[7vw] w-[20vw] h-[20vw] lg:mb-0 mb-5"
+                  className={`lg:w-[7vw] lg:h-[7vw] w-[20vw] h-[20vw]  lg:mb-0 mb-5 ${darkMode && "invert" }`}
                 />
               </div>
               <div
@@ -67,7 +67,7 @@ export const Footer = () => {
                   selectedLanguage == "ar" ? "text-end" : ""
                 }`}
               >
-                <h1 className="font-bold text-gray-600 text-[1.2rem]">
+                <h1 className={`font-bold text-gray-600  text-[1.2rem] ${darkMode && "text-white"}`}>
                   {t("footer.part1.title")}
                 </h1>
                 <div className="flex flex-col gap-1">
@@ -93,7 +93,7 @@ export const Footer = () => {
                 <h1
                   className={`font-bold text-gray-600 text-[1.2rem]  ${
                     selectedLanguage == "ar" ? "text-end" : ""
-                  }`}
+                  } ${darkMode && "text-white"}`}
                 >
                   {t("footer.part2.title")}
                 </h1>
@@ -104,7 +104,7 @@ export const Footer = () => {
                                     </div> */}
                   <div>
                     <p
-                      className={`font-medium text-gray-400 text-[0.9rem]  ${
+                      className={`font-medium text-gray-400  text-[0.9rem]  ${
                         selectedLanguage == "ar" ? "text-end" : ""
                       }`}
                     >
@@ -139,7 +139,7 @@ export const Footer = () => {
             </div>
             <div className="flex flex-col items-start gap-2 lg:w-[20%]">
               <h1
-                className={`font-bold text-gray-600 text-[1.2rem] w-full  ${
+                className={`font-bold text-gray-600 text-[1.2rem] w-full ${darkMode && "text-white"}  ${
                   selectedLanguage == "ar" ? "text-end" : ""
                 }`}
               >
@@ -190,7 +190,7 @@ export const Footer = () => {
                 <FaInstagram className="text-[1.4rem] fill-gray-400 hover:fill-pink-600 transition duration-200" />
               </a>
               <a target="blank" href="https://x.com/LionsGeek">
-                <BsTwitterX className="text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200" />
+                <BsTwitterX className={`text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200 `} />
               </a>
               <a
                 target="blank"

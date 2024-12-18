@@ -3,18 +3,18 @@ import { TransText } from "../../../components";
 import { useAppContext } from "../../../utils/contextProvider";
 
 const TrainingSection = () => {
-  const { selectedLanguage } = useAppContext();
+  const { selectedLanguage,darkMode } = useAppContext();
 
   return (
-    <div
+    <div style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff"}}
       id="trainings"
       className="flex flex-col items-center justify-between px-7 md:px-16 py-12 md:py-24"
     >
       <div className="w-full text-center pb-10">
-        <h1 className="text-lg md:text-xl">
+        <h1 className="text-lg md:text-xl" style={{ color: darkMode ? "#fff" : "#0f0f0f"}}>
           <TransText en="Trainings" fr="Formations" ar="برامج التدريب" />
         </h1>
-        <h1 className="text-3xl md:text-5xl font-bold">
+        <h1 className="text-3xl md:text-5xl font-bold" style={{ color: darkMode ? "#fff" : "#0f0f0f"}}>
           <TransText
             en="Level up your digital skills."
             fr="Développez vos compétences digitales"

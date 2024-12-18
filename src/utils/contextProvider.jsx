@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
@@ -10,17 +10,18 @@ export const MyProvider = ({ children }) => {
   // ? Galleries Data fetching
 
 
-  const storedDarkMode = localStorage.getItem("darkMode") === "true";
+const storedDarkMode = localStorage.getItem("darkMode") === "true";
 
-  const [darkMode, setDarkMode] = useState(storedDarkMode);
+const [darkMode, setDarkMode] = useState(storedDarkMode);
 
-  const toggleDarkMode = () => {
-    setDarkMode((ele) => {
-      const newMode = !ele;
-      localStorage.setItem("darkMode", newMode); 
-      return newMode;
-    });
-  };
+const toggleDarkMode = useCallback(() => {
+  setDarkMode((prevMode) => {
+    const newMode = !prevMode;
+    localStorage.setItem("darkMode", newMode);
+    return newMode;
+  });
+}, []);
+
 
 
 

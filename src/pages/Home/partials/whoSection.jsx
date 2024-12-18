@@ -3,10 +3,10 @@ import { Button, TransText } from "../../../components";
 import { useAppContext } from "../../../utils/contextProvider";
 
 const WhoSection = () => {
-  const { selectedLanguage } = useAppContext();
+  const { selectedLanguage,darkMode } = useAppContext();
 
   return (
-    <div className="px-7 md:px-16 pt-6 py-12">
+    <div className="px-7 md:px-16 pt-6 py-12" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff"}}>
       <div
         className={`flex flex-col gap-6 md:items-center justify-between py-12 md:py-24 bg-beta px-7 md:px-16 rounded-lg ${
           selectedLanguage === "ar" ? "md:flex-row-reverse" : "md:flex-row"

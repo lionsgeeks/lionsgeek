@@ -19,7 +19,7 @@ const ServiceSvg = ({ children, className, ...rest }) => {
 };
 
 const ServicesSection = () => {
-  const { selectedLanguage } = useAppContext();
+  const { selectedLanguage ,darkMode } = useAppContext();
 
   const services = [
     [
@@ -43,8 +43,11 @@ const ServicesSection = () => {
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
-        className="stroke-alpha group-hover:stroke-beta"
-      >
+        className={`${
+          darkMode
+            ? "stroke-alpha group-hover:stroke-gray-600"
+            : "stroke-alpha group-hover:stroke-beta"
+        }`}      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -66,8 +69,11 @@ const ServicesSection = () => {
       ],
       <ServiceSvg
         fill="currentColor"
-        className="fill-alpha group-hover:fill-beta"
-      >
+        className={`${
+          darkMode
+            ? "stroke-alpha group-hover:stroke-gray-600"
+            : "stroke-alpha group-hover:stroke-beta"
+        }`}      >
         <path
           fillRule="evenodd"
           d="M14.447 3.026a.75.75 0 0 1 .527.921l-4.5 16.5a.75.75 0 0 1-1.448-.394l4.5-16.5a.75.75 0 0 1 .921-.527ZM16.72 6.22a.75.75 0 0 1 1.06 0l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 1 1-1.06-1.06L21.44 12l-4.72-4.72a.75.75 0 0 1 0-1.06Zm-9.44 0a.75.75 0 0 1 0 1.06L2.56 12l4.72 4.72a.75.75 0 0 1-1.06 1.06L.97 12.53a.75.75 0 0 1 0-1.06l5.25-5.25a.75.75 0 0 1 1.06 0Z"
@@ -97,8 +103,11 @@ const ServicesSection = () => {
         fill="none"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="stroke-alpha group-hover:stroke-beta"
-      >
+        className={`${
+          darkMode
+            ? "stroke-alpha group-hover:stroke-gray-600"
+            : "stroke-alpha group-hover:stroke-beta"
+        }`}      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -127,7 +136,11 @@ const ServicesSection = () => {
         fill="none"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="stroke-alpha group-hover:stroke-beta"
+        className={`${
+          darkMode
+            ? "stroke-alpha group-hover:stroke-gray-600"
+            : "stroke-alpha group-hover:stroke-beta"
+        }`}
       >
         <path
           strokeLinecap="round"
@@ -140,13 +153,13 @@ const ServicesSection = () => {
 
   return (
     <>
-      <div className="px-7 md:px-16 py-12 md:py-24">
+      <div className={`px-7 md:px-16 py-12 md:py-24 ${  darkMode ? "bg-[#0f0f0f]" : "bg-[#ffffff]"}`} >
         <div className="overflow- flex flex-col gap-16 transition-all justify-between">
           <div className="w-full text-center">
-            <h1 className="text-lg md:text-xl">
+            <h1 className={`text-lg md:text-xl ${  darkMode ? "text-[#fff]" : "text-[#0f0f0f]"}`}  >
               <TransText fr="Services" en="Services" ar="الخدمات" />
             </h1>
-            <h1 className="text-3xl md:text-5xl font-bold">
+            <h1 className={`text-3xl md:text-5xl font-bold ${  darkMode ? "text-[#fff]" : "text-[#0f0f0f]"}`} >
               <TransText
                 fr="Nos LionsGeek Pro. "
                 en="Our lionsGeek Pro."
@@ -162,17 +175,22 @@ const ServicesSection = () => {
                   [macroService, serviceDescription, microServices, icon],
                   index
                 ) => (
-                  <div
-                    key={index}
-                    className={`flex flex-col gap-4 relative md:w-[calc(calc(100%-calc(1*2.5rem))/2)] group cursor-pointer bg-light_gray rounded-lg pt-10 pb-8 px-8 border-b-8 border-transparent hover:scale-105 duration-300 hover:border- hover:bg-transparent hover:after:w-full after:absolute after:h-2 after:w-0 after:duration-300 after:left-0 after:bottom-0 after:translate-y-full after:bg-alpha after:rounded-b-lg ${
-                      selectedLanguage === "ar" && "text-end"
-                    }`}
-                  >
+                <div
+  key={index}
+  className={`flex flex-col gap-4 relative md:w-[calc(calc(100%-calc(1*2.5rem))/2)] group cursor-pointer 
+    ${darkMode ? "bg-[#212529] hover:bg-gray-800" : "bg-gray-200 hover:bg-white"} 
+    rounded-lg pt-10 pb-8 px-8 border-b-8 border-transparent hover:scale-105 duration-300 
+    hover:after:w-full after:absolute after:h-2 after:w-0 after:duration-300 after:left-0 after:bottom-0 
+    after:translate-y-full after:bg-alpha after:rounded-b-lg ${
+      selectedLanguage === "ar" && "text-end"
+    }`}
+>
+
                     {icon}
-                    <h2 className="text-2xl font-extrabold">
+                    <h2 className={`text-2xl font-extrabold ${darkMode && "text-white"}`}>
                       <TransText {...macroService} />
                     </h2>
-                    <p>
+                    <p className={` ${darkMode && "text-white"}`}>
                       <TransText {...serviceDescription} />
                     </p>
                   </div>
