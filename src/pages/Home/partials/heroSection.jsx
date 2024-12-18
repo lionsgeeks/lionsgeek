@@ -249,7 +249,7 @@ fill="#f3f3f4" stroke="none">
         </h2>
 
         <div
-          className={`flex gap-6 flex-col md:gap-0 justify-between md:h-full ${selectedLanguage === "ar" ? "md:flex-row-reverse" : "md:flex-row"
+          className={`flex gap-6 flex-col md:gap-0 justify-between md:h-[15rem] ${selectedLanguage === "ar" ? "md:flex-row-reverse" : "md:flex-row"
             }`}
         >
           {pillars.map(({ title, description, icon }, index) => (

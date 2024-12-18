@@ -3,8 +3,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  // const URL = "http://172.28.0.135:8000/api/";
-  // const IMAGEURL = "http://172.28.0.135:8000/storage/images/";
+  // const URL = "http://172.28.0.185:8000/api/";
+  // const IMAGEURL = "http://172.28.0.185:8000/storage/images/";
   const URL = "https://backend.mylionsgeek.ma/api/";
   const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
@@ -73,7 +73,9 @@ export const MyProvider = ({ children }) => {
   const fetchEventsData = async () => {
     try {
       const response = await axios.get(`${URL}events`);
-      setEvents(response.data);
+      setTimeout(() => {
+        setEvents(response.data);
+      }, 3000);
     } catch (error) {
       console.error("Error fetching events data:", error);
     }
@@ -97,7 +99,7 @@ export const MyProvider = ({ children }) => {
     try {
       const response = await axios.get(`${URL}projects`);
       setProjects(response.data);
-      // console.log(response.data);
+      
     } catch (error) {
       console.error("Error fetching up coming Projects data:", error);
     }

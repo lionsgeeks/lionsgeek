@@ -8,9 +8,8 @@ export default function GallerySection() {
   const [count, setCount] = useState(0);
   const [onLoop, setOnLoop] = useState(true);
   const [onScroll, setOnScroll] = useState(false);
-  const { galleries, IMAGEURL, selectedLanguage } = useContext(MyContext)
-
-  // console.log(galleries);
+  const {galleries,IMAGEURL,selectedLanguage} = useContext(MyContext)
+  
 
 
 
@@ -87,7 +86,7 @@ export default function GallerySection() {
                     <TransText {...element.title} />
                   </h1>
                   <p className="text-white">
-                    <SubstringText text={element.description[selectedLanguage]} length={120} />j
+                    <SubstringText text={element.description[selectedLanguage]} length={120} />
                   </p>
                 </div>
               </div>

@@ -12,6 +12,8 @@ module.exports = {
         alpha: "#fee819",
         good: "#51b04f",
         light_gray: "#f2f2f2",
+        skeleton1: "#cacaca",
+        skeleton2: "#a3a3a3"
       },
     },
   },

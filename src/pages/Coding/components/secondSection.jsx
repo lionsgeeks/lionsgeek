@@ -61,7 +61,7 @@ export const SecondSection = () => {
       [
         <p
         key={"Front-End0"}
-          className={`flex gap-2 ${
+          className={`flex lg:flex-row flex-col gap-2 ${
             selectedLanguage == "ar" ? "flex-row-reverse" : ""
           }`}
         >
@@ -77,7 +77,7 @@ export const SecondSection = () => {
         </p>,
         <p
         key={"Front-End1"}
-          className={`flex gap-2  ${
+          className={`flex gap-2 lg:flex-row flex-col  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
         >
@@ -92,7 +92,7 @@ export const SecondSection = () => {
         </p>,
         <p
         key={"Front-End2"}
-          className={`flex gap-2  ${
+          className={`flex gap-2 lg:flex-row flex-col  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
         >
@@ -107,7 +107,7 @@ export const SecondSection = () => {
         </p>,
         <p
         key={"Front-End3"}
-          className={`flex gap-2  ${
+          className={`flex gap-2 lg:flex-row flex-col  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
         >
@@ -128,7 +128,7 @@ export const SecondSection = () => {
       [
         <p
         key={"Back-End0"}
-          className={`flex gap-2 ${
+          className={`flex gap-2 lg:flex-row flex-col ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
         >
@@ -150,7 +150,7 @@ export const SecondSection = () => {
       [
         <p
         key={"Back-End0"}
-          className={`flex gap-2 ${
+          className={`flex gap-2 lg:flex-row flex-col ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
         >
@@ -165,7 +165,7 @@ export const SecondSection = () => {
         </p>,
         <p
         key={"Back-End1"}
-          className={`flex gap-2  ${
+          className={`flex gap-2 lg:flex-row flex-col  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
         >
@@ -186,7 +186,7 @@ export const SecondSection = () => {
       [
         <p
         key={0}
-          className={`flex gap-2  ${
+          className={`flex gap-2 lg:flex-row flex-col  ${
             selectedLanguage == "ar" ? "flex-row-reverse " : ""
           }`}
         >
@@ -223,7 +223,7 @@ export const SecondSection = () => {
         </h1>
       </div>
       <div
-        className={`flex gap-2 flex-col lg:flex-row ${
+        className={`flex gap-2 lg:flex-row flex-col flex-col lg:flex-row ${
           selectedLanguage === "ar" ? "text-right lg:flex-row-reverse" : ""
         }`}
       >
