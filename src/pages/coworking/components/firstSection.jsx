@@ -3,10 +3,11 @@ import herocowork from "../../../assets/images/Coworking-pana.png";
 import { Button } from "../../../components";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { MyContext } from "../../../utils/contextProvider";
+import { MyContext, useAppContext } from "../../../utils/contextProvider";
 import gsap from "gsap";
 
 export const FirstSectionCoworking = () => {
+  const {darkMode}  = useAppContext();
   const { t } = useTranslation();
   const { selectedLanguage, setSelectedLanguage } = useContext(MyContext);
 
@@ -28,7 +29,7 @@ export const FirstSectionCoworking = () => {
 
   return (
     <>
-      <div className="px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden">
+      <div className={`px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden ${darkMode ? "bg-[#0f0f0f]" : ""} `}>
         <div
           className={`w-full flex flex-col-reverse md:flex-row lg:flex-row gap-2  ${
             selectedLanguage == "ar" ? "lg:flex-row-reverse" : ""
@@ -38,14 +39,14 @@ export const FirstSectionCoworking = () => {
             ref={leftside}
             className="w-full md:w-1/2 lg:w-1/2 px-7 flex flex-col md:gap-2 gap-5 "
           >
-            <h1 className="text-3xl text-center md:text-3xl md:text-start lg:text-6xl md:pb-0 py-5 font-bold">
+            <h1 className={`text-3xl text-center md:text-3xl md:text-start lg:text-6xl md:pb-0 py-5 font-bold ${darkMode ? "text-white" : ""}`}>
               {t("main.coworking.section1.title.first")}{" "}
               <span className="text-alpha selection:bg-alpha selection:text-black">
                 {t("main.coworking.section1.title.second")}
               </span>{" "}
               {t("main.coworking.section1.title.third")}
             </h1>
-            <p className="w-full md:text-sm lg:w-2/3  py-5 ">
+            <p className={`w-full md:text-sm lg:w-2/3  py-5 ${darkMode ? "text-white" : ""}`}>
               {t("main.coworking.section1.description")}
             </p>
             <Link to={"/coworking/form"}>
