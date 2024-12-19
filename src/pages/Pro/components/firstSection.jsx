@@ -9,7 +9,7 @@ import { TransText } from "../../../components";
 import { Link } from "react-router-dom";
 export const FirstSectionPro = () => {
   const { t } = useTranslation();
-  const { projects, selectedLanguage, setSelectedLanguage, IMAGEURL } =
+  const { projects, selectedLanguage, setSelectedLanguage, IMAGEURL ,darkMode } =
     useAppContext();
   const services = [
     {
@@ -108,34 +108,35 @@ export const FirstSectionPro = () => {
 
   return (
     <>
-      <div className="w-full lg:px-16">
+      <div className="w-full lg:px-16" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff1f" , } } >
         {/* hero section */}
-        <div className="flex flex-col gap-4 w-full items-center py-8  self-center ">
-          <h1 className="lg:text-5xl text-3xl font-bold">
+        <div className="flex flex-col gap-4 w-full items-center py-8  self-center " >
+          <h1 className="lg:text-5xl text-3xl font-bold" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
             {t("main.lionsgeekpro.firstsection.first-title")}
           </h1>
-          <p className="lg:text-xl py-2 font-normal lg:w-[50%] w-[95%] text-center ">
+          <p className="lg:text-xl py-2 font-normal lg:w-[50%] w-[95%] text-center " style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
             {t("main.lionsgeekpro.header.title")}
           </p>
         </div>
 
-        <div className="w-full  px-3  flex justify-between flex-wrap gap-3">
+        <div className="w-full  px-3  flex justify-between flex-wrap gap-3" >
           {services.map((ele, idx) => (
             <div
               key={idx}
-              className={`lg:w-[48%] w-full relative border-2 py-5  ${
+              className={`lg:w-[48%] w-full relative border   py-5  ${
                 selectedLanguage === "ar" && "text-end"
               }  overflow-hidden rounded-xl`}
+              
             >
               <img
               loading="lazy"
-                className="absolute top-0 w-full h-full  object-cover -z-20 opacity-90"
-                src={ele.photo}
+              className={`absolute top-0 w-full h-full  object-cover ${darkMode ? 'opacity-25' : '-z-10'}`}
+              src={ele.photo}
                 alt=""
               />
-              <div className="absolute top-0 -z-10 bg-black/60 w-full h-full"></div>
+              <div className="absolute top-0 -z-10 bg-black/60 w-full h-full" ></div>
 
-              <div className="w-full flex items-center justify-between p-8">
+              <div className="w-full flex items-center justify-between p-8" >
                 <div className="bg-[#e7e7e8]  rounded-lg p-3 text-alpha">
                   {ele.icon}
                 </div>
@@ -144,7 +145,7 @@ export const FirstSectionPro = () => {
                 </h1>
               </div>
 
-              <div className="py-5 px-8">
+              <div className="py-5 px-8" >
                 <h1 className="text-3xl text-white font-bold">
                   {t(ele.header)}
                 </h1>
@@ -188,20 +189,20 @@ export const FirstSectionPro = () => {
         </div>
 
         <div className="text-center py-5 mt-5">
-          <Link className="bg-alpha py-3 md:px-7 px-3 rounded-lg" to={"/contact-us"}>
+          <Link className="bg-alpha py-3 px-7 rounded-lg" to={"/contact-us"}>
             <TransText en="Contact Us" fr="Contactez-nous" ar="اتصل بنا" />
           </Link>
         </div>
 
         <div className="py-3 mt-3 text-center ">
-          <h1 className="lg:text-5xl text-3xl font-bold">
+          <h1 className="lg:text-5xl text-3xl font-bold" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
             <TransText
               en="Those Who Trust in Us"
               fr="Ceux Qui Nous Font Confiance"
               ar="من يثقون بنا"
             />
           </h1>
-          <p className="lg:text-l lg:px-0 px-4 py-3 mt-2 font-normal">
+          <p className="lg:text-l lg:px-0 px-4 py-3 mt-2 font-normal" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
             <TransText
               en="We are honored to work alongside organizations that share our values, striving for success together."
               fr="Nous sommes honorés de collaborer avec des organisations partageant nos valeurs, œuvrant ensemble vers la réussite."

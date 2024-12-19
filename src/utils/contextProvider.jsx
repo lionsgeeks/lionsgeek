@@ -43,7 +43,7 @@ const toggleDarkMode = useCallback(() => {
         setGalleries(response.data);
       }, 7000);
     } catch (error) {
-      window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
+      // window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
       console.error("Error fetching galleries data:", error);
     }
   };

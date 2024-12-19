@@ -4,7 +4,7 @@ import { useAppContext } from "../../../utils/contextProvider";
 import { AiFillPicture } from "react-icons/ai";
 
 export const BlogHeroSection = () => {
-  const { blogs, IMAGEURL, selectedLanguage, formatDate } = useAppContext();
+  const { blogs, IMAGEURL, selectedLanguage, formatDate , darkMode } = useAppContext();
 
   return (
     <>
@@ -18,12 +18,12 @@ export const BlogHeroSection = () => {
           />
 
           <div className="flex flex-col lg:w-[40%] gap-8 py-4 lg:px-8 ">
-            <p className="text-beta/50 ">{formatDate(blogs[0]?.created_at)}</p>
-            <h1 className="font-bold lg:text-3xl md:text-2xl text-xl leading-normal">
+            <p className="text-beta/50 " style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }>{formatDate(blogs[0]?.created_at)}</p>
+            <h1 className="font-bold lg:text-3xl md:text-2xl text-xl leading-normal"  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }>
               {blogs[0]?.title[selectedLanguage]}
             </h1>
 
-            <div
+            <div 
               dangerouslySetInnerHTML={{
                 __html:
                   blogs[0]?.description[selectedLanguage].length > 150
@@ -31,6 +31,7 @@ export const BlogHeroSection = () => {
                       "..."
                     : blogs[0]?.description[selectedLanguage],
               }}
+              
             />
             <div className=" flex justify-center md:justify-start items-center">
               <Link to={`/blog/${blogs[0]?.id}`}>
