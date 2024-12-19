@@ -241,7 +241,7 @@ export const SecondSection = () => {
         </div>
         <div
           ref={rightside}
-          className="lg:flex lg:flex-col hidden w-[10%] gap-2"
+          className={`lg:flex lg:flex-col hidden w-[10%] gap-2 ${darkMode && "invert"}`}
           
         >
           {programe[hint][2].map((element, index) => (
