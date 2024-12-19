@@ -2,8 +2,11 @@ import React from "react";
 import ilyass from "../../../assets/images/testimonial/ilyass.jpg";
 import { RiDoubleQuotesR } from "react-icons/ri";
 import { TransText } from "../../../components";
+import { useAppContext } from "../../../utils/contextProvider";
 
 export const FifthSection = () => {
+    const {darkMode } = useAppContext();
+  
   const testimoniels = [
     {
       name: "Ilyasse Elyatime",
@@ -44,12 +47,12 @@ export const FifthSection = () => {
   ];
 
   return (
-    <div className=" flex flex-col gap-6 px-16 py-8 ">
+    <div className=" flex flex-col gap-6 px-16 py-8 " style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" , } }>
       <div className="w-full text-center pb-10">
-        <h1 className="text-xl">
+        <h1 className="text-xl" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
           <TransText fr="Témoignages" ar="شهادات" en="Testimonials" />
         </h1>
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-5xl font-bold" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
           <TransText
             fr=" Les gens qui nous aiment déjà"
             ar="الأشخاص الذين يحبوننا بالفعل"
@@ -62,7 +65,10 @@ export const FifthSection = () => {
           <div
             key={index}
             className="lg:w-[30%] flex flex-col gap-2 relative overflow-hidden bg-white p-8 border-2 border-gray-100 rounded-lg"
-          >
+            style={{ backgroundColor: darkMode ? "#212529" : "#ffffff", border: darkMode ? "none" : "2px solid #f3f4f6", 
+            }}
+
+   >
             <div className="flex gap-3 items-center">
               <img loading="lazy" className="rounded-full w-10" src={element.image} alt="" />
               <p className="font-bold">{element.name}</p>
@@ -70,7 +76,7 @@ export const FifthSection = () => {
             <div className="absolute -top-4 -right-4 bg-alpha/70 p-5 object-cover rounded-full opacity-80">
               <RiDoubleQuotesR className="text-5xl" />
             </div>
-            <p>{element.description}</p>
+            <p style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>{element.description}</p>
           </div>
         ))}
       </div>

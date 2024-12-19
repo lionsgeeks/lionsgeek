@@ -13,7 +13,7 @@ import axios from "axios";
 export const ContactUs = () => {
 
     const { t } = useTranslation()
-    const { selectedLanguage, URL } = useAppContext();
+    const { selectedLanguage, URL, darkMode } = useAppContext();
     const womenRef = useRef(null);
 
     useEffect(() => {
@@ -81,36 +81,46 @@ export const ContactUs = () => {
 
     return (
         <>
-            <div className="py-[12vh] flex flex-col justify-center lg:px-16 px-5 mt-16 overflow-x-hidden">
+            <div className={`py-[12vh] flex flex-col justify-center lg:px-16 px-5 mt-16 overflow-x-hidden ${darkMode ? "bg-[#0f0f0f]" : "bg-white"}`}>
                 <div className={`flex lg:flex-row flex-col justify-between  gap-8 ${selectedLanguage === 'ar' ? 'lg:flex-row-reverse' : ''}`}>
                     <div className="lg:w-[50%] flex flex-col gap-6  px-3">
                         <div className="tessst opacity-0 translate-y-12 [clip-path: polygon((0 100%, 100% 100%, 100% 100%, 0% 100%)]">
-                            <h1 className={`font-bold text-[2.1rem] ${selectedLanguage === 'ar' ? 'text-end' : ''}`}>{t('main.contactUs.title1')}</h1>
-                            <h1 className={`font-bold text-[2.1rem] ${selectedLanguage === 'ar' ? 'text-end' : ''}`}>{t('main.contactUs.title2')}</h1>
+                            <h1 className={`font-bold text-[2.1rem] ${darkMode ? "text-white" : "text-black"} ${selectedLanguage === 'ar' ? 'text-end' : ''}`}>{t('main.contactUs.title1')}</h1>
+                            <h1 className={`font-bold text-[2.1rem] ${darkMode ? "text-white" : "text-black"} ${selectedLanguage === 'ar' ? 'text-end' : ''}`}>{t('main.contactUs.title2')}</h1>
                         </div>
                         <div className='flex flex-col gap-2 tessst opacity-0 translate-y-12 [clip-path: polygon((0 100%, 100% 100%, 100% 100%, 0% 100%)]'>
-                            <p className={`${selectedLanguage === 'ar' ? 'text-end' : ''}`}>{t('main.contactUs.paragraphe1')}</p>
-                            <p className={`${selectedLanguage === 'ar' ? 'text-end' : 'w-4/5'} `}>{t('main.contactUs.paragraphe2')}</p>
+                            <p className={`${darkMode ? "text-white" : "text-black"} ${selectedLanguage === 'ar' ? 'text-end' : ''}`}>{t('main.contactUs.paragraphe1')}</p>
+                            <p className={`${darkMode ? "text-white" : "text-black"} ${selectedLanguage === 'ar' ? 'text-end' : 'w-4/5'} `}>{t('main.contactUs.paragraphe2')}</p>
                         </div>
                         <div className={`flex flex-col gap-1 text-gray-500 font-thin text-[0.9rem] ${selectedLanguage === 'ar' ? 'items-end' : ''}`}>
                             <div className={`flex items-center ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''} gap-2 tessst opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)]`}>
-                                <IoLocationOutline />
-                                <p>{t('main.contactUs.address')}</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4" style={{stroke: darkMode ? "#fee819" : "#0f0f0f" }} 
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                                </svg>
+                                <p className={`${darkMode ? "text-white" : "text-black"}`}>{t('main.contactUs.address')}</p>
                             </div>
                             <div className={`flex items-center ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''} gap-2 tessst opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)]`}>
-                                <IoPhonePortraitOutline />
-                                <p>+212 522 662 660</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4" style={{stroke: darkMode ? "#fee819" : "#0f0f0f" }} 
+ >
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+</svg>
+                                <p className={`${darkMode ? "text-white" : "text-black"}`}>+212 522 662 660</p>
                             </div>
                             <div className={`flex items-center ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''} gap-2 tessst opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)]`}>
-                                <MdOutlineMailOutline />
-                                <p>contact@lionsgeek.ma</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4"style={{stroke: darkMode ? "#fee819" : "#0f0f0f" }} 
+                            >
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+</svg>
+                                <p className={`${darkMode ? "text-white" : "text-black"}`}>contact@lionsgeek.ma</p>
                             </div>
                         </div>
                     </div>
 
                     <form onSubmit={onFormSubmit} className={`lg:w-[40%] relative py-6 px-7 shadow-md  border border-white/55 rounded-lg flex  ${selectedLanguage === 'ar' ? 'items-end' : 'items-start'} flex-col gap-6 bg-200/75`}>
-                        <div ref={womenRef} className={`absolute w-[17rem] lg:flex hidden  -z-10  top-0 ${selectedLanguage === 'ar' ? 'left-full ' : 'right-full'}`}>
-                            <img loading="lazy" className={`  object-cover  ${selectedLanguage == 'ar' && 'transform scale-x-[-1]'} `} src={require("../../assets/images/women_pointing.png")} alt="" />
+                        <div ref={womenRef} className={`absolute w-[17rem] lg:flex hidden  z-10  top-0 ${selectedLanguage === 'ar' ? 'left-full ' : 'right-full'}`}>
+                            <img loading="lazy" className={`  object-cover   ${selectedLanguage == 'ar' && 'transform scale-x-[-1]'} `} src={require("../../assets/images/women_pointing.png")} alt="" />
 
                         </div>
                         <div className="input opacity-0 translate-y-12 [clip-path: polygon(0 100%, 95% 100%, 100% 100%, 0% 100%)] relative h-11 w-full min-w-[200px]">

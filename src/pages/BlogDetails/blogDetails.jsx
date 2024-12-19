@@ -10,7 +10,7 @@ import 'react-quill/dist/quill.snow.css';
 
 export const BlogDetailPage = () => {
     const { id } = useParams();
-    const { blogs, IMAGEURL, selectedLanguage } = useAppContext();
+    const { blogs, IMAGEURL, selectedLanguage , darkMode} = useAppContext();
 
     const [currentBlog, setCurrentBlog] = useState();
 
@@ -28,17 +28,17 @@ export const BlogDetailPage = () => {
         <>
             {
                 currentBlog &&
-                <div className="p-16">
+                <div className="p-16" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" , } } >
                     <div className="">
                         <img loading="lazy" className="w-full h-96 rounded-2xl  object-cover object-center -z-2" src={IMAGEURL + currentBlog.image} alt="" />
                     </div>
 
-                    <h1 className="font-extrabold text-3xl py-16">{currentBlog.title[selectedLanguage]}</h1>
+                    <h1 className="font-extrabold text-3xl py-16"  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }>{currentBlog.title[selectedLanguage]}</h1>
                     <div className="flex ">
                         <div className="pe-14 w-3/4">
 
                             <div className='view ql-editor reset-tw'>
-                                <div dangerouslySetInnerHTML={{ __html: currentBlog.description[selectedLanguage] }} />
+                                <div dangerouslySetInnerHTML={{ __html: currentBlog.description[selectedLanguage] }}  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }/>
                             </div>
                         </div>
 
@@ -51,9 +51,9 @@ export const BlogDetailPage = () => {
 
                                         <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={IMAGEURL + blog.image} alt="" />
                                         <div className="flex flex-col gap-3 overflow-hidden">
-                                            <h1 className="font-extrabold text-sm">{blog.title[selectedLanguage]}</h1>
+                                            <h1 className="font-extrabold text-sm"  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }>{blog.title[selectedLanguage]}</h1>
                                             
-                                            <div dangerouslySetInnerHTML={{ __html: blog.description[selectedLanguage].length > 70 ? blog.description[selectedLanguage].slice(0, 70) + '...' : blog.description[selectedLanguage] }} />
+                                            <div dangerouslySetInnerHTML={{ __html: blog.description[selectedLanguage].length > 70 ? blog.description[selectedLanguage].slice(0, 70) + '...' : blog.description[selectedLanguage] }}  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }/>
                                         </div>
                                     </Link>
                                 ))

@@ -40,7 +40,7 @@ export const MyProvider = ({ children }) => {
       const response = await axios.get(`${URL}galleries`);
       setGalleries(response.data);
     } catch (error) {
-      window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
+      // window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
       console.error("Error fetching galleries data:", error);
     }
   };

@@ -11,7 +11,7 @@ import { TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
 gsap.registerPlugin(ScrollTrigger);
 export const ThirdSection = () => {
-  const { selectedLanguage } = useContext(MyContext);
+  const { selectedLanguage , darkMode } = useContext(MyContext);
   useGSAP(() => {
     let ctx = gsap.from(".animateSection", {
       stagger: 0.7,
@@ -91,12 +91,15 @@ export const ThirdSection = () => {
     },
   ];
   return (
-    <div className="lg:px-16 px-7 py-16 flex flex-col gap-8 overflow-hidden">
+    <div className="lg:px-16 px-7 py-16 flex flex-col gap-8 overflow-hidden" style={{ backgroundColor: darkMode ? "#0f0f0f" :  undefined  ,} }
+>
       <div className="w-full text-center pb-10">
-        <h1 className="text-xl">
+        <h1 className="text-xl" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
+        >
           <TransText ar="رحلتنا" fr="Notre parcours" en="Our Journey" />
         </h1>
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-5xl font-bold" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
+        >
           <TransText
             fr="Le chemin vers LionsGeek"
             ar="LionsGeek الطريق إلى "
@@ -113,6 +116,9 @@ export const ThirdSection = () => {
           <div
             key={index}
             className={`bg-gray-50 p-7 flex flex-col lg:w-[30%] w-[90%] gap-4 rounded-lg relative`}
+            style={{ backgroundColor: darkMode ? "#212529" : undefined ,
+          } }
+
           >
             <svg
               className={`hidden lg:flex animateSection absolute inset-0 top-1/2 -z-20 -translate-y-1/2 ${
@@ -125,7 +131,7 @@ export const ThirdSection = () => {
               <path
                 id="path"
                 fill="none"
-                stroke="#333"
+                stroke={darkMode ? "#fee819"  : "#333"} 
                 strokeMiterlimit="10"
                 strokeWidth="2"
                 d="M0,75 L200,75"
@@ -140,6 +146,7 @@ export const ThirdSection = () => {
               className={`font-bold text-2xl flex gap-2 ${
                 selectedLanguage === "ar" ? "flex-row-reverse" : ""
               } `}
+              style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
             >
               <span className="text-alpha">
                 {selectedLanguage === "ar"
@@ -148,7 +155,8 @@ export const ThirdSection = () => {
               </span>{" "}
               {TransText(title)}
             </h1>
-            <p className={`${selectedLanguage === "ar" ? "text-right" : ""}`}>
+            <p className={`${selectedLanguage === "ar" ? "text-right" : ""}`} style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
+            >
               {TransText(description)}
             </p>
           </div>
