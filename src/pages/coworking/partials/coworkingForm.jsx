@@ -6,7 +6,7 @@ import Modal from "../../../components/Modal";
 import LoadingPage from "../../Loading";
 
 const ApplicationForm = () => {
-  const { URL, selectedLanguage } = useAppContext();
+  const { URL, selectedLanguage , darkMode } = useAppContext();
   const [cv, setCV] = useState(null);
   const [projPresentation, setProjectPresentation] = useState(null);
 
@@ -274,7 +274,7 @@ const ApplicationForm = () => {
 
   return (
     <div
-      className="px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden"
+      className={`px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden ${darkMode ? "bg-[#0f0f0f]" : ""}`}
       dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
     >
 
@@ -282,17 +282,17 @@ const ApplicationForm = () => {
         !sending ?
           <form
             onSubmit={handleSubmit}
-            className="p-6 bg-gray-50/50 rounded-lg shadow-md mb-4"
+            className={`p-6  rounded-lg shadow-md mb-4 ${darkMode ? "bg-[#212529]" : "bg-gray-50/50"}  `} 
           >
-            <h1 className="text-2xl font-bold mb-4">Application Form</h1>
+            <h1 className={`text-2xl font-bold mb-4 ${darkMode ? "text-white" : ""}`}>Application Form</h1>
 
-            <h2 className="underline font-semibold mb-2 text-lg">
+            <h2 className={`underline font-semibold mb-2 text-lg ${darkMode ? "text-white" : ""}`}>
               Personal Information
             </h2>
             <div className="flex items-center flex-col lg:flex-row justify-around gap-2">
               <div className="mb-4 w-full">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                   htmlFor="full_name"
                 >
                   <TransText en="Full Name" fr="Nom Complet" ar="الاسم الكامل" />
@@ -301,16 +301,20 @@ const ApplicationForm = () => {
                 <input
                   type="text"
                   name="full_name"
+                  placeholder={
+                    selectedLanguage === "en" ? "Enter Your Full Name" :
+                    selectedLanguage === "fr" ? "Entrez votre nom complet" :
+                    "أدخل اسمك الكامل"}
                   value={formInfo.full_name}
                   onChange={handleChange}
-                  className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
+                  className={`shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta `}
                   required
                 />
               </div>
 
               <div className="mb-4 w-full">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                   htmlFor="email"
                 >
                   <TransText en="Email" fr="Email" ar="البريد الإلكتروني" />
@@ -319,6 +323,10 @@ const ApplicationForm = () => {
                 <input
                   type="email"
                   name="email"
+                  placeholder={
+                    selectedLanguage === "en" ? "Enter Your Email" :
+                    selectedLanguage === "fr" ? "Entrez votre email" :
+                    "أدخل بريدك الإلكتروني  "}
                   value={formInfo.email}
                   onChange={handleChange}
                   className="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-beta"
@@ -330,7 +338,7 @@ const ApplicationForm = () => {
             <div className="flex items-center flex-col lg:flex-row justify-around gap-2">
               <div className="mb-4 w-full">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                   htmlFor="phone"
                 >
                   <TransText en="Phone" fr="Téléphone" ar="الهاتف" />
@@ -339,6 +347,10 @@ const ApplicationForm = () => {
                 <input
                   type="text"
                   name="phone"
+                  placeholder={
+                    selectedLanguage === "en" ? "Enter Your Phone" :
+                    selectedLanguage === "fr" ? "Entrez votre téléphone" :
+                    "أدخل رقم هاتفك"}
                   value={formInfo.phone}
                   onChange={handleChange}
                   className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
@@ -348,7 +360,7 @@ const ApplicationForm = () => {
 
               <div className="mb-4 w-full">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                   htmlFor="birthday"
                 >
                   <TransText
@@ -372,7 +384,7 @@ const ApplicationForm = () => {
             <div className="flex items-center flex-col lg:flex-row justify-around gap-2">
               <div className="mb-4 w-full">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                   htmlFor="formation"
                 >
                   <TransText
@@ -385,6 +397,10 @@ const ApplicationForm = () => {
                 <input
                   type="text"
                   name="formation"
+                  placeholder={
+                    selectedLanguage === "en" ? "Education/Professional" :
+                    selectedLanguage === "fr" ? "Formation/Expérience" :
+                    "التعليم/الخبرة المهنية"}
                   value={formInfo.formation}
                   onChange={handleChange}
                   className="shadow border rounded w-full p-3 text-gray-700 fo focus:outline-beta"
@@ -393,8 +409,9 @@ const ApplicationForm = () => {
               </div>
 
               <div className="mb-6 w-full">
-                <p className="mb-3 text-sm font-bold">
+                <p className={`mb-3 text-sm font-bold ${darkMode ? "text-white" : ""}`}>
                   <TransText
+                    className = {`${darkMode ? "text-white" : ""}`}
                     en="Upload CV"
                     fr="Télécharger le CV"
                     ar="رفع السيرة الذاتية"
@@ -423,6 +440,7 @@ const ApplicationForm = () => {
 
                   <span className="text-sm font-medium">
                     <TransText
+                    className = {`${darkMode ? "text-white" : ""}`}
                       en="Upload CV"
                       fr="Télécharger le CV"
                       ar="رفع السيرة الذاتية"
@@ -442,7 +460,7 @@ const ApplicationForm = () => {
             </div>
 
             <div className="flex flex-col mb-6 lg:w-[48%]">
-              <label htmlFor="gender" className="text-gray-700">
+              <label htmlFor="gender" className={`${darkMode ? "text-white" : "text-gray-700"}`}>
               <TransText en="Gender" fr="Genre" ar="الجنس" />:
               <Required />
               </label>
@@ -452,10 +470,12 @@ const ApplicationForm = () => {
                 onChange={(e) => {
                   setGender(e.target.value);
                 }}
-                className="w-full rounded border border-gray-300 p-[10px]"
+                className={`w-full rounded border border-gray-300 p-[10px] `}
                 required
               >
-                <option value="" disabled selected>Select Gender</option>
+                <option value="" disabled selected>                  
+                  <TransText en="Select Gender" fr="Sélectionnez le sexe" ar="حدد الجنس" />
+                </option>
                 <option value="male">
                   <TransText en="Male" fr="Homme" ar="ذكر" />
                 </option>
@@ -466,7 +486,7 @@ const ApplicationForm = () => {
             </div>
 
             {/* Project Informtation */}
-            <h1 className="underline font-semibold mb-2 text-lg">
+            <h1 className={`${darkMode && "text-white"} underline font-semibold mb-2 text-lg`}>
               <TransText
                 en="Project Information"
                 fr="Informations sur le projet"
@@ -475,7 +495,7 @@ const ApplicationForm = () => {
             </h1>
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                 htmlFor="proj_name"
               >
                 <TransText en="Project Name" fr="Nom du Project" ar="اسم المشروع" />{" "}
@@ -484,6 +504,10 @@ const ApplicationForm = () => {
               <input
                 type="text"
                 name="proj_name"
+                placeholder={
+                  selectedLanguage === "en" ? "Enter Project Name" :
+                  selectedLanguage === "fr" ? "Entrez le nom du projet" :
+                  "أدخل اسم المشروع"}
                 value={formInfo.proj_name}
                 onChange={handleChange}
                 className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
@@ -493,7 +517,7 @@ const ApplicationForm = () => {
 
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                 htmlFor="proj_desc"
               >
                 <TransText
@@ -505,6 +529,10 @@ const ApplicationForm = () => {
               </label>
               <textarea
                 name="proj_desc"
+                placeholder={
+                  selectedLanguage === "en" ? "Enter Project Description" :
+                  selectedLanguage === "fr" ? "Entrez le description du projet" :
+                  "أدخل وصف المشروع"}
                 value={formInfo.proj_desc}
                 onChange={handleChange}
                 className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
@@ -513,7 +541,7 @@ const ApplicationForm = () => {
             </div>
 
             <fieldset className="mb-4">
-              <legend className="block text-gray-700 text-sm font-bold mb-2">
+              <legend className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}>
                 <TransText
                   en="Project's domain of activity"
                   fr="Domaine d'activité du projet"
@@ -532,7 +560,7 @@ const ApplicationForm = () => {
                     }}
                     className="form-checkbox"
                   />
-                  <span className="m-2">{option.label}</span>
+                  <span className={`m-2 ${darkMode ? "text-white" : ""}`}>{option.label}</span>
                 </label>
               ))}
 
@@ -550,7 +578,7 @@ const ApplicationForm = () => {
 
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                 htmlFor="proj_plan"
               >
                 <TransText
@@ -563,6 +591,10 @@ const ApplicationForm = () => {
               </label>
               <textarea
                 name="proj_plan"
+                placeholder={
+                  selectedLanguage === "en" ? "Enter Action Plan" :
+                  selectedLanguage === "fr" ? "Entrez plan d'actions" :
+                  "أدخل خطة العمل"}
                 value={formInfo.proj_plan}
                 onChange={handleChange}
                 className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
@@ -571,7 +603,7 @@ const ApplicationForm = () => {
             </div>
 
             <div className="mb-6 w-full">
-              <p className="mb-3 text-sm font-bold">
+              <p className={`${darkMode && "text-white"} mb-3 text-sm font-bold`}>
                 <TransText
                   en="Upload Project Presentation"
                   fr="Télécharger la Présentation du Projet"
@@ -620,7 +652,7 @@ const ApplicationForm = () => {
 
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}
                 htmlFor="proj_plan"
               >
                 <TransText
@@ -631,6 +663,10 @@ const ApplicationForm = () => {
               </label>
               <textarea
                 name="prev_proj"
+                placeholder={
+                  selectedLanguage === "en" ? "Enter Previous Similar Project" :
+                  selectedLanguage === "fr" ? "Entrez Projet Précédent Similaire" :
+                  "أدخل مشروع مشابه سابق"}
                 value={formInfo.prev_proj}
                 onChange={handleChange}
                 className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
@@ -638,7 +674,7 @@ const ApplicationForm = () => {
             </div>
 
             <fieldset className="mb-4">
-              <legend className="block text-gray-700 text-sm font-bold mb-2">
+              <legend className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}>
                 <TransText
                   ar="كيف سمعت عن فرصة السكن التعاوني في عين السبع"
                   fr="Comment avez-vous entendu parler de l' opportunité pour l'espace de coworking à Ain Sbaa"
@@ -657,7 +693,7 @@ const ApplicationForm = () => {
                     }}
                     className="form-checkbox"
                   />
-                  <span className="m-2">{option.label}</span>
+                  <span className={`m-2 ${darkMode ? "text-white" : ""} `}>{option.label}</span>
                 </label>
               ))}
 
@@ -674,15 +710,15 @@ const ApplicationForm = () => {
             </fieldset>
 
             <fieldset className="mb-4">
-              <legend className="block text-gray-700 text-sm font-bold mb-2">
+              <legend className={`block text-sm font-bold mb-2 ${darkMode ? "text-white" : "text-gray-700"}`}>
                 <TransText ar="احتياجاتك" en="Needs" fr="Besoins" />
               </legend>
               {workspaceOptions.map((option) => (
-                <div className="m-2" key={option.value}>
-                  <label>
+                <div className="m-2"  key={option.value}>
+                  <label className={`${darkMode ? "text-white" : ""}`}>
                     <input
                       type="radio"
-                      className="mr-1"
+                      className={`mr-1 `}
                       value={option.value}
                       checked={needs === option.value}
                       onChange={(e) => {
@@ -700,7 +736,7 @@ const ApplicationForm = () => {
                   value={otherNeeds}
                   required
                   onChange={(e) => setOtherNeeds(e.target.value)}
-                  className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
+                  className={`shadow border rounded w-full py-2 px-3  fo focus:outline-beta ${darkMode ? "text-white" : "text-gray-700"}`}
                 />
               )}
             </fieldset>
@@ -708,7 +744,7 @@ const ApplicationForm = () => {
             <button
               disabled={!isFormComplete}
               className={`w-full py-3 rounded transition-all ${isFormComplete
-                ? "bg-black text-white "
+                ? ` ${darkMode ? "bg-alpha " : "bg-black text-white"} `
                 : "bg-gray-300 text-black/60"
                 }`}
               type="submit"

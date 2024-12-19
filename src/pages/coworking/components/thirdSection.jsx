@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import coworkvideo from "../../../assets/videos/videoplayback.mp4";
 import { useTranslation } from "react-i18next";
+import { useAppContext } from "../../../utils/contextProvider";
 export const ThirdSectionCoworking = () => {
+  const {darkMode}  = useAppContext();
   const { t } = useTranslation();
   const videoPlay = useRef(null);
   useEffect(() => {
@@ -16,11 +18,11 @@ export const ThirdSectionCoworking = () => {
     };
   }, []);
   return (
-    <div className="p-5 lg:px-16 py-10 flex flex-col gap-5 text-center">
-      <h1 className="text-lg lg:text-xl ">
+    <div className={`${darkMode ? "bg-[#0f0f0f]" : ""} p-5 lg:px-16 py-10 flex flex-col gap-5 text-center`}>
+      <h1 className={` ${darkMode ? "text-white" : ""} text-lg lg:text-xl `}>
         {t("main.coworking.section3.title.first")}
       </h1>
-      <h1 className="text-2xl lg:text-5xl font-bold">
+      <h1 className={` ${darkMode ? "text-white" : ""} text-2xl lg:text-5xl font-bold`}>
         {t("main.coworking.section3.title.second")}
       </h1>
       <div className="w-full  flex justify-center ">

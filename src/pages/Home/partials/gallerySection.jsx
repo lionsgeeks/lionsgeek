@@ -10,8 +10,9 @@ export default function GallerySection() {
   const [count, setCount] = useState(0);
   const [onLoop, setOnLoop] = useState(true);
   const [onScroll, setOnScroll] = useState(false);
-  const { galleries, IMAGEURL, selectedLanguage } = useContext(MyContext)
+  const { galleries, IMAGEURL, selectedLanguage,darkMode } = useContext(MyContext)
 
+  // console.log(galleries);
 
 
 
@@ -50,14 +51,14 @@ export default function GallerySection() {
     }
   }, [onLoop, count]);
 
-  return (
-    <div className="px-7 md:px-16 py-12 md:py-24">
+  return galleries ? (
+    <div className="px-7 md:px-16 py-12 md:py-24" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff"}}>
       <div className="overflow-hidden flex flex-col gap-16 transition-all justify-between">
         <div className="w-full text-center">
-          <h1 className="text-lg md:text-xl">
+          <h1 className="text-lg md:text-xl" style={{ color: darkMode ? "#fff" : "#0f0f0f"}}>
             <TransText en="Gallery" fr="Galerie" ar="معرض" />
           </h1>
-          <h1 className="text-3xl md:text-5xl font-bold">
+          <h1 className="text-3xl md:text-5xl font-bold" style={{ color: darkMode ? "#fff" : "#0f0f0f"}}>
             <TransText
               en="Discover our great moments together."
               fr="Découvrez nos plus beaux moments ensemble."

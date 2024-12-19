@@ -3,8 +3,10 @@ import { useTranslation } from "react-i18next";
 import { FaWifi, FaUsers } from "react-icons/fa";
 import { PiSecurityCameraDuotone } from "react-icons/pi";
 import gsap from "gsap";
+import { useAppContext } from "../../../utils/contextProvider";
 
 export const SecondSectionCoworking = () => {
+  const {darkMode}  = useAppContext();
   const { t } = useTranslation();
 
   const wifi = useRef(null);
@@ -99,33 +101,33 @@ export const SecondSectionCoworking = () => {
   }, []);
 
   return (
-    <div className="p-5 lg:px-16 py-20 flex flex-col gap-5 overflow-hidden">
-      <div className="w-full text-center pb-10">
-        <h1 className="text-lg lg:text-xl">
+    <div className={`p-5 lg:px-16 py-20 flex flex-col gap-5 overflow-hidden ${darkMode ? "bg-[#0f0f0f]" : ""}`}>
+      <div className={`w-full text-center pb-10 `}>
+        <h1 className={`text-lg lg:text-xl ${darkMode ? "text-white" : ""}`}>
           {t("main.coworking.section2.titleSection.first")}
         </h1>
-        <h1 className="text-2xl lg:text-5xl font-bold">
+        <h1 className={`text-2xl lg:text-5xl font-bold ${darkMode ? "text-white" : ""}`}>
           {t("main.coworking.section2.titleSection.second")}
         </h1>
       </div>
       <div className="w-full flex flex-wrap justify-evenly gap-y-7 gap-x-1  lg:py-5">
         <div
           ref={wifi}
-          className="w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 "
+          className={`${darkMode ? "bg-[#212529] " : ""} w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 `}
         >
           <div className="size-20 ">
             <FaWifi className="w-full h-full fill-alpha" />
           </div>
-          <h1 className="text-xl font-bold">
+          <h1 className={`${darkMode ? "text-white" : ""} text-xl font-bold`}>
             {t("main.coworking.section2.cards.wifi.title")}
           </h1>
-          <p className="text-sm">
+          <p className={`${darkMode ? "text-white" : ""} text-sm`}>
             {t("main.coworking.section2.cards.wifi.description")}
           </p>
         </div>
         <div
           ref={photo}
-          className="w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 "
+          className={`${darkMode ? "bg-[#212529] " : ""} w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 `}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -140,17 +142,17 @@ export const SecondSectionCoworking = () => {
               clipRule="evenodd"
             />
           </svg>
-          <h1 className="text-xl font-bold">
+          <h1 className={`${darkMode ? "text-white" : ""} text-xl font-bold`}>
             {t("main.coworking.section2.cards.Photography.title")}
           </h1>
-          <p className="text-sm">
+          <p className={`${darkMode ? "text-white" : ""} text-sm`}>
             {t("main.coworking.section2.cards.Photography.description")}
           </p>
         </div>
 
         <div
           ref={podcast}
-          className="w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 "
+          className={`${darkMode ? "bg-[#212529] " : ""} w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 `}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -161,16 +163,16 @@ export const SecondSectionCoworking = () => {
             <path d="M4.5 4.5a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h8.25a3 3 0 0 0 3-3v-9a3 3 0 0 0-3-3H4.5ZM19.94 18.75l-2.69-2.69V7.94l2.69-2.69c.944-.945 2.56-.276 2.56 1.06v11.38c0 1.336-1.616 2.005-2.56 1.06Z" />
           </svg>
 
-          <h1 className="text-xl font-bold">
+          <h1 className={`${darkMode ? "text-white" : ""} text-xl font-bold`}>
             {t("main.coworking.section2.cards.Podcast.title")}
           </h1>
-          <p className="text-sm">
+          <p className={`${darkMode ? "text-white" : ""} text-sm`}>
             {t("main.coworking.section2.cards.Podcast.description")}
           </p>
         </div>
         <div
           ref={recreation}
-          className="w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 "
+          className={`${darkMode ? "bg-[#212529] " : ""} w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 `}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -185,38 +187,38 @@ export const SecondSectionCoworking = () => {
             />
           </svg>
 
-          <h1 className="text-xl font-bold">
+          <h1 className={`${darkMode ? "text-white" : ""} text-xl font-bold`}>
             {t("main.coworking.section2.cards.Recreation.title")}
           </h1>
-          <p className="text-sm">
+          <p className={`${darkMode ? "text-white" : ""} text-sm`}>
             {t("main.coworking.section2.cards.Recreation.description")}
           </p>
         </div>
         <div
           ref={network}
-          className="w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 "
+          className={`${darkMode ? "bg-[#212529] " : ""} w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 `}
         >
           <div className="size-20 ">
             <FaUsers className="w-full h-full fill-alpha" />
           </div>
-          <h1 className="text-xl font-bold">
+          <h1 className={`${darkMode ? "text-white" : ""} text-xl font-bold`}>
             {t("main.coworking.section2.cards.Networking.title")}
           </h1>
-          <p className="text-sm">
+          <p className={`${darkMode ? "text-white" : ""} text-sm`}>
             {t("main.coworking.section2.cards.Networking.description")}
           </p>
         </div>
         <div
           ref={security}
-          className="w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 "
+          className={`${darkMode ? "bg-[#212529] " : ""} w-5/6 md:w-[45%] lg:w-1/4 px-5 py-10 flex flex-col text-center items-center gap-2  shadow-lg rounded-xl hover:scale-105 duration-300 `}
         >
           <div className="size-20 ">
             <PiSecurityCameraDuotone className="w-full h-full fill-alpha" />
           </div>
-          <h1 className="text-xl font-bold">
+          <h1 className={`${darkMode ? "text-white" : ""} text-xl font-bold`}>
             {t("main.coworking.section2.cards.Security.title")}
           </h1>
-          <p className="text-sm">
+          <p className={`${darkMode ? "text-white" : ""} text-sm`}>
             {t("main.coworking.section2.cards.Security.description")}
           </p>
         </div>

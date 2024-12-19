@@ -2,10 +2,11 @@ import React from 'react';
 import ilyass from '../../../assets/images/opinuons.png'
 import { RiDoubleQuotesR } from "react-icons/ri";
 import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../utils/contextProvider';
 
 
 export const FourthSectionCoworking = () => {
-    
+    const {darkMode}  = useAppContext();
     const { t } = useTranslation();
 
 
@@ -43,25 +44,25 @@ export const FourthSectionCoworking = () => {
         },
     ];
     return (
-        <div className='p-5 lg:px-16 py-10 flex flex-col gap-5'>
+        <div className={`p-5 lg:px-16 py-10 flex flex-col gap-5 ${darkMode ? "bg-[#0f0f0f]" : ""}`}>
             <div className='w-full text-center pb-10'>
-                <h1 className='text-lg lg:text-xl'>{t('main.coworking.section4.title.first')}</h1>
-                <h1 className='text-2xl lg:text-5xl font-bold'>{t('main.coworking.section4.title.second')}</h1>
+                <h1 className={` ${darkMode ? "text-white" : ""} text-lg lg:text-xl`}>{t('main.coworking.section4.title.first')}</h1>
+                <h1 className={` ${darkMode ? "text-white" : ""} text-2xl lg:text-5xl font-bold`}>{t('main.coworking.section4.title.second')}</h1>
             </div>
             <div className="flex flex-wrap  justify-center gap-3">
                 {testimoniels.map((element, index) => (
                     <div
                         key={index}
-                        className="w-full md:w-[45%] lg:w-[30%] flex flex-col gap-2 relative overflow-hidden bg-white p-5 lg:p-8 border-2 border-gray-100 rounded-lg"
+                        className={`w-full md:w-[45%] lg:w-[30%] flex flex-col gap-2 relative overflow-hidden ${darkMode ? "bg-[#212529]":"bg-white border-2 border-gray-100"}  p-5 lg:p-8  rounded-lg`}
                     >
                         <div className="flex gap-3 items-center">
                             <img loading="lazy" className="rounded-full w-10" src={element.image} alt="" />
-                            <p className="text-base font-bold ">{element.name}</p>
+                            <p className={` ${darkMode && "text-white"} text-base font-bold `}>{element.name}</p>
                         </div>
                         <div className="absolute -top-4 -right-4 bg-alpha/70 p-5 object-cover rounded-full opacity-80">
                             <RiDoubleQuotesR className="text-5xl" />
                         </div>
-                        <p className='text-xs lg:text-base'>{element.description}</p>
+                        <p className={` ${darkMode && "text-white"} text-xs lg:text-base`}>{element.description}</p>
                     </div>
                 ))}
             </div>

@@ -7,11 +7,17 @@ export default function HeroSection() {
 
   const pillars = [
     {
-      title: { en: "Traning", fr: "Formation", ar: "تدريب" },
+      //darkMode title 
+title: { 
+  en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Training</span>, 
+  fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Formation</span>, 
+  ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>تدريب</span>, 
+ 
+},
       description: {
-        en: "Master tech in 6 months! Gain the skills to thrive in the digital world. Build your career, start projects, and join a community of future tech pros.",
-        fr: "Devenez expert en tech en 6 mois! Acquérez des compétences recherchées pour réussir dans le digital. Lancez vous, créez des projets et rejoignez une communauté.",
-        ar: "أتقن التقنية في 6 أشهر! اكتسب مهارات مطلوبة لتزدهر في العالم الرقمي. ابدأ مسيرتك المهنية، أنشئ مشاريعك، وانضم إلى مجتمع الخبراء التقنيين",
+        en: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Master tech in 6 months! Gain the skills to thrive in the digital world. Build your career, start projects, and join a community of future tech pros.</span> ,
+        fr: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Devenez expert en tech en 6 mois! Acquérez des compétences recherchées pour réussir dans le digital. Lancez vous, créez des projets et rejoignez une communauté.</span>,
+        ar:<span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>أتقن التقنية في 6 أشهر! اكتسب مهارات مطلوبة لتزدهر في العالم الرقمي. ابدأ مسيرتك المهنية، أنشئ مشاريعك، وانضم إلى مجتمع الخبراء التقنيين</span> ,
       },
       icon: (
         <svg
@@ -32,12 +38,17 @@ export default function HeroSection() {
       ),
     },
     {
-      title: { en: "Co-working", fr: "Coworking", ar: "العمل المشترك" },
-      description: {
-        en: "Thrive in a dynamic coworking space! Collaborate, network, and elevate your work. Build ideas, create projects, and join a vibrant community of professionals.",
-        fr: "Un espace de coworking dynamique où les idées s'épanouissent. Connectez-vous à des esprits similaires, collaborez sur des projets et améliorez votre travail.",
-        ar: "مساحة عمل مشتركة نابضة حيث تزدهر الأفكار. تواصل مع أشخاص يشاركونك الفكر، وتعاون على المشاريع، وارفع مستوى عملك.",
+      title: { 
+        en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Co-working</span>, 
+        fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Coworking</span>, 
+        ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>العمل المشترك</span>, 
       },
+      description: {
+        en: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Thrive in a dynamic coworking space! Collaborate, network, and elevate your work. Build ideas, create projects, and join a vibrant community of professionals.</span> ,
+        fr: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Un espace de coworking dynamique où les idées s'épanouissent. Connectez-vous à des esprits similaires, collaborez sur des projets et améliorez votre travail.</span>,
+        ar:<span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>مساحة عمل مشتركة نابضة حيث تزدهر الأفكار. تواصل مع أشخاص يشاركونك الفكر، وتعاون على المشاريع، وارفع مستوى عملك.</span> ,
+      },
+      
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -97,12 +108,18 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
       ),
     },
     {
-      title: { en: "Event", fr: "Évènement", ar: "فعالية" },
-      description: {
-        en: "Dive into inspiring workshops, thrilling hackathons, and networking events. Be part of a community of developers, designers, and innovators",
-        fr: "Participez à des ateliers inspirants, hackathons palpitants et événements réseau enrichissants. Rejoignez une communauté créative de développeurs et designers.",
-        ar: "انضم إلى ورش عمل ملهمة، ومسابقات برمجية مثيرة، وفعاليات تواصل مؤثرة. كن جزءًا من مجتمع مبدع من المطورين والمصممين."
-      },
+      title: { 
+  en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Event</span>, 
+  fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Évènement</span>, 
+  ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>فعالية</span>, 
+ 
+},
+description: {
+  en: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Dive into inspiring workshops, thrilling hackathons, and networking events. Be part of a community of developers, designers, and innovators</span> ,
+  fr: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>"Participez à des ateliers inspirants, hackathons palpitants et événements réseau enrichissants. Rejoignez une communauté créative de développeurs et designers."</span>,
+  ar:<span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>انضم إلى ورش عمل ملهمة، ومسابقات برمجية مثيرة، وفعاليات تواصل مؤثرة. كن جزءًا من مجتمع مبدع من المطورين والمصممين.</span> ,
+},
+    
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -254,12 +271,13 @@ fill="#f3f3f4" stroke="none">
         >
           {pillars.map(({ title, description, icon }, index) => (
             <div
-              key={index}
-              className="md:w-[32%] py-3 md:pt-8 md:pb-4 border rounded-lg rounded-tr-none md:h-full border-beta relative overflow-hidden group cursor-pointer flex justify-end"
+            style={{ border: `1px solid ${darkMode ? "#fff" : "#1f1f1f"}` }}
+            key={index}
+              className="md:w-[32%] py-3 md:pt-8 md:pb-4 border rounded-lg rounded-tr-none md:h-full  relative overflow-hidden group cursor-pointer flex justify-end"
             >
               {icon}
 
-              <div
+              <div 
                 className={`flex flex-col justify-end py-4 px-4 md:pl-8 md:pb-6 overflow-hidden ${selectedLanguage === "ar" ? "text-end" : "text-start"
                   }`}
               >
