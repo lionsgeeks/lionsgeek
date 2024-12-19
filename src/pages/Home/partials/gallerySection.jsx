@@ -3,13 +3,15 @@ import { TransText } from "../../../components";
 import { useContext } from "react";
 import { MyContext } from "../../../utils/contextProvider";
 import SubstringText from "../../../components/SubstringText";
+import { AiFillPicture } from "react-icons/ai";
+import "./gallerySection.css"
 
 export default function GallerySection() {
   const [count, setCount] = useState(0);
   const [onLoop, setOnLoop] = useState(true);
   const [onScroll, setOnScroll] = useState(false);
-  const {galleries,IMAGEURL,selectedLanguage} = useContext(MyContext)
-  
+  const { galleries, IMAGEURL, selectedLanguage } = useContext(MyContext)
+
 
 
 
@@ -20,11 +22,13 @@ export default function GallerySection() {
 
 
 
+
+
   useEffect(() => {
     if (onLoop && !onScroll && galleries) {
       setOnScroll(true);
       const caroussel = document.getElementById("caroussel");
-      const firstItem = caroussel.firstChild;
+      const firstItem = caroussel?.firstChild;
       if (firstItem) {
 
         caroussel.style.transform = `translateX(calc( -${firstItem.clientWidth}px - 3.5rem ))`;
@@ -46,7 +50,7 @@ export default function GallerySection() {
     }
   }, [onLoop, count]);
 
-  return galleries ? (
+  return (
     <div className="px-7 md:px-16 py-12 md:py-24">
       <div className="overflow-hidden flex flex-col gap-16 transition-all justify-between">
         <div className="w-full text-center">
@@ -61,39 +65,56 @@ export default function GallerySection() {
             />
           </h1>
         </div>
-
-        <div
-          id="caroussel"
-          onMouseEnter={() => setOnLoop(false)}
-          onMouseLeave={() => setOnLoop(true)}
-          style={{ transition }}
-          className="flex justify- gap-x-14"
-        >
-          {galleries?.map((element, index) => (
-            <div
-              key={index}
-              className="h-[50vh] md:h-[62.5vh] flex flex-col gap-2 cursor-pointer flex-shrink-0 flex-[calc(calc(100%-calc(2*3.5rem))/3)] transition-transform duration-300"
-            >
-              <div className="flex flex-col justify-end group h-full after:transition-opacity after:duration-[375ms] relative after:absolute after:bg-beta/50 after:opacity-0 hover:after:opacity-100 after:inset-0">
-                <img
-                  loading="lazy"
-                  className="size-full object-cover"
-                  src={`${IMAGEURL}${element.couverture}`}
-                  alt="gallery"
-                />
-                <div className="w-full absolute z-10 duration-700 transition-all flex flex-col translate-y-[150%] group-hover:translate-y-0 pl-6 pr-4 pb-4">
-                  <h1 className="font-medium text-xl duration-700 truncate transition-all text-white">
-                    <TransText {...element.title} />
-                  </h1>
-                  <p className="text-white">
-                    <SubstringText text={element.description[selectedLanguage]} length={120} />
-                  </p>
-                </div>
+        {
+          galleries ?
+            <>
+              <div
+                id="caroussel"
+                onMouseEnter={() => setOnLoop(false)}
+                onMouseLeave={() => setOnLoop(true)}
+                style={{ transition }}
+                className="flex justify- gap-x-14"
+              >
+                {galleries?.map((element, index) => (
+                  <div
+                    key={index}
+                    className="h-[50vh] md:h-[62.5vh] flex flex-col gap-2 cursor-pointer flex-shrink-0 flex-[calc(calc(100%-calc(2*3.5rem))/3)] transition-transform duration-300"
+                  >
+                    <div className="flex flex-col justify-end group h-full after:transition-opacity after:duration-[375ms] relative after:absolute after:bg-beta/50 after:opacity-0 hover:after:opacity-100 after:inset-0">
+                      <img
+                        loading="lazy"
+                        className="size-full object-cover"
+                        src={`${IMAGEURL}${element.couverture}`}
+                        alt="gallery"
+                      />
+                      <div className="w-full absolute z-10 duration-700 transition-all flex flex-col translate-y-[150%] group-hover:translate-y-0 pl-6 pr-4 pb-4">
+                        <h1 className="font-medium text-xl duration-700 truncate transition-all text-white">
+                          <TransText {...element.title} />
+                        </h1>
+                        <p className="text-white">
+                          <SubstringText text={element.description[selectedLanguage]} length={120} />
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-          ))}
-        </div>
+            </>
+            :
+            <>
+              <div className="flex md:px-16 px-4 gap-[calc(5%/3)] ">
+                {
+                  Array.from({ length: 3 }).map((_, index) => (
+                    <div className={`${index !== 0 && "max-md:hidden"} skeleton flex items-center justify-center gap-5  md:w-[calc(95%/3)] w-full bg-skeleton1 h-[25rem] p-6  rounded-md`} >
+                      <AiFillPicture className="text-[8rem] opacity-30 " />
+                    </div>
+                  ))
+                }
+              </div>
+            </>
+        }
+
       </div>
     </div>
-  ) : <></>
+  )
 }

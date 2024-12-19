@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import { useAppContext } from "../../../utils/contextProvider";
+import { AiFillPicture } from "react-icons/ai";
 
 export const BlogHeroSection = () => {
   const { blogs, IMAGEURL, selectedLanguage, formatDate } = useAppContext();
 
   return (
     <>
-      {blogs && (
+      {blogs ? (
         <div className="flex lg:flex-row flex-col lg:gap-y-0 gap-y-4  pt-[10vh] ">
           <img
             loading="lazy"
@@ -38,7 +39,19 @@ export const BlogHeroSection = () => {
             </div>
           </div>
         </div>
-      )}
+      )
+      :
+      <>
+      <div className="flex md:flex-row flex-col md:gap-12 gap-6 w-full h-[26rem] mt-[4.5rem] rounded-md md:p-10 md:py-0  ">
+        <div className="skeleton md:w-[48%] w-full md:h-full h-[50%] bg-skeleton2  rounded-lg flex items-center justify-center "><AiFillPicture className="text-[6rem] opacity-30 " /></div>
+        <div className="flex gap-3 flex-col md:w-[40%] w-[100%] py-4 ">
+          <div className="skeleton w-full h-7 bg-skeleton2  rounded-md "></div>
+          <div className="skeleton w-full h-7 bg-skeleton2  rounded-md "></div>
+          <div className="skeleton w-[70%] h-7 bg-skeleton2  rounded-md "></div>
+        </div>
+      </div>
+      </>
+    }
     </>
   );
 };

@@ -38,7 +38,9 @@ export const MyProvider = ({ children }) => {
   const fetchGalleriesData = async () => {
     try {
       const response = await axios.get(`${URL}galleries`);
-      setGalleries(response.data);
+      setTimeout(() => {
+        setGalleries(response.data);
+      }, 7000);
     } catch (error) {
       window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
       console.error("Error fetching galleries data:", error);
@@ -62,7 +64,9 @@ export const MyProvider = ({ children }) => {
     axios
       .get(URL + "blogs")
       .then((res) => {
-        setBlogs(res.data);
+        setTimeout(() => {
+          setBlogs(res.data);
+        }, 5000);
       })
       .catch((err) => {
         console.log("Blog fetching error", err);
