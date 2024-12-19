@@ -4,14 +4,14 @@ import { useAppContext } from "../../../utils/contextProvider";
 import { useNavigate } from "react-router-dom";
 export const Press = () => {
   const { t } = useTranslation();
-  const { selectedLanguage, blogs, IMAGEURL } = useAppContext();
+  const { selectedLanguage, blogs, IMAGEURL, darkMode } = useAppContext();
   const navigate = useNavigate();
   // console.log(blogs);
   return (
-    <section className="py-[4vh]">
+    <section className={`${darkMode && "bg-[#0f0f0f]"} py-[4vh]`}>
       <div className="w-full text-center pb-10">
-        <h1 className="text-xl">{t("main.about.section4.title.first")}</h1>
-        <h1 className="xl:text-5xl text-3xl font-bold">
+        <h1 className={`${darkMode && "text-alpha"} text-xl`}>{t("main.about.section4.title.first")}</h1>
+        <h1 className={`${darkMode && "text-alpha"} xl:text-5xl text-3xl font-bold`}>
           {t("main.about.section4.title.second")}
         </h1>
       </div>
@@ -28,7 +28,7 @@ export const Press = () => {
               <img loading="lazy" src={`${IMAGEURL}${el.image}`} alt="" />
             </div>
             <div className="text w-[80vw] md:w-[20vw] flex flex-col mt-3">
-              <p className="font-bold py-1 text-center">
+              <p className={`${darkMode && "text-white"} font-bold py-1 text-center`}>
                 {el.title[selectedLanguage]}
               </p>
             </div>

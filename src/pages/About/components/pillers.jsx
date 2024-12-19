@@ -7,11 +7,11 @@ import { TransText } from "../../../components";
 
 export const Pillers = () => {
   const { t } = useTranslation();
-  const { selectedLanguage } = useAppContext();
+  const { selectedLanguage , darkMode } = useAppContext();
 
   return (
     <div
-      className={`flex flex-col items-center justify-between py-14 bg-beta border-t- border-t-alpha border-b-alpha`}
+      className={`flex flex-col items-center justify-between py-14 ${darkMode ? "bg-[#0f0f0f]" : "bg-beta"}  border-t- border-t-alpha border-b-alpha`}
     >
       <div className=" rounded-lg xl:w-[50vw] w-[100vw]  px-1 text-center">
         <h1 className="xl:text-7xl text-4xl text-alpha font-bold py-4">
@@ -22,7 +22,7 @@ export const Pillers = () => {
         </p>
       </div>
       {/* Coding */}
-      <div className="bg-[#f9f9f9] relative xl:flex hidden flex-row rounded-lg w-[80vw] lg:h-fit h-[40vh] mt-8 ">
+      <div className={`${darkMode ? "bg-beta" : "bg-[#f9f9f9]"}  relative xl:flex hidden flex-row rounded-lg w-[80vw] lg:h-fit h-[40vh] mt-8 `}>
         <div className="relative w-[50%]">
           <div className="relative w-full codingformationpic">
             <img
@@ -41,7 +41,7 @@ export const Pillers = () => {
               <g clipPath="url(#clip0)">
                 <path
                   d="M85.5 1079.95C43.7072 966.929 19.9593 852.301 14.5 737.24C8 600.336 29.872 512.409 41.5 424.739C59.279 290.7 60.81 99.3082 -16.5 -142.448H85.5L85.5 1079.95Z"
-                  fill="#f9f9f9"
+                  fill={`${darkMode ? "#212529" :"#f9f9f9"}`}
                 ></path>
               </g>
               <defs>
@@ -62,10 +62,10 @@ export const Pillers = () => {
           dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
           className="w-[50%] h-[70%] gap-4 flex flex-col justify-around py-8 px-5"
         >
-          <p className={`text-4xl font-semibold py-3`}>
+          <p className={`${darkMode && "text-white"} text-4xl font-semibold py-3`}>
             {t("main.about.section2.coding.title")}
           </p>
-          <p>
+          <p className={`${darkMode && "text-white"}`}>
             <TransText
               en="Our 6-month Coding Formation will teach you how to become a Full-Stack Web Developer. You will learn front-end skills like HTML, CSS, JavaScript, and React to create websites that look great and work well. On the back-end, you’ll use PHP and Laravel to build powerful systems and APIs. This program is hands-on, with real projects to help you practice what you learn. It’s perfect for anyone who wants to start a career in web development or improve their coding skills."
               fr="Notre formation de 6 mois en programmation vous apprendra à devenir un développeur web Full-Stack. Vous apprendrez des compétences front-end comme HTML, CSS, JavaScript et React pour créer des sites web à la fois esthétiques et performants. Du côté back-end, vous utiliserez PHP et Laravel pour développer des systèmes puissants et des API. Ce programme est pratique, avec des projets réels pour vous aider à mettre en pratique ce que vous apprenez. C’est parfait pour toute personne souhaitant commencer une carrière dans le développement web ou améliorer ses compétences en programmation."
@@ -77,7 +77,7 @@ export const Pillers = () => {
 
 
       {/* Media */}
-      <div className="bg-[#f9f9f9] relative xl:flex hidden flex-row-reverse rounded-lg w-[80vw] lg:h-fit h-[40vh] mt-8">
+      <div className={`${darkMode ? "bg-beta" : "bg-[#f9f9f9]"} relative xl:flex hidden flex-row-reverse rounded-lg w-[80vw] lg:h-fit h-[40vh] mt-8`}>
         <div className="relative w-[50%]">
           <div className="relative w-[100%] codingformationpic">
             <img
@@ -96,7 +96,7 @@ export const Pillers = () => {
               <g clipPath="url(#clip0)">
                 <path
                   d="M85.5 1079.95C43.7072 966.929 19.9593 852.301 14.5 737.24C8 600.336 29.872 512.409 41.5 424.739C59.279 290.7 60.81 99.3082 -16.5 -142.448H85.5L85.5 1079.95Z"
-                  fill="#f9f9f9"
+                  fill={`${darkMode ? "#212529" : "#f9f9f9"}`}
                 ></path>
               </g>
               <defs>
@@ -117,10 +117,10 @@ export const Pillers = () => {
           dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
           className="w-[50%] h-[70%] gap-4 flex flex-col justify-around  py-8 px-5"
         >
-          <p className={`text-4xl font-semibold py-3 `}>
+          <p className={`text-4xl font-semibold py-3 ${darkMode && "text-white"} `}>
             {t("main.about.section2.media.title")}
           </p>
-          <p>
+          <p className={`${darkMode && "text-white"}`}>
             <TransText
               en="Our 6-month Media Formation will teach you the skills needed to create amazing digital content. You will learn how to design graphics, edit videos, and manage social media platforms to engage and grow audiences. This hands-on program focuses on practical projects, giving you real experience in creating content for different types of media. Whether you want to start a career in media or improve your creative skills, this program is a great way to learn and grow."
               ar="ستعلمك دورة الإعلام لمدة 6 أشهر المهارات اللازمة لإنشاء محتوى رقمي مذهل. ستتعلم كيفية تصميم الرسومات، وتحرير الفيديوهات، وإدارة منصات وسائل التواصل الاجتماعي لجذب الجمهور وزيادة التفاعل. يركز هذا البرنامج العملي على المشاريع التطبيقية، مما يمنحك خبرة حقيقية في إنشاء المحتوى لأنواع مختلفة من الوسائط. سواء كنت ترغب في بدء مهنة في الإعلام أو تحسين مهاراتك الإبداعية، فإن هذا البرنامج يعد وسيلة رائعة للتعلم والنمو"
