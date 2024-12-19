@@ -102,7 +102,7 @@ const BookingSection = ({ event }) => {
 };
 
 export const FirstSectionEventDetail = () => {
-  const { events, IMAGEURL } = useContext(MyContext);
+  const { events, IMAGEURL,darkMode } = useContext(MyContext);
   const { id } = useParams();
   const [event, setEvent] = useState();
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -180,9 +180,9 @@ export const FirstSectionEventDetail = () => {
   return (
     <>
       {event ? (
-        <div id="eventDet" className="h-fit lg:p-16 p-7 lg:pt-24 md:pt-40 pt-28">
+        <div id="eventDet" className={`h-fit lg:p-16 p-7 lg:pt-24 md:pt-40 pt-28 ${darkMode ? "bg-[#0f0f0f]":"bg-white"}`}>
           {/* Event Header */}
-          <div className="first w-full gap-5 rounded-l-lg  flex">
+          <div className={`first w-full gap-5 rounded-l-lg  flex `}>
 
             <div className="lg:flex lg:flex-col">
               <div className="bg-alpha rounded-t-lg px-2 h-[40%] flex items-center justify-center font-bold text-white text-lg">
@@ -198,9 +198,9 @@ export const FirstSectionEventDetail = () => {
             </div>
 
             <div className="flex flex-col gap-3">
-              <div className="lg:flex gap-2 lg:text-3xl text-xl px-2">
+              <div className="lg:flex gap-2 lg:text-3xl text-xl px-2 ">
                 <div>
-                  <h1>
+                  <h1 className={`${darkMode ? "text-white": "text-[#0f0f0f]"}`} >
                     <TransText {...event[0]?.name} />
                   </h1>
                 </div>
@@ -211,7 +211,7 @@ export const FirstSectionEventDetail = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
-                  stroke="currentColor"
+                  stroke={darkMode ? "white": "#0f0f0f"}
                   className="lg:size-6 size-5"
                 >
                   <path
@@ -225,7 +225,7 @@ export const FirstSectionEventDetail = () => {
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
                   />
                 </svg>
-                <p>
+                <p className={`${darkMode ? "text-white": "text-[#0f0f0f]"}`}>
                   <TransText {...event[0]?.location} />
                 </p>
               </div>
@@ -241,8 +241,8 @@ export const FirstSectionEventDetail = () => {
                 alt=""
               />
               <div className="shadow-sm px-4 border rounded-lg flex flex-col py-4">
-                <div className="border-b-2 border-black py-3">
-                  <h1 className="font-semibold text-xl">
+                <div className={`${darkMode ? "border-b-2 border-white" : "border-b-2 border-black  py-3"}`}>
+                  <h1 className={`${darkMode ? "text-white": "text-[#0f0f0f]"}`}>
                     <TransText
                       ar="حول هذا الحدث"
                       fr="A propos de cet évenement"
@@ -250,8 +250,8 @@ export const FirstSectionEventDetail = () => {
                     />
                   </h1>
                 </div>
-                <div className="py-4">
-                  <p>
+                <div className={`py-4 `}>
+                  <p className={`${darkMode ? "text-white": "text-[#0f0f0f]"}`}>
                     <TransText {...event[0]?.description} />
                   </p>
                 </div>
@@ -259,7 +259,7 @@ export const FirstSectionEventDetail = () => {
             </div>
 
             <div className="shadow-xl last border rounded-lg h-fit flex flex-col md:mt-10 lg:w-[30%]">
-              <h2 className="p-4 border-b border-gray-500">
+              <h2 className={`p-4 border-b border-gray-500 ${darkMode ? "text-white": "text-[#0f0f0f]"}`}>
                 <TransText
                   ar="تفاصيل الحدث"
                   fr="Détail de l'Événement"

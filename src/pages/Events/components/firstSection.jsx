@@ -7,7 +7,7 @@ import gsap from "gsap";
 
 export const FirstSectionEvent = () => {
   const { t } = useTranslation();
-  const { selectedLanguage } = useContext(MyContext);
+  const { selectedLanguage , darkMode } = useContext(MyContext);
   const leftside = useRef(null);
   const rightside = useRef(null);
   useEffect(() => {
@@ -26,9 +26,9 @@ export const FirstSectionEvent = () => {
     <>
       {/* herosection */}
       <div
-        className={`flex lg:flex-row flex-col-reverse overflow-x-hidden  justify-between w-[100%]  lg:px-5 lg:pt-[3.5em] pt-[3rem] pb-[5em]   ${selectedLanguage === "ar" ? "  lg:flex-row-reverse" : "" }`}
+        className={` flex lg:flex-row flex-col-reverse overflow-x-hidden ${darkMode ? "bg-[#0f0f0f]":"bg-white"} justify-between w-[100%]  lg:px-5 lg:pt-[3.5em] pt-[3rem] pb-[5em]   ${selectedLanguage === "ar" ? "  lg:flex-row-reverse" : "" }`}
       >
-        <div ref={leftside} className="flex justify-center items-center lg:w-[50%] w-[100%] ">
+        <div ref={leftside} className={`flex justify-center items-center lg:w-[50%] w-[100%] `}>
           <div
             className={`lg:px-16 lg:py-0 py-1 px-3 flex flex-col gap-6 w-[100%] b${selectedLanguage === "ar"
                 ? "    text-end w-[100%] flex  items-end  "
@@ -36,15 +36,15 @@ export const FirstSectionEvent = () => {
               }`}
           >
             <h1
-              className={`bg-banana font-bold lg:text-[60px] text-[45px] text-start lg:w-[100%]   ${selectedLanguage === "ar" ? "    text-end " : "md:"
+              className={`bg-banana font-bold lg:text-[60px] text-[45px] text-start lg:w-[100%] ${darkMode ? "text-white": "text-[#0f0f0f]"}  ${selectedLanguage === "ar" ? "    text-end " : "md:"
                 }`}
             >
               {" "}
               {t("main.Events.title")}
             </h1>
-            <p className="text-lg">{t("main.Events.desc")}</p>
+            <p className={`text-lg  ${darkMode ? "text-white": "text-[#0f0f0f]"}`}>{t("main.Events.desc")}</p>
             <p
-              className={`font-light flex gap-2    ${selectedLanguage === "ar"
+              className={`font-light flex gap-2 text-lg  ${darkMode ? "text-white": "text-[#0f0f0f]"}   ${selectedLanguage === "ar"
                   ? "    text-end w-full  flex flex-row-reverse"
                   : "md:"
                 }`}
@@ -55,7 +55,7 @@ export const FirstSectionEvent = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
-                stroke="currentColor"
+                stroke={darkMode ? "white":"black"}
                 className="size-6"
               >
                 <path

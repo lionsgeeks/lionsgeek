@@ -13,7 +13,8 @@ export const CardsSection = () => {
   const {
     selectedLanguage,
     IMAGEURL,
-    events
+    events,
+    darkMode
   } = useContext(MyContext);
 
   const navigate = useNavigate();
@@ -43,12 +44,12 @@ export const CardsSection = () => {
 
   return (
     <>
-      <div id="cards" className="w-full text-center lg:pt-5 lg:px-0 px-6">
-        <h1 className="text-xl">{t("main.Events.Title1")}</h1>
-        <h1 className="text-5xl font-bold">{t("main.Events.Desc1")}</h1>
+      <div id="cards" className={`w-full text-center lg:pt-5 lg:px-0 px-6  ${darkMode ? "bg-[#0f0f0f]":"bg-white"}`}>
+        <h1 className={`text-xl ${darkMode ? "text-white": "text-[#0f0f0f]"}`}>{t("main.Events.Title1")}</h1>
+        <h1 className={`text-5xl font-bold ${darkMode ? "text-white": "text-[#0f0f0f]"}`}>{t("main.Events.Desc1")}</h1>
       </div>
 
-      <div className="flex justify-center items-center md:px-20 px-6 py-14 ">
+      <div className={`flex justify-center items-center md:px-20 px-6 py-14  ${darkMode ? "bg-[#0f0f0f]":"bg-white"}`}>
         <div className="flex flex-wrap w-full lg:gap-x-[calc(10%/2)] lg:gap-y-14 md:gap-x-[calc(4%/1)] gap-10 ">
           {
             events ?
@@ -69,9 +70,9 @@ export const CardsSection = () => {
                         alt=""
                       />
                     </div>
-                    <div className="">
+                    <div className={` ${darkMode ? "bg-[#303439]":"bg-white"}`}>
                       <div className="flex flex-col font-mono gap-3 py-[1rem] px-[1rem] ">
-                        <h3 className="text-[22px] font-bold truncate">
+                        <h3 className={`text-[22px] font-bold truncate text-xl ${darkMode ? "text-white": "text-black"}`}>
                           <TransText {...element.name} />
 
                         </h3>
@@ -88,7 +89,7 @@ export const CardsSection = () => {
                           </div>
                         </div>
                       </div>
-                      <button className="bg-[#fee819] transition duration-150 text-white w-full py-[.5rem] font-semibold ">
+                      <button className={`bg-[#fee819] transition duration-150 ${darkMode ? "text-[#0f0f0f] hover:bg-[#f9df4f]": "text-white"} w-full py-[.5rem] font-semibold `}>
                         <TransText fr="Voir tout" ar="شاهد الكل" en="See all" />
                       </button>
                     </div>

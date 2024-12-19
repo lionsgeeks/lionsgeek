@@ -9,7 +9,7 @@ export const EventPage = () => {
         <>
             <FirstSectionEvent />
             {
-                <CardsSection />
+                <CardsSection  />
             }
         </>
     );
