@@ -51,7 +51,7 @@ export default function GallerySection() {
     }
   }, [onLoop, count]);
 
-  return galleries ? (
+  return (
     <div className="px-7 md:px-16 py-12 md:py-24" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff"}}>
       <div className="overflow-hidden flex flex-col gap-16 transition-all justify-between">
         <div className="w-full text-center">
