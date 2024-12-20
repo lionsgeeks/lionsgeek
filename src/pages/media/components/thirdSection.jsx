@@ -106,7 +106,7 @@ export const ThirdSection = () => {
         </h1>
       </div>
       <div
-        className={`flex lg:flex-row lg:flex-wrap flex-col items-center gap-10 justify-center ${
+        className={`flex lg:flex-row lg:flex-wrap flex-col z-20 items-center gap-10 justify-center ${
           selectedLanguage === "ar" ? "lg:flex-row-reverse text-right" : ""
         } `}
       >
@@ -118,7 +118,7 @@ export const ThirdSection = () => {
              }}
           >
             <svg
-              className={`hidden lg:flex animateSection absolute inset-0 top-1/2 -z-20 -translate-y-1/2 ${
+              className={`hidden lg:flex animateSection absolute inset-0 top-1/2 -z-10 -translate-y-1/2 ${
                 index === 3 || index === 4 ? "-left-96" : "-right-36"
               } `}
               xmlns="http://www.w3.org/2000/svg"

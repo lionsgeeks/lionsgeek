@@ -1,58 +1,78 @@
 import React from "react";
-import ilyass from "../../../assets/images/testimonial/ilyass.jpg";
+import media1 from "../../../assets/images/testimonial/media1.JPG";
+import media2 from "../../../assets/images/testimonial/media2.JPG";
+import media3 from "../../../assets/images/testimonial/media3.JPG";
+import media4 from "../../../assets/images/testimonial/media4.JPG";
+import media5 from "../../../assets/images/testimonial/media5.JPG";
+import media6 from "../../../assets/images/testimonial/media6.JPG";
 import { RiDoubleQuotesR } from "react-icons/ri";
 import { TransText } from "../../../components";
 import { useAppContext } from "../../../utils/contextProvider";
 
 export const FifthSection = () => {
-    const {darkMode } = useAppContext();
-  
+  const { darkMode } = useAppContext();
+
   const testimoniels = [
     {
-      name: "Ilyasse Elyatime",
+      name: "Hiba Sabri",
+      class: "Media School 2",
       description:
-        "Attending LionsGeek's master classes was a game-changer. The UI/UX Design and Personal Branding sessions boosted my career. I highly recommend LionsGeek for web development and media training.",
-      image: ilyass,
+        "LionsGeek's media classes were exceptional. From video editing to content creation, I gained practical skills that transformed my passion into a career. The hands-on projects and expert guidance were invaluable.",
+      image: media1,
     },
     {
-      name: "Oufkir Hamza",
+      name: "Fatima zahra Hajji",
+      class: "Media School 2",
       description:
-        "LionsGeek transformed my web development skills. The hands-on projects and expert guidance were invaluable. Now, I'm confident in HTML, CSS, JavaScript, React, and Laravel.",
-      image: ilyass,
+        "The storytelling and branding sessions at LionsGeek gave me a new perspective on how to create impactful media content. I now feel confident producing professional-quality videos and graphics.",
+      image: media2,
     },
     {
-      name: "Amine Bakrime",
+      name: "Soufiane Naimi",
+      class: "Media School 2",
       description:
-        "LionsGeek offers top-notch web development education. The practical approach, including real-world projects and industry visits, prepared me well for the tech industry.",
-      image: ilyass,
+        "Attending LionsGeek's media workshops was the best decision for my creative career. Their focus on practical learning helped me master tools like Adobe Premiere and Photoshop.",
+      image: media3,
     },
     {
-      name: "Youness Ait Haddou",
+      name: "anwar bouchiri",
+      class: "Media School 2",
       description:
-        "I loved the media and code crossover classes at LionsGeek. They gave me a comprehensive understanding of both fields, making me a versatile professional.",
-      image: ilyass,
+        "LionsGeek provided the perfect mix of technical training and creative freedom. The mentorship helped me discover my strengths in video production and marketing strategies.",
+      image: media4,
     },
     {
-      name: "Wissale Chreiba",
+      name: "Fatima zahra Chorfi",
+      class: "Media School 2",
       description:
-        "The personal attention and mentorship at LionsGeek are outstanding. The CV and cover letter workshops helped me land my dream job in web development.",
-      image: ilyass,
+        "Thanks to LionsGeek, I learned how to create visually compelling content that resonates with audiences. Their mentorship and constructive feedback elevated my skills to a professional level.",
+      image: media5,
     },
     {
-      name: "Youssef Faradi",
+      name: "Adam Qmiat",
+      class: "Media School 2",
       description:
-        "LionsGeek's immersive bootcamp taught me everything from HTML and CSS to advanced JavaScript and Laravel. The supportive community and networking opportunities were fantastic.",
-      image: ilyass,
+        "The media program at LionsGeek is top-notch. The focus on personal branding and visual storytelling gave me an edge in today's competitive media industry.",
+      image: media6,
     },
   ];
 
   return (
-    <div className=" flex flex-col gap-6 px-16 py-8 " style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" , } }>
+    <div
+      className=" flex flex-col gap-6 px-16 py-8 "
+      style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" }}
+    >
       <div className="w-full text-center pb-10">
-        <h1 className="text-xl" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
+        <h1
+          className="text-xl"
+          style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
+        >
           <TransText fr="Témoignages" ar="شهادات" en="Testimonials" />
         </h1>
-        <h1 className="text-5xl font-bold" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
+        <h1
+          className="text-5xl font-bold"
+          style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
+        >
           <TransText
             fr=" Les gens qui nous aiment déjà"
             ar="الأشخاص الذين يحبوننا بالفعل"
@@ -65,18 +85,41 @@ export const FifthSection = () => {
           <div
             key={index}
             className="lg:w-[30%] flex flex-col gap-2 relative overflow-hidden bg-white p-8 border-2 border-gray-100 rounded-lg"
-            style={{ backgroundColor: darkMode ? "#212529" : "#ffffff", border: darkMode ? "none" : "2px solid #f3f4f6", 
+            style={{
+              backgroundColor: darkMode ? "#212529" : "#ffffff",
+              border: darkMode ? "none" : "2px solid #f3f4f6",
             }}
-
-   >
+          >
             <div className="flex gap-3 items-center">
-              <img loading="lazy" className="rounded-full w-10" src={element.image} alt="" />
-              <p className="font-bold">{element.name}</p>
+              <div className=" w-14 h-14 overflow-hidden rounded-full">
+              <img
+                loading="lazy"
+                className=" w-[120%] object-contain object-top"
+                src={element.image}
+                alt=""
+                />
+                </div>
+              <div className="flex flex-col">
+                <p
+                  className="font-medium"
+                  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
+                >
+                  {element.name}
+                </p>
+                <p
+                  className="font- text-xs text-black/70"
+                  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
+                >
+                  {element.class}
+                </p>
+              </div>
             </div>
             <div className="absolute -top-4 -right-4 bg-alpha/70 p-5 object-cover rounded-full opacity-80">
               <RiDoubleQuotesR className="text-5xl" />
             </div>
-            <p style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>{element.description}</p>
+            <p style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
+              {element.description}
+            </p>
           </div>
         ))}
       </div>

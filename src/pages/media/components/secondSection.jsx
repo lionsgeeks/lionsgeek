@@ -136,7 +136,7 @@ export const SecondSection = () => {
                   setActiveSkill(element);
                   setAnime(true);
                 }}
-                className={`leftside overflow-x-hidden ${darkMode ? "bg-[#0f0f0f]" :"bg-white"}  cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${
+                className={`leftside overflow-x-hidden ${darkMode ? "bg-[#212529]" :"bg-white"}  cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${
                   selectedLanguage === "ar"
                     ? "text-right lg:flex-row-reverse"
                     : ""
