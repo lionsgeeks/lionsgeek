@@ -15,8 +15,8 @@ export const BlogContentsSection = () => {
                 {
                     blogs ? blogs.map((blog, index) => (
                         <>
-                            <div className={`${blogs[0] ? "flex" : "hidden"}`}>
-                                <h1 className={` text-center py-10 font-extrabold text-4xl `}>Our Blog</h1>
+                            <div className={`${blogs[0] ? "flex" : "hidden"} flex-col py-16`}>
+                                <h1 className={` text-center py-10 font-extrabold text-4xl ${darkMode ? "text-white" : "text-black"}`}>Our Blog</h1>
                                 <Link
                                     to={`/blog/${blog.id}`}
                                     key={index}
