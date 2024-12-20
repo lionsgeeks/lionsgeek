@@ -417,7 +417,7 @@ const Navbar = () => {
                         clipRule="evenodd"
                       />
                     </svg>        
-              </p>
+                </p>
      
 
               </div>
@@ -444,7 +444,7 @@ const Navbar = () => {
                   onClick={() => {
                     navigateTo("contact-us");
                   }}
-                  className={"shadow-md font-normal px-4 text-[0.8rem] mt-0"}
+                  className={"shadow-md font-normal   px-4 text-[0.8rem] mt-0"}
                 >
                   {t("header.contact_us")}
                 </Button>
@@ -457,7 +457,7 @@ const Navbar = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
-                  fill={darkMode ? "white" : "currentColor"} // Conditional fill based on darkMode
+                  fill={darkMode ? "white" : "currentColor"} 
                   className="bi bi-brightness-high text-yellow-400"
                   viewBox="0 0 16 16"
                 >

@@ -116,7 +116,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
 },
 description: {
   en: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Dive into inspiring workshops, thrilling hackathons, and networking events. Be part of a community of developers, designers, and innovators</span> ,
-  fr: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>"Participez à des ateliers inspirants, hackathons palpitants et événements réseau enrichissants. Rejoignez une communauté créative de développeurs et designers."</span>,
+  fr: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Participez à des ateliers inspirants, hackathons palpitants et événements réseau enrichissants. Rejoignez une communauté créative de développeurs et designers.</span>,
   ar:<span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>انضم إلى ورش عمل ملهمة، ومسابقات برمجية مثيرة، وفعاليات تواصل مؤثرة. كن جزءًا من مجتمع مبدع من المطورين والمصممين.</span> ,
 },
     
@@ -273,7 +273,7 @@ fill="#f3f3f4" stroke="none">
             <div
             style={{ border: `1px solid ${darkMode ? "#fff" : "#1f1f1f"}` }}
             key={index}
-              className="md:w-[32%] py-3 md:pt-8 md:pb-4 border rounded-lg rounded-tr-none md:h-full  relative overflow-hidden group cursor-pointer flex justify-end"
+              className="md:w-[32%]  py-3 md:pt-8 md:pb-4 border rounded-lg rounded-tr-none md:h-full  relative overflow-hidden group cursor-pointer flex justify-end"
             >
               {icon}
 

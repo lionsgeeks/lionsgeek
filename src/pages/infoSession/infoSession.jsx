@@ -6,7 +6,7 @@ import LoadingPage from "../Loading";
 import TransText from "../../components/TransText.tsx";
 
 const InfoSession = () => {
-  const { selectedLanguage, URL, sessions } = useAppContext();
+  const { selectedLanguage, URL, sessions,darkMode } = useAppContext();
   const [chosenSession, setChosenSession] = useState("");
   const [sending, setSending] = useState(false);
   const [validate, setValidate] = useState(false);
@@ -150,22 +150,22 @@ const InfoSession = () => {
 
   return (
     <div
-      className="px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden"
+      className={`px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden ${darkMode ? "bg-[#0f0f0f]":"bg-white"}`}
       dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
     >
       {!sending ? (
         <>
-          <h1 className="font-semibold text-2xl tracking-wide">
+          <h1 className={`font-semibold pb-2 text-2xl tracking-wide ${darkMode ? "text-white":"text-black"}`}>
             Sign Up to Start Your Adventure with Us
           </h1>
 
           {sessions && sessions.length > 0 && (
             <form
               onSubmit={handleSubmit}
-              className="mx-auto p-6 bg-white rounded-lg shadow-md space-y-4"
+              className={`mx-auto p-6  rounded-lg shadow-md space-y-4 ${darkMode ? "bg-[#212529]":"bg-white"}`}
             >
-              <div className="flex flex-col space-y-2">
-                <label htmlFor="sessions" className="text-gray-700">
+              <div className={`flex flex-col space-y-2 `}>
+                <label htmlFor="sessions" className={` ${darkMode ? "text-white":"text-gray-700"} `}>
                   Choose a Session: <Required />
                 </label>
                 <select
@@ -194,38 +194,42 @@ const InfoSession = () => {
               <div className="flex flex-wrap gap-1">
                 {formFields.map((field) => (
                   <div
-                    key={field.name}
-                    className="flex flex-col space-y-2 w-[49.7%]"
-                  >
-                    <label htmlFor={field.name} className="text-gray-700">
-                      {field.label}: <Required />
-                    </label>
-                    <input
-                      type={field.type}
-                      id={field.name}
-                      name={field.name}
-                      min={minDateString}
-                      max={maxDateString}
-                      placeholder={field.label + "..."}
-                      value={formData[field.name]}
-                      onChange={handleChange}
-                      className={`px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-beta ${
-                        emailError && field.name === "email"
-                          ? "text-red-500 border-red-500"
-                          : "border-gray-300 text-black"
-                      }`}
-                      required
-                    />
-                    {emailError && field.name === "email" && (
-                      <span className="text-red-500 text-sm ">
-                        The email is already exist
-                      </span>
-                    )}
+                      key={field.name}
+                      className="flex flex-col space-y-2 w-full sm:w-[49.7%]"
+                    >
+                      <label
+                        htmlFor={field.name}
+                        className={`${darkMode ? "text-white" : "text-gray-700"}`}
+                      >
+                        {field.label}: <Required />
+                      </label>
+                      <input
+                        type={field.type}
+                        id={field.name}
+                        name={field.name}
+                        min={minDateString}
+                        max={maxDateString}
+                        placeholder={field.label + "..."}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        className={`px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-beta ${
+                          emailError && field.name === "email"
+                            ? "text-red-500 border-red-500"
+                            : "border-gray-300 text-black"
+                        }`}
+                        required
+                      />
+                      {emailError && field.name === "email" && (
+                        <span className="text-red-500 text-sm">
+                          The email is already exist
+                        </span>
+                      )}
                   </div>
+
                 ))}
 
-                <div className="flex flex-col space-y-2 w-[49.7%]">
-                  <label htmlFor="city" className="text-gray-700">
+                <div className="flex flex-col space-y-2 w-full sm:w-[49.7%] ">
+                  <label htmlFor="city" className={` ${darkMode ? "text-white":"text-gray-700"} `}>
                     City: <Required />
                   </label>
                   <select
@@ -249,8 +253,8 @@ const InfoSession = () => {
                   </select>
                 </div>
 
-                <div className="flex flex-col space-y-2 w-[49.7%]">
-                  <label htmlFor="prefecture" className="text-gray-700">
+                <div className="flex flex-col space-y-2 w-full sm:w-[49.7%]">
+                  <label htmlFor="prefecture" className={` ${darkMode ? "text-white":"text-gray-700"} `}>
                     Prefecture: <Required />
                   </label>
                   <select
@@ -287,8 +291,8 @@ const InfoSession = () => {
                   </select>
                 </div>
 
-                <div className="flex flex-col space-y-2 w-[49.7%]">
-                  <label htmlFor="gender" className="text-gray-700">
+                <div className="flex flex-col space-y-2 w-full sm:w-[49.7%]">
+                  <label htmlFor="gender" className={` ${darkMode ? "text-white":"text-gray-700"} `}>
                     <TransText en="Gender" fr="Genre" ar="الجنس" />
                     <Required />
                   </label>
@@ -313,8 +317,8 @@ const InfoSession = () => {
                   </select>
                 </div>
 
-                <div className="flex flex-col space-y-2 w-[49.7%]">
-                  <label htmlFor="source">
+                <div className="flex flex-col space-y-2 w-full sm:w-[49.7%]">
+                  <label htmlFor="source" className={`${darkMode ? "text-white":"text-black"} `}>
                     Where Have you Heard of LionsGeek: <Required />
                   </label>
                   <input
@@ -332,7 +336,7 @@ const InfoSession = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full">
-                  <label htmlFor="motivation">
+                  <label htmlFor="motivation" className={`${darkMode ? "text-white":"text-black"} `}>
                     Motivation:
                     <Required />
                     <span
@@ -340,7 +344,7 @@ const InfoSession = () => {
                         motivation.length < 150
                           ? "text-red-600"
                           : "text-green-500"
-                      }`}
+                      } ${darkMode ? "text-white":"text-gray-700"} `}
                     >
                       {" "}
                       {motivation.length}/150
@@ -360,7 +364,7 @@ const InfoSession = () => {
                 <button
                   type="submit"
                   disabled={sending}
-                  className="w-full py-2 px-4 bg-alpha font-semibold rounded-md hover:bg-beta hover:text-alpha focus:outline-none"
+                  className={`w-full py-2 px-4 bg-alpha font-semibold rounded-md ${darkMode ? "hover:bg-[#2d343a]":"hover:bg-[#212529]"} hover:text-alpha focus:outline-none`}
                 >
                   Submit
                 </button>

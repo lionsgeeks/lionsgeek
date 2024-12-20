@@ -45,6 +45,8 @@ const TimeBlock = ({ value, label }) => {
 };
 
 const BookingSection = ({ event }) => {
+  const { darkMode } = useContext(MyContext);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   if (!hasEventPassed(event?.date)) {
 
@@ -52,7 +54,7 @@ const BookingSection = ({ event }) => {
 
       <>
         <div className="p-4">
-          <h1 className="font-bold text-2xl py-3">
+          <h1 className={`font-bold text-2xl py-3 ${darkMode ? "text-white":"text-black"}`}>
             <TransText
               fr="Total à payer"
               en="Total to pay"
