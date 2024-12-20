@@ -44,8 +44,8 @@ export const BlogHeroSection = () => {
             </div>
           </div>
           <div className={`${blogs[0] ? "hidden" : "flex"} h-[20rem] items-center justify-center `}>
-            <p className="text-[30px] font-bold text-center ">
-              <TransText en="No available Blogs for the Moment" ar="" fr="" />
+            <p className="text-[30px] font-bold text-center " style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }>
+              <TransText en="No available Blogs for the Moment" ar="لا توجد مدونات متوفرة في الوقت الحالي" fr="Aucun blog disponible pour le moment" />
             </p>
           </div>
         </>
