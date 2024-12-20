@@ -1,9 +1,11 @@
 import React from "react";
+import { useAppContext } from "../../../utils/contextProvider";
 
 const FirstSection = () => {
+  const {darkMode} = useAppContext()
   return (
-    <div className="flex flex-col gap-10 justify-center items-center px-2 py-[7rem]">
-      <h1 className="text-5xl font-bold text-center">About Our Organization</h1>
+    <div className={`${darkMode && "bg-[#0f0f0f]"} flex flex-col gap-10 justify-center items-center px-2 py-[7rem]`}>
+      <h1 className={`${darkMode && "text-white"} text-5xl font-bold text-center`}>About Our Organization</h1>
       <iframe
         className="md:w-[95%] w-full h-[20rem] md:h-[28rem] lg:w-[90%] xl:w-[75%] lg:h-[36rem]"
         src="https://www.youtube.com/embed/LGoZc4j1dIk"

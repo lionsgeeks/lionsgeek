@@ -25,8 +25,8 @@ title: {
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          stroke="currentColor"
-          className={`absolute -z-10 h-full scale-125 stroke-beta/[6.25%] -top-[10%] ${selectedLanguage === "ar" ? "left-0 rotate-45" : "right-0 -rotate-45"
+          stroke="currentColor" 
+          className={`absolute z-10 h-full scale-125 ${darkMode ? "stroke-white" : "stroke-beta/[6.25%]"}  -top-[10%] ${selectedLanguage === "ar" ? "left-0 rotate-45" : "right-0 -rotate-45"
             } transition-all duration-[625ms] group-hover:opacity-0 group-hover:scale-[25]`}
         >
           <path
@@ -56,7 +56,7 @@ title: {
           viewBox="0 0 512 512"
           strokeWidth="1.5"
           stroke="red"
-          className={`absolute  -z-10 h-full scale-125  -top-[10%] ${selectedLanguage === "ar" ? "left-0 " : "right-0 -"
+          className={`absolute z-10 h-full scale-125  -top-[10%] ${selectedLanguage === "ar" ? "left-0 " : "right-0 -"
             } transition-all duration-[625ms] group-hover:opacity-0 group-hover:scale-[25]`}
         >
 
@@ -127,7 +127,7 @@ description: {
           viewBox="0 0 512 512"
           strokeWidth="1.5"
           stroke="currentColor"
-          className={`absolute -z-10 h-full scale-100 stroke-beta/[6.25%] -top-[10%] ${selectedLanguage === "ar" ? "left-0 " : "right-0 -"
+          className={`absolute z-10 h-full scale-100 stroke-beta/[6.25%] -top-[10%] ${selectedLanguage === "ar" ? "left-0 " : "right-0 -"
             } transition-all duration-[625ms] group-hover:opacity-0 group-hover:scale-[25]`}
         >
 
