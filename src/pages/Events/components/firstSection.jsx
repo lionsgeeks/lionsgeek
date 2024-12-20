@@ -77,7 +77,7 @@ export const FirstSectionEvent = () => {
                   .getElementById("cards")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
-              className="bg-alpha w-fit px-5 py-2 rounded-lg hover:bg-transparent hover:scale-105 hover:text-alpha border"
+              className="bg-alpha w-fit px-5 py-2 rounded-lg hover:bg-transparent hover:scale-105 hover:text-alpha hover:border"
             >
               {t("main.Events.button")}
             </button>
