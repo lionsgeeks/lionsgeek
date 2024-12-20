@@ -212,18 +212,20 @@ export const FirstSectionPro = () => {
         </div>
 
         {/* projects */}
-        <div className="py-10 px-5 flex items-center flex-wrap gap-5">
+        <div className={`py-10 px-5 flex items-center flex-wrap gap-5`}>
           {projects &&
             projects.map((ele, indx) => (
               <div
                 key={indx}
-                className="lg:w-[32%] w-full projects relative p-5 transition-all overflow-hidden  border border-black rounded-lg"
+                className={`lg:w-[32%] w-full projects relative p-5 transition-all overflow-hidden border border-black rounded-lg
+                ${darkMode ? 'bg-[#E1E1E1]' : ''}
+                `}
               >
                 <div className="flex items-center justify-between w-full">
                   <p className="font-bold">{ele.name}</p>
                   <img
                   loading="lazy"
-                    className="w-16 h-16 object-cover rounded-full"
+                    className="w-16 aspect-square object-cover rounded-full"
                     src={IMAGEURL + "projects/" + ele.logo}
                     alt=""
                   />
@@ -235,7 +237,7 @@ export const FirstSectionPro = () => {
                 >
                   {JSON.parse(ele.description)[selectedLanguage]}
                 </p>
-                <div className=" preview rounded-lg ">
+                <div className=" w-full preview rounded-lg ">
                   <img
                   loading="lazy"
                     className="w-full h-full object-cover "
