@@ -39,9 +39,9 @@ const toggleDarkMode = useCallback(() => {
   const fetchGalleriesData = async () => {
     try {
       const response = await axios.get(`${URL}galleries`);
-      setTimeout(() => {
+      // setTimeout(() => {
         setGalleries(response.data);
-      }, 7000);
+      // }, 7000);
     } catch (error) {
       // window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
       console.error("Error fetching galleries data:", error);
@@ -65,9 +65,9 @@ const toggleDarkMode = useCallback(() => {
     axios
       .get(URL + "blogs")
       .then((res) => {
-        setTimeout(() => {
+        // setTimeout(() => {
           setBlogs(res.data);
-        }, 5000);
+        // }, 5000);
       })
       .catch((err) => {
         console.log("Blog fetching error", err);
@@ -78,9 +78,9 @@ const toggleDarkMode = useCallback(() => {
   const fetchEventsData = async () => {
     try {
       const response = await axios.get(`${URL}events`);
-      setTimeout(() => {
+      // setTimeout(() => {
         setEvents(response.data);
-      }, 3000);
+      // }, 3000);
     } catch (error) {
       console.error("Error fetching events data:", error);
     }
