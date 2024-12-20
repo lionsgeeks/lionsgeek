@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  transition: background-color 0.5s ease;
+}
+
 @font-face {
   font-family: Gotham;
   src: url(./assets/fonts/Gotham-Font/Gotham-Thin.otf);
