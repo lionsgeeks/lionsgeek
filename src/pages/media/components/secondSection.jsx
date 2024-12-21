@@ -18,7 +18,7 @@ import { MyContext } from "../../../utils/contextProvider";
 import gsap from "gsap";
 
 export const SecondSection = () => {
-  const { selectedLanguage,darkMode } = useContext(MyContext);
+  const { selectedLanguage, darkMode } = useContext(MyContext);
 
   const skill = [
     "Digital Marketing",
@@ -81,8 +81,8 @@ export const SecondSection = () => {
     Branding: [
       {
         ar: <span style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>اكتشف أساسيات إنشاء هوية علامة تجارية قوية. تعلم كيفية تطوير هوية بصرية ولفظية متسقة تتجاوب مع جمهورك وتتميز عن المنافسة</span>,
-        fr:<span style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>Découvrez les essentiels de la création d'une identité de marque forte. Apprenez à développer une identité visuelle et verbale cohérente qui résonne avec votre audience et vous distingue de la concurrence</span>,
-        en:<span style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>Discover the essentials of creating a strong brand identity. Learn how to develop a consistent visual and verbal identity that resonates with your audience and sets you apart from the competition.</span>,
+        fr: <span style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>Découvrez les essentiels de la création d'une identité de marque forte. Apprenez à développer une identité visuelle et verbale cohérente qui résonne avec votre audience et vous distingue de la concurrence</span>,
+        en: <span style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>Discover the essentials of creating a strong brand identity. Learn how to develop a consistent visual and verbal identity that resonates with your audience and sets you apart from the competition.</span>,
       },
       { en: "Branding", ar: "العلامة التجارية ", fr: "Branding" },
       [fingerPrint, linkedinLogo],
@@ -109,7 +109,7 @@ export const SecondSection = () => {
 
   return (
     <div className="flex flex-col gap-8 lg:px-16 px-7 py-7 bg-gray-50 " style={{ backgroundColor: darkMode ? "#0f0f0f" : "#f9fafb", }}
->
+    >
       <div className="w-full text-center pb-10">
         <h1 className="text-xl" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
         >
@@ -121,10 +121,9 @@ export const SecondSection = () => {
         </h1>
       </div>
       <div
-        className={`flex gap-2 flex-col lg:flex-row ${
-          selectedLanguage === "ar" ? "text-right lg:flex-row-reverse" : ""
-        }`}
-        
+        className={`flex gap-2 flex-col lg:flex-row ${selectedLanguage === "ar" ? "text-right lg:flex-row-reverse" : ""
+          }`}
+
       >
         <div className="lg:w-[40%] flex flex-col gap-2" >
           {skill.map((element, index) => (
@@ -136,40 +135,36 @@ export const SecondSection = () => {
                   setActiveSkill(element);
                   setAnime(true);
                 }}
-                className={`leftside overflow-x-hidden ${darkMode ? "bg-[#212529]" :"bg-white"}  cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${
-                  selectedLanguage === "ar"
-                    ? "text-right lg:flex-row-reverse"
-                    : ""
-                }`}
+                className={`leftside overflow-x-hidden ${darkMode ? "bg-[#212529]" : "bg-white"}  cursor-pointer p-3 pl-8 text-3xl flex justify-between items-center ${selectedLanguage === "ar"
+                  ? "text-right lg:flex-row-reverse"
+                  : ""
+                  }`}
               >
                 <h1
-                  className={`flex gap-3 ${darkMode ? "text-white" :"text-black"} ${
-                    selectedLanguage === "ar"
-                      ? "text-right lg:flex-row-reverse"
-                      : ""
-                  }`}
+                  className={`flex gap-3 ${darkMode ? "text-white" : "text-black"} ${selectedLanguage === "ar"
+                    ? "text-right lg:flex-row-reverse"
+                    : ""
+                    }`}
 
                 >
                   <span
-                    className={`${
-                      activeSkill === element ? "text-alpha" :  darkMode ?
+                    className={`${activeSkill === element ? "text-alpha" : darkMode ?
                       'text-white'
                       :
-                      'text-black' 
+                      'text-black'
 
-                    } font-bold`}
+                      } font-bold`}
                   >
                     {" "}
                     {index + 1}{" "}
                   </span>
                   <span
-                    className={`${
-                      activeSkill === element ? "text-alpha" : darkMode ?
+                    className={`${activeSkill === element ? "text-alpha" : darkMode ?
                       'text-white'
                       :
-                      'text-black' 
+                      'text-black'
 
-                    } font-bold`}
+                      } font-bold`}
                   >
                     {" "}
                     {TransText(programe[element][1])}{" "}
@@ -182,11 +177,9 @@ export const SecondSection = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className={`lg:rotate-0 ${
-                    activeSkill === element ? "stroke-alpha" :  darkMode ? "stroke-white" : "stroke-black"
-                  } ${element === hint ? "rotate-90" : ""} ${
-                    selectedLanguage === "ar" ? "lg:rotate-180" : ""
-                  } size-5 font-bold`}
+                  className={`lg:rotate-0 ${activeSkill === element ? "stroke-alpha" : darkMode ? "stroke-white" : "stroke-black"
+                    } ${element === hint ? "rotate-90" : ""} ${selectedLanguage === "ar" ? "lg:rotate-180" : ""
+                    } size-5 font-bold`}
                 >
                   <path
                     strokeLinecap="round"
@@ -196,11 +189,11 @@ export const SecondSection = () => {
                 </svg>
               </div>
               <div
-                className={`${
-                  element === hint ? "h-auto " : "h-0 hidden"
-                }  gap-2 lg:hidden flex flex-col bg-white p-4`}
-                style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff", border: darkMode ? "1px solid #ffffff" : "none",  color: darkMode ? "#ffffff" : "#0f0f0f" 
-              }}
+                className={`${element === hint ? "h-auto " : "h-0 hidden"
+                  }  gap-2 lg:hidden flex flex-col bg-white p-4`}
+                style={{
+                  backgroundColor: darkMode ? "#0f0f0f" : "#ffffff", border: darkMode ? "1px solid #ffffff" : "none", color: darkMode ? "#ffffff" : "#0f0f0f"
+                }}
 
               >
                 {TransText(programe[element][0])}
@@ -208,30 +201,28 @@ export const SecondSection = () => {
             </div>
           ))}
         </div>
-        <div className="hidden lg:flex lg:w-[50%] p-4 bg-white relative overflow-hidden" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff", border: darkMode ? "1px solid #ffffff" : "none",  }}
+        <div className="hidden lg:flex lg:w-[50%] p-4 bg-white relative overflow-hidden" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff", border: darkMode ? "1px solid #ffffff" : "none", }}
         >
           {programe[hint] && (
             <>
               <p
-                className={`font-medium text-xl bg-white/25 absolute px-5 ${
-                  selectedLanguage == "ar" ? "text-right " : ""
-                }`}
-                style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff"  }}
+                className={`font-medium text-xl bg-white/25 absolute px-5 ${selectedLanguage == "ar" ? "text-right " : ""
+                  }`}
+                style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" }}
 
               >
                 {TransText(programe[hint][0])}
               </p>
               <img
-              loading="lazy"
-                className={`hidden lg:flex size-[120%] object-cover absolute duration-700 ${
-                  anime ? "-rotate-12 -right-56 duration-500" : "-right-96"
-                } -top-6 opacity-5`}
+                loading="lazy"
+                className={`hidden lg:flex size-[120%] object-cover absolute duration-700 ${anime ? "-rotate-12 -right-56 duration-500" : "-right-96"
+                  } -top-6 opacity-5`}
                 style={{
                   opacity: darkMode ? 0.2 : undefined
-              }}
+                }}
                 src={
                   programe[hint][2][
-                    Math.floor(Math.random() * programe[hint][2].length)
+                  Math.floor(Math.random() * programe[hint][2].length)
                   ]
                 }
                 alt=""
@@ -241,11 +232,12 @@ export const SecondSection = () => {
         </div>
         <div
           ref={rightside}
-          className={`lg:flex lg:flex-col hidden w-[10%] gap-2 ${darkMode && "invert"}`}
-          
+          className={`lg:flex lg:flex-col hidden w-[10%] gap-2 `}
+
         >
           {programe[hint][2].map((element, index) => (
-            <img loading="lazy" key={index} className="w-[40%]" src={element} alt="" />
+            <img loading="lazy" key={index} className={`w-[40%] ${darkMode && ![facebook , instaLogo , premierPro , photoshop , illustrator , afterEffect].includes(element) && "invert"}`}
+              src={element} alt="" />
           ))}
         </div>
       </div>

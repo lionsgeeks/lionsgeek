@@ -357,7 +357,7 @@ export const SecondSection = () => {
         </div>
         <div ref={rightside} className="lg:flex hidden lg:flex-col w-[10%]" >
           {programe[hint][2].map((element, index) => (
-            <img loading="lazy" key={index} className="w-[40%]" src={element} alt="" />
+            <img loading="lazy" key={index} className={`w-[40%] ${darkMode & element == githubLogo && "invert"}`} src={element} alt="" />
           ))}
         </div>
       </div>
