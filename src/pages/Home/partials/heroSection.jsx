@@ -3,21 +3,21 @@ import { Button, TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
 
 export default function HeroSection() {
-  const { selectedLanguage,darkMode } = useContext(MyContext);
+  const { selectedLanguage, darkMode } = useContext(MyContext);
 
   const pillars = [
     {
       //darkMode title 
-title: { 
-  en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Training</span>, 
-  fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Formation</span>, 
-  ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>تدريب</span>, 
- 
-},
+      title: {
+        en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Training</span>,
+        fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Formation</span>,
+        ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>تدريب</span>,
+
+      },
       description: {
-        en: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Master tech in 6 months! Gain the skills to thrive in the digital world. Build your career, start projects, and join a community of future tech pros.</span> ,
-        fr: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Devenez expert en tech en 6 mois! Acquérez des compétences recherchées pour réussir dans le digital. Lancez vous, créez des projets et rejoignez une communauté.</span>,
-        ar:<span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>أتقن التقنية في 6 أشهر! اكتسب مهارات مطلوبة لتزدهر في العالم الرقمي. ابدأ مسيرتك المهنية، أنشئ مشاريعك، وانضم إلى مجتمع الخبراء التقنيين</span> ,
+        en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Master tech in 6 months! Gain the skills to thrive in the digital world. Build your career, start projects, and join a community of future tech pros.</span>,
+        fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Devenez expert en tech en 6 mois! Acquérez des compétences recherchées pour réussir dans le digital. Lancez vous, créez des projets et rejoignez une communauté.</span>,
+        ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>أتقن التقنية في 6 أشهر! اكتسب مهارات مطلوبة لتزدهر في العالم الرقمي. ابدأ مسيرتك المهنية، أنشئ مشاريعك، وانضم إلى مجتمع الخبراء التقنيين</span>,
       },
       icon: (
         <svg
@@ -25,8 +25,8 @@ title: {
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          stroke="currentColor" 
-          className={`absolute z-10 h-full scale-125 ${darkMode ? "stroke-white" : "stroke-beta/[6.25%]"}  -top-[10%] ${selectedLanguage === "ar" ? "left-0 rotate-45" : "right-0 -rotate-45"
+          stroke="currentColor"
+          className={`absolute z-10 h-full scale-125 ${darkMode ? "stroke-white/[15.25%]" : "stroke-beta/[6.25%]"}  -top-[10%] ${selectedLanguage === "ar" ? "left-0 rotate-45" : "right-0 -rotate-45"
             } transition-all duration-[625ms] group-hover:opacity-0 group-hover:scale-[25]`}
         >
           <path
@@ -38,17 +38,17 @@ title: {
       ),
     },
     {
-      title: { 
-        en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Co-working</span>, 
-        fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Coworking</span>, 
-        ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>العمل المشترك</span>, 
+      title: {
+        en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Co-working</span>,
+        fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Coworking</span>,
+        ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>العمل المشترك</span>,
       },
       description: {
-        en: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Thrive in a dynamic coworking space! Collaborate, network, and elevate your work. Build ideas, create projects, and join a vibrant community of professionals.</span> ,
-        fr: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Un espace de coworking dynamique où les idées s'épanouissent. Connectez-vous à des esprits similaires, collaborez sur des projets et améliorez votre travail.</span>,
-        ar:<span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>مساحة عمل مشتركة نابضة حيث تزدهر الأفكار. تواصل مع أشخاص يشاركونك الفكر، وتعاون على المشاريع، وارفع مستوى عملك.</span> ,
+        en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Thrive in a dynamic coworking space! Collaborate, network, and elevate your work. Build ideas, create projects, and join a vibrant community of professionals.</span>,
+        fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Un espace de coworking dynamique où les idées s'épanouissent. Connectez-vous à des esprits similaires, collaborez sur des projets et améliorez votre travail.</span>,
+        ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>مساحة عمل مشتركة نابضة حيث تزدهر الأفكار. تواصل مع أشخاص يشاركونك الفكر، وتعاون على المشاريع، وارفع مستوى عملك.</span>,
       },
-      
+
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,7 @@ title: {
         >
 
           <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-            fill="#f3f3f4" stroke="none">
+            fill={darkMode ? "rgb(255 255 255 / 15.25%)" : "#f3f3f4"} stroke="none">
             <path d="M790 4326 c-188 -42 -314 -214 -296 -404 12 -129 100 -253 219 -308
 55 -26 73 -29 157 -29 88 0 101 3 162 33 137 67 211 187 212 342 1 75 -3 93
 -31 152 -55 117 -154 194 -278 217 -69 13 -74 13 -145 -3z"/>
@@ -108,18 +108,18 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
       ),
     },
     {
-      title: { 
-  en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Event</span>, 
-  fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Évènement</span>, 
-  ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>فعالية</span>, 
- 
-},
-description: {
-  en: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Dive into inspiring workshops, thrilling hackathons, and networking events. Be part of a community of developers, designers, and innovators</span> ,
-  fr: <span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>Participez à des ateliers inspirants, hackathons palpitants et événements réseau enrichissants. Rejoignez une communauté créative de développeurs et designers.</span>,
-  ar:<span style={{ color: darkMode ? "#fff":"#1f1f1f" }}>انضم إلى ورش عمل ملهمة، ومسابقات برمجية مثيرة، وفعاليات تواصل مؤثرة. كن جزءًا من مجتمع مبدع من المطورين والمصممين.</span> ,
-},
-    
+      title: {
+        en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Event</span>,
+        fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Évènement</span>,
+        ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>فعالية</span>,
+
+      },
+      description: {
+        en: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Dive into inspiring workshops, thrilling hackathons, and networking events. Be part of a community of developers, designers, and innovators</span>,
+        fr: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>Participez à des ateliers inspirants, hackathons palpitants et événements réseau enrichissants. Rejoignez une communauté créative de développeurs et designers.</span>,
+        ar: <span style={{ color: darkMode ? "#fff" : "#1f1f1f" }}>انضم إلى ورش عمل ملهمة، ومسابقات برمجية مثيرة، وفعاليات تواصل مؤثرة. كن جزءًا من مجتمع مبدع من المطورين والمصممين.</span>,
+      },
+
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -131,14 +131,14 @@ description: {
             } transition-all duration-[625ms] group-hover:opacity-0 group-hover:scale-[25]`}
         >
 
-<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-fill="#f3f3f4" stroke="none">
-<path d="M530 4876 c-223 -89 -415 -172 -427 -184 l-23 -21 0 -751 0 -751 25
+          <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+            fill={darkMode ? "rgb(255 255 255 / 15.25%)" : "#f3f3f4"}  stroke="none">
+            <path d="M530 4876 c-223 -89 -415 -172 -427 -184 l-23 -21 0 -751 0 -751 25
 -24 c13 -14 34 -25 47 -25 38 0 851 329 871 352 16 19 17 70 17 770 l0 749
 -25 24 c-15 16 -35 25 -52 24 -15 0 -210 -74 -433 -163z m350 -669 l0 -633
 -307 -123 c-170 -68 -314 -125 -320 -128 -10 -4 -13 126 -13 629 l0 634 312
 126 c172 69 316 127 321 127 4 1 7 -284 7 -632z"/>
-<path d="M1145 5015 l-25 -24 0 -751 0 -751 25 -24 24 -25 1391 0 1391 0 24
+            <path d="M1145 5015 l-25 -24 0 -751 0 -751 25 -24 24 -25 1391 0 1391 0 24
 25 25 24 0 751 0 751 -25 24 -24 25 -1391 0 -1391 0 -24 -25z m1340 -144 c-90
 -22 -172 -90 -215 -176 -24 -47 -25 -60 -25 -215 0 -160 1 -167 27 -216 15
 -28 38 -64 52 -81 27 -32 113 -82 160 -94 18 -4 -34 -7 -123 -8 -188 -1 -220
@@ -152,12 +152,12 @@ fill="#f3f3f4" stroke="none">
 40 19 120 12 153 -13z m287 -798 c24 -23 25 -29 25 -160 l0 -135 -40 0 -40 0
 0 80 0 80 -80 0 -80 0 0 -80 0 -80 -160 0 -160 0 0 80 0 80 -80 0 -80 0 0 -80
 0 -80 -40 0 -40 0 0 135 c0 131 1 137 25 160 l24 25 351 0 351 0 24 -25z"/>
-<path d="M4105 5015 l-25 -24 0 -749 c0 -700 1 -751 18 -770 19 -23 832 -352
+            <path d="M4105 5015 l-25 -24 0 -749 c0 -700 1 -751 18 -770 19 -23 832 -352
 870 -352 13 0 34 11 47 25 l25 24 0 749 c0 700 -1 751 -17 770 -20 23 -833
 352 -871 352 -13 0 -34 -11 -47 -25z m468 -306 l307 -123 0 -634 c0 -503 -3
 -633 -12 -629 -7 3 -151 60 -320 128 l-308 123 0 634 c0 503 3 633 13 629 6
 -3 150 -60 320 -128z"/>
-<path d="M960 3267 c-49 -16 -133 -102 -148 -153 -16 -56 -16 -412 0 -468 16
+            <path d="M960 3267 c-49 -16 -133 -102 -148 -153 -16 -56 -16 -412 0 -468 16
 -55 99 -138 154 -154 25 -7 107 -12 205 -12 l164 -1 159 -119 c174 -131 197
 -140 241 -95 23 22 25 32 25 120 l0 95 56 0 c31 0 75 5 98 12 55 16 138 99
 154 154 16 55 16 412 0 466 -6 22 -31 62 -55 88 -72 81 -69 80 -577 79 -291
@@ -165,20 +165,20 @@ fill="#f3f3f4" stroke="none">
 -215 -23 -24 -31 -25 -135 -25 -104 0 -112 -1 -135 -25 -21 -20 -25 -34 -25
 -80 l0 -55 -107 80 -106 80 -189 0 c-255 0 -238 -17 -238 240 0 189 0 191 25
 215 l24 25 431 0 431 0 24 -25z"/>
-<path d="M1120 2880 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z"/>
-<path d="M1360 2880 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z"/>
-<path d="M1600 2880 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z"/>
-<path d="M3385 3255 c-23 -22 -25 -32 -25 -120 l0 -95 -56 0 c-31 0 -75 -5
+            <path d="M1120 2880 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z" />
+            <path d="M1360 2880 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z" />
+            <path d="M1600 2880 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z" />
+            <path d="M3385 3255 c-23 -22 -25 -32 -25 -120 l0 -95 -56 0 c-31 0 -75 -5
 -98 -12 -55 -16 -138 -99 -154 -154 -16 -56 -16 -412 0 -468 16 -55 99 -138
 154 -154 58 -17 890 -17 948 0 55 16 138 99 154 154 16 55 16 412 0 466 -6 22
 -31 62 -55 88 -63 70 -100 80 -302 80 l-166 1 -159 119 c-174 131 -197 140
 -241 95z m537 -375 c255 0 238 17 238 -240 0 -189 0 -191 -25 -215 l-24 -25
 -431 0 -431 0 -24 25 c-25 24 -25 26 -25 215 0 189 0 191 25 215 23 24 31 25
 135 25 104 0 112 1 135 25 21 20 25 34 25 80 l0 55 107 -80 106 -80 189 0z"/>
-<path d="M3360 2640 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z"/>
-<path d="M3600 2640 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z"/>
-<path d="M3840 2640 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z"/>
-<path d="M2441 2624 c-169 -45 -301 -180 -346 -351 -20 -77 -20 -309 0 -386
+            <path d="M3360 2640 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z" />
+            <path d="M3600 2640 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z" />
+            <path d="M3840 2640 l0 -80 80 0 80 0 0 80 0 80 -80 0 -80 0 0 -80z" />
+            <path d="M2441 2624 c-169 -45 -301 -180 -346 -351 -20 -77 -20 -309 0 -386
 17 -68 54 -142 90 -185 l25 -30 -52 -17 c-84 -27 -171 -80 -232 -141 -65 -65
 -99 -118 -135 -213 -23 -62 -25 -79 -29 -298 l-4 -232 26 -26 25 -25 751 0
 751 0 25 25 26 26 -4 232 c-4 219 -6 236 -29 298 -37 95 -71 149 -138 216 -61
@@ -191,7 +191,7 @@ fill="#f3f3f4" stroke="none">
 -80 0 0 -160 0 -160 -320 0 -320 0 0 160 0 160 -80 0 -80 0 0 -160 0 -160 -81
 0 -81 0 4 168 c3 163 4 168 35 234 17 37 50 87 72 111 44 48 135 101 197 116
 22 5 181 9 355 8 l315 -2 76 -37z"/>
-<path d="M761 1984 c-169 -45 -301 -180 -346 -351 -20 -77 -20 -309 0 -386 17
+            <path d="M761 1984 c-169 -45 -301 -180 -346 -351 -20 -77 -20 -309 0 -386 17
 -68 54 -142 90 -185 l25 -30 -52 -17 c-84 -27 -171 -80 -232 -141 -65 -65 -99
 -118 -135 -213 -23 -62 -25 -79 -29 -298 l-4 -232 26 -26 25 -25 751 0 751 0
 25 25 26 26 -4 232 c-4 219 -6 236 -29 298 -37 95 -71 149 -138 216 -61 62
@@ -204,7 +204,7 @@ fill="#f3f3f4" stroke="none">
 -80 0 0 -160 0 -160 -320 0 -320 0 0 160 0 160 -80 0 -80 0 0 -160 0 -160 -81
 0 -81 0 4 168 c3 163 4 168 35 234 17 37 50 87 72 111 44 48 135 101 197 116
 22 5 181 9 355 8 l315 -2 76 -37z"/>
-<path d="M4121 1984 c-169 -45 -301 -180 -346 -351 -20 -77 -20 -309 0 -386
+            <path d="M4121 1984 c-169 -45 -301 -180 -346 -351 -20 -77 -20 -309 0 -386
 17 -68 54 -142 90 -185 l25 -30 -52 -17 c-84 -27 -171 -80 -232 -141 -65 -65
 -99 -118 -135 -213 -23 -62 -25 -79 -29 -298 l-4 -232 26 -26 25 -25 751 0
 751 0 25 25 26 26 -4 232 c-4 219 -6 236 -29 298 -37 95 -71 149 -138 216 -61
@@ -217,14 +217,14 @@ fill="#f3f3f4" stroke="none">
 -80 0 0 -160 0 -160 -320 0 -320 0 0 160 0 160 -80 0 -80 0 0 -160 0 -160 -81
 0 -81 0 4 168 c3 163 4 168 35 234 17 37 50 87 72 111 44 48 135 101 197 116
 22 5 181 9 355 8 l315 -2 76 -37z"/>
-</g>
+          </g>
         </svg>
       ),
     },
   ];
 
   return (
-    <div className=" mt-[67.11px] px-7 md:px-16 text- text-balance pt-6 py-12 flex flex-col justify-between gap-6 md:gap-12" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff"}}>
+    <div className=" mt-[67.11px] px-7 md:px-16 text- text-balance pt-6 py-12 flex flex-col justify-between gap-6 md:gap-12" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" }}>
       <div className="bg-image h-[70vh] bg-no-repeat bg-center bg-cover md:h-[calc(calc(100vh-67.11px)*2/3)] rounded-lg overflow-hidden p-12 relative after:absolute after:size-full after:inset-0 after:bg-beta/50">
         <div
           className={`flex flex-col  gap-4 absolute z-10 top-1/2 -translate-y-1/2 lg:w-[calc(calc(100%-6rem)*0.5)] ${selectedLanguage === "ar" ? "items-end right-12" : "items-start left-12"
@@ -258,11 +258,11 @@ fill="#f3f3f4" stroke="none">
       </div>
 
       <div className="md:h-1/2 flex gap-4 flex-col">
-        <h2 style={{ color: darkMode ? "#fff" : "#1d1d1d"}}
+        <h2 style={{ color: darkMode ? "#fff" : "#1d1d1d" }}
           className={`text-xl md:text-3xl font-bold ${selectedLanguage === "ar" ? "text-end" : "text-start"
             }`}
         >
-          <TransText  fr="Nos piliers" en="Our pillars" ar="ركائزنا" />
+          <TransText fr="Nos piliers" en="Our pillars" ar="ركائزنا" />
         </h2>
 
         <div
@@ -271,13 +271,13 @@ fill="#f3f3f4" stroke="none">
         >
           {pillars.map(({ title, description, icon }, index) => (
             <div
-            style={{ border: `1px solid ${darkMode ? "#fff" : "#1f1f1f"}` }}
-            key={index}
+              style={{ border: `1px solid ${darkMode ? "#fff" : "#1f1f1f"}` }}
+              key={index}
               className="md:w-[32%]  py-3 md:pt-8 md:pb-4 border rounded-lg rounded-tr-none md:h-full  relative overflow-hidden group cursor-pointer flex justify-end"
             >
               {icon}
 
-              <div 
+              <div
                 className={`flex flex-col justify-end py-4 px-4 md:pl-8 md:pb-6 overflow-hidden ${selectedLanguage === "ar" ? "text-end" : "text-start"
                   }`}
               >
