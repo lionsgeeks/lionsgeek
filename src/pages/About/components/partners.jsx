@@ -6,7 +6,7 @@ export const Partners = () => {
   const { t } = useTranslation()
   const { darkMode } = useAppContext()
   return (
-    <div className={`${darkMode && "bg-[#0f0f0f]"} px-16 py-24`}>
+    <div className={`${darkMode && "bg-[#0f0f0f]"} px-16 py-20`}>
       <div className="overflow-hidden flex flex-col gap-6 items-center justify-between">
         <div className="w-full text-center pb-10">
           <h1 className={`${darkMode && "text-alpha"} text-xl`}>{t('main.about.section5.title.name')}</h1>
@@ -18,7 +18,7 @@ export const Partners = () => {
               
               <img
                 loading="lazy"
-                className={`h-12 ${darkMode && "invert" }  w-[calc(calc(100%-calc(3*0.60rem))/4)] md:w-[calc(calc(100%-calc(11*3rem))/5)] object-contain`}
+                className={`h-12 ${darkMode & index!=0 && "invert" }  w-[calc(calc(100%-calc(3*0.60rem))/4)] md:w-[calc(calc(100%-calc(11*3rem))/5)] object-contain`}
                 key={index}
                 src={require(`../../../assets/images/partners/partner-${index}.png`)}
                 alt={`partner-${index}`}
