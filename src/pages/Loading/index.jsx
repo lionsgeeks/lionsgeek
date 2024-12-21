@@ -1,11 +1,16 @@
 import "./loading.sass";
 
 const LoadingPage = () => {
+
+  const darkMode = localStorage.getItem("darkMode") === "true";
+  console.log(darkMode);
+
+
   return (
-    <div className={`h-screen flex justify-center flex-col gap-8 items-center relative overflow-hidden group `}>
+    <div className={`h-screen ${darkMode && "bg-[#0f0f0f]"} flex justify-center flex-col gap-8 items-center relative overflow-hidden group `}>
       <svg
         viewBox="0 0 37 36"
-        fill="#212529"
+        fill={darkMode ? "#fff" : "#000"}
         xmlns="http://www.w3.org/2000/svg"
         className="size-24 spin"
       >
@@ -17,7 +22,7 @@ const LoadingPage = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="animate-pulse absolute h-5/6 fill-beta/5 -top-1/3 left-0 rotate-45 transition-all duration-700 group-hover/coding:rotate-[200deg] group-hover/coding:left-2/4 group-hover/coding:scale-[62.5%] group-hover/coding:top-0"
+        className={`animate-pulse absolute h-5/6 fill-beta/5 -top-1/3 left-0 rotate-45 transition-all duration-700 group-hover/coding:rotate-[200deg] group-hover/coding:left-2/4 group-hover/coding:scale-[62.5%] group-hover/coding:top-0 ${darkMode ? "fill-[#252529]" : "fill-beta/5"}`}
       >
         <path
           fillRule="evenodd"
@@ -32,7 +37,7 @@ const LoadingPage = () => {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="animate-pulse absolute h-5/6 stroke-beta/5 -bottom-1/3 right-0 -rotate-45  transition-all duration-700 group-hover/media:rotate-[382.5deg] group-hover/media:right-1/2 group-hover/media:scale-75 group-hover/media:top-0"
+        className={`animate-pulse absolute h-5/6 ${darkMode ? "stroke-[#252529]" : "stroke-beta/5"} -bottom-1/3 right-0 -rotate-45  transition-all duration-700 group-hover/media:rotate-[382.5deg] group-hover/media:right-1/2 group-hover/media:scale-75 group-hover/media:top-0`}
       >
         <path
           strokeLinecap="round"
