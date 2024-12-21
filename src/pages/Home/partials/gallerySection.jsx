@@ -106,7 +106,7 @@ export default function GallerySection() {
               <div className="flex md:px-16 px-4 gap-[calc(5%/3)] ">
                 {
                   Array.from({ length: 3 }).map((_, index) => (
-                    <div className={`${index !== 0 && "max-md:hidden"} skeleton flex items-center justify-center gap-5  md:w-[calc(95%/3)] w-full bg-skeleton1 h-[25rem] p-6  rounded-md`} >
+                    <div key={index} className={`${index !== 0 && "max-md:hidden"} skeleton flex items-center justify-center gap-5  md:w-[calc(95%/3)] w-full bg-skeleton1 h-[25rem] p-6  rounded-md`} >
                       <AiFillPicture className="text-[8rem] opacity-30 " />
                     </div>
                   ))
