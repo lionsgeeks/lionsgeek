@@ -1,16 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { TransText } from "../../../components";
 import { useTranslation } from "react-i18next";
-import { MyContext } from "../../../utils/contextProvider";
+import { MyContext, useAppContext } from "../../../utils/contextProvider";
 import axios from "axios";
 
-const API_URL = "http://172.28.0.186:8000/api/";
 
 export const BookingModal = ({ isOpen, onClose, event }) => {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
-  const { selectedLanguage } = useContext(MyContext);
+  const { selectedLanguage  , URL} = useAppContext();
 
   if (!isOpen) return null;
 
@@ -48,7 +47,7 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
     formdata.append("event_id", event.id);
 
     try {
-      const response = await axios.post(API_URL + "booking/store", formdata);
+      const response = await axios.post(URL + "booking/store", formdata);
       setSuccessMessage(response.data.message);
     } catch (error) {
       const errorMessage = {

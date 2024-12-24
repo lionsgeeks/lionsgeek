@@ -300,7 +300,7 @@ export const FirstSectionEventDetail = () => {
           <BookingModal
           isOpen={switcher}
           onClose={() => switching(false)}
-          event={event}
+          event={event[0]}
         />
         </div>
       ) :
