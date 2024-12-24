@@ -43,16 +43,19 @@ const TimeBlock = ({ value, label }) => {
     </div>
   );
 };
-
+let switcher = false
+const switching = (lightSwitch) => {  
+  return switcher = lightSwitch
+}
 const BookingSection = ({ event }) => {
   const { darkMode } = useContext(MyContext);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   if (!hasEventPassed(event?.date)) {
 
     return (
 
       <>
+
         <div className="p-4">
           <h1 className={`font-bold text-2xl py-3 ${darkMode ? "text-white":"text-black"}`}>
             <TransText
@@ -67,7 +70,7 @@ const BookingSection = ({ event }) => {
         <div className="p-4">
           <button
             className="bg-alpha text-black rounded-md px-4 py-2 transition w-full"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => switching(true)}
           >
             <TransText
               fr="Réserver maintenant"
@@ -75,12 +78,8 @@ const BookingSection = ({ event }) => {
               ar="احجز الآن"
             />
           </button>
+
         </div>
-        <BookingModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          event={event}
-        />
       </>
     );
   }
@@ -298,6 +297,11 @@ export const FirstSectionEventDetail = () => {
               <BookingSection event={event[0]} />
             </div>
           </div>
+          <BookingModal
+          isOpen={switcher}
+          onClose={() => switching(false)}
+          event={event}
+        />
         </div>
       ) :
         <>

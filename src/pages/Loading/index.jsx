@@ -22,7 +22,7 @@ const LoadingPage = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className={`animate-pulse absolute h-5/6 fill-beta/5 -top-1/3 left-0 rotate-45 transition-all duration-700 group-hover/coding:rotate-[200deg] group-hover/coding:left-2/4 group-hover/coding:scale-[62.5%] group-hover/coding:top-0 ${darkMode ? "fill-[#252529]" : "fill-beta/5"}`}
+        className={`animate-pulse absolute h-5/6 ${darkMode ? "fill-[#252529]" : "fill-beta/5"} -top-1/3 left-0 rotate-45 transition-all duration-700 group-hover/coding:rotate-[200deg] group-hover/coding:left-2/4 group-hover/coding:scale-[62.5%] group-hover/coding:top-0 ${darkMode ? "fill-[#252529]" : "fill-beta/5"}`}
       >
         <path
           fillRule="evenodd"

@@ -237,7 +237,7 @@ export const FirstSectionPro = () => {
                 >
                   {JSON.parse(ele.description)[selectedLanguage]}
                 </p>
-                <div className=" w-full preview rounded-lg ">
+                <div className=" w-full h-full bg-white preview rounded-lg ">
                   <img
                   loading="lazy"
                     className="w-full h-full object-cover "
