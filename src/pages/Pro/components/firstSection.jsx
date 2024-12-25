@@ -235,7 +235,7 @@ export const FirstSectionPro = () => {
                     selectedLanguage == "ar" && "text-end"
                   }`}
                 >
-                  {JSON.parse(ele.description)[selectedLanguage]}
+                  {ele.description[selectedLanguage]}
                 </p>
                 <div className=" w-full h-full bg-white preview rounded-lg ">
                   <img

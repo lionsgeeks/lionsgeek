@@ -21,7 +21,7 @@ const ar = <svg xmlns="http://www.w3.org/2000/svg" width={flag_width} id="flag-i
 
 
 export const LANGUAGES = [
-    { label: "francais", code: "fr", flag: fr },
+    { label: "Francais", code: "fr", flag: fr },
     { label: "English", code: "en", flag: en },
     { label: "العربية", code: "ar", flag: ar },
 ];
