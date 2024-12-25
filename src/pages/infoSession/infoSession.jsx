@@ -375,10 +375,11 @@ const InfoSession = () => {
                     :
                     <Required />
                     <span
-                      className={`text-sm ${motivation.length < 150
-                        ? "text-red-600"
-                        : "text-green-500"
-                        }`}
+                      className={`text-sm ${
+                        motivation.length < 150
+                          ? "text-red-600"
+                          : "text-green-500"
+                      } `}
                     >
                       {" "}
                       {motivation.length}/150
