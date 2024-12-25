@@ -129,10 +129,10 @@ export const ContactUs = () => {
                                 value={formInfo.first} type="text" name="first" id="first"
                                 className={`${selectedLanguage === 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 `}
                                 placeholder=" "
-                                style={{ color: darkMode ? "#6b7280" : "#0f0f0f" , } }
+                                style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }
 
                             />
-                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`} style={{ color: darkMode ? "#ffffff" : "#6b7280" , } }
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha  ${ darkMode ? "text-white/50" : "text-gray-500"  }`} 
                             >
                                 {t('main.contactUs.first_name')}
                             </label>
@@ -143,9 +143,9 @@ export const ContactUs = () => {
                                 value={formInfo.last} type="text" name="last" id="last"
                                 className={` ${selectedLanguage === 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
                                 placeholder=" "
-                                style={{ color: darkMode ? "#6b7280" : "#0f0f0f" , } }
+                                style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }
                             />
-                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`} style={{ color: darkMode ? "#ffffff" : "#6b7280" , } }>
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha  ${ darkMode ? "text-white/50" : "text-gray-500"  }`} >
                                 {t('main.contactUs.last_name')}
                             </label>
                         </div>
@@ -155,10 +155,10 @@ export const ContactUs = () => {
                                 value={formInfo.phone} type="tel" name="phone" id="phone"
                                 className={` ${selectedLanguage === 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
                                 placeholder=" "
-                                style={{ color: darkMode ? "#6b7280" : "#0f0f0f" , } }
+                                style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }
 
                             />
-                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' ']  peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`} style={{ color: darkMode ? "#ffffff" : "#6b7280" , } }>
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' ']  peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha  ${ darkMode ? "text-white/50" : "text-gray-500"  }`} >
                                 {t('main.contactUs.phone_number')}
                             </label>
                         </div>
@@ -168,10 +168,10 @@ export const ContactUs = () => {
                                 value={formInfo.email} type="email" name="email" id="email"
                                 className={`${selectedLanguage === 'ar' ? 'text-end' : ''} peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
                                 placeholder=" "
-                                style={{ color: darkMode ? "#6b7280" : "#0f0f0f" , } }
+                                style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }
 
                             />
-                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' ']  peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`} style={{ color: darkMode ? "#ffffff" : "#6b7280" , } }>
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' ']  peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha  ${ darkMode ? "text-white/50" : "text-gray-500"  }`} >
                                 {t('main.contactUs.email')}
                             </label>
                         </div>
@@ -183,9 +183,9 @@ export const ContactUs = () => {
                             <textarea name="message" id="message"
                                 onChange={handleInputChange} value={formInfo.message}
                                 className={`${selectedLanguage === 'ar' ? 'text-end' : ''} resize-none  peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-alpha focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
-                                placeholder=" " style={{ color: darkMode ? "#6b7280" : "#0f0f0f" , } }
+                                placeholder=" " style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }
 />
-                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha text-gray-500`} style={{ color: darkMode ? "#ffffff" : "#6b7280" , } }>
+                            <label className={`pt-1 pointer-events-none absolute ${selectedLanguage === 'ar' ? 'right-0' : 'left-0'}  -top-1.5 transition-all after:content[' '] peer-placeholder-shown:text-sm  peer-placeholder-shown:leading-[4.25] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-alpha  ${ darkMode ? "text-white/50" : "text-gray-500"  }`} >
                                 {t('main.contactUs.message')}
                             </label>
                         </div>

@@ -3,7 +3,7 @@ import "./loading.sass";
 const LoadingPage = () => {
 
   const darkMode = localStorage.getItem("darkMode") === "true";
-  console.log(darkMode);
+  // console.log(darkMode);
 
 
   return (
