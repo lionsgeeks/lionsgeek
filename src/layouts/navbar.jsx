@@ -146,14 +146,14 @@ const Navbar = () => {
 
               </Link>
               {/* toggle */}
-              <button
+       <button
                 className="rounded-lg lg:hidden focus:outline-none focus:shadow-outline"
                 onClick={toggleNavbar}
               >
                 <svg
                   fill="currentColor"
                   viewBox="0 0 20 20"
-                  className="w-6 h-6"
+                  className={`w-6 h-6 ${darkMode ? "fill-white" : "fill-black"}`}
                 >
                   {isOpen ? (
                     <path
