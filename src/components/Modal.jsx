@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import TransText from "./TransText.tsx";
+import { useAppContext } from "../utils/contextProvider.jsx";
 
 const Modal = ({ validate, confirm, action }) => {
   const validIcon = (
@@ -46,18 +47,19 @@ const Modal = ({ validate, confirm, action }) => {
       document.body.style.overflow = "auto";
     };
   }, [confirm]);
+  const {darkMode}=useAppContext();
   return (
     <div className="fixed z-50 inset-0 p-5  transition-shadow w-full h-screen bg-gray-600/90 flex justify-center items-center">
-      <div className="bg-white lg:w-[60%] rounded py-16 px-5 flex flex-col items-center text-center gap-3 ">
+      <div className={`${darkMode ? "bg-black ":"bg-white"}  lg:w-[60%] rounded py-16 px-5 flex flex-col items-center text-center gap-3`}>
         {validate ? validIcon : notValidIcon}
-        <h1 className="text-xl font-medium text-black/50">
+        <h1 className={`text-xl font-medium  ${darkMode ? "text-white":"text-black/50"}`}>
           {validate ? (
             <TransText en="Success!" fr="Succès !" ar="نجاح" />
           ) : (
             <TransText en="Oops!" fr="Oops!" ar="عذرًا" />
           )}
         </h1>
-        <p>
+        <p className={`${darkMode ? "text-white":"text-black/50"}`}>
           {validate ? (
             <TransText
               ar="شكراً لتسجيلك في جلسة المعلومات"
@@ -72,7 +74,7 @@ const Modal = ({ validate, confirm, action }) => {
             />
           )}
         </p>
-        <p>
+        <p className={`${darkMode ? "text-white":"text-black/50"}`}>
           {validate ? (
             <TransText
               en="Please check your email inbox (or spam folder) for a confirmation message with all the event details."
