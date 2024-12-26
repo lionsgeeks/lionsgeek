@@ -17,7 +17,8 @@ const InfoSession = () => {
   const [pref, setPref] = useState("");
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState(false);
-
+  const [refresh, setRefresh] = useState(false);
+  const navigate = useNavigate();
   const dateLanguage = {
     en: "US",
     fr: "FR",
@@ -27,12 +28,29 @@ const InfoSession = () => {
   const [motivation, setMotivation] = useState("");
   const [source, setSource] = useState("");
   const formFields = [
-    { name: "full_name", label: <TransText en="Full Name" fr="Nom Complet" ar="الاسم الكامل" />, type: "text" },
-    { name: "email", label: <TransText en="Email" fr="Email" ar="البريد الإلكتروني" />, type: "email" },
-    { name: "birthday", label: <TransText en="Birthday" fr="Date de Naissance" ar="تاريخ الميلاد" />, type: "date" },
-    { name: "phone", label: <TransText en="Phone" fr="Téléphone" ar="رقم الهاتف" />, type: "tel" },
+    {
+      name: "full_name",
+      label: <TransText en="Full Name" fr="Nom Complet" ar="الاسم الكامل" />,
+      type: "text",
+    },
+    {
+      name: "email",
+      label: <TransText en="Email" fr="Email" ar="البريد الإلكتروني" />,
+      type: "email",
+    },
+    {
+      name: "birthday",
+      label: (
+        <TransText en="Birthday" fr="Date de Naissance" ar="تاريخ الميلاد" />
+      ),
+      type: "date",
+    },
+    {
+      name: "phone",
+      label: <TransText en="Phone" fr="Téléphone" ar="رقم الهاتف" />,
+      type: "tel",
+    },
   ];
-
 
   const initialState = formFields.reduce((acc, field) => {
     acc[field.name] = "";
@@ -77,6 +95,8 @@ const InfoSession = () => {
           if (res.data.status === 69) {
             setEmailError(true);
             return;
+          } else if (res.data.status === 96) {
+            setRefresh(true);
           }
           setFormData(initialState);
           setMotivation("");
@@ -94,7 +114,6 @@ const InfoSession = () => {
     }
   };
 
-  const nav = useNavigate();
   useEffect(() => {
     if (error) {
       setFormData(initialState);
@@ -152,11 +171,13 @@ const InfoSession = () => {
   const maxDateString = maxDate.toISOString().split("T")[0];
   const minDateString = minDate.toISOString().split("T")[0];
 
-  const [formation, setFormation] = useState('');
+  const [formation, setFormation] = useState("");
 
   return (
     <div
-      className={`px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden ${darkMode ? "bg-[#0f0f0f]" : "bg-white"}`}
+      className={`px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden ${
+        darkMode ? "bg-[#0f0f0f]" : "bg-white"
+      }`}
       dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
     >
       {!sending ? (
@@ -168,27 +189,45 @@ const InfoSession = () => {
           {sessions && sessions.length > 0 ? (
             <form
               onSubmit={handleSubmit}
-              className={`mx-auto p-6  rounded-lg shadow-md space-y-4 ${darkMode ? "bg-[#212529]" : "bg-white"}`}
+              className={`mx-auto p-6  rounded-lg shadow-md space-y-4 ${
+                darkMode ? "bg-[#212529]" : "bg-white"
+              }`}
             >
               <div className={`flex flex-col space-y-2 `}>
-                <label htmlFor="sessions" className={` ${darkMode ? "text-white" : "text-gray-700"} `}>
-                  <TransText en="Choose a Session" fr="Choisir une session" ar="اختر جلسة" />
+                <label
+                  htmlFor="sessions"
+                  className={` ${darkMode ? "text-white" : "text-gray-700"} `}
+                >
+                  <TransText
+                    en="Choose a Session"
+                    fr="Choisir une session"
+                    ar="اختر جلسة"
+                  />
                   : <Required />
                 </label>
 
                 <div className="flex items-center gap-2">
-                  <select className="w-full rounded border border-gray-300 px-4 py-2"
-                    name="formation" required
+                  <select
+                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    name="formation"
+                    required
                     onChange={(e) => {
-                      setFormation(e.target.value)
-                      setChosenSession('');
+                      setFormation(e.target.value);
+                      setChosenSession("");
                     }}
                   >
-                    <option disabled selected value=""><TransText en="Choose Formation" fr="Choisir la formation" ar="اختر التكوين" />
+                    <option disabled selected value="">
+                      <TransText
+                        en="Choose Formation"
+                        fr="Choisir la formation"
+                        ar="اختر التكوين"
+                      />
                     </option>
-                    <option value="coding"><TransText en="Coding" fr="Codage" ar="البرمجة" />
+                    <option value="coding">
+                      <TransText en="Coding" fr="Codage" ar="البرمجة" />
                     </option>
-                    <option value="media"><TransText en="Media" fr="Média" ar="صانع محتوى" />
+                    <option value="media">
+                      <TransText en="Media" fr="Média" ar="صانع محتوى" />
                     </option>
                   </select>
                   <select
@@ -202,17 +241,31 @@ const InfoSession = () => {
                     required
                   >
                     <option disabled selected value="">
-                      <TransText en="Choose a Session" fr="Choisir une session" ar="اختر جلسة" />
-
+                      <TransText
+                        en="Choose a Session"
+                        fr="Choisir une session"
+                        ar="اختر جلسة"
+                      />
                     </option>
-                    {sessions.filter((ses) => ses.formation == formation.charAt(0).toUpperCase() + formation.slice(1).toLowerCase()).map(
-                      (opt, ind) =>
-                        opt.isAvailable && (
-                          <option key={ind} className="text-lg" value={opt.id}>
-                            {formatDate(opt.start_date)}
-                          </option>
-                        )
-                    )}
+                    {sessions
+                      .filter(
+                        (ses) =>
+                          ses.formation ==
+                          formation.charAt(0).toUpperCase() +
+                            formation.slice(1).toLowerCase()
+                      )
+                      .map(
+                        (opt, ind) =>
+                          opt.isAvailable && (
+                            <option
+                              key={ind}
+                              className="text-lg"
+                              value={opt.id}
+                            >
+                              {formatDate(opt.start_date)}
+                            </option>
+                          )
+                      )}
                   </select>
                 </div>
               </div>
@@ -238,10 +291,11 @@ const InfoSession = () => {
                       placeholder="....."
                       value={formData[field.name]}
                       onChange={handleChange}
-                      className={`px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-beta ${emailError && field.name === "email"
-                        ? "text-red-500 border-red-500"
-                        : "border-gray-300 text-black"
-                        }`}
+                      className={`px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-beta ${
+                        emailError && field.name === "email"
+                          ? "text-red-500 border-red-500"
+                          : "border-gray-300 text-black"
+                      }`}
                       required
                     />
                     {emailError && field.name === "email" && (
@@ -250,11 +304,13 @@ const InfoSession = () => {
                       </span>
                     )}
                   </div>
-
                 ))}
 
                 <div className="flex flex-col space-y-2 w-full sm:w-[49.7%] ">
-                  <label htmlFor="city" className={` ${darkMode ? "text-white" : "text-gray-700"} `}>
+                  <label
+                    htmlFor="city"
+                    className={` ${darkMode ? "text-white" : "text-gray-700"} `}
+                  >
                     <TransText en="City" fr="Ville" ar="مدينة" />
                     : <Required />
                   </label>
@@ -272,10 +328,18 @@ const InfoSession = () => {
                       <TransText en="City" fr="Ville" ar="مدينة" />
                     </option>
                     <option value="casablanca">
-                      <TransText en="Casablanca" fr="Casablanca" ar="الدار البيضاء" />
+                      <TransText
+                        en="Casablanca"
+                        fr="Casablanca"
+                        ar="الدار البيضاء"
+                      />
                     </option>
                     <option value="mohammedia">
-                      <TransText en="Mohammedia" fr="Mohammedia" ar="المحمدية" />
+                      <TransText
+                        en="Mohammedia"
+                        fr="Mohammedia"
+                        ar="المحمدية"
+                      />
                     </option>
                     <option value="other">
                       <TransText en="Other" fr="Autres" ar="اخر" />
@@ -284,7 +348,10 @@ const InfoSession = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full sm:w-[49.7%]">
-                  <label htmlFor="prefecture" className={` ${darkMode ? "text-white" : "text-gray-700"} `}>
+                  <label
+                    htmlFor="prefecture"
+                    className={` ${darkMode ? "text-white" : "text-gray-700"} `}
+                  >
                     <TransText en="Prefecture" fr="Préfecture" ar="العمالة" />
                     : <Required />
                   </label>
@@ -325,7 +392,10 @@ const InfoSession = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full sm:w-[49.7%]">
-                  <label htmlFor="gender" className={` ${darkMode ? "text-white" : "text-gray-700"} `}>
+                  <label
+                    htmlFor="gender"
+                    className={` ${darkMode ? "text-white" : "text-gray-700"} `}
+                  >
                     <TransText en="Gender" fr="Genre" ar="الجنس" />
                     <Required />
                   </label>
@@ -351,8 +421,15 @@ const InfoSession = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full sm:w-[49.7%]">
-                  <label htmlFor="source" className={`${darkMode ? "text-white" : "text-black"} `}>
-                    <TransText en="Where Have you Heard of LionsGeek" fr="Où avez-vous entendu parler de LionsGeek" ar="أين سمعت عن LionsGeek" />
+                  <label
+                    htmlFor="source"
+                    className={`${darkMode ? "text-white" : "text-black"} `}
+                  >
+                    <TransText
+                      en="Where Have you Heard of LionsGeek"
+                      fr="Où avez-vous entendu parler de LionsGeek"
+                      ar="أين سمعت عن LionsGeek"
+                    />
                     : <Required />
                   </label>
                   <input
@@ -370,7 +447,10 @@ const InfoSession = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full">
-                  <label htmlFor="motivation" className={`${darkMode ? "text-white" : "text-black"} `}>
+                  <label
+                    htmlFor="motivation"
+                    className={`${darkMode ? "text-white" : "text-black"} `}
+                  >
                     <TransText en="Motivation" fr="Motivation" ar="الدافع" />
                     :
                     <Required />
@@ -391,7 +471,8 @@ const InfoSession = () => {
                     className="border border-gray-400 rounded p-[6px]"
                     onChange={(e) => setMotivation(e.target.value)}
                     placeholder="..."
-                    value={motivation} required
+                    value={motivation}
+                    required
                   ></textarea>
                 </div>
               </div>
@@ -399,35 +480,40 @@ const InfoSession = () => {
                 <button
                   type="submit"
                   disabled={sending}
-                  className={`w-full py-2 px-4 bg-alpha font-semibold rounded-md ${darkMode ? "hover:bg-[#2d343a]" : "hover:bg-[#212529]"} hover:text-alpha focus:outline-none`}
+                  className={`w-full py-2 px-4 bg-alpha font-semibold rounded-md ${
+                    darkMode ? "hover:bg-[#2d343a]" : "hover:bg-[#212529]"
+                  } hover:text-alpha focus:outline-none`}
                 >
                   <TransText en="Submit" fr="Soumettre" ar="إرسال" />
                 </button>
               </div>
             </form>
-          )
-            :
-
+          ) : (
             <div className="h-[65vh] flex items-center justify-center flex-col gap-2">
-
               <h1 className="text-white text-3xl text-center">
                 &#x28;⊙__⊙&#x29;
               </h1>
 
               <h1 className="text-white text-3xl font-semibold text-center">
-                <TransText en="Oops!! You Should Not Be Seeing This Page Yet!" fr="Oups!! Vous ne devriez pas encore voir cette page !" ar="عذرًا!! يجب ألا ترى هذه الصفحة بعد!" />
-
+                <TransText
+                  en="Oops!! You Should Not Be Seeing This Page Yet!"
+                  fr="Oups!! Vous ne devriez pas encore voir cette page !"
+                  ar="عذرًا!! يجب ألا ترى هذه الصفحة بعد!"
+                />
               </h1>
               <br />
               <NavLink to={"/"}>
                 <button className="px-4 py-2 bg-alpha rounded font-bold border-2 border-alpha hover:bg-black hover:text-alpha">
-                  <TransText en="Return to the homepage" fr="Retour à la page d'accueil" ar="الرجوع إلى الصفحة الرئيسية" />
+                  <TransText
+                    en="Return to the homepage"
+                    fr="Retour à la page d'accueil"
+                    ar="الرجوع إلى الصفحة الرئيسية"
+                  />
                   .
                 </button>
               </NavLink>
             </div>
-
-          }
+          )}
         </>
       ) : (
         <LoadingPage load={true} />
@@ -440,6 +526,10 @@ const InfoSession = () => {
             <button
               onClick={() => {
                 setConfirmation(false);
+                if (validate && refresh) {
+                  window.location.reload();
+                  // navigate(-1);
+                }
               }}
               className="px-5 py-2 font-medium bg-alpha rounded"
             >
@@ -449,8 +539,6 @@ const InfoSession = () => {
         />
       )}
     </div>
-
-
   );
 };
 
