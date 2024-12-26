@@ -86,7 +86,15 @@
 }
 
 .bg-image {
-  background-image: url("./assets/images/gallery/gallery-1.jpg");
+  background-image: url("./assets/images/gallery/image.png");
+  /* background-position: center; */
+}
+.bg-image-coding {
+  background-image: url("./assets/images/gallery/coding.jpg");
+  background-position: bottom;
+}
+.bg-image-media {
+  background-image: url("./assets/images/gallery/media.jpg");
 }
 
 

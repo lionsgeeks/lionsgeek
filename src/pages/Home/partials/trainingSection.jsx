@@ -54,7 +54,7 @@ const TrainingSection = () => {
           </div>
 
           <div className="md:w-[62.5%] h-[288px] md:h-auto overflow-hidden rounded-r-lg">
-            <div className="size-full bg-image bg-cover bg-center rounded-r-lg group-hover/coding:scale-[1.125] transition-transform duration-700"></div>
+            <div className="size-full bg-image-coding bg-cover bg-center rounded-r-lg group-hover/coding:scale-[1.125] transition-transform duration-700"></div>
           </div>
         </Link>
 
@@ -95,7 +95,7 @@ const TrainingSection = () => {
           </div>
 
           <div className="md:w-[62.5%] h-[288px] md:h-auto overflow-hidden rounded-l-lg">
-            <div className="size-full bg-image bg-cover bg-center rounded-l-lg group-hover/media:scale-[1.125] transition-transform duration-700"></div>
+            <div className="size-full bg-image-media bg-cover bg-center rounded-l-lg group-hover/media:scale-[1.125] transition-transform duration-700"></div>
           </div>
         </Link>
       </div>
