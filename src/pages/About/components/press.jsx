@@ -4,9 +4,7 @@ import { useAppContext } from "../../../utils/contextProvider";
 import { useNavigate } from "react-router-dom";
 export const Press = () => {
   const { t } = useTranslation();
-  const { selectedLanguage, blogs, IMAGEURL, darkMode } = useAppContext();
-  const navigate = useNavigate();
-  // console.log(blogs);
+  const { selectedLanguage, IMAGEURL, darkMode, press } = useAppContext();
   return (
     <section className={`${darkMode && "bg-[#0f0f0f]"} py-[4vh]`}>
       <div className="w-full text-center pb-10">
@@ -16,25 +14,22 @@ export const Press = () => {
         </h1>
       </div>
 
-      {/* blog */}
-      {blogs?.map((el, index) => (
-        <div
-          onClick={() => navigate(`/blog/${el.id}`)}
-          key={index}
-          className="cards flex flex-wrap justify-center md:justify-around px-4 md:px-16 cursor-pointer "
-        >
-          <div className="flex flex-col items-center w-full md:w-auto mb-12 md:mb-0">
-            <div className=" w-[80vw] md:w-[20vw] rounded-lg hover:scale-105 transition-all duration-300">
-              <img loading="lazy" src={`${IMAGEURL}${el.image}`} alt="" />
+      {/* Press */}
+      <div className="grid grid-cols-5 gap-3 justify-center md:justify-around px-4 md:px-16">
+        {press?.map((el, index) => (
+          <a href={el.link} target="_blank"
+            key={index}
+          >
+            <div className="bg-white rounded-lg  relative hover:scale-105 transition-all duration-300 shadow-md">
+              <img src={IMAGEURL + "/press/" + el.cover} className="h-[25vh] w-full object-cover rounded-t-lg" alt="" />
+              <div className="flex items-center gap-2 p-2 mt-2">
+                <img src={IMAGEURL + "/press/" + el.logo} className="w-[25px] rounded-full aspect-square" alt="" />
+                <p>{el.name[selectedLanguage]}</p>
+              </div>
             </div>
-            <div className="text w-[80vw] md:w-[20vw] flex flex-col mt-3">
-              <p className={`${darkMode && "text-white"} font-bold py-1 text-center`}>
-                {el.title[selectedLanguage]}
-              </p>
-            </div>
-          </div>
-        </div>
-      ))}
+          </a>
+        ))}
+      </div>
     </section>
   );
 };
