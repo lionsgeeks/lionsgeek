@@ -5,8 +5,8 @@ export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
   // const URL = "http://172.28.0.27:8000/api/";
   // const IMAGEURL = "http://172.28.0.27:8000/storage/images/";
-  const URL = "https://backend.mylionsgeek.ma/api/";
-  const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
+  // const URL = "https://backend.mylionsgeek.ma/api/";
+  // const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
 

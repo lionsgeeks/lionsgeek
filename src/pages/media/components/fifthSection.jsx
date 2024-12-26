@@ -1,10 +1,10 @@
 import React from "react";
-import media1 from "../../../assets/images/testimonial/media1.jpg";
-import media2 from "../../../assets/images/testimonial/media2.jpg";
-import media3 from "../../../assets/images/testimonial/media3.jpg";
-import media4 from "../../../assets/images/testimonial/media4.jpg";
-import media5 from "../../../assets/images/testimonial/media5.jpg";
-import media6 from "../../../assets/images/testimonial/media6.jpg";
+import media1 from "../../../assets/images/testimonial/media1.JPG";
+import media2 from "../../../assets/images/testimonial/media2.JPG";
+import media3 from "../../../assets/images/testimonial/media3.JPG";
+import media4 from "../../../assets/images/testimonial/media4.JPG";
+import media5 from "../../../assets/images/testimonial/media5.JPG";
+import media6 from "../../../assets/images/testimonial/media6.JPG";
 import { RiDoubleQuotesR } from "react-icons/ri";
 import { TransText } from "../../../components";
 import { useAppContext } from "../../../utils/contextProvider";
