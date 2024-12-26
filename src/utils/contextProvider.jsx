@@ -3,10 +3,10 @@ import React, { createContext, useCallback, useContext, useEffect, useState } fr
 import { useLocation } from "react-router-dom";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  const URL = "http://172.28.0.31:8000/api/";
-  const IMAGEURL = "http://172.28.0.31:8000/storage/images/";
-  // const URL = "https://backend.mylionsgeek.ma/api/";
-  // const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
+  // const URL = "http://172.28.0.31:8000/api/";
+  // const IMAGEURL = "http://172.28.0.31:8000/storage/images/";
+  const URL = "https://backend.mylionsgeek.ma/api/";
+  const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
 
@@ -65,22 +65,30 @@ const toggleDarkMode = useCallback(() => {
     axios
       .get(URL + "blogs")
       .then((res) => {
-        // setTimeout(() => {
           setBlogs(res.data);
-        // }, 5000);
       })
       .catch((err) => {
         console.log("Blog fetching error", err);
       });
   };
 
+  const [press, setPress] = useState();
+  const fetchPress = () => {
+    axios
+      .get(URL + "press")
+      .then((res) => {
+        setPress(res.data);
+      })
+      .catch((err) => {
+        console.log("Press Err", err);
+      });
+  }
+
   const [events, setEvents] = useState();
   const fetchEventsData = async () => {
     try {
       const response = await axios.get(`${URL}events`);
-      // setTimeout(() => {
         setEvents(response.data);
-      // }, 3000);
     } catch (error) {
       console.error("Error fetching events data:", error);
     }
@@ -131,6 +139,7 @@ const toggleDarkMode = useCallback(() => {
     fetchUpcomingEvent();
     fetchProjects();
     views();
+    fetchPress();
   }, []);
 
   const formatDate = (date) => {
@@ -149,6 +158,7 @@ const toggleDarkMode = useCallback(() => {
           selectedLanguage,
           setSelectedLanguage,
           blogs,
+          press,
           URL,
           IMAGEURL,
           formatDate,
@@ -162,7 +172,7 @@ const toggleDarkMode = useCallback(() => {
           setUpcomingEvent,
           projects,
           darkMode,
-          toggleDarkMode
+          toggleDarkMode,
         }}
       >
         {children}
