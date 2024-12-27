@@ -174,9 +174,8 @@ const InfoSession = () => {
 
   return (
     <div
-      className={`px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden ${
-        darkMode ? "bg-[#0f0f0f]" : "bg-white"
-      }`}
+      className={`px-4 pt-24 lg:px-16 lg:pt-28 overflow-hidden ${darkMode ? "bg-[#0f0f0f]" : "bg-white"
+        }`}
       dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
     >
       {!sending ? (
@@ -186,16 +185,14 @@ const InfoSession = () => {
               <>
                 <form
                   onSubmit={handleSubmit}
-                  className={`mx-auto p-6  rounded-lg shadow-md space-y-4 ${
-                    darkMode ? "bg-[#212529]" : "bg-white"
-                  }`}
+                  className={`mx-auto p-6  rounded-lg shadow-md space-y-4 ${darkMode ? "bg-[#212529]" : "bg-white"
+                    }`}
                 >
                   <div className={`flex flex-col space-y-2 `}>
                     <label
                       htmlFor="sessions"
-                      className={` ${
-                        darkMode ? "text-white" : "text-gray-700"
-                      } `}
+                      className={` ${darkMode ? "text-white" : "text-gray-700"
+                        } `}
                     >
                       <TransText
                         en="Choose a Session"
@@ -205,7 +202,7 @@ const InfoSession = () => {
                       : <Required />
                     </label>
 
-                    <div className="flex flex-col md:flex-row items-center gap-2">
+                    <div className="flex flex-col md:flex-row lg:items-center lg:gap-2 gap-y-4">
                       <select
                         className="w-full rounded border border-gray-300 px-4 py-2"
                         name="formation"
@@ -229,6 +226,19 @@ const InfoSession = () => {
                           <TransText en="Media" fr="Média" ar="صانع محتوى" />
                         </option>
                       </select>
+                      <label
+                        htmlFor="sessions"
+                        className={` ${darkMode ? "text-white" : "text-gray-700"
+                          }  lg:hidden`}
+                      >
+                        <TransText
+                          en="Choose a Session Date"
+                          fr="Choisissez une date de session"
+                          ar="اختر تاريخ الجلسة"
+                        />
+
+                        : <Required />
+                      </label>
                       <select
                         name="sessions"
                         id="sessions"
@@ -251,7 +261,7 @@ const InfoSession = () => {
                             (ses) =>
                               ses.formation ==
                               formation.charAt(0).toUpperCase() +
-                                formation.slice(1).toLowerCase()
+                              formation.slice(1).toLowerCase()
                           )
                           .map(
                             (opt, ind) =>
@@ -277,9 +287,8 @@ const InfoSession = () => {
                       >
                         <label
                           htmlFor={field.name}
-                          className={`${
-                            darkMode ? "text-white" : "text-gray-700"
-                          }`}
+                          className={`${darkMode ? "text-white" : "text-gray-700"
+                            }`}
                         >
                           <TransText {...field.label} /> : <Required />
                         </label>
@@ -292,11 +301,10 @@ const InfoSession = () => {
                           placeholder={field.label[selectedLanguage]}
                           value={formData[field.name]}
                           onChange={handleChange}
-                          className={`px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-beta ${
-                            emailError && field.name === "email"
+                          className={`px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-beta ${emailError && field.name === "email"
                               ? "text-red-500 border-red-500"
                               : "border-gray-300 text-black"
-                          }`}
+                            }`}
                           required
                         />
                         {emailError && field.name === "email" && (
@@ -310,9 +318,8 @@ const InfoSession = () => {
                     <div className="flex flex-col space-y-2 w-full sm:w-[49.7%] ">
                       <label
                         htmlFor="city"
-                        className={` ${
-                          darkMode ? "text-white" : "text-gray-700"
-                        } `}
+                        className={` ${darkMode ? "text-white" : "text-gray-700"
+                          } `}
                       >
                         <TransText en="City" fr="Ville" ar="مدينة" />
                         : <Required />
@@ -353,9 +360,8 @@ const InfoSession = () => {
                     <div className="flex flex-col space-y-2 w-full sm:w-[49.7%]">
                       <label
                         htmlFor="prefecture"
-                        className={` ${
-                          darkMode ? "text-white" : "text-gray-700"
-                        } `}
+                        className={` ${darkMode ? "text-white" : "text-gray-700"
+                          } `}
                       >
                         <TransText
                           en="Prefecture"
@@ -407,9 +413,8 @@ const InfoSession = () => {
                     <div className="flex flex-col space-y-2 w-full sm:w-[49.7%]">
                       <label
                         htmlFor="gender"
-                        className={` ${
-                          darkMode ? "text-white" : "text-gray-700"
-                        } `}
+                        className={` ${darkMode ? "text-white" : "text-gray-700"
+                          } `}
                       >
                         <TransText en="Gender" fr="Genre" ar="الجنس" />
                         <Required />
@@ -452,7 +457,7 @@ const InfoSession = () => {
                         value={source}
                         name="source"
                         id="source"
-                        placeholder={selectedLanguage=="en" ? "Source" : selectedLanguage=="fr" ? "Source" : "مصدر" }
+                        placeholder={selectedLanguage == "en" ? "Source" : selectedLanguage == "fr" ? "Source" : "مصدر"}
                         onChange={(e) => {
                           setSource(e.target.value);
                         }}
@@ -474,11 +479,10 @@ const InfoSession = () => {
                         :
                         <Required />
                         <span
-                          className={`text-sm ${
-                            motivation.length < 150
+                          className={`text-sm ${motivation.length < 150
                               ? "text-red-600"
                               : "text-green-500"
-                          } `}
+                            } `}
                         >
                           {" "}
                           {motivation.length}/150
@@ -489,7 +493,7 @@ const InfoSession = () => {
                         id="motivation"
                         className="border border-gray-400 rounded p-[6px]"
                         onChange={(e) => setMotivation(e.target.value)}
-                        placeholder={selectedLanguage=="en" ? "Motivation" : selectedLanguage=="fr" ? "Motivation" : "دافع" }
+                        placeholder={selectedLanguage == "en" ? "Motivation" : selectedLanguage == "fr" ? "Motivation" : "دافع"}
                         value={motivation}
                         required
                       ></textarea>
@@ -499,9 +503,8 @@ const InfoSession = () => {
                     <button
                       type="submit"
                       disabled={sending}
-                      className={`w-full py-2 px-4 bg-alpha font-semibold rounded-md ${
-                        darkMode ? "hover:bg-[#2d343a]" : "hover:bg-[#212529]"
-                      } hover:text-alpha focus:outline-none`}
+                      className={`w-full py-2 px-4 bg-alpha font-semibold rounded-md ${darkMode ? "hover:bg-[#2d343a]" : "hover:bg-[#212529]"
+                        } hover:text-alpha focus:outline-none`}
                     >
                       <TransText en="Submit" fr="Soumettre" ar="إرسال" />
                     </button>
@@ -512,9 +515,8 @@ const InfoSession = () => {
               <>
                 <>
                   <div
-                    className={`flex justify-center items-center text-center w-full h-[16rem] text-[30px] font-bold  ${
-                      darkMode ? "text-white" : "text-black"
-                    }`}
+                    className={`flex justify-center items-center text-center w-full h-[16rem] text-[30px] font-bold  ${darkMode ? "text-white" : "text-black"
+                      }`}
                   >
                     <TransText
                       fr="Aucune session disponible"
