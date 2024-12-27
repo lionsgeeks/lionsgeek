@@ -284,7 +284,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                 <h1 className="font-medium text-lg md:text-xl md:duration-700 md:transition-all md:translate-y-[calc(150%+1.75rem)] md:group-hover:translate-y-0">
                   <TransText {...title} />
                 </h1>
-                <div className="md:duration-700 md:transition-all md:translate-y-[150%] md:group-hover:translate-y-0">
+                <div className="md:duration-700 static z-20 md:transition-all md:translate-y-[150%] md:group-hover:translate-y-0">
                   <TransText {...description} />
                 </div>
               </div>

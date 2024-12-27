@@ -238,7 +238,7 @@ export const FirstSectionEventDetail = () => {
               <img
                 loading="lazy"
                 className="lg:h-[25rem] md:h-[25rem]  w-[100%] rounded-lg object-cover"
-                src={`${IMAGEURL}${event[0]?.cover}`}
+                src={`${IMAGEURL + "/events/"}${event[0]?.cover}`}
                 alt=""
               />
               <div className="shadow-sm px-4 border rounded-lg flex flex-col py-4">

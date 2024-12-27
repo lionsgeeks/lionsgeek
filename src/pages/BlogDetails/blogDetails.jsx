@@ -30,7 +30,7 @@ export const BlogDetailPage = () => {
                 currentBlog &&
                 <div className="p-16" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" , } } >
                     <div className="">
-                        <img loading="lazy" className="w-full h-96 rounded-2xl  object-cover object-center -z-2" src={IMAGEURL + currentBlog.image} alt="" />
+                        <img loading="lazy" className="w-full h-96 rounded-2xl  object-cover object-center -z-2" src={IMAGEURL +"/blog/" + currentBlog.image} alt="" />
                     </div>
 
                     <h1 className="font-extrabold text-3xl py-16"  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }>{currentBlog.title[selectedLanguage]}</h1>
@@ -49,7 +49,7 @@ export const BlogDetailPage = () => {
                                 blogs.map((blog, index) => (
                                     blog.id != id && <Link key={index} to={`/blog/${blog.id}`} className="flex gap-3">
 
-                                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={IMAGEURL + blog.image} alt="" />
+                                        <img loading="lazy" className="w-[35%] rounded-xl  object-cover object-center -z-2" src={IMAGEURL +"/blog/" + blog.image} alt="" />
                                         <div className="flex flex-col gap-3 overflow-hidden">
                                             <h1 className="font-extrabold text-sm"  style={{ color: darkMode ? "#ffffff" : "#0f0f0f" , } }>{blog.title[selectedLanguage]}</h1>
                                             
