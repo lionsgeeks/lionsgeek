@@ -24,7 +24,7 @@ export const Press = () => {
               <img src={IMAGEURL + "/press/" + el.cover} className="h-[25vh] w-full object-cover rounded-t-lg" alt="" />
               <div className="flex items-center gap-2 p-2 mt-2">
                 <img src={IMAGEURL + "/press/" + el.logo} className="w-[25px] rounded-full aspect-square" alt="" />
-                <p>{el.name[selectedLanguage]}</p>
+                <p className="truncate">{el.name[selectedLanguage]}</p>
               </div>
             </div>
           </a>

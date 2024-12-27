@@ -64,7 +64,7 @@ export const CardsSection = () => {
                       <div className="w-[100%] h-[13rem]  ">
                         <img
                           loading="lazy"
-                          src={`${IMAGEURL}${element.cover}`}
+                          src={`${IMAGEURL + "/events/"}${element.cover}`}
                           className="w-full h-full object-cover rounded-t-xl"
                           alt=""
                         />

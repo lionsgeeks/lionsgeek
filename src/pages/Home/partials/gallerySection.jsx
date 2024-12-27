@@ -85,7 +85,7 @@ export default function GallerySection() {
                       <img
                         loading="lazy"
                         className="size-full object-cover"
-                        src={`${IMAGEURL}${element.couverture}`}
+                        src={`${IMAGEURL + "/gallery/"}${element.couverture}`}
                         alt="gallery"
                       />
                       <div className="w-full absolute z-10 duration-700 transition-all flex flex-col translate-y-[150%] group-hover:translate-y-0 pl-6 pr-4 pb-4">

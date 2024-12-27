@@ -15,7 +15,7 @@ export const BlogHeroSection = () => {
             <img
               loading="lazy"
               className="lg:w-1/2 lg:h-[60vh] h-1/2 object-cover rounded-xl "
-              src={IMAGEURL + blogs[0]?.image}
+              src={IMAGEURL+ "/blog/" + blogs[0]?.image}
               alt=""
             />
 

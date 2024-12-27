@@ -207,9 +207,9 @@ export const Footer = () => {
               <a target="blank" href="https://www.tiktok.com/@lions_geek">
                 <FaTiktok className="text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200" />
               </a>
-              <a target="blank" href="https://discord.com/channels/1219261183803129929/1219261184314839133">
+              {/* <a target="blank" href="https://discord.com/channels/1219261183803129929/1219261184314839133">
                 <FaDiscord className="text-[1.4rem] fill-gray-400 hover:fill-black transition duration-200" />
-              </a>
+              </a> */}
             </div>
             <p className="text-gray-400 text-[0.9rem] text-center">
               &copy; Copyright {currentYear} LionsGeek. All Rights Reserved.

@@ -32,7 +32,7 @@ export const FirstSectionGalerie = () => {
             <main>
                 <ul className='slider' ref={slider}>
                     {galleries?.map((gallery, index) => (
-                        <li className='item z10 ' key={index} style={{ backgroundImage:  `url('${IMAGEURL}${gallery.couverture}')` }}  >
+                        <li className='item z10 ' key={index} style={{ backgroundImage:  `url('${IMAGEURL + "/gallery/"}${gallery.couverture}')` }}  >
                             <div className='content '>
                                 <h2 className=' text-white truncate text-[25px] font-bold '>
                                     <TransText fr={`${gallery.title.fr}`} ar={`${gallery.title.ar}`} en={`${gallery.title.en}`} />
