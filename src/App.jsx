@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/Home/home";
 import { AboutPage } from "./pages/About/about";
-import { MyProvider } from "./utils/contextProvider";
+import { MyProvider, useAppContext } from "./utils/contextProvider";
 import { Footer } from "./layouts/footer";
 import { ContactUs } from "./pages/ContactUs/contactUs";
 import Navbar from "./layouts/navbar";
@@ -22,13 +22,11 @@ import LoadingPage from "./pages/Loading";
 import WhatisLg from "./pages/WhatisLg/whatisLg";
 
 function App() {
-
   function Redirect(params) {
-    window.location.href = 'https://backend.mylionsgeek.ma/login';
-    return (
-      <LoadingPage />
-    )
+    window.location.href = "https://backend.mylionsgeek.ma/login";
+    return <LoadingPage />;
   }
+  const { sessions } = useAppContext() ;
 
   return (
     <MyProvider>
@@ -50,7 +48,7 @@ function App() {
         <Route path="/galerie" element={<GaleriePage />} />
         <Route path="/album/:id" element={<AlbumPage />} />
         <Route path="/pro" element={<Propage />} />
-        <Route path="/postuler" element={<InfoSession />} />
+        {sessions && <Route path="/postuler" element={<InfoSession />} />}
         <Route path="/whatislionsgeek" element={<WhatisLg />} />
       </Routes>
       <Footer />

@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import LoadingPage from "./pages/Loading";
+import { MyProvider } from "./utils/contextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,7 +16,9 @@ root.render(
   <BrowserRouter>
     <I18nextProvider i18n={i18n}>
       <Suspense fallback={<LoadingPage />}>
+      <MyProvider>
         <App />
+      </MyProvider>
       </Suspense>
     </I18nextProvider>
   </BrowserRouter>
