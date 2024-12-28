@@ -245,7 +245,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
             />
           </p>
 
-          {/* <Button
+          <Button
             className="mt-3"
             onClick={() =>
               document.getElementById("trainings")?.scrollIntoView({ behavior: "smooth" })
@@ -253,7 +253,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
             outline
           >
             <TransText fr="Lancez-vous" en="Get Started" ar="ابدأ الآن" />
-          </Button> */}
+          </Button>
         </div>
       </div>
 

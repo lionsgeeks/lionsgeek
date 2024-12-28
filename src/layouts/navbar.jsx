@@ -84,7 +84,7 @@ const Navbar = () => {
               <Link
                 to={"/"}
                 href="#"
-                className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
+                className="text-lg ml-2 lg:ml-0 font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
               >
                 <svg
                   className={`${darkMode ? "fill-white" : "fill-[#0f0f0f]"}`}
