@@ -1,29 +1,27 @@
 import axios from "axios";
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import PreventDevTools from "./functions/debugger";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  const URL = "http://192.168.0.154:8000/api/";
-  const IMAGEURL = "http://192.168.0.154:8000/storage/images/";
-  // const URL = "https://backend.mylionsgeek.ma/api/";
-  // const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
+  // const URL = "http://192.168.0.154:8000/api/";
+  // const IMAGEURL = "http://192.168.0.154:8000/storage/images/";
+  const URL = "https://backend.mylionsgeek.ma/api/";
+  const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
 
-const storedDarkMode = localStorage.getItem("darkMode") === "true";
+  const storedDarkMode = localStorage.getItem("darkMode") === "true";
 
-const [darkMode, setDarkMode] = useState(storedDarkMode);
+  const [darkMode, setDarkMode] = useState(storedDarkMode);
 
-const toggleDarkMode = useCallback(() => {
-  setDarkMode((prevMode) => {
-    const newMode = !prevMode;
-    localStorage.setItem("darkMode", newMode);
-    return newMode;
-  });
-}, []);
-
-
-
+  const toggleDarkMode = useCallback(() => {
+    setDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem("darkMode", newMode);
+      return newMode;
+    });
+  }, []);
 
   const path = useLocation();
   useEffect(() => {
@@ -40,7 +38,7 @@ const toggleDarkMode = useCallback(() => {
     try {
       const response = await axios.get(`${URL}galleries`);
       // setTimeout(() => {
-        setGalleries(response.data);
+      setGalleries(response.data);
       // }, 7000);
     } catch (error) {
       window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
@@ -65,7 +63,7 @@ const toggleDarkMode = useCallback(() => {
     axios
       .get(URL + "blogs")
       .then((res) => {
-          setBlogs(res.data);
+        setBlogs(res.data);
       })
       .catch((err) => {
         console.log("Blog fetching error", err);
@@ -88,7 +86,7 @@ const toggleDarkMode = useCallback(() => {
   const fetchEventsData = async () => {
     try {
       const response = await axios.get(`${URL}events`);
-        setEvents(response.data);
+      setEvents(response.data);
     } catch (error) {
       console.error("Error fetching events data:", error);
     }
@@ -112,15 +110,15 @@ const toggleDarkMode = useCallback(() => {
     try {
       const response = await axios.get(`${URL}projects`);
       setProjects(response.data);
-      
+
     } catch (error) {
       console.error("Error fetching up coming Projects data:", error);
     }
   };
 
-  const views = async() => {
+  const views = async () => {
     const data = {
-      tempoToken : "3c6b27df90dbc68b8b24fdf744bc94558daebaf3da836d58c360794c6384b6d2",
+      tempoToken: "3c6b27df90dbc68b8b24fdf744bc94558daebaf3da836d58c360794c6384b6d2",
     };
     try {
       axios.post(URL + 'views', data).then((res) => {
@@ -140,7 +138,12 @@ const toggleDarkMode = useCallback(() => {
     fetchProjects();
     views();
     fetchPress();
+    //  guys chofo  had l function hehehe 7aydo l comment o 7ollo l inspect
+    // PreventDevTools();
   }, []);
+
+
+
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-US", {
