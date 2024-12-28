@@ -26,7 +26,7 @@ function App() {
     window.location.href = "https://backend.mylionsgeek.ma/login";
     return <LoadingPage />;
   }
-  const { sessions } = useAppContext() ;
+  const { sessions } = useAppContext();
 
   return (
     <MyProvider>
@@ -48,7 +48,7 @@ function App() {
         <Route path="/galerie" element={<GaleriePage />} />
         <Route path="/album/:id" element={<AlbumPage />} />
         <Route path="/pro" element={<Propage />} />
-        {sessions && <Route path="/postuler" element={<InfoSession />} />}
+        <Route path="/postuler" element={<InfoSession />} />
         <Route path="/whatislionsgeek" element={<WhatisLg />} />
       </Routes>
       <Footer />

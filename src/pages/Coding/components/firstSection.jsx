@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import developer from "../../../assets/images/Programmer-cuate.svg";
 import Button from "../../../components/Button";
-import { useTranslation } from "react-i18next";
 import { TransText } from "../../../components";
 import { MyContext } from "../../../utils/contextProvider";
 import gsap from "gsap";
 import { NavLink } from "react-router-dom";
+import Loading from "../../../components/loading";
 
 export const FirstSection = () => {
-  const { selectedLanguage, sessions ,darkMode } = useContext(MyContext);
+  const { selectedLanguage, sessions, darkMode } = useContext(MyContext);
   const leftside = useRef(null);
   const rightside = useRef(null);
-  const [checkFormationCode, setCheckFormationCode] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [checkingStatus, setCheckingStatus] = useState(null);
   useEffect(() => {
     gsap.fromTo(
       leftside.current,
@@ -50,42 +51,68 @@ export const FirstSection = () => {
     );
   }, []);
 
-  useEffect(() => {
-    sessions?.forEach((element) => {
-      if (element.formation === "Coding") {
-        setCheckFormationCode(true);
+
+  const sessionStatus = {
+    open: {
+      en: "Sign Up Open",
+      fr: "Postuler",
+      ar: "التسجيل مفتوح"
+    },
+    closed: {
+      en: "Sign Up Closed",
+      fr: "Inscriptions Fermées",
+      ar: "التسجيل مغلق"
+    },
+    full: {
+      en: "No Places Available",
+      fr: "Places Completes",
+      ar: "الأماكن ممتلئة"
+    },
+  };
+
+  const filterSession = () => {
+    const coding_exist = sessions?.filter(element => element.formation == "Coding");
+    if (coding_exist) {
+      if (coding_exist.length) {
+        const session_is_full = coding_exist.every(e => e.isFull == true);
+        setCheckingStatus(session_is_full ? "full" : "open");
+      } else {
+        setCheckingStatus("closed");
       }
-    });
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    filterSession()
   }, [sessions]);
 
   return (
     <div
-      className={`mt-16 flex flex-col-reverse items-center lg:flex-row justify-center overflow-x-hidden ${
-        selectedLanguage === "ar" ? "lg:flex-row-reverse text-right" : ""
-      }`}
-      style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff"}}>
+      className={`mt-16 flex flex-col-reverse items-center lg:flex-row justify-center overflow-x-hidden ${selectedLanguage === "ar" ? "lg:flex-row-reverse text-right" : ""
+        }`}
+      style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" }}>
       <div
         ref={leftside}
         className="lg:w-[50%] md:py-16 py-8 lg:px-16 px-7 flex flex-col gap-4"
       >
-      <h1 className="font-bold md:text-5xl text-3xl text-balance" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
+        <h1 className="font-bold md:text-5xl text-3xl text-balance" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
           <TransText
             fr="Développeur Web Full Stack."
             en="Full Stack Web Developer."
             ar="مطور ويب متكامل"
           />
         </h1>
-        <p className="text-lg"style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
+        <p className="text-lg" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
           <TransText
             fr="Devenez un pro du Full Stack et créez des applications web puissantes et responsives. Notre bootcamp met l'accent sur des projets concrets pour vous aider à maîtriser les dernières technologies et frameworks."
             en="Become a full stack pro and build powerful, responsive web apps. Our bootcamp focuses on hands-on projects to help you master the latest technologies and frameworks ."
             ar="أصبح محترفًا في تطوير الويب المتكامل وطور تطبيقات ويب قوية ومتجاوبة. يركز برنامجنا التدريبي على المشاريع العملية لمساعدتك على إتقان أحدث التقنيات والأطر. "
           />
         </p>
-        <div 
-          className={`flex items-center gap-4 ${
-            selectedLanguage === "ar" ? "flex-row-reverse" : ""
-         }`} 
+        <div
+          className={`flex items-center gap-4 ${selectedLanguage === "ar" ? "flex-row-reverse" : ""
+            }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -94,8 +121,8 @@ export const FirstSection = () => {
             strokeWidth="1.5"
             stroke="currentColor"
             className="size-5"
-            style={{stroke: darkMode ? "#fee819" : "#0f0f0f" }} 
-            >
+            style={{ stroke: darkMode ? "#fee819" : "#0f0f0f" }}
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -111,9 +138,8 @@ export const FirstSection = () => {
           </p>
         </div>
         <div
-          className={`flex items-center gap-4 ${
-            selectedLanguage === "ar" ? "flex-row-reverse" : ""
-          }`}
+          className={`flex items-center gap-4 ${selectedLanguage === "ar" ? "flex-row-reverse" : ""
+            }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +148,7 @@ export const FirstSection = () => {
             strokeWidth="1.5"
             stroke="currentColor"
             className="size-5"
-            style={{stroke: darkMode ? "#fee819" : "#0f0f0f" }} 
+            style={{ stroke: darkMode ? "#fee819" : "#0f0f0f" }}
 
           >
             <path
@@ -140,9 +166,8 @@ export const FirstSection = () => {
           </p>
         </div>
         <div
-          className={`flex items-center gap-4 ${
-            selectedLanguage === "ar" ? "flex-row-reverse" : ""
-          }`}
+          className={`flex items-center gap-4 ${selectedLanguage === "ar" ? "flex-row-reverse" : ""
+            }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +176,7 @@ export const FirstSection = () => {
             strokeWidth="1.5"
             stroke="currentColor"
             className="size-5"
-            style={{stroke: darkMode ? "#fee819" : "#0f0f0f" }} 
+            style={{ stroke: darkMode ? "#fee819" : "#0f0f0f" }}
 
           >
             <path
@@ -168,15 +193,31 @@ export const FirstSection = () => {
             />
           </p>
         </div>
-        <div>
-          {checkFormationCode && (
-            <NavLink to={"/postuler"}>
-              <Button>
-                <TransText en="Apply" fr="Postuler" ar="تقدم بطلب" />
-              </Button>
-            </NavLink>
-          )}
+
+        <div className={` rounded-lg mt-2 flex items-center justify-center ${loading ? "w-44 h-10" : "w-fit"} ${selectedLanguage === "ar" ? "self-end" : ""}`}>
+          {
+            !loading ? (
+              checkingStatus !== "open" ? (
+                <div className={`px-3 select-none py-2 rounded-lg cursor-not-allowed border ${checkingStatus === "closed" ? (darkMode ? "text-alpha  border-alpha" : "text-alpha bg-[#252529]") : checkingStatus === "full" && "text-red-500  border-red-500 bg-[#]"}`}>
+                  <TransText
+                    en={sessionStatus[checkingStatus].en}
+                    fr={sessionStatus[checkingStatus].fr}
+                    ar={sessionStatus[checkingStatus].ar}
+                  />
+                </div>
+              ) : (
+                <NavLink to={"/postuler"}>
+                  <Button>
+                    <TransText fr="Postuler" en="Apply" ar="تقدم بطلب" />
+                  </Button>
+                </NavLink>
+              )
+            ) : (
+              <Loading color={"#fee819"} />
+            )
+          }
         </div>
+
       </div>
       <div ref={rightside} className="lg:w-[50%] w-[90%] flex justify-center">
         <img
