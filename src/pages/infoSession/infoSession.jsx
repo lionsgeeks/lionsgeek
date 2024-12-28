@@ -181,7 +181,7 @@ const InfoSession = () => {
       {!sending ? (
         <>
           {sessions ? (
-            sessions[0] ? (
+            (sessions[0] & !sessions?.every(e => e.isFull)) ? (
               <>
                 <form
                   onSubmit={handleSubmit}
@@ -259,9 +259,10 @@ const InfoSession = () => {
                         {sessions
                           .filter(
                             (ses) =>
-                              ses.formation ==
-                              formation.charAt(0).toUpperCase() +
-                              formation.slice(1).toLowerCase()
+
+                              ses.formation == formation.charAt(0).toUpperCase() + formation.slice(1).toLowerCase()
+                              & ses.isFull == false
+
                           )
                           .map(
                             (opt, ind) =>
@@ -302,8 +303,8 @@ const InfoSession = () => {
                           value={formData[field.name]}
                           onChange={handleChange}
                           className={`px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-beta ${emailError && field.name === "email"
-                              ? "text-red-500 border-red-500"
-                              : "border-gray-300 text-black"
+                            ? "text-red-500 border-red-500"
+                            : "border-gray-300 text-black"
                             }`}
                           required
                         />
@@ -480,8 +481,8 @@ const InfoSession = () => {
                         <Required />
                         <span
                           className={`text-sm ${motivation.length < 150
-                              ? "text-red-600"
-                              : "text-green-500"
+                            ? "text-red-600"
+                            : "text-green-500"
                             } `}
                         >
                           {" "}
@@ -553,21 +554,15 @@ const InfoSession = () => {
             //   </NavLink>
             // </div>
             <>
-              {Array.from({ length: 3 }).map((_, index) => (
-                <div
-                  key={index}
-                  className={`lg:w-[30%] flex  flex-col gap-8 md:w-[48%] w-[100%] lg:h-[30vh] h-[23.6rem] rounded-xl p-4 `}
-                >
-                  <div
-                    className={`skeleton lg:h-[30vh] h-[11.5rem] w-[100%] bg-skeleton2 rounded-md `}
-                  ></div>
-                  <div className="flex flex-col gap-4">
-                    <div className="skeleton w-[75%] h-6 rounded-md bg-skeleton2 "></div>
-                    <div className="skeleton w-[60%] h-4 rounded-md bg-skeleton2 "></div>
-                    <div className="skeleton w-[75%] h-5 rounded-md bg-skeleton2 "></div>
-                  </div>
-                </div>
-              ))}
+              <div className=" pt-[5vh] flex flex-col lg:flex-row flex-wrap gap-x-3 gap-y-6">
+                {Array.from({ length: 10 }).map((_, index) => (
+
+                  <>
+                    <div className="bg-skeleton1 animate-pulse rounded-lg lg:w-[48%] w-full h-[8vh]"></div>
+
+                  </>
+                ))}
+              </div>
             </>
           )}
         </>
