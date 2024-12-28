@@ -181,7 +181,7 @@ const InfoSession = () => {
       {!sending ? (
         <>
           {sessions ? (
-            (sessions[0] & !sessions?.every(e => e.isFull)) ? (
+            (sessions[0] && sessions?.every(e => e.isFull) == false) ? (
               <>
                 <form
                   onSubmit={handleSubmit}
