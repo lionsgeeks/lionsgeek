@@ -158,6 +158,12 @@ const InfoSession = () => {
     return `${formattedDate} ${formattedTime}`;
   }
 
+  // prevent l user mn anah idir copy past hehehe  nihahahahaha
+  const handlePaste = (event) => {
+    event.preventDefault();
+    alert('Pasting is disabled. Please type your input 🙂.');
+  };
+
   const today = chosenSession
     ? new Date(sessions?.find((s) => s.id == chosenSession)?.start_date)
     : new Date();
@@ -497,6 +503,8 @@ const InfoSession = () => {
                       <textarea
                         name="motivation"
                         id="motivation"
+                        // bach mankhalich l user idir copy past  l l motivation 
+                        // onPaste={handlePaste}
                         className="border border-gray-400 rounded p-[6px]"
                         onChange={(e) => setMotivation(e.target.value)}
                         placeholder={selectedLanguage == "en" ? "Motivation" : selectedLanguage == "fr" ? "Motivation" : "دافع"}
