@@ -160,8 +160,13 @@ const InfoSession = () => {
 
   // prevent l user mn anah idir copy past hehehe  nihahahahaha
   const handlePaste = (event) => {
+    const messages = {
+      en: 'Pasting is disabled. Please type your input 🙂.',
+      fr: "Le collage est désactivé. Veuillez saisir votre texte 🙂.",
+      ar: "لصق النص غير مسموح. يرجى كتابة النص 🙂."
+    };
     event.preventDefault();
-    alert('Pasting is disabled. Please type your input 🙂.');
+    alert(messages[selectedLanguage] || messages.en);
   };
 
   const today = chosenSession
@@ -504,7 +509,7 @@ const InfoSession = () => {
                         name="motivation"
                         id="motivation"
                         // bach mankhalich l user idir copy past  l l motivation 
-                        // onPaste={handlePaste}
+                        onPaste={handlePaste}
                         className="border border-gray-400 rounded p-[6px]"
                         onChange={(e) => setMotivation(e.target.value)}
                         placeholder={selectedLanguage == "en" ? "Motivation" : selectedLanguage == "fr" ? "Motivation" : "دافع"}
