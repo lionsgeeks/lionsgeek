@@ -173,6 +173,7 @@ const toggleDarkMode = useCallback(() => {
           projects,
           darkMode,
           toggleDarkMode,
+          fetchInfosession
         }}
       >
         {children}

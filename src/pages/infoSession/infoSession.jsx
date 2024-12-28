@@ -7,7 +7,7 @@ import TransText from "../../components/TransText.tsx";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const InfoSession = () => {
-  const { selectedLanguage, URL, sessions, darkMode } = useAppContext();
+  const { selectedLanguage, URL, sessions, darkMode , fetchInfosession } = useAppContext();
   const [chosenSession, setChosenSession] = useState("");
   const [sending, setSending] = useState(false);
   const [validate, setValidate] = useState(false);
@@ -24,6 +24,10 @@ const InfoSession = () => {
     fr: "FR",
     ar: "AR",
   };
+
+      useEffect(() => {
+          fetchInfosession()
+      }, [])
 
   const [motivation, setMotivation] = useState("");
   const [source, setSource] = useState("");
@@ -102,6 +106,7 @@ const InfoSession = () => {
           setConfirmation(true);
           if (res.status === 200) {
             setValidate(true);
+            fetchInfosession()
           } else {
             setValidate(false);
           }
