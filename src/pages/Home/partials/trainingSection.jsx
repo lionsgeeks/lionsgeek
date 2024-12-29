@@ -33,7 +33,7 @@ const TrainingSection = () => {
 
             <div
               className=" py-14 px-7  lg:px-12 flex flex-col gap-4"
-              >
+            >
               <h1 className="font-bold md:text-5xl text-3xl lg:text-balance" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
                 <TransText
                   fr="Développeur Web Full Stack."
@@ -133,7 +133,7 @@ const TrainingSection = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="absolute h-[150%] fill-white/5 -top-1/2 left-0 rotate-45 transition-all duration-700 group-hover/coding:rotate-[200deg] group-hover/coding:left-2/4 group-hover/coding:scale-[62.5%] group-hover/coding:top-0"
+              className={`absolute h-[150%] ${darkMode ? "fill-white/5" : "fill-black/5"}  -top-1/2 left-0 rotate-45 transition-all duration-700 group-hover/coding:rotate-[200deg] group-hover/coding:left-2/4 group-hover/coding:scale-[62.5%] group-hover/coding:top-0`}
             >
               <path
                 fillRule="evenodd"
@@ -261,7 +261,7 @@ const TrainingSection = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="absolute h-[150%] stroke-white/5 -top-1/2 right-0 -rotate-45  transition-all duration-700 group-hover/media:rotate-[382.5deg] group-hover/media:right-1/2 group-hover/media:scale-75 group-hover/media:top-0"
+              className={`absolute h-[150%] ${darkMode ? "stroke-white/5" : "stroke-black/5"}  -top-1/2 right-0 -rotate-45  transition-all duration-700 group-hover/media:rotate-[382.5deg] group-hover/media:right-1/2 group-hover/media:scale-75 group-hover/media:top-0`}
             >
               <path
                 strokeLinecap="round"
