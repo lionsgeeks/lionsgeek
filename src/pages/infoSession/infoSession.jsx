@@ -509,7 +509,7 @@ const InfoSession = () => {
                         name="motivation"
                         id="motivation"
                         // bach mankhalich l user idir copy past  l l motivation 
-                        // onPaste={handlePaste}
+                        onPaste={handlePaste}
                         className="border border-gray-400 rounded p-[6px]"
                         onChange={(e) => setMotivation(e.target.value)}
                         placeholder={selectedLanguage == "en" ? "Motivation" : selectedLanguage == "fr" ? "Motivation" : "دافع"}

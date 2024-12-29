@@ -242,7 +242,7 @@ export const FirstSectionEventDetail = () => {
                 alt=""
               />
               <div className="shadow-sm px-4 border rounded-lg flex flex-col py-4">
-                <div className={`${darkMode ? "border-b-2 border-white" : "border-b-2 border-black  py-3"}`}>
+                <div className={`${darkMode ? "border-b-2 border-white" : "border-b-2 border-black  "} py-3`}>
                   <h1 className={`${darkMode ? "text-white": "text-[#0f0f0f]"}`}>
                     <TransText
                       ar="حول هذا الحدث"
