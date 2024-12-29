@@ -15,7 +15,7 @@ export const Press = () => {
       </div>
 
       {/* Press */}
-      <div className="grid grid-cols-5 gap-3 justify-center md:justify-around px-4 md:px-16">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 justify-center md:justify-around px-4 md:px-16">
         {press?.map((el, index) => (
           <a href={el.link} target="_blank"
             key={index}
