@@ -152,7 +152,9 @@ export const Footer = () => {
                     setInputError(false);
                   }}
                   value={subscriber}
-                  className={`${
+                  className={`
+                  ${darkMode && "text-white/90"}
+                  ${
                     selectedLanguage == "ar" ? "text-end" : ""
                   } peer h-full w-full border-b  ${
                     inputError
