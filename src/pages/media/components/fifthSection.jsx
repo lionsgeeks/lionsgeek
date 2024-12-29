@@ -15,42 +15,42 @@ export const FifthSection = () => {
   const testimoniels = [
     {
       name: "Hiba Sabri",
-      class: "Media School 2",
+      class: "Media School 3",
       description:
         "LionsGeek's media classes were exceptional. From video editing to content creation, I gained practical skills that transformed my passion into a career. The hands-on projects and expert guidance were invaluable.",
       image: media1,
     },
     {
       name: "Fatima zahra Hajji",
-      class: "Media School 2",
+      class: "Media School 3",
       description:
         "The storytelling and branding sessions at LionsGeek gave me a new perspective on how to create impactful media content. I now feel confident producing professional-quality videos and graphics.",
       image: media2,
     },
     {
       name: "Soufiane Naimi",
-      class: "Media School 2",
+      class: "Media School 3",
       description:
         "Attending LionsGeek's media workshops was the best decision for my creative career. Their focus on practical learning helped me master tools like Adobe Premiere and Photoshop.",
       image: media3,
     },
     {
       name: "anwar bouchiri",
-      class: "Media School 2",
+      class: "Media School 3",
       description:
         "LionsGeek provided the perfect mix of technical training and creative freedom. The mentorship helped me discover my strengths in video production and marketing strategies.",
       image: media4,
     },
     {
       name: "Fatima zahra Chorfi",
-      class: "Media School 2",
+      class: "Media School 3",
       description:
         "Thanks to LionsGeek, I learned how to create visually compelling content that resonates with audiences. Their mentorship and constructive feedback elevated my skills to a professional level.",
       image: media5,
     },
     {
       name: "Adam Qmiat",
-      class: "Media School 2",
+      class: "Media School 3",
       description:
         "The media program at LionsGeek is top-notch. The focus on personal branding and visual storytelling gave me an edge in today's competitive media industry.",
       image: media6,

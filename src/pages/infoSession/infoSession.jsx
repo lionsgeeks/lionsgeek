@@ -239,7 +239,7 @@ const InfoSession = () => {
                           <TransText en="Coding" fr="Codage" ar="البرمجة" />
                         </option>
                         <option value="media">
-                          <TransText en="Media" fr="Média" ar="صانع محتوى" />
+                          <TransText en="Digital" fr="Média" ar="صانع محتوى" />
                         </option>
                       </select>
                       <label

@@ -4,10 +4,10 @@ import { useLocation } from "react-router-dom";
 import PreventDevTools from "./functions/debugger";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  // const URL = "http://192.168.0.154:8000/api/";
-  // const IMAGEURL = "http://192.168.0.154:8000/storage/images/";
-  const URL = "https://backend.mylionsgeek.ma/api/";
-  const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
+  const URL = "http://192.168.0.154:8000/api/";
+  const IMAGEURL = "http://192.168.0.154:8000/storage/images/";
+  // const URL = "https://backend.mylionsgeek.ma/api/";
+  // const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
 
