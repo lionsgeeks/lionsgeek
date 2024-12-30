@@ -92,7 +92,7 @@ export const ThirdSection = () => {
   ];
   return (
     <div
-      className="lg:px-16 px-7 py-16 flex flex-col gap-8 overflow-hidden"
+      className="lg:px-16 px-5  py-16 flex flex-col gap-8 overflow-hidden"
       style={{ backgroundColor: darkMode ? "#0f0f0f" : undefined }}
     >
       <div className="w-full text-center pb-10">
