@@ -20,6 +20,7 @@ import CoworkingForm from "./pages/coworking/partials/coworkingForm";
 import InfoSession from "./pages/infoSession/infoSession";
 import LoadingPage from "./pages/Loading";
 import WhatisLg from "./pages/WhatisLg/whatisLg";
+import Policy from "./pages/policy/policy";
 
 function App() {
   function Redirect(params) {
@@ -50,6 +51,7 @@ function App() {
         <Route path="/pro" element={<Propage />} />
         <Route path="/postuler" element={<InfoSession />} />
         <Route path="/whatislionsgeek" element={<WhatisLg />} />
+        <Route path="/policy" element={<Policy />} />
       </Routes>
       <Footer />
     </MyProvider>
