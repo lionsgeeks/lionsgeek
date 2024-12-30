@@ -87,7 +87,7 @@ export const FourthSection = () => {
     },
   ];
   return (
-    <div className="bg-gray-50 px-16 py-16 flex flex-col gap-8" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" , } }
+    <div className="bg-gray-50 lg:px-16 px-7 py-16 flex flex-col gap-8" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" , } }
 >
       <div className="w-full text-center pb-10">
         <h1 className="text-xl" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
