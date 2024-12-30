@@ -50,7 +50,7 @@ export const Stats = () => {
         </svg>
       ),
       title: { en: "Coaches", fr: "Coachs", ar: "المدربون" },
-      numbers: 4,
+      numbers: 10,
     },
     {
       icon: (
@@ -74,7 +74,7 @@ export const Stats = () => {
         fr: "Étudiants diplômés",
         ar: "الطلاب المتخرجون",
       },
-      numbers: 250,
+      numbers: 150,
     },
   ];
   return (
@@ -83,7 +83,7 @@ export const Stats = () => {
         <img loading="lazy" className="lg:w-[40%] rounded-lg" src={staff} alt="" />
         <div
           dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
-          className="flex gap-5 flex-col"
+          className="flex  lg:w-1/2 gap-5 flex-col"
         >
           <h1 className={`${darkMode && "text-alpha"} font-bold text-4xl`}>
             <TransText en="Highlights" fr="Highlights" ar="الأرقام البارزة" />
@@ -106,7 +106,7 @@ export const Stats = () => {
             {stats.map((e, i) => (
               <div
                 key={i}
-                className={`${darkMode ? "bg-beta border-alpha" : "border-black/50"} flex flex-col lg:items-start items-center gap-3 rounded-lg border  p-3 lg:w-[25%] lg:aspect-square text-2xl font-semibold`}
+                className={`${darkMode ? "bg-beta b" : "border-black/50"} flex flex-col lg:items-start items-center gap-3 rounded-lg border  p-3 lg:w-[25%] lg:aspect-square text-2xl font-semibold`}
               >
                 <span className="">{e.icon}</span>
                 <h1 className={`${darkMode && "text-white"} text-3xl`}>+{e.numbers}</h1>
