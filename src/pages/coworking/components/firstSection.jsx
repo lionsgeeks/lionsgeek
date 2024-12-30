@@ -39,7 +39,7 @@ export const FirstSectionCoworking = () => {
             ref={leftside}
             className="w-full md:w-1/2 lg:w-1/2 px-7 flex flex-col md:gap-2 gap-5 "
           >
-            <h1 className={`text-3xl text-center md:text-3xl md:text-start lg:text-6xl md:pb-0 py-5 font-bold ${darkMode ? "text-white" : ""}`}>
+            <h1 className={`text-2xl text-center md:text-3xl md:text-start lg:text-6xl md:pb-0 py-5 font-bold ${darkMode ? "text-white" : ""}`}>
               {t("main.coworking.section1.title.first")}{" "}
               <span className="text-alpha selection:bg-alpha selection:text-black">
                 {t("main.coworking.section1.title.second")}

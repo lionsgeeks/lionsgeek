@@ -96,7 +96,7 @@ export const FirstSection = () => {
         ref={leftside}
         className="lg:w-[50%] md:py-16 py-8 lg:px-16 px-7 flex flex-col gap-4"
       >
-        <h1 className="font-bold md:text-5xl text-3xl text-balance" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
+      <h1 className="font-bold md:text-5xl text-2xl text-balance" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
           <TransText
             fr="Développeur Web Full Stack."
             en="Full Stack Web Developer."

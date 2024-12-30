@@ -220,7 +220,7 @@ const InfoSession = () => {
 
                     <div className="flex flex-col md:flex-row lg:items-center lg:gap-2 gap-y-4">
                       <select
-                        className="w-full rounded border border-gray-300 px-4 py-2"
+                        className="w-full rounded border border-gray-300 px-4 py-2 appearance-none"
                         name="formation"
                         required
                         onChange={(e) => {
@@ -262,7 +262,7 @@ const InfoSession = () => {
                         onChange={(e) => {
                           setChosenSession(e.target.value);
                         }}
-                        className="w-full rounded border border-gray-300 px-4 py-2"
+                        className="w-full rounded border border-gray-300 px-4 py-2 appearance-none"
                         required
                       >
                         <option disabled selected value="">
@@ -348,7 +348,7 @@ const InfoSession = () => {
                           setCity(e.target.value);
                         }}
                         value={city}
-                        className="w-full rounded border border-gray-300 px-4 py-[11px]"
+                        className="w-full rounded border border-gray-300 px-4 py-[11px] appearance-none"
                         required
                       >
                         <option value="" disabled>
@@ -394,7 +394,7 @@ const InfoSession = () => {
                         onChange={(e) => {
                           setPref(e.target.value);
                         }}
-                        className="w-full rounded border border-gray-300 px-4 py-[11px]"
+                        className="w-full rounded border border-gray-300 px-4 py-[11px] appearance-none"
                         required
                       >
                         <option value="" disabled>
@@ -442,7 +442,7 @@ const InfoSession = () => {
                         onChange={(e) => {
                           setGender(e.target.value);
                         }}
-                        className="w-full rounded border border-gray-300 px-4 py-[11px]"
+                        className="w-full rounded border border-gray-300 px-4 py-[11px] appearance-none"
                         required
                       >
                         <option value="" selected disabled>

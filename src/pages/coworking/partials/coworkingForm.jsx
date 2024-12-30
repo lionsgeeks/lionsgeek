@@ -375,7 +375,7 @@ const ApplicationForm = () => {
                   name="birthday"
                   value={formInfo.birthday}
                   onChange={handleChange}
-                  className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta"
+                  className="shadow border rounded w-full py-2 px-3 text-gray-700 fo focus:outline-beta "
                   required
                 />
               </div>
@@ -470,7 +470,7 @@ const ApplicationForm = () => {
                 onChange={(e) => {
                   setGender(e.target.value);
                 }}
-                className={`w-full rounded border border-gray-300 p-[10px] `}
+                className={`w-full rounded border border-gray-300 p-[10px] appearance-none`}
                 required
               >
                 <option value="" disabled selected>                  

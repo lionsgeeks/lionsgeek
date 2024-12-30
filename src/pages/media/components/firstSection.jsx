@@ -99,7 +99,7 @@ export const FirstSection = () => {
         ref={leftside}
         className=" lg:w-[50%] py-16 px-7 lg:px-16 flex flex-col gap-4"
       >
-        <h1 className="font-bold md:text-6xl text-4xl lg:text-balance" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
+        <h1 className="font-bold md:text-6xl text-2xl lg:text-balance" style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}>
           <TransText
             en="Digital Content Creator"
             fr="Créateur de contenu digital"
