@@ -254,7 +254,7 @@ const resources = {
                   section5: {
                     title: {
                       name: "Partners",
-                      description: "Develop a future-ready workforce.",
+                      description: "Develop Future-Ready Skills.",
                     },
                   },
                 },
@@ -523,7 +523,7 @@ const resources = {
                   section5: {
                     title: {
                       name: "Partenaires",
-                      description: "Développer une main-d'œuvre prête pour l'avenir.",
+                      description: "Développer des compétences prêtes pour l'avenir.",
                     },
                   },
                 },
@@ -758,7 +758,7 @@ const resources = {
                   section5: {
                     title: {
                       name: "الشركاء",
-                      description: "تطوير قوة عاملة جاهزة للمستقبل.",
+                      description: ".تطوير مهارات جاهزة للمستقبل",
                     },
                   },
                 },

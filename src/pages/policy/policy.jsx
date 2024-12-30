@@ -57,11 +57,9 @@ const Policy = () => {
                         <img loading="lazy" className="w-[80%]" src={herocowork} alt="img" />
                     </div>
                 </div>
-            </div>
-
  {/* Content Section */}
 <div className="container mx-auto px-4 py-8">
-    <div className="max-w-4xl mx-auto bg-gray-900 rounded-lg p-8 mb-8">
+    <div className="max-w-4xl mx-auto rounded-lg p-8 mb-8">
         <div className="space-y-8">
             {/* Introduction */}
             <section>
@@ -174,6 +172,8 @@ const Policy = () => {
         </div>
     </div>
 </div>
+            </div>
+
 
 
         </div>
