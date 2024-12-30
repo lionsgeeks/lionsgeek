@@ -59,7 +59,7 @@ export const FifthSection = () => {
 
   return (
     <div
-      className=" flex flex-col gap-6 px-16 py-8 "
+      className=" flex flex-col gap-6 lg:px-16 px-7 py-8 "
       style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" }}
     >
       <div className="w-full text-center pb-10">
@@ -70,7 +70,7 @@ export const FifthSection = () => {
           <TransText fr="Témoignages" ar="شهادات" en="Testimonials" />
         </h1>
         <h1
-          className="text-5xl font-bold"
+          className="lg:text-5xl text-2xl font-bold"
           style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
         >
           <TransText
@@ -84,7 +84,7 @@ export const FifthSection = () => {
         {testimoniels.map((element, index) => (
           <div
             key={index}
-            className="lg:w-[30%] flex flex-col gap-2 relative overflow-hidden bg-white p-8 border-2 border-gray-100 rounded-lg"
+            className="lg:w-[30%] flex flex-col gap-2 relative overflow-hidden  p-8 border-2 border-gray-100 rounded-lg"
             style={{
               backgroundColor: darkMode ? "#212529" : "#ffffff",
               border: darkMode ? "none" : "2px solid #f3f4f6",

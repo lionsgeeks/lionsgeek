@@ -71,7 +71,7 @@ export const FifthSection = () => {
           <TransText fr="Témoignages" ar="شهادات" en="Testimonials" />{" "}
         </h1>
         <h1
-          className="text-5xl font-bold"
+          className="lg:text-5xl text-2xl font-bold"
           style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
         >
           <TransText
