@@ -21,7 +21,6 @@ const Navbar = () => {
   // dark Mode
   const { darkMode, toggleDarkMode } = useAppContext();
 
-
   const toggleLanguageIsOpen = () => {
     setLanguageIsOpen(!languageIsOpen);
   };
@@ -72,12 +71,16 @@ const Navbar = () => {
     }
   };
   return (
-    <div className=" z-50 fixed top-0 right-0 left-0 " >
-      <div className="antialiased  dark-mode:bg-gray-900" >
-        <div className="w-full text-gray-700 bg-gray-50 dark-mode:text-gray-200 dark-mode:bg-gray-800" style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" }}>
+    <div className=" z-50 fixed top-0 right-0 left-0 ">
+      <div className="antialiased  dark-mode:bg-gray-900">
+        <div
+          className="w-full text-gray-700 bg-gray-50 dark-mode:text-gray-200 dark-mode:bg-gray-800"
+          style={{ backgroundColor: darkMode ? "#0f0f0f" : "#ffffff" }}
+        >
           <div
-            className={`flex flex-col px-4 lg:items-center lg:justify-between lg:flex-row md:px-8 lg:px-16 ${selectedLanguage == "ar" ? "lg:flex-row-reverse" : ""
-              }`}
+            className={`flex flex-col px-4 lg:items-center lg:justify-between lg:flex-row md:px-8 lg:px-16 ${
+              selectedLanguage == "ar" ? "lg:flex-row-reverse" : ""
+            }`}
           >
             <div className="flex flex-row items-center justify-between py-4">
               {/* logo */}
@@ -143,102 +146,111 @@ const Navbar = () => {
                     </g>
                   </g>
                 </svg>
-
               </Link>
               {/* toggle */}
               <div className=" flex items-center gap-x-3">
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 transition-colors  lg:hidden duration-200 rounded-full focus:outline-none"
-              >
-
-                {darkMode ? (
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill={darkMode ? "white" : "currentColor"}
-                    className="bi bi-brightness-high text-yellow-400"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
-                  </svg>
-
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
-                    <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286" />
-                  </svg>
-                )}
-
-              </button>
-              <button
-                className="rounded-lg lg:hidden focus:outline-none focus:shadow-outline"
-                onClick={toggleNavbar}
-              >
-                <svg
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  className={`w-6 h-6 ${darkMode ? "fill-white" : "fill-black"}`}
+                <button
+                  onClick={toggleDarkMode}
+                  className="p-2 transition-colors  lg:hidden duration-200 rounded-full focus:outline-none"
                 >
-                  {isOpen ? (
-                    <path
-                      fillRule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
+                  {darkMode ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill={darkMode ? "white" : "currentColor"}
+                      className="bi bi-brightness-high text-yellow-400"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+                    </svg>
                   ) : (
-                    <path
-                      fillRule="evenodd"
-                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                      clipRule="evenodd"
-                    />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-moon"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286" />
+                    </svg>
                   )}
-                </svg>
-              </button>
+                </button>
+                <button
+                  className="rounded-lg lg:hidden focus:outline-none focus:shadow-outline"
+                  onClick={toggleNavbar}
+                >
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    className={`w-6 h-6 ${
+                      darkMode ? "fill-white" : "fill-black"
+                    }`}
+                  >
+                    {isOpen ? (
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    ) : (
+                      <path
+                        fillRule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                        clipRule="evenodd"
+                      />
+                    )}
+                  </svg>
+                </button>
               </div>
             </div>
             <nav
-              className={`flex-col ${isOpen ? "flex" : "hidden"
-                } gap-6 xl:gap-6 lg:gap-2 pb-4 lg:pb-0 lg:flex lg:justify-end lg:items-center lg:flex-row bg--500  ${selectedLanguage == "ar" ? "lg:flex-row-reverse items-end" : ""
-                }`}
+              className={`flex-col ${
+                isOpen ? "flex" : "hidden"
+              } gap-6 xl:gap-6 lg:gap-2 pb-4 lg:pb-0 lg:flex lg:justify-end lg:items-center lg:flex-row bg--500  ${
+                selectedLanguage == "ar" ? "lg:flex-row-reverse items-end" : ""
+              }`}
             >
-              <Link style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
+              <Link
+                style={{ color: darkMode ? "#ffffff" : "#0f0f0f" }}
                 to={"/"}
                 onClick={() => setIsOpen(false)}
-                className={` px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == "/"
-                  ? "font-medium  after:border-alpha after:w-[100%]"
-                  : "after:border-gray-300"
-                  }`}
+                className={` px-2 py-2 text-sm relative lg:after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${
+                  location.pathname == "/"
+                    ? "font-medium  after:border-alpha after:w-[100%]"
+                    : "after:border-gray-300"
+                }`}
               >
                 {t("header.home")}
               </Link>
               <div
                 ref={formationRef}
-                className={`relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == "/coding" ||
+                className={`relative lg:after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${
+                  location.pathname == "/coding" ||
                   location.pathname == "/media"
-                  ? "font-medium after:border-alpha after:w-[100%]"
-                  : "after:border-gray-300"
-                  }`}
+                    ? "font-medium after:border-alpha after:w-[100%]"
+                    : "after:border-gray-300"
+                }`}
               >
                 <button
                   onClick={() => {
                     setFormationMenu(!formationMenu);
                     setAboutMenu(false);
                   }}
-                  className={`px-2 py-2 text-sm relative flex items-center ${selectedLanguage == "ar" ? "flex-row-reverse" : ""
-                    } `}
+                  className={`px-2 py-2 text-sm relative flex items-center ${
+                    selectedLanguage == "ar" ? "flex-row-reverse" : ""
+                  } `}
                 >
-                  <span
-                    className={`  ${darkMode ? "text-white" : "#0f0f0f"}`}
-                  >
+                  <span className={`  ${darkMode ? "text-white" : "#0f0f0f"}`}>
                     {t("header.formation")}
                   </span>
                   <svg
                     fill={darkMode ? "white" : "#0f0f0f"}
                     viewBox="0 0 20 20"
-                    className={`inline w-4 h-4 transition-transform duration-200 transform ${selectedLanguage === "ar" ? "mr-1" : "ml-1"
-                      } ${formationMenu ? "rotate-180" : "rotate-0"}`}
+                    className={`inline w-4 h-4 transition-transform duration-200 transform ${
+                      selectedLanguage === "ar" ? "mr-1" : "ml-1"
+                    } ${formationMenu ? "rotate-180" : "rotate-0"}`}
                   >
                     <path
                       fillRule="evenodd"
@@ -246,34 +258,57 @@ const Navbar = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-
-
                 </button>
                 {formationMenu && (
                   <div
-                    className={`absolute z-30 ${selectedLanguage == "ar" ? "right-0" : "left-0"
-                      }  mt-2 origin-top-right`}
+                    className={`absolute z-30 ${
+                      selectedLanguage == "ar" ? "right-0" : "left-0"
+                    }  mt-2 origin-top-right`}
                   >
-                    <div className={`py-2  rounded-md lg:min-w-[15vw] min-w-[40vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ${darkMode ? "bg-[#0f0f0f] " : "bg-white"}`}>
+                    <div
+                      className={`py-2  rounded-md lg:min-w-[15vw] min-w-[40vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2 ${
+                        darkMode ? "bg-[#0f0f0f] " : "bg-white"
+                      }`}
+                    >
                       <Link
                         id="codingLink"
                         to={"/coding"}
                         onClick={() => closeMore_Open()}
-                        className={`group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == "ar" ? "flex-row-reverse" : ""
-                          } items-center gap-3 px-3 py-1 transition duration-300 `}
+                        className={`group cursor-pointer  hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${
+                          selectedLanguage == "ar" ? "flex-row-reverse" : ""
+                        } items-center gap-3 px-3 py-1 transition duration-300 `}
                       >
-                        <IoCodeSlashOutline className={`text-[1.3rem]   group-hover:stroke-alpha transition duration-300 `} stroke={darkMode ? "#fff" : "#0f0f0f"} />
-                        <p className={`text-[0.9rem] ${darkMode && "text-white"} `}>{t("header.coding")}</p>
+                        <IoCodeSlashOutline
+                          className={`text-[1.3rem]   group-hover:stroke-alpha transition duration-300 `}
+                          stroke={darkMode ? "#fff" : "#0f0f0f"}
+                        />
+                        <p
+                          className={`text-[0.9rem] ${
+                            darkMode && "text-white"
+                          } `}
+                        >
+                          {t("header.coding")}
+                        </p>
                       </Link>
                       <Link
                         id="mediaLink"
                         to={"/media"}
                         onClick={() => closeMore_Open()}
-                        className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == "ar" ? "flex-row-reverse" : ""
-                          }  items-center gap-3 px-3 py-1 transition duration-300`}
+                        className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${
+                          selectedLanguage == "ar" ? "flex-row-reverse" : ""
+                        }  items-center gap-3 px-3 py-1 transition duration-300`}
                       >
-                        <IoCameraOutline className={`text-[1.3rem]  group-hover:stroke-alpha transition duration-300 `} stroke={darkMode ? "#fff" : "#0f0f0f"} />
-                        <p className={`text-[0.9rem]  ${darkMode && "text-white"}`}>{t("header.media")}</p>
+                        <IoCameraOutline
+                          className={`text-[1.3rem]  group-hover:stroke-alpha transition duration-300 `}
+                          stroke={darkMode ? "#fff" : "#0f0f0f"}
+                        />
+                        <p
+                          className={`text-[0.9rem]  ${
+                            darkMode && "text-white"
+                          }`}
+                        >
+                          {t("header.media")}
+                        </p>
                       </Link>
                     </div>
                   </div>
@@ -282,30 +317,40 @@ const Navbar = () => {
               <Link
                 to={"/coworking"}
                 onClick={() => setIsOpen(false)}
-                className={`${darkMode ? "text-white" : "#0f0f0f"} px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == "/coworking"
+                
+                // className={`${darkMode ? "text-white" : "text-[#0f0f0f]"} px-2 py-2 text-sm relative  
+                //   `}
+                className={`${darkMode ? "text-white" : "#0f0f0f"} px-2 py-2 text-sm relative  lg:after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == "/coworking"
                   ? "font-medium  after:border-alpha after:w-[100%]"
                   : "after:border-gray-300"
                   }`}
+  
               >
                 {t("header.coworking")}
               </Link>
               <Link
                 to={"/event"}
                 onClick={() => setIsOpen(false)}
-                className={`${darkMode ? "text-white" : "#0f0f0f"}  px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == "/event"
-                  ? "font-medium  after:border-alpha after:w-[100%]"
-                  : "after:border-gray-300"
-                  }`}
+                className={`${
+                  darkMode ? "text-white" : "#0f0f0f"
+                }  px-2 py-2 text-sm relative lg:after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${
+                  location.pathname == "/event"
+                    ? "font-medium  after:border-alpha after:w-[100%]"
+                    : "after:border-gray-300"
+                }`}
               >
                 {t("header.events")}
               </Link>
               <Link
                 to={"/pro"}
                 onClick={() => setIsOpen(false)}
-                className={`${darkMode ? "text-white" : "#0f0f0f"}  px-2 py-2 text-sm relative after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${location.pathname == "/pro"
-                  ? "font-medium  after:border-alpha after:w-[100%]"
-                  : "after:border-gray-300"
-                  }`}
+                className={`${
+                  darkMode ? "text-white" : "#0f0f0f"
+                }  px-2 py-2 text-sm relative lg:after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s]  ${
+                  location.pathname == "/pro"
+                    ? "font-medium  after:border-alpha after:w-[100%]"
+                    : "after:border-gray-300"
+                }`}
               >
                 {t("header.pro")}
               </Link>
@@ -313,28 +358,34 @@ const Navbar = () => {
               {/* <a href="#" className="bg-alpha  md:mt-0 md:ml-2 font-light text-[0.9rem] px-4 py-2 rounded-lg shadow-md border border-alpha hover:text-alpha hover:bg-transparent hover:border hover:border-alpha  text-center">Contact Us</a> */}
               <div
                 ref={aboutRef}
-                className={`relative  after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${location.pathname == "/blog" ||
+                className={`relative  lg:after:absolute after:border-b-[2px]  after:bottom-[-13px] after:left-0 after:w-0 hover:after:w-[100%] after:transition-all after:duration-[0.35s] ${
+                  location.pathname == "/blog" ||
                   location.pathname == "/about" ||
                   location.pathname == "/galerie"
-                  ? "font-medium after:border-alpha after:w-[100%]"
-                  : "after:border-gray-300"
-                  }`}
+                    ? "font-medium after:border-alpha after:w-[100%]"
+                    : "after:border-gray-300"
+                }`}
               >
                 <button
                   onClick={() => {
                     setAboutMenu(!aboutMenu);
                     setFormationMenu(false);
                   }}
-                  className={` px-2 py-2 text-sm relative flex items-center ${selectedLanguage == "ar" ? "flex-row-reverse" : ""
-                    } `}
+                  className={` px-2 py-2 text-sm relative flex items-center ${
+                    selectedLanguage == "ar" ? "flex-row-reverse" : ""
+                  } `}
                 >
-                  <span className={`${darkMode ? "text-white" : "#0f0f0f"} `}>{t("header.about")}</span>
+                  <span className={`${darkMode ? "text-white" : "#0f0f0f"} `}>
+                    {t("header.about")}
+                  </span>
                   <svg
                     fill={darkMode ? "white" : "#0f0f0f"}
                     viewBox="0 0 20 20"
-                    className={`inline w-4 h-4 ${selectedLanguage === "ar" ? "mr-1" : "ml-1"
-                      } transition-transform duration-200 transform ${aboutMenu ? "rotate-180" : "rotate-0"
-                      }`}
+                    className={`inline w-4 h-4 ${
+                      selectedLanguage === "ar" ? "mr-1" : "ml-1"
+                    } transition-transform duration-200 transform ${
+                      aboutMenu ? "rotate-180" : "rotate-0"
+                    }`}
                   >
                     <path
                       fillRule="evenodd"
@@ -342,23 +393,35 @@ const Navbar = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-
                 </button>
                 {aboutMenu && (
                   <div
-                    className={`absolute z-30 ${selectedLanguage == "ar" ? "right-0" : "left-0"
-                      }   mt-2 origin-top-right `}
+                    className={`absolute z-30 ${
+                      selectedLanguage == "ar" ? "right-0" : "left-0"
+                    }   mt-2 origin-top-right `}
                   >
-                    <div className={`py-2  ${darkMode ? "bg-[#0f0f0f]" : "bg-white"} rounded-md lg:min-w-[15vw] min-w-[40vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2`}>
+                    <div
+                      className={`py-2  ${
+                        darkMode ? "bg-[#0f0f0f]" : "bg-white"
+                      } rounded-md lg:min-w-[15vw] min-w-[40vw] shadow-lg dark-mode:bg-gray-700 flex flex-col gap-2`}
+                    >
                       <Link
                         id="codingLink"
                         to={"/about"}
                         onClick={() => closeMore_Open()}
-                        className={`group cursor-pointer   hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == "ar" ? "flex-row-reverse" : ""
-                          } items-center gap-3 px-3 py-1 transition duration-300`}
+                        className={`group cursor-pointer   hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${
+                          selectedLanguage == "ar" ? "flex-row-reverse" : ""
+                        } items-center gap-3 px-3 py-1 transition duration-300`}
                       >
-                        <TbMessageCircleExclamation className="text-[1.3rem]   group-hover:stroke-alpha transition duration-300" stroke={darkMode ? "#fff" : "#0f0f0f"} />
-                        <p className={`text-[0.9rem] ${darkMode && "text-white"}`}>
+                        <TbMessageCircleExclamation
+                          className="text-[1.3rem]   group-hover:stroke-alpha transition duration-300"
+                          stroke={darkMode ? "#fff" : "#0f0f0f"}
+                        />
+                        <p
+                          className={`text-[0.9rem] ${
+                            darkMode && "text-white"
+                          }`}
+                        >
                           {t("header.who_we_are")}
                         </p>
                       </Link>
@@ -366,35 +429,55 @@ const Navbar = () => {
                         id="mediaLink"
                         to={"/blog"}
                         onClick={() => closeMore_Open()}
-                        className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == "ar" ? "flex-row-reverse" : ""
-                          } items-center gap-3 px-3 py-1 transition duration-300 `}
+                        className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${
+                          selectedLanguage == "ar" ? "flex-row-reverse" : ""
+                        } items-center gap-3 px-3 py-1 transition duration-300 `}
                       >
-                        <TbBrandMessenger className="text-[1.3rem]  group-hover:stroke-alpha transition duration-300" stroke={darkMode ? "#fff" : "#0f0f0f"} />
-                        <p className={`text-[0.9rem] ${darkMode && "text-white"}`}>{t("header.blog")}</p>
+                        <TbBrandMessenger
+                          className="text-[1.3rem]  group-hover:stroke-alpha transition duration-300"
+                          stroke={darkMode ? "#fff" : "#0f0f0f"}
+                        />
+                        <p
+                          className={`text-[0.9rem] ${
+                            darkMode && "text-white"
+                          }`}
+                        >
+                          {t("header.blog")}
+                        </p>
                       </Link>
                       <Link
                         id="mediaLink"
                         to={"/galerie"}
                         onClick={() => closeMore_Open()}
-                        className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${selectedLanguage == "ar" ? "flex-row-reverse" : ""
-                          } items-center gap-3 px-3 py-1 transition duration-300 `}
+                        className={`group cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 flex ${
+                          selectedLanguage == "ar" ? "flex-row-reverse" : ""
+                        } items-center gap-3 px-3 py-1 transition duration-300 `}
                       >
-                        <LuGalleryHorizontalEnd className="text-[1.3rem]  group-hover:stroke-alpha transition duration-300" stroke={darkMode ? "#fff" : "#0f0f0f"} />
-                        <p className={`text-[0.9rem] ${darkMode && "text-white"}`}>{t("header.gallerie")}</p>
+                        <LuGalleryHorizontalEnd
+                          className="text-[1.3rem]  group-hover:stroke-alpha transition duration-300"
+                          stroke={darkMode ? "#fff" : "#0f0f0f"}
+                        />
+                        <p
+                          className={`text-[0.9rem] ${
+                            darkMode && "text-white"
+                          }`}
+                        >
+                          {t("header.gallerie")}
+                        </p>
                       </Link>
                     </div>
                   </div>
                 )}
               </div>
               <div
-
                 ref={selectRef}
                 className={`relative flex items-center`}
                 onClick={toggleLanguageIsOpen}
               >
                 <div
-                  className={`cursor-pointer flex gap-1 ${selectedLanguage == "ar" ? "flex-row-reverse" : ""
-                    } items-center `}
+                  className={`cursor-pointer flex gap-1  ${
+                    selectedLanguage == "ar" ? "flex-row-reverse" : ""
+                  } items-center `}
                 >
                   <HiOutlineLanguage
                     stroke={darkMode ? "white" : "#0f0f0f"}
@@ -410,9 +493,11 @@ const Navbar = () => {
                     <svg
                       fill={darkMode ? "white" : "#0f0f0f"}
                       viewBox="0 0 20 20"
-                      className={`inline w-4 h-4 ${selectedLanguage === "ar" ? "mr-1" : "ml-1"
-                        } transition-transform duration-75 transform ${languageIsOpen ? "rotate-180" : "rotate-0"
-                        }`}
+                      className={`inline w-4 h-4 ${
+                        selectedLanguage === "ar" ? "mr-1" : "ml-1"
+                      } transition-transform duration-75 transform ${
+                        languageIsOpen ? "rotate-180" : "rotate-0"
+                      }`}
                     >
                       <path
                         fillRule="evenodd"
@@ -421,22 +506,34 @@ const Navbar = () => {
                       />
                     </svg>
                   </p>
-
-
                 </div>
                 {languageIsOpen && (
-                  <div className={`absolute top-10 z-30 mt-2 `}>
-                    <div className={`rounded-md  flex flex-col items-start gap-2 shadow-lg  py-2 ${darkMode ? "bg-[#0f0f0f]" : "bg-white"}`}>
+                  <div className={`absolute top-10 ${selectedLanguage === "ar" ? "right-0" : ""}  z-30 mt-2`}>
+                    <div
+                      className={`rounded-md  flex flex-col items-start gap-2 shadow-lg   py-2 ${
+                        darkMode ? "bg-[#0f0f0f]" : "bg-white "
+                      }`}
+                    >
                       {LANGUAGES.map(({ code, label, flag }, index) => {
                         return (
                           <div
                             key={index}
                             onClick={handleChangeLanguage}
                             data-code={code}
-                            className={`flex justify-start gap-2 px-3 py-1 cursor-pointer  ${darkMode ? "hover:bg-gray-600" : "hover:bg-gray-200"} w-full transition duration-200 `}
+                            className={`flex justify-start gap-2 px-3 py-1  cursor-pointer  ${
+                              darkMode
+                                ? "hover:bg-gray-600"
+                                : "hover:bg-gray-200"
+                            } w-full transition duration-200 `}
                           >
                             {flag}
-                            <p className={`cursor-pointer ${darkMode ? "text-white" : ""}`}>{label}</p>
+                            <p
+                              className={`cursor-pointer ${
+                                darkMode ? "text-white" : ""
+                              }`}
+                            >
+                              {label}
+                            </p>
                           </div>
                         );
                       })}
@@ -456,9 +553,7 @@ const Navbar = () => {
                 onClick={toggleDarkMode}
                 className="p-2 transition-colors hidden lg:block duration-200 rounded-full focus:outline-none"
               >
-
                 {darkMode ? (
-
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -469,13 +564,18 @@ const Navbar = () => {
                   >
                     <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
                   </svg>
-
                 ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-moon"
+                    viewBox="0 0 16 16"
+                  >
                     <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286" />
                   </svg>
                 )}
-
               </button>
             </nav>
           </div>
