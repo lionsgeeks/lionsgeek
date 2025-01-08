@@ -4,10 +4,10 @@ import { useLocation } from "react-router-dom";
 import PreventDevTools from "./functions/debugger";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  // const URL = "http://192.168.1.25:8000/api/";
-  // const IMAGEURL = "http://192.168.1.25:8000/storage/images/";
-  const URL = "https://backend.mylionsgeek.ma/api/";
-  const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
+  const URL = "http://172.28.0.186:8000/api/";
+  const IMAGEURL = "http://172.28.0.186:8000/storage/images/";
+  // const URL = "https://backend.mylionsgeek.ma/api/";
+  // const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
 
 
@@ -52,6 +52,19 @@ export const MyProvider = ({ children }) => {
       .get(URL + "infosessions")
       .then((res) => {
         setSessions(res.data.infos);
+      })
+      .catch((err) => {
+        console.log("info session form errrr", err);
+      });
+  };
+
+
+  const [privatesession, setprivatesession] = useState();
+  const fetchInfoprivatesession  = () => {
+    axios
+      .get(URL + "0cb1e4af6e3d2a705e07ac733dbf66275940f03fa243b8b5f5680b1af134b98c")
+      .then((res) => {
+        setprivatesession(res.data.infos);
       })
       .catch((err) => {
         console.log("info session form errrr", err);
@@ -133,6 +146,7 @@ export const MyProvider = ({ children }) => {
     fetchEventsData();
     fetchBlogs();
     fetchInfosession();
+    fetchInfoprivatesession();
     fetchGalleriesData();
     fetchUpcomingEvent();
     fetchProjects();
@@ -171,12 +185,15 @@ export const MyProvider = ({ children }) => {
           setEvents,
           sessions,
           setSessions,
+          privatesession,
+          setprivatesession,
           upcomingEvent,
           setUpcomingEvent,
           projects,
           darkMode,
           toggleDarkMode,
-          fetchInfosession
+          fetchInfosession,
+          fetchInfoprivatesession
         }}
       >
         {children}

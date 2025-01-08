@@ -18,6 +18,7 @@ import { BlogDetailPage } from "./pages/BlogDetails/blogDetails";
 import { Propage } from "./pages/Pro/Pro";
 import CoworkingForm from "./pages/coworking/partials/coworkingForm";
 import InfoSession from "./pages/infoSession/infoSession";
+import Privatesession from "./pages/infoSession/privatesession";
 import LoadingPage from "./pages/Loading";
 import WhatisLg from "./pages/WhatisLg/whatisLg";
 import Policy from "./pages/policy/policy";
@@ -52,6 +53,7 @@ function App() {
         <Route path="/postuler" element={<InfoSession />} />
         <Route path="/whatislionsgeek" element={<WhatisLg />} />
         <Route path="/policy" element={<Policy />} />
+        <Route path="/0cb1e4af6e3d2a705e07ac733dbf66275940f03fa243b8b5f5680b1af134b98c" element={<Privatesession />} />
       </Routes>
       <Footer />
     </MyProvider>
