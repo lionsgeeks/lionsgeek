@@ -87,6 +87,7 @@ export const Footer = () => {
                   }`}
                 />
               </div>
+              {/* cours */}
               <div
                 className={`flex flex-col  gap-3 lg:ms-5 ${
                   selectedLanguage == "ar" ? "text-end" : ""
@@ -116,8 +117,13 @@ export const Footer = () => {
                   >
                     {t("footer.part1.phrase2")}
                   </Link>
+                  
                 </div>
+                
               </div>
+             
+              <div>
+
               <div className="flex flex-col gap-3">
                 <h1
                   className={`font-bold text-gray-600 text-[1.2rem]  ${
@@ -149,6 +155,7 @@ export const Footer = () => {
                       </a>
                     </p>
                   </div>
+                 
                   <div>
                     <p
                       className={`font-medium text-gray-400 text-[0.9rem]  ${
@@ -167,6 +174,9 @@ export const Footer = () => {
                   </div>
                 </div>
               </div>
+              
+              </div>
+              
             </div>
             <div className="flex flex-col items-start gap-2 lg:w-[40%] xl:w-[25%]">
               <h1
@@ -266,8 +276,17 @@ export const Footer = () => {
             <p className="text-gray-400 text-[0.9rem] text-center">
               &copy; Copyright {currentYear} LionsGeek. All Rights Reserved.
             </p>
+            {/* policy */}
+          <div>
+            <Link to="/policy" className="text-gray-400 hover:underline">
+              Privacy Policy
+            </Link>
+         
           </div>
+          </div>
+          
         </div>
+        
       </footer>
       {sending && (
         <div className="fixed z-[1000] overflow-hidden inset-0 flex justify-center items-center bg-gray-700/70  w-full h-full ">
