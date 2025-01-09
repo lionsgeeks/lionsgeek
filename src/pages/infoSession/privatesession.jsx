@@ -187,7 +187,7 @@ const Privatesession = () => {
   const minDateString = minDate.toISOString().split("T")[0];
 
   const [formation, setFormation] = useState("");
-//   console.log(privatesession?.isAvailable);
+  console.log(privatesession);
   
   return (
     <div
@@ -197,8 +197,8 @@ const Privatesession = () => {
     >
       {!sending ? (
         <>
-          {sessions ? (
-            (sessions[0] && sessions?.every(e => e.isFull) == false) ? (
+          {privatesession ? (
+            (privatesession) ? (
               <>
                 <form
                   onSubmit={handleSubmit}
