@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 import PreventDevTools from "./functions/debugger";
 export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
-  // const URL = "http://172.28.0.186:8000/api/";
-  // const IMAGEURL = "http://172.28.0.186:8000/storage/images/";
+  // const URL = "http://172.28.0.27:8000/api/";
+  // const IMAGEURL = "http://172.28.0.27:8000/storage/images/";
   const URL = "https://backend.mylionsgeek.ma/api/";
   const IMAGEURL = "https://backend.mylionsgeek.ma/storage/images/";
   // ? Galleries Data fetching
@@ -41,7 +41,7 @@ export const MyProvider = ({ children }) => {
       setGalleries(response.data);
       // }, 7000);
     } catch (error) {
-      window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
+      // window.location.href = "https://backend.mylionsgeek.ma/?redirect=true";
       console.error("Error fetching galleries data:", error);
     }
   };
