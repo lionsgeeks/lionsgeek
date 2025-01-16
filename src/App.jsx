@@ -23,6 +23,7 @@ import LoadingPage from "./pages/Loading";
 import WhatisLg from "./pages/WhatisLg/whatisLg";
 import Policy from "./pages/policy/policy";
 import Unsubscribe from "./pages/Unsubscribe/unsubscribe";
+import AttendanceConfirmation from "./pages/AttendanceConfirmation/AttendanceConfirmation";
 
 function App() {
   function Redirect(params) {
@@ -56,6 +57,7 @@ function App() {
         <Route path="/policy" element={<Policy />} />
         <Route path="/unsubscribe/:id" element={<Unsubscribe />} />
         <Route path="/0cb1e4af6e3d2a705e07ac733dbf66275940f03fa243b8b5f5680b1af134b98c" element={<Privatesession />} />
+        <Route path="/attendance/confirmation" element={<AttendanceConfirmation />} />
       </Routes>
       <Footer />
     </MyProvider>
