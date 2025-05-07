@@ -45,15 +45,15 @@ export const CardsSection = () => {
     <>
       <div className={`flex justify-center items-center md:px-20 px-6 py-14 ${darkMode ? "bg-[#0f0f0f]":"bg-white"}`}>
         <div className="flex flex-wrap w-full lg:gap-x-[calc(10%/2)] lg:gap-y-14 md:gap-x-[calc(4%/1)] gap-10 ">
+                    <div id="cards" className={`w-full text-center lg:pt-5 lg:px-0 px-6 `}>
+                      <h1 className={`text-xl ${darkMode ? "text-white":"text-black"}`}>{t("main.Events.Title1")}</h1>
+                      <h1 className={`text-5xl font-bold ${darkMode ? "text-white":"text-black"}`}>{t("main.Events.Desc1")}</h1>
+                    </div>
           {
             events ?
               events[0] ?
                 events.map((element, index) => (
                   <>
-                    <div id="cards" className={`w-full text-center lg:pt-5 lg:px-0 px-6 `}>
-                      <h1 className={`text-xl ${darkMode ? "text-white":"text-black"}`}>{t("main.Events.Title1")}</h1>
-                      <h1 className={`text-5xl font-bold ${darkMode ? "text-white":"text-black"}`}>{t("main.Events.Desc1")}</h1>
-                    </div>
                     <div
                       key={index}
                       id="eventCard"
