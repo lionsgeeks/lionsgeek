@@ -8,6 +8,9 @@ import axios from "axios";
 export const BookingModal = ({ isOpen, onClose, event }) => {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
+  const [genderInput, setGenderInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState("");
+
   const [successMessage, setSuccessMessage] = useState(null);
   const { selectedLanguage  , URL} = useAppContext();
 
@@ -30,7 +33,7 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
   };
 
   const submit = async () => {
-    if (!nameInput || !emailInput) {
+    if (!nameInput || !emailInput || !genderInput || !phoneInput) {
       const message = {
         en: "Please fill out both fields.",
         fr: "Veuillez remplir tous les champs.",
@@ -45,6 +48,9 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
     formdata.append("email", emailInput);
     formdata.append("name", nameInput);
     formdata.append("event_id", event.id);
+    formdata.append("gender", genderInput);
+    formdata.append("phone", phoneInput);
+
 
     try {
       const response = await axios.post(URL + "booking/store", formdata);
@@ -151,7 +157,46 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
                   />
                 </div>
               </div>
-              <div className="flex justify-center gap-3">
+
+              <div className="flex flex-col items-start gap-y-2 mt-3 w-full">
+  <label htmlFor="gender" className={selectedLanguage === "ar" ? "self-end" : ""}>
+    <TransText en="Gender" fr="Genre" ar="الجنس" />
+  </label>
+  <select
+    id="gender"
+    className={inputClassName}
+    value={genderInput}
+    onChange={(e) => setGenderInput(e.target.value)}
+    dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
+  >
+    <option value="">{selectedLanguage === "ar" ? "اختر الجنس" : selectedLanguage === "fr" ? "Sélectionner le genre" : "Select gender"}</option>
+    <option value="male">{selectedLanguage === "ar" ? "ذكر" : selectedLanguage === "fr" ? "Homme" : "Male"}</option>
+    <option value="female">{selectedLanguage === "ar" ? "أنثى" : selectedLanguage === "fr" ? "Femme" : "Female"}</option>
+  </select>
+</div>
+
+<div className="flex flex-col items-start gap-y-2 mt-3 w-full">
+  <label htmlFor="phone" className={selectedLanguage === "ar" ? "self-end" : ""}>
+    <TransText en="Phone Number" fr="Numéro de téléphone" ar="رقم الهاتف" />
+  </label>
+  <input 
+    id="phone"
+    className={inputClassName}
+    type="tel"
+    placeholder={
+      selectedLanguage === "ar"
+        ? "أدخل رقم الهاتف"
+        : selectedLanguage === "fr"
+        ? "Entrez le numéro de téléphone"
+        : "Enter phone number"
+    }
+    value={phoneInput}
+    onChange={(e) => setPhoneInput(e.target.value)}
+    dir={selectedLanguage === "ar" ? "rtl" : "ltr"}
+  />
+</div>
+
+              <div className="flex justify-center gap-3 mt-5">
                 <button
                   onClick={submit}
                   className="text-black bg-alpha w-full justify-center font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center transition-colors duration-200"
