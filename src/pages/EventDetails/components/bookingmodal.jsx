@@ -10,11 +10,13 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
   const [emailInput, setEmailInput] = useState("");
   const [genderInput, setGenderInput] = useState("");
   const [phoneInput, setPhoneInput] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const { selectedLanguage  , URL} = useAppContext();
 
   if (!isOpen) return null;
+
+
 
   const getPlaceholder = (field) => {
     const placeholders = {
@@ -50,7 +52,7 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
     formdata.append("event_id", event.id);
     formdata.append("gender", genderInput);
     formdata.append("phone", phoneInput);
-
+    setLoading(true);
 
     try {
       const response = await axios.post(URL + "booking/store", formdata);
@@ -64,6 +66,8 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
       
       setSuccessMessage(errorMessage);
       console.error("Booking error:", error);
+    }finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -197,16 +201,24 @@ export const BookingModal = ({ isOpen, onClose, event }) => {
 </div>
 
               <div className="flex justify-center gap-3 mt-5">
-                <button
-                  onClick={submit}
-                  className="text-black bg-alpha w-full justify-center font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center transition-colors duration-200"
-                >
+              <button
+                onClick={submit}
+                disabled={loading}
+                className={`text-black bg-alpha w-full justify-center font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center transition-colors duration-200 ${
+                  loading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              >
+                {loading ? (
+                  <span>Loading...</span> // You can replace this with a spinner icon
+                ) : (
                   <TransText
                     fr="Oui, je confirme"
                     en="Yes, I confirm"
                     ar="نعم، أؤكد"
                   />
-                </button>
+                )}
+              </button>
+
               </div>
             </div>
           </div>
