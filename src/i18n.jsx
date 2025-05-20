@@ -51,7 +51,7 @@ const resources = {
         translation: {
             header: {
                 "home": "Home",
-                "pro": "Services",
+                "pro": "LionsGeek Pro",
                 "formation": "Formation",
                 "coding": "Learn to code",
                 "media": "Master media arts",
@@ -289,7 +289,7 @@ const resources = {
         translation: {
             header: {
                 "home": "Accueil",
-                "pro": "Services",
+                "pro": "LionsGeek Pro",
                 "formation": "Formation",
                 "coding": "Apprenez à coder",
                 "media": "Maîtriser les arts médiatiques",
@@ -561,7 +561,7 @@ const resources = {
         translation: {
             header: {
                 "home": "الرئيسية",
-                "pro": "خدمات",
+                "pro": "ليونزجيك برو ",
                 "formation": "التكوين",
                 "coding": "تعلم البرمجة",
                 "media": "إتقان فنون الإعلام",

@@ -25,7 +25,7 @@ const EventSection = () => {
     >
       <img
       loading="lazy"
-        className="md:w-1/2 md:h-[50vh] h-[20vh] object-cover"
+        className="md:w-1/2 md:h-[75vh] h-[55vh] object-cover object-center"
         src={`${IMAGEURL+"/events/"}${upcomingEvent?.cover}`}
         alt="we-choose-art-event"
       />

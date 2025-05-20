@@ -117,66 +117,61 @@ export const Footer = () => {
                   >
                     {t("footer.part1.phrase2")}
                   </Link>
-                  
                 </div>
-                
               </div>
-             
-              <div>
 
-              <div className="flex flex-col gap-3">
-                <h1
-                  className={`font-bold text-gray-600 text-[1.2rem]  ${
-                    selectedLanguage == "ar" ? "text-end" : ""
-                  } ${darkMode && "text-white"}`}
-                >
-                  {t("footer.part2.title")}
-                </h1>
-                <div className="flex flex-col gap-1">
-                  {/* <div>
+              <div>
+                <div className="flex flex-col gap-3">
+                  <h1
+                    className={`font-bold text-gray-600 text-[1.2rem]  ${
+                      selectedLanguage == "ar" ? "text-end" : ""
+                    } ${darkMode && "text-white"}`}
+                  >
+                    {t("footer.part2.title")}
+                  </h1>
+                  <div className="flex flex-col gap-1">
+                    {/* <div>
                                         <p className='font-medium text-gray-400 text-[0.9rem]'>Address:</p>
                                         <p className='text-gray-400 text-[0.9rem] w-[20vw] '>4ème étage, Ain Sebaa Center, Route de Rabat, Casablanca</p>
                                     </div> */}
-                  <div>
-                    <p
-                      className={`font-medium text-gray-400  text-[0.9rem]  ${
-                        selectedLanguage == "ar" ? "text-end" : ""
-                      }`}
-                    >
-                      {t("footer.part2.area1.title")}
-                    </p>
-                    <p
-                      className={`text-gray-400 text-[0.9rem]  ${
-                        selectedLanguage == "ar" ? "text-end" : ""
-                      }`}
-                    >
-                      <a href="mailto:contact@lionsgeek.ma">
-                        {t("footer.part2.area1.content")}
-                      </a>
-                    </p>
-                  </div>
-                 
-                  <div>
-                    <p
-                      className={`font-medium text-gray-400 text-[0.9rem]  ${
-                        selectedLanguage == "ar" ? "text-end" : ""
-                      }`}
-                    >
-                      {t("footer.part2.area2.title")}
-                    </p>
-                    <p
-                      className={`text-gray-400 text-[0.9rem]  ${
-                        selectedLanguage == "ar" ? "text-end" : ""
-                      }`}
-                    >
-                      {t("footer.part2.area2.content")}
-                    </p>
+                    <div>
+                      <p
+                        className={`font-medium text-gray-400  text-[0.9rem]  ${
+                          selectedLanguage == "ar" ? "text-end" : ""
+                        }`}
+                      >
+                        {t("footer.part2.area1.title")}
+                      </p>
+                      <p
+                        className={`text-gray-400 text-[0.9rem]  ${
+                          selectedLanguage == "ar" ? "text-end" : ""
+                        }`}
+                      >
+                        <a href="mailto:contact@lionsgeek.ma">
+                          {t("footer.part2.area1.content")}
+                        </a>
+                      </p>
+                    </div>
+
+                    <div>
+                      <p
+                        className={`font-medium text-gray-400 text-[0.9rem]  ${
+                          selectedLanguage == "ar" ? "text-end" : ""
+                        }`}
+                      >
+                        {t("footer.part2.area2.title")}
+                      </p>
+                      <p
+                        className={`text-gray-400 text-[0.9rem]  ${
+                          selectedLanguage == "ar" ? "text-end" : ""
+                        }`}
+                      >
+                        {t("footer.part2.area2.content")}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-              
-              </div>
-              
             </div>
             <div className="flex flex-col items-start gap-2 lg:w-[40%] xl:w-[25%]">
               <h1
@@ -236,7 +231,6 @@ export const Footer = () => {
                 className={"shadow-md font-normal w-full mt-5 text-[0.8rem]"}
                 onClick={sendEmail}
               >
-                
                 {t("footer.part3.button")}
               </Button>
             </div>
@@ -277,90 +271,53 @@ export const Footer = () => {
               &copy; Copyright {currentYear} LionsGeek. All Rights Reserved.
             </p>
             {/* policy */}
-          <div>
-            <Link to="/policy" className="text-gray-400 hover:underline">
-              Privacy Policy
-            </Link>
-         
+            <div>
+              <Link to="/policy" className="text-gray-400 hover:underline">
+                Privacy Policy
+              </Link>
+            </div>
           </div>
-          </div>
-          
         </div>
-        
       </footer>
       {sending && (
-        <div className="fixed z-[1000] overflow-hidden inset-0 flex justify-center items-center bg-gray-700/70  w-full h-full ">
-          <div class={`z-[1000] max-w-xl  w-full mx-auto rounded-xl overflow-hidden ${darkMode ? "bg-[#0f0f0f]" : "bg-[#ebe7e7]"}`}>
-            <div class="max-w-md mx-auto pt-12 pb-14 px-5 text-center">
-              <div class="inline-flex items-center justify-center w-12 h-12 mb-5 rounded-full">
+        <div className="fixed z-[1000] overflow-hidden inset-0 flex justify-center items-center bg-black/50  w-full h-full ">
+          <div
+            class={`z-[1000] max-w-xl  w-full mx-auto rounded-xl overflow-hidden ${
+              darkMode ? "bg-[#0f0f0f]" : "bg-white"
+            }`}
+          >
+            <div class="max-w-md mx-auto pt-12 pb-2 px-5 text-center">
+              <div class="inline-flex items-center justify-center rounded-full">
                 <svg
-                  viewBox="0 0 48 48"
-                  height="100"
-                  width="100"
-                  y="0px"
-                  x="0px"
                   xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="#22c55e"
+                  className="size-9"
                 >
-                  <linearGradient
-                    gradientUnits="userSpaceOnUse"
-                    y2="37.081"
-                    y1="10.918"
-                    x2="10.918"
-                    x1="37.081"
-                    id="SVGID_1__8tZkVc2cOjdg_gr1"
-                  >
-                    <stop stop-color="#60fea4" offset="0"></stop>
-                    <stop stop-color="#6afeaa" offset=".033"></stop>
-                    <stop stop-color="#97fec4" offset=".197"></stop>
-                    <stop stop-color="#bdffd9" offset=".362"></stop>
-                    <stop stop-color="#daffea" offset=".525"></stop>
-                    <stop stop-color="#eefff5" offset=".687"></stop>
-                    <stop stop-color="#fbfffd" offset=".846"></stop>
-                    <stop stop-color="#fff" offset="1"></stop>
-                  </linearGradient>
-                  <circle
-                    fill="url(#SVGID_1__8tZkVc2cOjdg_gr1)"
-                    r="18.5"
-                    cy="24"
-                    cx="24"
-                  ></circle>
                   <path
-                    d="M35.401,38.773C32.248,41.21,28.293,42.66,24,42.66C13.695,42.66,5.34,34.305,5.34,24	c0-2.648,0.551-5.167,1.546-7.448"
-                    stroke-width="3"
-                    stroke-miterlimit="10"
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke="#10e36c"
-                    fill="none"
-                  ></path>
-                  <path
-                    d="M12.077,9.646C15.31,6.957,19.466,5.34,24,5.34c10.305,0,18.66,8.354,18.66,18.66	c0,2.309-0.419,4.52-1.186,6.561"
-                    stroke-width="3"
-                    stroke-miterlimit="10"
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke="#10e36c"
-                    fill="none"
-                  ></path>
-                  <polyline
-                    points="16.5,23.5 21.5,28.5 32,18"
-                    stroke-width="3"
-                    stroke-miterlimit="10"
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke="#10e36c"
-                    fill="none"
-                  ></polyline>
+                    fillRule="evenodd"
+                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
-              <h4 class={`text-xl  font-semibold mb-5 ${darkMode ? " text-gray-100" : " text-[#0f0f0f]"}`}>
+              <h2 className="text-lg font- text-gray-500">Success!</h2>
+              <h4
+                class={`text-xl  font-semibold mb-5 ${
+                  darkMode ? " text-gray-100" : " text-gray-500"
+                }`}
+              >
                 <TransText
                   ar="شكراً لاشتراكك في النشرة الإخبارية"
                   fr="Merci de vous être inscrit(e) à la newsletter !"
                   en="Thank you for signing up for the newsletter!"
                 />
               </h4>
-              <p class={` font-medium ${darkMode ? " text-gray-300" : " text-[#0f0f0f]"}`}>
+              <p
+                class={` font- ${
+                  darkMode ? " text-gray-300" : " text-gray-500"
+                }`}
+              >
                 <TransText
                   ar="ستتلقى رسالة بريد إلكتروني قريباً"
                   fr="Vous recevrez un e-mail bientôt."
@@ -368,14 +325,18 @@ export const Footer = () => {
                 />
               </p>
             </div>
-            <div class={`pt-5 pb-6 px-6 text-right  -mb-2 ${darkMode ? "bg-gray-900" : "bg-[#e2e0e0]"}`}>
+            <div
+              class={`pb-6 px-6 text-right flex justify-center items-center  -mb-2 ${
+                darkMode ? "bg-[#0f0f0f]" : "bg-white"
+              }`}
+            >
               <button
                 onClick={() => {
                   setSending(false);
                 }}
-                class="inline-block w-full sm:w-auto py-3 px-5 mb-2 mr-4 text-center font-semibold leading-6 text-gray-200 bg-gray-500 hover:bg-gray-400 rounded-lg transition duration-200"
+                class="inline-block w-full sm:w-auto py-3 px-5 mb-2 mr-4 text-center leading-6 text-black bg-alpha hover:bg-alpha/70 rounded-lg transition duration-200"
               >
-                Confirm
+                Close
               </button>
             </div>
           </div>
