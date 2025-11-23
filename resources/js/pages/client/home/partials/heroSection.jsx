@@ -1,9 +1,61 @@
 import { Button } from '@/components/Button';
 import { TransText } from '@/components/TransText';
 import { useAppContext } from '@/context/appContext';
+import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
     const { selectedLanguage, darkMode } = useAppContext();
+    const [activismDay, setActivismDay] = useState(0);
+    const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    const [campaignStatus, setCampaignStatus] = useState('upcoming'); // 'upcoming', 'active', 'ended'
+
+    // Calculate countdown and campaign status with real-time updates
+    // Campaign runs from November 25 to December 10 each year
+    useEffect(() => {
+        const calculateCampaignStatus = () => {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const campaignStart = new Date(currentYear, 10, 25, 0, 0, 0, 0); // November 25 at midnight
+            const campaignEnd = new Date(currentYear, 11, 10, 23, 59, 59, 999); // December 10 end of day
+
+            if (now < campaignStart) {
+                // Before campaign - calculate exact time remaining
+                const diffTime = campaignStart - now;
+                const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+
+                setCountdown({ days, hours, minutes, seconds });
+                setActivismDay(0);
+                setCampaignStatus('upcoming');
+            } else if (now >= campaignStart && now <= campaignEnd) {
+                // Campaign is active - calculate current day (1-16)
+                const nowDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const startDate = new Date(campaignStart.getFullYear(), campaignStart.getMonth(), campaignStart.getDate());
+                const diffTime = nowDate - startDate;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                setActivismDay(Math.min(diffDays, 16));
+                setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                setCampaignStatus('active');
+            } else {
+                // After campaign
+                setActivismDay(16);
+                setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                setCampaignStatus('ended');
+            }
+        };
+
+        // Calculate immediately
+        calculateCampaignStatus();
+
+        // Update every second for real-time countdown
+        const intervalId = setInterval(calculateCampaignStatus, 1000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, []);
 
     const pillars = [
         {
@@ -39,9 +91,8 @@ export default function HeroSection() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`absolute z-10 h-full scale-125 ${darkMode ? 'stroke-white/[15.25%]' : 'stroke-beta/[6.25%]'} -top-[10%] ${
-                        selectedLanguage === 'ar' ? 'left-0 rotate-45' : 'right-0 -rotate-45'
-                    } transition-all duration-[625ms] group-hover:scale-[25] group-hover:opacity-0`}
+                    className={`absolute z-10 h-full scale-125 ${darkMode ? 'stroke-white/[15.25%]' : 'stroke-beta/[6.25%]'} -top-[10%] ${selectedLanguage === 'ar' ? 'left-0 rotate-45' : 'right-0 -rotate-45'
+                        } transition-all duration-[625ms] group-hover:scale-[25] group-hover:opacity-0`}
                 >
                     <path
                         strokeLinecap="round"
@@ -84,9 +135,8 @@ export default function HeroSection() {
                     viewBox="0 0 512 512"
                     strokeWidth="1.5"
                     stroke="red"
-                    className={`absolute -top-[10%] z-10 h-full scale-125 ${
-                        selectedLanguage === 'ar' ? 'left-0' : '- right-0'
-                    } transition-all duration-[625ms] group-hover:scale-[25] group-hover:opacity-0`}
+                    className={`absolute -top-[10%] z-10 h-full scale-125 ${selectedLanguage === 'ar' ? 'left-0' : '- right-0'
+                        } transition-all duration-[625ms] group-hover:scale-[25] group-hover:opacity-0`}
                 >
                     <g
                         transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
@@ -185,9 +235,8 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                     viewBox="0 0 512 512"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`absolute -top-[10%] z-10 h-full scale-100 stroke-beta/[6.25%] ${
-                        selectedLanguage === 'ar' ? 'left-0' : '- right-0'
-                    } transition-all duration-[625ms] group-hover:scale-[25] group-hover:opacity-0`}
+                    className={`absolute -top-[10%] z-10 h-full scale-100 stroke-beta/[6.25%] ${selectedLanguage === 'ar' ? 'left-0' : '- right-0'
+                        } transition-all duration-[625ms] group-hover:scale-[25] group-hover:opacity-0`}
                 >
                     <g
                         transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
@@ -305,11 +354,117 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
             className="text- mt-12 flex flex-col justify-between gap-6 px-7 py-12 pt-6 text-balance md:gap-12 md:px-16"
             style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
         >
-            <div className="bg-image relative h-[70vh] overflow-hidden rounded-lg bg-cover bg-center bg-no-repeat p-12 after:absolute after:inset-0 after:size-full after:bg-beta/50 md:h-[calc(calc(100vh-67.11px)*2/3)]">
+            <div
+                className="relative h-[70vh] overflow-hidden rounded-lg bg-cover  bg-no-repeat p-12 after:absolute after:inset-0 after:size-full after:bg-beta/50 md:h-[calc(calc(100vh-67.11px)*2/3)]"
+                style={{ backgroundImage: "url('/assets/img/activism.png')" }}
+            >
+                {/* Countdown Badge - Top Left */}
+                {(campaignStatus === 'upcoming' || campaignStatus === 'active') && (
+                    <div
+                        className={`absolute bottom-2 left-[84%] z-30 flex flex-col gap-2 rounded-lg border-2 px-4 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 ${selectedLanguage === 'ar' ? 'right-6' : 'left-6'
+                            } ${campaignStatus === 'active'
+                                ? 'border-alpha bg-alpha/90'
+                                : darkMode
+                                    ? 'border-white/30 bg-white/10'
+                                    : 'border-beta/30 bg-white/95'
+                            }`}
+                        style={{
+                            borderColor: campaignStatus === 'active' ? '#ff5910' : darkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(33, 37, 41, 0.3)',
+                            backgroundColor: campaignStatus === 'active' ? 'rgba(255, 89, 16, 0.9)' : darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.95)',
+                        }}
+                    >
+                        <div className="text-center">
+                            <p
+                                className="text-xs font-semibold uppercase tracking-wider md:text-sm"
+                                style={{ color: campaignStatus === 'active' ? '#fff' : darkMode ? '#fff' : '#1f1f1f' }}
+                            >
+                                <TransText
+                                    fr={campaignStatus === 'active' ? "16 Jours d'Activisme" : "16 Jours d'Activisme"}
+                                    en={campaignStatus === 'active' ? '16 Days of Activism' : '16 Days of Activism'}
+                                    ar={campaignStatus === 'active' ? '16 يومًا من النشاط' : '16 يومًا من النشاط'}
+                                />
+                            </p>
+                        </div>
+
+                        {campaignStatus === 'upcoming' ? (
+                            <div className="flex items-center gap-2">
+                                <div className="flex flex-col items-center">
+                                    <span
+                                        className="text-xl font-bold md:text-2xl"
+                                        style={{ color: darkMode ? '#fff' : '#1f1f1f' }}
+                                    >
+                                        {String(countdown.days).padStart(2, '0')}
+                                    </span>
+                                    <span
+                                        className="text-[10px] font-medium uppercase text-white/70 md:text-xs"
+                                        style={{ color: darkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(31, 31, 31, 0.7)' }}
+                                    >
+                                        <TransText fr="J" en="D" ar="ي" />
+                                    </span>
+                                </div>
+                                <span className="text-lg font-bold" style={{ color: darkMode ? '#fff' : '#1f1f1f' }}>
+                                    :
+                                </span>
+                                <div className="flex flex-col items-center">
+                                    <span
+                                        className="text-xl font-bold md:text-2xl"
+                                        style={{ color: darkMode ? '#fff' : '#1f1f1f' }}
+                                    >
+                                        {String(countdown.hours).padStart(2, '0')}
+                                    </span>
+                                    <span
+                                        className="text-[10px] font-medium uppercase text-white/70 md:text-xs"
+                                        style={{ color: darkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(31, 31, 31, 0.7)' }}
+                                    >
+                                        <TransText fr="H" en="H" ar="س" />
+                                    </span>
+                                </div>
+                                <span className="text-lg font-bold" style={{ color: darkMode ? '#fff' : '#1f1f1f' }}>
+                                    :
+                                </span>
+                                <div className="flex flex-col items-center">
+                                    <span
+                                        className="text-xl font-bold md:text-2xl"
+                                        style={{ color: darkMode ? '#fff' : '#1f1f1f' }}
+                                    >
+                                        {String(countdown.minutes).padStart(2, '0')}
+                                    </span>
+                                    <span
+                                        className="text-[10px] font-medium uppercase text-white/70 md:text-xs"
+                                        style={{ color: darkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(31, 31, 31, 0.7)' }}
+                                    >
+                                        <TransText fr="M" en="M" ar="د" />
+                                    </span>
+                                </div>
+                                <span className="text-lg font-bold" style={{ color: darkMode ? '#fff' : '#1f1f1f' }}>
+                                    :
+                                </span>
+                                <div className="flex flex-col items-center">
+                                    <span
+                                        className="text-xl font-bold md:text-2xl"
+                                        style={{ color: darkMode ? '#fff' : '#1f1f1f' }}
+                                    >
+                                        {String(countdown.seconds).padStart(2, '0')}
+                                    </span>
+                                    <span
+                                        className="text-[10px] font-medium uppercase text-white/70 md:text-xs"
+                                        style={{ color: darkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(31, 31, 31, 0.7)' }}
+                                    >
+                                        <TransText fr="S" en="S" ar="ث" />
+                                    </span>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="flex items-center justify-center gap-1">
+                                <span className="text-2xl font-bold text-white md:text-3xl">{activismDay}</span>
+                                <span className="text-lg font-semibold text-white/90 md:text-xl">/16</span>
+                            </div>
+                        )}
+                    </div>
+                )}
                 <div
-                    className={`absolute top-1/2 z-10 flex -translate-y-1/2 flex-col gap-4 lg:w-[calc(calc(100%-6rem)*0.5)] ${
-                        selectedLanguage === 'ar' ? 'right-12 items-end' : 'left-12 items-start'
-                    }`}
+                    className={`absolute top-1/2 z-10 flex -translate-y-1/2 flex-col gap-4 lg:w-[calc(calc(100%-6rem)*0.5)] ${selectedLanguage === 'ar' ? 'right-12 items-end' : 'left-12 items-start'
+                        }`}
                 >
                     <h1 className="text-4xl font-bold text-balance text-white md:text-6xl">
                         <TransText fr="Le portail vers le monde numérique." en="The door to the digital world." ar=".بوابة إلى العالم الرقمي" />
@@ -337,9 +492,8 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                 </h2>
 
                 <div
-                    className={`flex flex-col justify-between gap-6 md:h-[15rem] md:gap-0 ${
-                        selectedLanguage === 'ar' ? 'md:flex-row-reverse' : 'md:flex-row'
-                    }`}
+                    className={`flex flex-col justify-between gap-6 md:h-[15rem] md:gap-0 ${selectedLanguage === 'ar' ? 'md:flex-row-reverse' : 'md:flex-row'
+                        }`}
                 >
                     {pillars.map(({ title, description, icon }, index) => (
                         <div
@@ -350,9 +504,8 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                             {icon}
 
                             <div
-                                className={`flex flex-col justify-end overflow-hidden px-4 py-4 md:pb-6 md:pl-8 ${
-                                    selectedLanguage === 'ar' ? 'text-end' : 'text-start'
-                                }`}
+                                className={`flex flex-col justify-end overflow-hidden px-4 py-4 md:pb-6 md:pl-8 ${selectedLanguage === 'ar' ? 'text-end' : 'text-start'
+                                    }`}
                             >
                                 <h1 className="text-lg font-medium md:translate-y-[calc(150%+1.75rem)] md:text-xl md:transition-all md:duration-700 md:group-hover:translate-y-0">
                                     <TransText {...title} />

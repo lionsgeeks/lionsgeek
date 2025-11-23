@@ -4,6 +4,8 @@ import { BookOpen, Camera, CodeXml, GalleryHorizontalEnd, Languages, MessageCirc
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './Button';
 import { TransText } from './TransText';
+import logo from '../../../public/assets/img/orange-lg.png';
+import { cn } from '@/lib/utils';
 
 const Navbar = () => {
     const flag_width = '20';
@@ -201,17 +203,16 @@ const Navbar = () => {
                         style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
                     >
                         <div
-                            className={`flex flex-col px-4 md:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-16 ${
-                                selectedLanguage == 'ar' ? 'lg:flex-row-reverse' : ''
-                            }`}
+                            className={`flex flex-col px-4 md:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-16 ${selectedLanguage == 'ar' ? 'lg:flex-row-reverse' : ''
+                                }`}
                         >
                             <div className="flex flex-row items-center justify-between py-4">
                                 {/* logo */}
                                 <Link
                                     href={'/'}
-                                    className="dark-mode:text-white focus:shadow-outline ml-2 rounded-lg text-lg font-semibold tracking-widest text-gray-900 uppercase focus:outline-none lg:ml-0"
+                                    className="dark-mode:text-white focus:shadow-outline ml-2 rounded-lg text-lg font-semibold tracking-widest text-gray-900  focus:outline-none lg:ml-0"
                                 >
-                                    <svg
+                                    {/* <svg
                                         className={`${darkMode ? 'fill-white' : 'fill-[#0f0f0f]'}`}
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="206.551"
@@ -264,7 +265,13 @@ const Navbar = () => {
                                                 />
                                             </g>
                                         </g>
-                                    </svg>
+                                    </svg> */}
+                                    {/* activism day logo here commentiwh mni nsaliw bayna an7tajoh mn be3d */}
+                                    <div className={`flex items-center gap-x-2 ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''}`}>
+
+                                        <img src={logo} alt="logo" className="h-10 w-10" />
+                                        <h1 className="text-2xl font-bold text-alpha">LionsGeek</h1>
+                                    </div>
                                 </Link>
                                 {/* toggle */}
                                 <div className="flex items-center gap-x-3">
@@ -316,11 +323,9 @@ const Navbar = () => {
                                 </div>
                             </div>
                             <nav
-                                className={`flex-col ${
-                                    isOpen ? 'flex' : 'hidden'
-                                } bg--500 gap-6 pb-4 lg:flex lg:flex-row lg:items-center lg:justify-end lg:gap-2 lg:pb-0 xl:gap-6 ${
-                                    selectedLanguage == 'ar' ? 'items-end lg:flex-row-reverse' : ''
-                                }`}
+                                className={`flex-col ${isOpen ? 'flex' : 'hidden'
+                                    } bg--500 gap-6 pb-4 lg:flex lg:flex-row lg:items-center lg:justify-end lg:gap-2 lg:pb-0 xl:gap-6 ${selectedLanguage == 'ar' ? 'items-end lg:flex-row-reverse' : ''
+                                    }`}
                             >
                                 {navigation?.map((element, index) =>
                                     // this is for select tag in navbar
@@ -328,11 +333,10 @@ const Navbar = () => {
                                         <div
                                             key={index}
                                             ref={() => element.menu}
-                                            className={`relative after:bottom-[-13px] after:left-0 after:w-0 after:border-b-[2px] after:transition-all after:duration-[0.35s] hover:after:w-[100%] lg:after:absolute ${
-                                                element.options?.some((option) => '/' + option.link === location.pathname)
+                                            className={`relative after:bottom-[-13px] after:left-0 after:w-0 after:border-b-[2px] after:transition-all after:duration-[0.35s] hover:after:w-[100%] lg:after:absolute ${element.options?.some((option) => '/' + option.link === location.pathname)
                                                     ? 'font-medium after:w-[100%] after:border-alpha'
                                                     : 'after:border-gray-300'
-                                            }`}
+                                                }`}
                                         >
                                             <button
                                                 onClick={() => {
@@ -354,9 +358,8 @@ const Navbar = () => {
                                                 <svg
                                                     fill={darkMode ? 'white' : '#0f0f0f'}
                                                     viewBox="0 0 20 20"
-                                                    className={`inline h-4 w-4 transform transition-transform duration-200 ${
-                                                        selectedLanguage === 'ar' ? 'mr-1' : 'ml-1'
-                                                    } ${element.menu ? 'rotate-180' : 'rotate-0'}`}
+                                                    className={`inline h-4 w-4 transform transition-transform duration-200 ${selectedLanguage === 'ar' ? 'mr-1' : 'ml-1'
+                                                        } ${element.menu ? 'rotate-180' : 'rotate-0'}`}
                                                 >
                                                     <path
                                                         fillRule="evenodd"
@@ -370,9 +373,8 @@ const Navbar = () => {
                                                     className={`absolute z-30 ${selectedLanguage == 'ar' ? 'right-0' : 'left-0'} mt-2 origin-top-right`}
                                                 >
                                                     <div
-                                                        className={`dark-mode:bg-gray-700 flex min-w-[40vw] flex-col gap-2 rounded-md py-2 shadow-lg lg:min-w-[15vw] ${
-                                                            darkMode ? 'bg-[#0f0f0f]' : 'bg-white'
-                                                        }`}
+                                                        className={`dark-mode:bg-gray-700 flex min-w-[40vw] flex-col gap-2 rounded-md py-2 shadow-lg lg:min-w-[15vw] ${darkMode ? 'bg-[#0f0f0f]' : 'bg-white'
+                                                            }`}
                                                     >
                                                         {element.options?.map((option) => {
                                                             const Icon = option.icon;
@@ -381,9 +383,8 @@ const Navbar = () => {
                                                                     id={option.id}
                                                                     href={option.link}
                                                                     onClick={() => closeMore_Open()}
-                                                                    className={`group flex cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 ${
-                                                                        selectedLanguage == 'ar' ? 'flex-row-reverse' : ''
-                                                                    } items-center gap-3 px-3 py-1 transition duration-300`}
+                                                                    className={`group flex cursor-pointer hover:border-s-[2px] hover:border-alpha hover:bg-alpha/10 ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''
+                                                                        } items-center gap-3 px-3 py-1 transition duration-300`}
                                                                 >
                                                                     <Icon size={18} color={darkMode ? '#fff' : '#0f0f0f'} />
                                                                     <p className={`text-[0.9rem] ${darkMode && 'text-white'} `}>
@@ -408,11 +409,10 @@ const Navbar = () => {
                                                 setAboutMenu(false);
                                                 setLanguageIsOpen(false);
                                             }}
-                                            className={`relative px-2 py-2 text-sm after:bottom-[-13px] after:left-0 after:w-0 after:border-b-[2px] after:transition-all after:duration-[0.35s] hover:after:w-[100%] lg:after:absolute ${
-                                                location.pathname == element.link
+                                            className={`relative px-2 py-2 text-sm after:bottom-[-13px] after:left-0 after:w-0 after:border-b-[2px] after:transition-all after:duration-[0.35s] hover:after:w-[100%] lg:after:absolute ${location.pathname == element.link
                                                     ? 'font-medium after:w-[100%] after:border-alpha'
                                                     : 'after:border-gray-300'
-                                            }`}
+                                                }`}
                                         >
                                             <TransText en={element.eng} fr={element.fr} ar={element.ar} />
                                         </Link>
@@ -428,9 +428,8 @@ const Navbar = () => {
                                             <svg
                                                 fill={darkMode ? 'white' : '#0f0f0f'}
                                                 viewBox="0 0 20 20"
-                                                className={`inline h-4 w-4 ${
-                                                    selectedLanguage === 'ar' ? 'mr-1' : 'ml-1'
-                                                } transform transition-transform duration-75 ${languageIsOpen ? 'rotate-180' : 'rotate-0'}`}
+                                                className={`inline h-4 w-4 ${selectedLanguage === 'ar' ? 'mr-1' : 'ml-1'
+                                                    } transform transition-transform duration-75 ${languageIsOpen ? 'rotate-180' : 'rotate-0'}`}
                                             >
                                                 <path
                                                     fillRule="evenodd"
@@ -443,9 +442,8 @@ const Navbar = () => {
                                     {languageIsOpen && (
                                         <div className={`absolute top-10 ${selectedLanguage === 'ar' ? 'right-0' : ''} z-30 mt-2`}>
                                             <div
-                                                className={`flex flex-col items-start gap-2 rounded-md py-2 shadow-lg ${
-                                                    darkMode ? 'bg-[#0f0f0f]' : 'bg-white'
-                                                }`}
+                                                className={`flex flex-col items-start gap-2 rounded-md py-2 shadow-lg ${darkMode ? 'bg-[#0f0f0f]' : 'bg-white'
+                                                    }`}
                                             >
                                                 {LANGS.map(({ code, label, flag }, index) => (
                                                     <div
@@ -454,9 +452,8 @@ const Navbar = () => {
                                                             setSelectedLanguage(code);
                                                             setLanguageIsOpen(false);
                                                         }}
-                                                        className={`flex cursor-pointer justify-start gap-2 px-3 py-1 ${
-                                                            darkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
-                                                        } w-full transition duration-200`}
+                                                        className={`flex cursor-pointer justify-start gap-2 px-3 py-1 ${darkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
+                                                            } w-full transition duration-200`}
                                                     >
                                                         {flag}
                                                         <p className={`cursor-pointer ${darkMode ? 'text-white' : ''}`}>{label}</p>
