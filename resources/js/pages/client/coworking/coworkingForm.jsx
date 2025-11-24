@@ -22,10 +22,10 @@ export default function CoworkingForm() {
         proj_plan: '',
         prev_proj: '',
         // checkbox
-        domain: '',
-        otherDomains: '',
+        domain: [],
+        otherDomain: '',
         reasons: '',
-        otherReasons: '',
+        otherReason: '',
         needs: '',
         otherNeeds: '',
         // files
@@ -36,10 +36,23 @@ export default function CoworkingForm() {
     const [sending, setSending] = useState(false);
     const [validate, setValidate] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
+    const [errorDetails, setErrorDetails] = useState(null);
+    const [modalContent, setModalContent] = useState({
+        title: null,
+        message: null,
+        submessage: null,
+    });
 
     const onFormSubmit = (e) => {
         e.preventDefault();
         setSending(true);
+        setErrorDetails(null);
+        setModalContent({
+            title: null,
+            message: null,
+            submessage: null,
+        });
+
         post(route('coworking.store'), {
             onSuccess: () => {
                 setData({
@@ -53,17 +66,61 @@ export default function CoworkingForm() {
                     proj_desc: '',
                     proj_plan: '',
                     prev_proj: '',
-                    domain: '',
-                    otherDomains: '',
+                    domain: [],
+                    otherDomain: '',
                     reasons: '',
-                    otherReasons: '',
+                    otherReason: '',
                     needs: '',
                     otherNeeds: '',
                     cv: '',
                     presentation: '',
                 });
-                setConfirmation(true);
                 setValidate(true);
+                setConfirmation(true);
+                setModalContent({
+                    title: (
+                        <TransText en="Success!" fr="Succès !" ar="تم بنجاح" />
+                    ),
+                    message: (
+                        <TransText
+                            en="Thank you for submitting your coworking application!"
+                            fr="Merci d'avoir soumis votre candidature au coworking !"
+                            ar="شكراً لتقديمك طلب الانضمام إلى مساحة العمل المشتركة!"
+                        />
+                    ),
+                    submessage: (
+                        <TransText
+                            en="We will review your request and get back to you shortly. Please check your inbox (or spam) for updates."
+                            fr="Nous examinerons votre demande et vous répondrons bientôt. Veuillez vérifier votre boîte mail (ou spam) pour les mises à jour."
+                            ar="سنراجع طلبك ونتواصل معك قريباً. يرجى تفقد بريدك الإلكتروني (أو الرسائل غير المرغوب فيها) للتحديثات."
+                        />
+                    ),
+                });
+                setErrorDetails(null);
+            },
+            onError: (errors) => {
+                setValidate(false);
+                setConfirmation(true);
+                setErrorDetails(errors && Object.keys(errors).length ? errors : { message: 'Unexpected error. Please try again.' });
+                setModalContent({
+                    title: (
+                        <TransText en="Submission Failed" fr="Échec de l'envoi" ar="فشل الإرسال" />
+                    ),
+                    message: (
+                        <TransText
+                            en="There was a problem with your coworking application."
+                            fr="Un problème est survenu lors de votre candidature au coworking."
+                            ar="حدثت مشكلة أثناء معالجة طلبك لمساحة العمل المشتركة."
+                        />
+                    ),
+                    submessage: (
+                        <TransText
+                            en="Please review the highlighted fields and try again. Contact us if the issue persists."
+                            fr="Veuillez vérifier les champs mis en évidence et réessayer. Contactez-nous si le problème persiste."
+                            ar="يرجى مراجعة الحقول المحددة وإعادة المحاولة. تواصل معنا إذا استمرت المشكلة."
+                        />
+                    ),
+                });
             },
             onFinish: () => {
                 setSending(false);
@@ -198,10 +255,11 @@ export default function CoworkingForm() {
 
     const handleCheckboxChange = (field, value) => {
         setData((prevData) => {
-            const isChecked = prevData[field]?.includes(value);
+            const currentValues = Array.isArray(prevData[field]) ? prevData[field] : [];
+            const isChecked = currentValues.includes(value);
             return {
                 ...prevData,
-                [field]: isChecked ? prevData[field].filter((item) => item !== value) : [...prevData[field], value],
+                [field]: isChecked ? currentValues.filter((item) => item !== value) : [...currentValues, value],
             };
         });
     };
@@ -388,13 +446,12 @@ export default function CoworkingForm() {
                             <select
                                 name="gender"
                                 id="gender"
-                                onChange={(e) => {
-                                    setData('gender', e.target.value);
-                                }}
+                                value={data.gender}
+                                onChange={handleChange}
                                 className={`w-full appearance-none rounded p-[10px] ${darkMode ? 'border border-gray-600 bg-[#2b3035] text-white' : 'border border-gray-300 bg-white text-gray-700'}`}
                                 required
                             >
-                                <option value="" disabled defaultValue className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
+                                <option value="" disabled className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
                                     <TransText en="Select Gender" fr="Sélectionnez le sexe" ar="حدد الجنس" />
                                 </option>
                                 <option value="male" className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
@@ -473,9 +530,9 @@ export default function CoworkingForm() {
                                 <input
                                     type="text"
                                     placeholder="Other..."
-                                    value={data.otherDomains}
+                                    value={data.otherDomain}
                                     required
-                                    onChange={(e) => setData('otherDomains', e.target.value)}
+                                    onChange={(e) => setData('otherDomain', e.target.value)}
                                     className={`shadow border rounded w-full py-2 px-3 ${darkMode ? 'bg-[#57646e] text-white placeholder:text-gray-300' : 'bg-white text-gray-900 placeholder:text-gray-500'} focus:outline-beta`}
                                 />
                             )}
@@ -577,23 +634,23 @@ export default function CoworkingForm() {
                             {sourceOptions.map((option) => (
                                 <label className="m-2 inline-flex items-center" key={option.value}>
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         value={option.value}
-                                        checked={data.reasons?.includes(option.value)}
-                                        onChange={() => handleCheckboxChange('reasons', option.value)}
-                                        className="form-checkbox"
+                                        checked={data.reasons === option.value}
+                                        onChange={() => setData('reasons', option.value)}
+                                        className="form-radio"
                                     />
                                     <span className={`m-2 ${darkMode ? 'text-white' : ''} `}>{option.label}</span>
                                 </label>
                             ))}
 
-                            {data.reasons.includes('other') && (
+                            {data.reasons === 'other' && (
                                 <input
                                     type="text"
                                     placeholder="Other..."
-                                    value={data.otherReasons}
+                                    value={data.otherReason}
                                     required
-                                    onChange={(e) => setData('otherReasons', e.target.value)}
+                                    onChange={(e) => setData('otherReason', e.target.value)}
                                     className={`shadow border rounded w-full py-2 px-3 ${darkMode ? 'bg-[#57646e] text-white placeholder:text-gray-300' : 'bg-white text-gray-900 placeholder:text-gray-500'} focus:outline-beta`}
                                 />
                             )}
@@ -650,12 +707,17 @@ export default function CoworkingForm() {
                         <button
                             onClick={() => {
                                 setConfirmation(false);
+                                setErrorDetails(null);
                             }}
                             className="rounded bg-alpha px-5 py-2 font-medium"
                         >
                             Close
                         </button>
                     }
+                    title={modalContent.title}
+                    message={modalContent.message}
+                    submessage={modalContent.submessage}
+                    errorDetails={errorDetails}
                 />
             )}
         </AppLayout>
