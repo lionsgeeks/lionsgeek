@@ -21,13 +21,16 @@ export default function BlogDetails() {
                         />
                     </div>
 
-                    <h1 className="py-16 text-3xl font-extrabold" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
+                    <h1
+                        dir={selectedLanguage == "ar" ? "rtl" : "ltr"}
+                        className="py-16 text-3xl font-extrabold" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
                         {blog.title[selectedLanguage]}
                     </h1>
                     <div className="flex flex-col lg:flex-row">
                         <div className="w-full p-0 lg:w-3/4 lg:pe-14">
                             <div className="view ql-editor reset-tw">
                                 <div
+                                    dir={selectedLanguage == "ar" ? "rtl" : "ltr"}
                                     dangerouslySetInnerHTML={{
                                         __html: blog.description[selectedLanguage],
                                     }}
