@@ -16,47 +16,48 @@ export const BlogHeroSection = () => {
             day: 'numeric',
         });
     };
+    
 
     return (
         <>
             {blogs ? (
                 <>
-                    <div className={`flex-col gap-y-4 pt-[10vh] lg:flex-row lg:gap-y-0 ${blogs[0] ? 'flex' : 'hidden'}`}>
+                    <div className={`flex-col gap-y-4 pt-[10vh] lg:flex-row lg:gap-y-0 ${blogs[blogs.length -1] ? 'flex' : 'hidden'}`}>
                         <img
                             loading="lazy"
                             className="lg:w-0.5/1 h-1/2 rounded-xl object-cover lg:h-[60vh]"
-                            src={'storage/images/blog/' + blogs[0]?.image}
+                            src={'storage/images/blog/' + blogs[blogs.length -1]?.image}
                             alt=""
                         />
 
                         <div className="flex flex-col gap-8 py-4 lg:w-[40%] lg:px-8">
                             <p className="text-beta/50" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                                {formatDate(blogs[0]?.created_at)}
+                                {formatDate(blogs[blogs.length -1]?.created_at)}
                             </p>
                             <h1
                                 className="text-xl leading-normal font-bold md:text-2xl lg:text-3xl"
                                 style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}
                             >
-                                {blogs[0]?.title[selectedLanguage]}
+                                {blogs[blogs.length -1]?.title[selectedLanguage]}
                             </h1>
                             <div className="reset-tw" style={{ color: darkMode ? '#ffffff' : '#0f0f0f', fontSize: '12px' }}>
                                 <div
                                     dangerouslySetInnerHTML={{
                                         __html:
-                                            blogs[0]?.description[selectedLanguage].length > 150
-                                                ? blogs[0]?.description[selectedLanguage].slice(0, 150) + '...'
-                                                : blogs[0]?.description[selectedLanguage],
+                                            blogs[blogs.length -1]?.description[selectedLanguage].length > 150
+                                                ? blogs[blogs.length -1]?.description[selectedLanguage].slice(0, 150) + '...'
+                                                : blogs[blogs.length -1]?.description[selectedLanguage],
                                     }}
                                 />
                             </div>
                             <div className="flex items-center justify-center md:justify-start">
-                                <Link href={`/blogs/${blogs[0]?.id}`} className="cursor-pointer">
+                                <Link href={`/blogs/${blogs[blogs.length -1]?.id}`} className="cursor-pointer">
                                     <Button children={'Read Article'} />
                                 </Link>
                             </div>
                         </div>
                     </div>
-                    <div className={`${blogs[0] ? 'hidden' : 'flex'} h-[20rem] items-center justify-center`}>
+                    <div className={`${blogs[blogs.length -1] ? 'hidden' : 'flex'} h-[20rem] items-center justify-center`}>
                         <p className="text-center text-[30px] font-bold" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
                             <TransText
                                 en="No available Blogs for the Moment"

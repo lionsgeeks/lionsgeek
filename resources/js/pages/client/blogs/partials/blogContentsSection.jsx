@@ -24,7 +24,7 @@ export const BlogContentsSection = () => {
                 )}
                 <div className="flex flex-wrap items-center justify-center gap-3">
                     {blogs?.length > 0 ? (
-                        blogs.map((blog, index) => (
+                        blogs.reverse().map((blog, index) => (
                             <div className={`${blogs[0].id == blog.id ? 'hidden' : 'flex'} `} key={index}>
                                 <Link
                                     href={`/blogs/${blog.id}`}

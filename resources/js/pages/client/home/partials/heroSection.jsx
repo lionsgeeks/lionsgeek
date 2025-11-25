@@ -1,6 +1,7 @@
 import { Button } from '@/components/Button';
 import { TransText } from '@/components/TransText';
 import { useAppContext } from '@/context/appContext';
+import { Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
@@ -358,7 +359,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                 className="relative h-[55vh] overflow-hidden rounded-lg   sm:bg-top   bg-no-repeat p-12 after:absolute after:inset-0 after:size-full after:bg-beta/50 md:h-[calc(calc(100vh-67.11px)*2/3)]"
                 style={{ backgroundImage: "url('/assets/img/activism.png')" }}
             >
-
+                <div className='w-full h-full absolute bg-gradient-to-r from-alpha/50 via-black/20 to-transparent top-0 left-0'></div>
                 <div
                     dir={selectedLanguage == "ar" ? "rtl" : "ltr"}
                     className={`absolute top-1/2 z-10 flex -translate-y-1/2 flex-col gap-4 lg:w-[calc(calc(100%-6rem)*0.5)] ${selectedLanguage === 'ar' ? 'right-4 ' : 'left-12 items-start'
@@ -375,14 +376,15 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                         />
                     </p>
 
-                    <Button className="mt-3" onClick={() => document.getElementById('trainings')?.scrollIntoView({ behavior: 'smooth' })} outline>
+                    {/* todo :  rje3ha  mn be3d  10 decembre */}
+                    {/* <Button className="mt-3" onClick={() => document.getElementById('trainings')?.scrollIntoView({ behavior: 'smooth' })} outline>
                         <TransText fr="Lancez-vous" en="Get Started" ar="ابدأ الآن" />
-                    </Button>
+                    </Button> */}
 
 
                     {/* Countdown Badge - Top Left */}
                     {(campaignStatus === 'upcoming' || campaignStatus === 'active') && (
-                        <div
+                        <Link href={"/blogs/6"}
                             className={` bottom-2  z-30 flex flex-col gap-2 rounded-lg border-2 px-4 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 ${selectedLanguage === 'ar' ? ' right-4' : 'left-12'
                                 } ${campaignStatus === 'active'
                                     ? 'border-alpha w-fit bg-/90'
@@ -395,7 +397,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                         //     backgroundColor: campaignStatus === 'active' ? 'rgba(255, 89, 16, 0.9)' : darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.95)',
                         // }}
                         >
-                            <div className="text-center">
+                            <p className="text-center">
                                 <p
                                     dir={selectedLanguage == "ar" ? 'rtl' : 'ltr'}
                                     className="text-xs font-semibold uppercase tracking-wider md:text-sm "
@@ -408,7 +410,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                                         ar={campaignStatus === 'active' ? '16 يومًا من الحملة' : '16 يومًا من الحملة'}
                                     />
                                 </p>
-                            </div>
+                            </p>
 
                             {campaignStatus === 'upcoming' ? (
                                 <div className="flex items-center gap-2">
@@ -484,7 +486,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                                     <span className="text-lg font-semibold text-white/90 md:text-lg">/16</span> */}
                                 </div>
                             )}
-                        </div>
+                        </Link>
                     )}
                 </div>
             </div>
