@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Coworking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -27,37 +28,69 @@ class CoworkingController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->file('cv')) {
-            $cv = $request->file('cv')->store('uploads', 'public');
-        }
-        if ($request->file('presentation')) {
-            $presentation = $request->file('presentation')->store('uploads', 'public');
+        $validated = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:255',
+            'birthday' => 'required|string|max:255',
+            'formation' => 'required|string',
+            'proj_name' => 'required|string',
+            'proj_desc' => 'required|string',
+            'proj_plan' => 'required|string',
+            'prev_proj' => 'nullable|string',
+            'domain' => 'required',
+            'reasons' => 'required|string',
+            'otherDomain' => 'nullable|string',
+            'otherDomains' => 'nullable|string',
+            'otherReasons' => 'nullable|string',
+            'otherReason' => 'nullable|string|required_if:reasons,other',
+            'needs' => 'nullable|string',
+            'otherNeeds' => 'nullable|string',
+            'gender' => 'required|string|max:50',
+            'cv' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'presentation' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        $cv = $request->file('cv')->store('uploads', 'public');
+        $presentation = $request->file('presentation')->store('uploads', 'public');
+
+        $domainInput = Arr::wrap($request->input('domain'));
+        $domainValues = array_filter($domainInput, fn ($value) => !is_null($value) && $value !== '' && $value !== 'other');
+        $domain = implode(', ', $domainValues);
+        $otherDomain = $request->input('otherDomain') ?? $request->input('otherDomains');
+        if ($otherDomain) {
+            $domain = trim($domain . ($domain ? ', ' : '') . $otherDomain);
         }
 
-        // to be finished later
-        $request->validate([
-            'full_name' => 'required|string',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-        ]);
+        $reasons = $request->input('reasons');
+        if ($reasons === 'other') {
+            $reasons = $request->input('otherReason') ?? $request->input('otherReasons');
+        }
+
+        $needs = $request->input('needs');
+        if ($needs === 'other') {
+            $needs = $request->input('otherNeeds');
+        }
 
         Coworking::create([
-            'full_name' => $request->full_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'birthday' => $request->birthday,
-            'formation' => $request->formation,
-            'cv' => $cv ?? null,
-            'proj_name' => $request->proj_name,
-            'proj_description' => $request->proj_desc,
-            'domain' => implode(', ', $request->domain) . $request->otherDomain,
-            'plan' => $request->proj_plan,
-            'presentation' => $presentation ?? null,
-            'prev_proj' => $request->prev_proj,
-            'reasons' => implode(', ', $request->reasons) . $request->otherReasons,
-            'needs' => $request->needs,
-            'gender' => $request->gender,
+            'full_name' => $validated['full_name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'birthday' => $validated['birthday'],
+            'formation' => $validated['formation'],
+            'cv' => $cv,
+            'proj_name' => $validated['proj_name'],
+            'proj_description' => $validated['proj_desc'],
+            'domain' => $domain,
+            'plan' => $validated['proj_plan'],
+            'presentation' => $presentation,
+            'prev_proj' => $validated['prev_proj'] ?? null,
+            'reasons' => $reasons,
+            'needs' => $needs,
+            'gender' => $validated['gender'],
         ]);
+
+        return back()->with('success', __('Thank you! We received your coworking application.'));
     }
 
 

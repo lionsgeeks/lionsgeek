@@ -35,3 +35,4 @@ require __DIR__ . '/coworking.php';
 require __DIR__ . '/newsletter.php';
 require __DIR__ . '/contact.php';
 require __DIR__ . '/dashboard.php';
+require __DIR__ . '/chatbot.php';

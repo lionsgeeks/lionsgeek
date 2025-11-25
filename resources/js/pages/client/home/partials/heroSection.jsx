@@ -355,33 +355,34 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
             style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
         >
             <div
-                className="relative h-[70vh] overflow-hidden rounded-lg bg-cover  bg-no-repeat p-12 after:absolute after:inset-0 after:size-full after:bg-beta/50 md:h-[calc(calc(100vh-67.11px)*2/3)]"
+                className="relative h-[70vh] overflow-hidden rounded-lg   sm:bg-top   bg-no-repeat p-12 after:absolute after:inset-0 after:size-full after:bg-beta/50 md:h-[calc(calc(100vh-67.11px)*2/3)]"
                 style={{ backgroundImage: "url('/assets/img/activism.png')" }}
             >
                 {/* Countdown Badge - Top Left */}
                 {(campaignStatus === 'upcoming' || campaignStatus === 'active') && (
                     <div
-                        className={`absolute bottom-2 left-[84%] z-30 flex flex-col gap-2 rounded-lg border-2 px-4 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 ${selectedLanguage === 'ar' ? 'right-6' : 'left-6'
+                        className={`absolute bottom-2  z-30 flex flex-col gap-2 rounded-lg border-2 px-4 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 ${selectedLanguage === 'ar' ? ' right-4' : 'left-6'
                             } ${campaignStatus === 'active'
-                                ? 'border-alpha bg-alpha/90'
+                                ? 'border-alpha w-fit bg-/90'
                                 : darkMode
                                     ? 'border-white/30 bg-white/10'
                                     : 'border-beta/30 bg-white/95'
                             }`}
-                        style={{
-                            borderColor: campaignStatus === 'active' ? '#ff5910' : darkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(33, 37, 41, 0.3)',
-                            backgroundColor: campaignStatus === 'active' ? 'rgba(255, 89, 16, 0.9)' : darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.95)',
-                        }}
+                        // style={{
+                        //     borderColor: campaignStatus === 'active' ? '#ff5910' : darkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(33, 37, 41, 0.3)',
+                        //     backgroundColor: campaignStatus === 'active' ? 'rgba(255, 89, 16, 0.9)' : darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.95)',
+                        // }}
                     >
                         <div className="text-center">
                             <p
+                            dir={selectedLanguage == "ar" ? 'rtl' : 'ltr'}
                                 className="text-xs font-semibold uppercase tracking-wider md:text-sm"
                                 style={{ color: campaignStatus === 'active' ? '#fff' : darkMode ? '#fff' : '#1f1f1f' }}
                             >
                                 <TransText
                                     fr={campaignStatus === 'active' ? "16 Jours d'Activisme" : "16 Jours d'Activisme"}
                                     en={campaignStatus === 'active' ? '16 Days of Activism' : '16 Days of Activism'}
-                                    ar={campaignStatus === 'active' ? '16 يومًا من النشاط' : '16 يومًا من النشاط'}
+                                    ar={campaignStatus === 'active' ? '16 يومًا من الحملة' : '16 يومًا من الحملة'}
                                 />
                             </p>
                         </div>
@@ -390,13 +391,13 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                             <div className="flex items-center gap-2">
                                 <div className="flex flex-col items-center">
                                     <span
-                                        className="text-xl font-bold md:text-2xl"
+                                        className="text-lg font-bold md:text-2xl"
                                         style={{ color: darkMode ? '#fff' : '#1f1f1f' }}
                                     >
                                         {String(countdown.days).padStart(2, '0')}
                                     </span>
                                     <span
-                                        className="text-[10px] font-medium uppercase text-white/70 md:text-xs"
+                                        className="text-lg font-medium uppercase text-white/70 md:text-xs"
                                         style={{ color: darkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(31, 31, 31, 0.7)' }}
                                     >
                                         <TransText fr="J" en="D" ar="ي" />
@@ -407,13 +408,13 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                                 </span>
                                 <div className="flex flex-col items-center">
                                     <span
-                                        className="text-xl font-bold md:text-2xl"
+                                        className="text-lg font-bold md:text-2xl"
                                         style={{ color: darkMode ? '#fff' : '#1f1f1f' }}
                                     >
                                         {String(countdown.hours).padStart(2, '0')}
                                     </span>
                                     <span
-                                        className="text-[10px] font-medium uppercase text-white/70 md:text-xs"
+                                        className="text-lg font-medium uppercase text-white/70 md:text-xs"
                                         style={{ color: darkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(31, 31, 31, 0.7)' }}
                                     >
                                         <TransText fr="H" en="H" ar="س" />
@@ -456,20 +457,21 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                             </div>
                         ) : (
                             <div className="flex items-center justify-center gap-1">
-                                <span className="text-2xl font-bold text-white md:text-3xl">{activismDay}</span>
+                                <span className="text-2xl font-bold text-white md:text-xl">{activismDay}</span>
                                 <span className="text-lg font-semibold text-white/90 md:text-xl">/16</span>
                             </div>
                         )}
                     </div>
                 )}
                 <div
-                    className={`absolute top-1/2 z-10 flex -translate-y-1/2 flex-col gap-4 lg:w-[calc(calc(100%-6rem)*0.5)] ${selectedLanguage === 'ar' ? 'right-12 items-end' : 'left-12 items-start'
+                dir={selectedLanguage == "ar" ? "rtl" : "ltr"}
+                    className={`absolute top-1/2 z-10 flex -translate-y-1/2 flex-col gap-4 lg:w-[calc(calc(100%-6rem)*0.5)] ${selectedLanguage === 'ar' ? 'right-4 ' : 'left-12 items-start'
                         }`}
                 >
-                    <h1 className="text-4xl font-bold text-balance text-white md:text-6xl">
-                        <TransText fr="Le portail vers le monde numérique." en="The door to the digital world." ar=".بوابة إلى العالم الرقمي" />
+                    <h1 className="text-4xl font-bold text-balance text-white md:text-5xl">
+                        <TransText fr="Le portail vers le monde numérique." en="The door to the digital world." ar="بوابة إلى العالم الرقمي" />
                     </h1>
-                    <p className="text-lg font-normal text-balance text-white md:text-xl">
+                    <p className="text-lg font-normal text-balance text-white md:text-xl w-4/5">
                         <TransText
                             fr="Formation et mentorat gratuits pour vous aider à prospérer dans les secteurs de la technologie et des médias."
                             en="Free training and mentorship to help you thrive in the tech and media industries."
