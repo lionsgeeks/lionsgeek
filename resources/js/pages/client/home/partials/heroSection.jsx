@@ -370,7 +370,7 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                         <TransText
                             fr="Pour un espace numérique sûr pour toutes — 16 jours d’activisme"
                             en="For a safe digital space for all — 16 Days of Activism"
-                            ar="من أجل فضاء رقمي آمن للجميع — 16 يومًا من النشاط"
+                            ar="من أجل فضاء رقمي آمن للجميع — 16 يومًا من الحملة"
                         />
                     </h1>
                     <p className="text-lg font-normal text-balance text-white md:text-xl ">

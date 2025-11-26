@@ -75,7 +75,7 @@ export default function CardsSection({ events = [], IMAGEURL = 'http://127.0.0.1
                                 </div>
                                 <div
                                     onClick={() => router.visit(`/events/${element.id}`)}
-                                    className={`flex w-full items-center justify-center bg-[#fee819] py-2 font-semibold text-black transition duration-150 hover:bg-yellow-400`}
+                                    className={`flex w-full items-center justify-center bg-alpha py-2 font-semibold text-black transition duration-150 hover:bg-yellow-400`}
                                     // disabled={element.capacity <= 0}
                                 >
                                     <TransText fr="Voir tout" ar="شاهد الكل" en="See all" />
