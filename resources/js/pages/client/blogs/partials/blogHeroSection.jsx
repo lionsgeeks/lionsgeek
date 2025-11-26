@@ -25,12 +25,12 @@ export const BlogHeroSection = () => {
                     <div className={`flex-col gap-y-4 pt-[10vh] lg:flex-row lg:gap-y-0 ${blogs[blogs.length -1] ? 'flex' : 'hidden'}`}>
                         <img
                             loading="lazy"
-                            className="lg:w-0.5/1 h-1/2 rounded-xl object-cover lg:h-[60vh]"
+                            className="lg:w-1/2 h-1/2 rounded-xl object-cover lg:h-[60vh]"
                             src={'storage/images/blog/' + blogs[blogs.length -1]?.image}
                             alt=""
                         />
 
-                        <div className="flex flex-col gap-8 py-4 lg:w-[40%] lg:px-8">
+                        <div className="flex flex-col gap-8  lg:w-[40%] lg:px-8">
                             <p className="text-beta/50" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
                                 {formatDate(blogs[blogs.length -1]?.created_at)}
                             </p>
@@ -40,7 +40,7 @@ export const BlogHeroSection = () => {
                             >
                                 {blogs[blogs.length -1]?.title[selectedLanguage]}
                             </h1>
-                            <div className="reset-tw" style={{ color: darkMode ? '#ffffff' : '#0f0f0f', fontSize: '12px' }}>
+                            <div className="reset-tw " style={{ color: darkMode ? '#ffffff' : '#0f0f0f', fontSize: '12px' }}>
                                 <div
                                     dangerouslySetInnerHTML={{
                                         __html:

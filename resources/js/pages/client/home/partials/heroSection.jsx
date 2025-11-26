@@ -366,13 +366,18 @@ c-88 329 -98 355 -139 355 -26 0 -60 -30 -60 -53 0 -34 187 -727 201 -743 10
                         }`}
                 >
                     <h1 className="text-4xl font-bold text-balance text-white md:text-5xl">
-                        <TransText fr="Le portail vers le monde numérique." en="The door to the digital world." ar="بوابة إلى العالم الرقمي" />
+
+                        <TransText
+                            fr="Pour un espace numérique sûr pour toutes — 16 jours d’activisme"
+                            en="For a safe digital space for all — 16 Days of Activism"
+                            ar="من أجل فضاء رقمي آمن للجميع — 16 يومًا من النشاط"
+                        />
                     </h1>
                     <p className="text-lg font-normal text-balance text-white md:text-xl ">
                         <TransText
-                            fr="Formation et mentorat gratuits pour vous aider à prospérer dans les secteurs de la technologie et des médias."
-                            en="Free training and mentorship to help you thrive in the tech and media industries."
-                            ar=".تدريب مجاني وتوجيه لمساعدتك على النجاح في مجالي التكنولوجيا والإعلام"
+                            fr="UNITE ! Mettre fin à la violence numérique contre toutes les femmes et les filles — 25 novembre au 10 décembre 2025"
+                            en="UNITE! End digital violence against all women and girls — November 25 to December 10, 2025"
+                            ar="الاتحاد! وضع حد للعنف الرقمي ضد جميع النساء والفتيات — 25 نوفمبر إلى 10 ديسمبر 2025"
                         />
                     </p>
 
