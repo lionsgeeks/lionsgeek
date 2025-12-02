@@ -90,7 +90,7 @@ const Footer = () => {
                                     <div className="flex flex-col gap-1">
                                         <div>
                                             <p className="text-[0.9rem] font-medium text-gray-400">Address:</p>
-                                            <p className="w-[20vw] text-[0.9rem] text-gray-400">
+                                            <p className="text-[0.9rem] text-gray-400">
                                                 4ème étage, Ain Sebaa Center, Route de Rabat, Casablanca
                                             </p>
                                         </div>

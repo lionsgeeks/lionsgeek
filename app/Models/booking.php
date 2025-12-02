@@ -11,6 +11,8 @@ class Booking extends Model
         "email",
         "phone",
         "gender",
+        "maturite_project",
+        "secteur_dactivite",
         "event_id"
     ];
 

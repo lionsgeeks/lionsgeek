@@ -99,9 +99,11 @@ function Participants({ bookings, tab }) {
                                 <th className="px-2 py-3 text-left font-medium text-muted-foreground">Name</th>
                                 <th className="px-2 py-3 text-left font-medium text-muted-foreground">Email</th>
                                 <th className="px-2 py-3 text-left font-medium text-muted-foreground">Gender</th>
-                                <th className="px-2 py-3 text-left font-medium text-muted-foreground">Phone</th>
-                                <th className="px-2 py-3 text-left font-medium text-muted-foreground">Booked at</th>
-                                <th className="px-2 py-3 text-left font-medium text-muted-foreground">Visited</th> {/* New column header */}
+                                {/* <th className="px-2 py-3 text-left font-medium text-muted-foreground">Phone</th> */}
+                                <th className="px-2 py-3 text-left font-medium text-muted-foreground">Project Maturity</th>
+                                <th className="px-2 py-3 text-left font-medium text-muted-foreground">Sector of Activities</th>
+                                {/* <th className="px-2 py-3 text-left font-medium text-muted-foreground">Booked at</th> */}
+                                <th className="px-2 py-3 text-left font-medium text-muted-foreground">Visited</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,9 +112,25 @@ function Participants({ bookings, tab }) {
                                     <td className="px-2 py-3 text-sm">{startIndex + index + 1}</td>
                                     <td className="px-2 py-3 font-medium">{participant.name}</td>
                                     <td className="px-2 py-3 text-sm text-muted-foreground">{participant.email}</td>
-                                    <td className="px-2 py-3 text-sm">{participant.gender}</td>
-                                    <td className="px-2 py-3 text-sm">{participant.phone}</td>
-                                    <td className="px-2 py-3 text-sm text-muted-foreground">{new Date(participant.created_at).toLocaleString()}</td>
+                                    <td className="px-2 py-3 text-sm capitalize">{participant.gender || '-'}</td>
+                                    {/* <td className="px-2 py-3 text-sm">{participant.phone || '-'}</td> */}
+                                    <td className="px-2 py-3 text-sm">
+                                        {participant.maturite_project ? (
+                                            <Badge variant="outline" className="capitalize">
+                                                {participant.maturite_project}
+                                            </Badge>
+                                        ) : (
+                                            <span className="text-muted-foreground">-</span>
+                                        )}
+                                    </td>
+                                    <td className="px-2 py-3 text-sm">
+                                        {participant.secteur_dactivite ? (
+                                            <span className="text-xs">{participant.secteur_dactivite}</span>
+                                        ) : (
+                                            <span className="text-muted-foreground">-</span>
+                                        )}
+                                    </td>
+                                    {/* <td className="px-2 py-3 text-sm text-muted-foreground">{new Date(participant.created_at).toLocaleString()}</td> */}
                                     <td className="px-2 py-3 text-sm">
                                         {participant.is_visited ? (
                                             <CheckCircle2 className="h-5 w-5 text-green-500" />
