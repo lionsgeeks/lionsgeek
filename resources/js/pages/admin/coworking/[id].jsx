@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import AppLayout from '@/layouts/app-layout';
 import { Head, useForm, usePage } from '@inertiajs/react';
-import { Check, Trash2 } from 'lucide-react';
+import { Check, CheckCircle2, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 const breadcrumbs = [
@@ -16,7 +16,7 @@ export default function CoworkingShow() {
     const [isOpen, setIsOpen] = useState(false);
     const [actionType, setActionType] = useState(null); // 'delete' or 'approve'
     const { coworking } = usePage().props;
-    const { delete: destroy, post } = useForm();
+    const { delete: destroy,  put  } = useForm();
 
     const fields = {
         'Full Name': coworking.full_name,
@@ -77,7 +77,7 @@ export default function CoworkingShow() {
         if (actionType === 'delete') {
             destroy(route('coworking.destroy', coworking.id));
         } else if (actionType === 'approve') {
-            post(route('coworking.approve', coworking.id));
+            put(route('coworking.update', coworking.id));
         }
 
         setIsOpen(false);
@@ -179,6 +179,7 @@ export default function CoworkingShow() {
                         <Trash2 className="mr-1 h-4 w-4" />
                         Delete
                     </Button>
+                    {(!coworking.status || coworking.status === 0)? (
 
                     <Button
                         variant="default"
@@ -191,6 +192,16 @@ export default function CoworkingShow() {
                         <Check className="mr-1 h-4 w-4" />
                         Approve
                     </Button>
+                    ):(
+                            <Button
+                        variant="default"
+
+                        className="bg-green-700 text-white"
+                    >
+                        <CheckCircle2 className="mr-1 h-4 w-4" />
+                        Approved
+                    </Button>
+                    )}
                 </div>
             </div>
 

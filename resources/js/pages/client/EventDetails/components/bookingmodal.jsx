@@ -17,6 +17,8 @@ export default function BookingModal({ isOpen, onClose, event }) {
         email: '',
         phone: '',
         gender: '',
+        secteur_dactivite: '',
+        maturite_project: '',
         event_id: event?.id || '',
     });
 
@@ -65,6 +67,28 @@ export default function BookingModal({ isOpen, onClose, event }) {
             window.location.href = '/events';
         }
     };
+
+    const maturiteOptions = [
+        { value: 'idéation', en: 'Ideation', fr: 'Idéation', ar: 'التصور' },
+        { value: 'démarrage', en: 'Startup', fr: 'Démarrage', ar: 'البدء' },
+        { value: 'en développement', en: 'In Development', fr: 'En développement', ar: 'قيد التطوير' },
+    ];
+
+    const secteurOptions = [
+        { value: 'BTP', en: 'BTP: Building and public works, construction', fr: 'BTP : Bâtiment et travaux publics, construction', ar: 'BTP: البناء والأشغال العامة والبناء' },
+        { value: 'Santé et action sociale', en: 'Health and social action: Medical, paramedical, social services', fr: 'Santé et action sociale : Services médicaux, paramédicaux, sociaux', ar: 'الصحة والعمل الاجتماعي: الخدمات الطبية والشبه طبية والاجتماعية' },
+        { value: 'Finance et assurance', en: 'Finance and insurance: Banking, insurance, investment funds', fr: 'Finance et assurance : Banque, assurance, fonds d\'investissement', ar: 'المالية والتأمين: البنوك والتأمين وصناديق الاستثمار' },
+        { value: 'Numérique', en: 'Digital: IT, telecoms, internet, cybersecurity, video games', fr: 'Numérique : Informatique, télécoms, internet, cybersécurité, jeux vidéo', ar: 'الرقمي: المعلوماتية والاتصالات والإنترنت والأمن السيبراني وألعاب الفيديو' },
+        { value: 'Tourisme', en: 'Tourism: Hospitality, catering, leisure', fr: 'Tourisme : Hôtellerie, restauration, loisirs', ar: 'السياحة: الفنادق والمطاعم والترفيه' },
+        { value: 'Luxe', en: 'Luxury: Creation and sale of luxury products', fr: 'Luxe : Création et vente de produits de luxe', ar: 'الفاخر: إنشاء وبيع منتجات فاخرة' },
+        { value: 'Recherche et développement', en: 'Research and development (R&D): Research in various fields such as biology, chemistry, or technologies', fr: 'Recherche et développement (R&D) : Recherche dans divers domaines comme la biologie, la chimie, ou les technologies', ar: 'البحث والتطوير: البحث في مجالات متنوعة مثل الأحياء والكيمياء أو التقنيات' },
+        { value: 'Transports et logistique', en: 'Transport and logistics: Air, rail, maritime, logistics, freight transport', fr: 'Transports et logistique : Aérien, ferroviaire, maritime, logistique, transport de marchandises', ar: 'النقل واللوجستيك: الجوي والسكك الحديدية والبحري واللوجستيك ونقل البضائع' },
+        { value: 'Art et culture', en: 'Art and culture: Audiovisual, cinema, publishing, arts, shows', fr: 'Art et culture : Audiovisuel, cinéma, édition, arts, spectacles', ar: 'الفن والثقافة: السمعي البصري والسينما والنشر والفنون والعروض' },
+        { value: 'Défense et sécurité', en: 'Defense and security: Army, private security', fr: 'Défense et sécurité : Armée, sécurité privée', ar: 'الدفاع والأمن: الجيش والأمن الخاص' },
+        { value: 'Environnement et énergie', en: 'Environment and energy: Waste management, renewable energies, water treatment', fr: 'Environnement et énergie : Gestion des déchets, énergies renouvelables, traitement de l\'eau', ar: 'البيئة والطاقة: إدارة النفايات والطاقات المتجددة ومعالجة المياه' },
+        { value: 'Événementiel', en: 'Events: Organization of fairs, salons, congresses', fr: 'Événementiel : Organisation de foires, salons, congrès', ar: 'الفعاليات: تنظيم المعارض والصالونات والمؤتمرات' },
+        { value: 'Immobilier', en: 'Real estate: Transaction, management, promotion', fr: 'Immobilier : Transaction, gestion, promotion', ar: 'العقارات: المعاملات والإدارة والترويج' },
+    ];
 
     const inputClassName = `border p-2 w-full rounded-lg ${darkMode ? 'bg-[#1a1a1a] text-white border-white/20' : 'border-black text-black'} ${selectedLanguage === 'ar' ? 'text-right' : 'text-left'}`;
     const labelClass = selectedLanguage === 'ar' ? 'self-end' : '';
@@ -137,6 +161,46 @@ export default function BookingModal({ isOpen, onClose, event }) {
                                     <option value="female">{t({ en: 'Female', fr: 'Femme', ar: 'أنثى' })}</option>
                                 </select>
                                 {errors.gender && <p className="text-red-500 text-xs">{errors.gender}</p>}
+                            </div>
+                            <div className="mt-3 flex w-full flex-col items-start gap-y-2">
+                                <label htmlFor="secteur_dactivite" className={labelClass}>
+                                    {t({ en: 'Sector of Activities', fr: "Secteur d'activité", ar: 'قطاع الأنشطة' })}
+                                </label>
+                                <select
+                                    id="secteur_dactivite"
+                                    className={inputClassName}
+                                    value={data.secteur_dactivite}
+                                    onChange={(e) => setData('secteur_dactivite', e.target.value)}
+                                    dir={selectedLanguage === 'ar' ? 'rtl' : 'ltr'}
+                                >
+                                    <option value="">{t({ en: 'Select Sector', fr: 'Sélectionnez le secteur', ar: 'حدد القطاع' })}</option>
+                                    {secteurOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {t(option)}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.secteur_dactivite && <p className="text-red-500 text-xs">{errors.secteur_dactivite}</p>}
+                            </div>
+                            <div className="mt-3 flex w-full flex-col items-start gap-y-2">
+                                <label htmlFor="maturite_project" className={labelClass}>
+                                    {t({ en: 'Project Maturity', fr: 'Maturité du projet', ar: 'نضج المشروع' })}
+                                </label>
+                                <select
+                                    id="maturite_project"
+                                    className={inputClassName}
+                                    value={data.maturite_project}
+                                    onChange={(e) => setData('maturite_project', e.target.value)}
+                                    dir={selectedLanguage === 'ar' ? 'rtl' : 'ltr'}
+                                >
+                                    <option value="">{t({ en: 'Select Project Maturity', fr: 'Sélectionnez la maturité du projet', ar: 'حدد نضج المشروع' })}</option>
+                                    {maturiteOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {t(option)}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.maturite_project && <p className="text-red-500 text-xs">{errors.maturite_project}</p>}
                             </div>
 
                             <div className="mt-5 flex justify-center gap-3">

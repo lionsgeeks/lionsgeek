@@ -19,6 +19,8 @@ class BookingController extends Controller
             'email'    => 'required|email|max:255',
             'phone'    => 'required|string|max:20',
             'gender'   => 'required|string|in:male,female',
+            'maturite_project' => 'nullable|string|in:idéation,démarrage,en développement',
+            'secteur_dactivite' => 'nullable|string',
             'event_id' => 'required|exists:events,id',
         ]);
 
@@ -51,6 +53,8 @@ class BookingController extends Controller
             'email'    => $request->email,
             'phone'    => $request->phone,
             'gender'   => $request->gender,
+            'maturite_project' => $request->maturite_project,
+            'secteur_dactivite' => $request->secteur_dactivite,
             'event_id' => $request->event_id,
         ]);
 
