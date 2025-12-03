@@ -156,10 +156,11 @@ export default function CoworkingForm() {
         {
             label: (
                 <TransText
-                    fr="Lauréat Lionsgeek"
-                    ar="خريج Lionsgeek"
-                    en="Lauréat Lionsgeek"
+                    fr="Alumni Lionsgeek"
+                    ar="خريج برنامج Lionsgeek"
+                    en="Lionsgeek Alumni"
                 />
+
             ),
             value: 'lionsgeek-winner',
 
