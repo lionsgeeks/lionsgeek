@@ -13,7 +13,7 @@ class Booking extends Model
         "gender",
         "maturite_project",
         "secteur_dactivite",
-        "event_id"
+        "event_id",
     ];
 
     public function event()
