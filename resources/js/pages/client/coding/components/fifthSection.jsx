@@ -74,7 +74,7 @@ export const FifthSection = () => {
                         key={index}
                         className="relative flex flex-col gap-2 overflow-hidden rounded-lg border-2 border-gray-100 bg-white p-8 lg:w-[30%]"
                         style={{
-                            backgroundColor: darkMode ? '#212529' : '#ffffff',
+                            backgroundColor: darkMode ? 'var(--color-beta)' : '#ffffff',
                             border: darkMode ? 'none' : '2px solid #f3f4f6',
                         }}
                     >

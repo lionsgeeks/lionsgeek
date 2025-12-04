@@ -211,7 +211,7 @@ export const SecondSection = () => {
                                 className={`leftside flex cursor-pointer items-center justify-between overflow-x-hidden bg-white p-3 pl-8 text-3xl ${
                                     selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''
                                 }`}
-                                style={{ backgroundColor: darkMode ? '#212529' : '#ffffff' }}
+                                style={{ backgroundColor: darkMode ? 'var(--color-beta)' : '#ffffff' }}
                             >
                                 <h1
                                     className={`flex gap-3 ${selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''}`}

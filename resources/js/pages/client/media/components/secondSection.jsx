@@ -183,7 +183,7 @@ export const SecondSection = () => {
                                     setActiveSkill(element);
                                     setAnime(true);
                                 }}
-                                className={`leftside overflow-x-hidden ${darkMode ? 'bg-[#212529]' : 'bg-white'} flex cursor-pointer items-center justify-between p-3 pl-8 text-3xl ${
+                                    className={`leftside overflow-x-hidden ${darkMode ? 'bg-beta' : 'bg-white'} flex cursor-pointer items-center justify-between p-3 pl-8 text-3xl ${
                                     selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''
                                 }`}
                             >

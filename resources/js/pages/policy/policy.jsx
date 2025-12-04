@@ -29,13 +29,13 @@ const Policy = () => {
                             <h1 className={`py-5 text-center text-2xl font-bold md:pb-0 md:text-start md:text-3xl lg:text-5xl`}>
                                 <TransText
                                     en=<span className={`${darkMode ? 'text-white' : ''}`}>
-                                        Personal <span className="text-yellow-400">Data Processing</span> Policy
+                                        Personal <span className="text-alpha">Data Processing</span> Policy
                                     </span>
                                     ar=<span className={`${darkMode ? 'text-white' : ''}`}>
-                                        سياسة <span className="text-yellow-400">معالجة البيانات</span> الشخصية
+                                        سياسة <span className="text-alpha">معالجة البيانات</span> الشخصية
                                     </span>
                                     fr=<span className={`${darkMode ? 'text-white' : ''}`}>
-                                        Politique <span className="text-yellow-400">de Traitement des Données</span> Personnelles
+                                        Politique <span className="text-alpha">de Traitement des Données</span> Personnelles
                                     </span>
                                 />
                             </h1>
@@ -50,7 +50,7 @@ const Policy = () => {
                             <div className="space-y-8">
                                 {/* Introduction */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText
                                             en="Personal Data Processing Policy"
                                             ar="سياسة معالجة البيانات الشخصية"
@@ -68,7 +68,7 @@ const Policy = () => {
 
                                 {/* Section 1 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText
                                             en="1. Collection of Personal Data"
                                             ar="1. جمع البيانات الشخصية"
@@ -117,7 +117,7 @@ const Policy = () => {
 
                                 {/* Section 2 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText
                                             en="2. Purposes of Data Processing"
                                             ar="2. أهداف معالجة البيانات"
@@ -165,7 +165,7 @@ const Policy = () => {
 
                                 {/* Section 3 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText en="3. Consent" ar="3. الموافقة" fr="3. Consentement" />
                                     </h2>
                                     <p className={`mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>
@@ -182,7 +182,7 @@ const Policy = () => {
 
                                 {/* Section 4 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText en="4. Sharing of data" ar="4. مشاركة البيانات" fr="4. Partage des données" />
                                     </h2>
                                     <p className={`mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>
@@ -199,7 +199,7 @@ const Policy = () => {
 
                                 {/* Section 5 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText en="5. Data security" ar="5. أمن البيانات" fr="5. Sécurité des données" />
                                     </h2>
                                     <p className={`mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>
@@ -213,7 +213,7 @@ const Policy = () => {
 
                                 {/* Section 6 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText en="6. Your rights" ar="6. حقوقك" fr="6. Vos droits" />
                                     </h2>
                                     <p className={`mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>
@@ -280,7 +280,7 @@ const Policy = () => {
 
                                 {/* Section 7 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText en="7. Retention period" ar="7. مدة الصلاحية" fr="7. Durée de conservation" />
                                     </h2>
                                     <p className={`mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>
@@ -294,7 +294,7 @@ const Policy = () => {
 
                                 {/* Section 8 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText
                                             en="8. Obligations and exemptions"
                                             ar="8. الالتزامات والإعفاءات"
@@ -312,7 +312,7 @@ const Policy = () => {
 
                                 {/* Section 9 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText en="9. Modification of the policy" ar="9. تغيير السياسة" fr="9. Modification de la politique" />
                                     </h2>
                                     <p className={`mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>
@@ -326,7 +326,7 @@ const Policy = () => {
 
                                 {/* Section 10 */}
                                 <section>
-                                    <h2 className="mb-4 text-2xl font-bold text-yellow-400">
+                                    <h2 className="mb-4 text-2xl font-bold text-alpha">
                                         <TransText en="10. Contact" ar="10. الاتصال" fr="10. Contact" />
                                     </h2>
                                     <p className={`mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>

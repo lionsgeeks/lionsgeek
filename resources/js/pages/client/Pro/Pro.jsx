@@ -272,7 +272,7 @@ const Propage = () => {
                                     <div className={`rounded-xl p-4 ${getIconBgClass()}`} style={{ color: darkMode ? '#ffffff' : '#1f2937' }}>
                                         {service.icon}
                                     </div>
-                                    <h1 className="text-4xl font-bold text-yellow-400 drop-shadow-lg">0{service.id}</h1>
+                                    <h1 className="text-4xl font-bold text-alpha drop-shadow-lg">0{service.id}</h1>
                                 </div>
 
                                 {/* Title Section */}
@@ -358,7 +358,7 @@ const Propage = () => {
                                     key={indx}
                                     className={`relative flex h-[500px] w-full flex-col overflow-hidden rounded-xl p-6 transition-all duration-300 hover:scale-105 lg:w-[32%] ${getTextAlignClass()} ${
                                         darkMode
-                                            ? 'border border-gray-700 bg-gray-900/90 hover:border-gray-600'
+                                            ? 'border border-beta bg-beta hover:border-alpha hover:bg-beta hover:text-alpha  hover:border'
                                             : 'border border-gray-200 bg-white/95 shadow-lg hover:border-gray-300'
                                     }`}
                                 >

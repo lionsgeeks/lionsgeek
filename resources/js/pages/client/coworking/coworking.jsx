@@ -37,7 +37,7 @@ const Coworking = () => {
 
     const services = [
         {
-            icon: <Wifi size={60} color={darkMode ? '#fee819' : 'yellow'} />,
+            icon: <Wifi size={60} color={'var(--color-alpha)'} />,
             title: <TransText en="High Speed Internet" fr="Internet Haut Débit" ar="إنترنت عالي السرعة" />,
             description: (
                 <TransText
@@ -48,7 +48,7 @@ const Coworking = () => {
             ),
         },
         {
-            icon: <Camera size={60} color={darkMode ? '#fee819' : 'yellow'} />,
+            icon: <Camera size={60} color={'var(--color-alpha)'} />,
             title: <TransText en="Photography Studio" fr="Studio de Photographie" ar="استوديو تصوير" />,
             description: (
                 <TransText
@@ -59,7 +59,7 @@ const Coworking = () => {
             ),
         },
         {
-            icon: <Podcast size={60} color={darkMode ? '#fee819' : 'yellow'} />,
+            icon: <Podcast size={60} color={'var(--color-alpha)'} />,
             title: <TransText en="Podcast Studio" fr="Studio de Podcast" ar="استوديو بودكاست" />,
             description: (
                 <TransText
@@ -70,7 +70,7 @@ const Coworking = () => {
             ),
         },
         {
-            icon: <Gamepad size={60} color={darkMode ? '#fee819' : 'yellow'} />,
+            icon: <Gamepad size={60} color={'var(--color-alpha)'} />,
             title: <TransText en="Recreation Space" fr="Espace de Récréation" ar="مساحة ترفيهية" />,
             description: (
                 <TransText
@@ -81,7 +81,7 @@ const Coworking = () => {
             ),
         },
         {
-            icon: <Users size={60} color={darkMode ? '#fee819' : 'yellow'} />,
+            icon: <Users size={60} color={'var(--color-alpha)'} />,
             title: <TransText en="Networking" fr="Réseautage" ar="التواصل" />,
             description: (
                 <TransText
@@ -92,7 +92,7 @@ const Coworking = () => {
             ),
         },
         {
-            icon: <Shield size={60} color={darkMode ? '#fee819' : 'yellow'} />,
+            icon: <Shield size={60} color={'var(--color-alpha)'} />,
             title: <TransText en="High Security" fr="Haute Sécurité" ar="أمان عالي" />,
             description: (
                 <TransText
@@ -283,7 +283,7 @@ const Coworking = () => {
                             {testimoniels.map((element, index) => (
                                 <div
                                     key={index}
-                                    className={`relative flex w-full flex-col gap-2 overflow-hidden rounded-lg p-5 shadow-md md:w-[45%] lg:w-[30%] lg:p-8 ${darkMode ? 'bg-[#1a1a1a]' : 'bg-white'}`}
+                                    className={`relative flex w-full flex-col gap-2 overflow-hidden rounded-lg p-5 shadow-md md:w-[45%] lg:w-[30%] lg:p-8 ${darkMode ? 'bg-beta' : 'bg-white'}`}
                                 >
                                     <div className="flex items-center gap-3">
                                         <img loading="lazy" className="w-10 rounded-full" src={element.image} alt="" />

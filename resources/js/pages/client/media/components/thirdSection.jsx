@@ -107,7 +107,7 @@ export const ThirdSection = () => {
                         key={index}
                         className={`relative flex flex-col gap-4 rounded-lg bg-gray-50 p-7 lg:w-[30%]`}
                         style={{
-                            backgroundColor: darkMode ? '#212529' : undefined,
+                            backgroundColor: darkMode ? 'var(--color-beta)' : undefined,
                         }}
                     >
                         <svg
@@ -121,7 +121,7 @@ export const ThirdSection = () => {
                             <path
                                 id="path"
                                 fill="none"
-                                stroke={darkMode ? '#fee819' : '#333'}
+                                stroke={darkMode ? 'var(--color-alpha)' : '#333'}
                                 strokeMiterlimit="10"
                                 strokeWidth="2"
                                 d="M0,75 L200,75"

@@ -272,12 +272,12 @@ export default function CoworkingForm() {
                 {!sending ? (
                     <form
                         onSubmit={onFormSubmit}
-                        className={`mx-auto mt-20 mb-5 flex w-[95vw] flex-col rounded-lg p-5 shadow-md ${darkMode ? 'bg-[#212529]' : 'bg-gray-50/50'}`}
+                        className={`mx-auto mt-20 mb-5 flex w-[95vw] flex-col rounded-lg p-5 shadow-md ${darkMode ? 'bg-beta' : 'bg-gray-50/50'}`}
                     >
                         <h1 className={`mb-3 text-2xl font-bold ${darkMode ? 'text-white' : ''}`}>Application Form</h1>
 
                         <h2 className={`mb-2 text-lg font-semibold underline ${darkMode ? 'text-white' : ''}`}>Personal Information</h2>
-                        <div className="flex flex-col items-center justify-around gap-2 lg:flex-row">
+                        <div className="flex flex-col items-center justify-around gap-4 lg:flex-row">
                             <div className="mb-3 w-full">
                                 <label className={`mb-2 block text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-700'}`} htmlFor="full_name">
                                     <TransText en="Full Name" fr="Nom Complet" ar="الاسم الكامل" />
@@ -323,7 +323,7 @@ export default function CoworkingForm() {
                             </div>
                         </div>
 
-                        <div className="flex flex-col items-center justify-around gap-2 lg:flex-row">
+                        <div className="flex flex-col items-center justify-around gap-4 lg:flex-row">
                             <div className="mb-3 w-full">
                                 <label className={`mb-2 block text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-700'}`} htmlFor="phone">
                                     <TransText en="Phone" fr="Téléphone" ar="الهاتف" />
@@ -362,8 +362,8 @@ export default function CoworkingForm() {
                             </div>
                         </div>
 
-                        <div className="flex flex-col items-center justify-around gap-2 lg:flex-row">
-                            <div className="mb-3 w-full">
+                        <div className="flex flex-col items-center justify-around gap-4 lg:flex-row">
+                            <div className="mb-4 w-full">
                                 <label className={`mb-2 block text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-700'}`} htmlFor="formation">
                                     <TransText
                                         en="Education/Professional Experience (brief description)"
@@ -389,80 +389,82 @@ export default function CoworkingForm() {
                                 />
                             </div>
 
-                            <div className="mb-4 w-full">
-                                <p className={`mb-2 text-sm font-bold ${darkMode ? 'text-white' : ''}`}>
-                                    <TransText
-                                        className={`${darkMode ? 'bg text-white' : ''}`}
-                                        en="Upload CV"
-                                        fr="Télécharger le CV"
-                                        ar="رفع السيرة الذاتية"
-                                    />{' '}
-                                    <Required />
-                                </p>
-                                <label
-                                    htmlFor="cv"
-                                    className={`flex cursor-pointer items-center gap-2 rounded border p-[11px] shadow ${data.cv ? 'bg-alpha' : darkMode ? 'border-gray-600 bg-[#2b3035] text-white' : 'bg-white'}`}
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth="1.5"
-                                        stroke="currentColor"
-                                        className="size-6"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-                                        />
-                                    </svg>
 
-                                    <span className="text-sm font-medium">
-                                        <TransText
-                                            className={`${darkMode ? 'text-white' : ''}`}
-                                            en="Upload CV"
-                                            fr="Télécharger le CV"
-                                            ar="رفع السيرة الذاتية"
-                                        />
-                                    </span>
+                            <div className="mb-4 flex flex-col w-full">
+                                <label htmlFor="gender" className={`${darkMode ? 'text-white' : 'text-gray-700'}`}>
+                                    <TransText en="Gender" fr="Genre" ar="الجنس" />:
                                     <Required />
                                 </label>
-
-                                <input
-                                    type="file"
-                                    id="cv"
-                                    accept=".pdf,.doc,.docx"
-                                    onChange={(e) => setData('cv', e.target.files[0])}
-                                    className="hidden"
-                                />
+                                <select
+                                    name="gender"
+                                    id="gender"
+                                    value={data.gender}
+                                    onChange={handleChange}
+                                    className={`w-full appearance-none rounded p-[10px] ${darkMode ? 'border border-gray-600 bg-[#2b3035] text-white' : 'border border-gray-300 bg-white text-gray-700'}`}
+                                    required
+                                >
+                                    <option value="" disabled className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
+                                        <TransText en="Select Gender" fr="Sélectionnez le sexe" ar="حدد الجنس" />
+                                    </option>
+                                    <option value="male" className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
+                                        <TransText en="Male" fr="Homme" ar="ذكر" />
+                                    </option>
+                                    <option value="female" className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
+                                        <TransText en="Female" fr="Female" ar="أنثى" />
+                                    </option>
+                                </select>
                             </div>
                         </div>
 
-                        <div className="mb-4 flex flex-col lg:w-[48%]">
-                            <label htmlFor="gender" className={`${darkMode ? 'text-white' : 'text-gray-700'}`}>
-                                <TransText en="Gender" fr="Genre" ar="الجنس" />:
+                        <div className="mb-4 w-full">
+                            <p className={`mb-2 text-sm font-bold ${darkMode ? 'text-white' : ''}`}>
+                                <TransText
+                                    className={`${darkMode ? 'bg text-white' : ''}`}
+                                    en="Upload CV"
+                                    fr="Télécharger le CV"
+                                    ar="رفع السيرة الذاتية"
+                                />{' '}
+                                <Required />
+                            </p>
+                            <label
+                                htmlFor="cv"
+                                className={`flex cursor-pointer items-center gap-2 rounded border p-[11px] shadow ${data.cv ? 'bg-alpha' : darkMode ? 'border-gray-600 bg-[#2b3035] text-white' : 'bg-white'}`}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="size-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+                                    />
+                                </svg>
+
+                                <span className="text-sm font-medium">
+                                    <TransText
+                                        className={`${darkMode ? 'text-white' : ''}`}
+                                        en="Upload CV"
+                                        fr="Télécharger le CV"
+                                        ar="رفع السيرة الذاتية"
+                                    />
+                                </span>
                                 <Required />
                             </label>
-                            <select
-                                name="gender"
-                                id="gender"
-                                value={data.gender}
-                                onChange={handleChange}
-                                className={`w-full appearance-none rounded p-[10px] ${darkMode ? 'border border-gray-600 bg-[#2b3035] text-white' : 'border border-gray-300 bg-white text-gray-700'}`}
-                                required
-                            >
-                                <option value="" disabled className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
-                                    <TransText en="Select Gender" fr="Sélectionnez le sexe" ar="حدد الجنس" />
-                                </option>
-                                <option value="male" className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
-                                    <TransText en="Male" fr="Homme" ar="ذكر" />
-                                </option>
-                                <option value="female" className={darkMode ? 'bg-[#212529] text-white' : 'bg-white text-gray-700'}>
-                                    <TransText en="Female" fr="Female" ar="أنثى" />
-                                </option>
-                            </select>
+
+                            <input
+                                type="file"
+                                id="cv"
+                                accept=".pdf,.doc,.docx"
+                                onChange={(e) => setData('cv', e.target.files[0])}
+                                className="hidden"
+                            />
                         </div>
+
 
                         {/* Project Informtation */}
                         <h1 className={`${darkMode && 'text-white'} mb-2 text-lg font-semibold underline`}>

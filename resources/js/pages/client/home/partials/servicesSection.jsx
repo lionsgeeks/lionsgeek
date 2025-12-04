@@ -141,7 +141,7 @@ const ServicesSection = () => {
                             {services.map(([macroService, serviceDescription, microServices, icon], index) => (
                                 <div
                                     key={index}
-                                    className={`group relative flex cursor-pointer flex-col gap-4 md:w-[calc(calc(100%-calc(1*2.5rem))/2)] ${darkMode ? 'bg-[#212529] hover:bg-gray-800' : 'bg-gray-200 hover:bg-white'} rounded-lg border-b-8 border-transparent px-8 pt-10 pb-8 duration-300 after:absolute after:bottom-0 after:left-0 after:h-2 after:w-0 after:translate-y-full after:rounded-b-lg after:bg-alpha after:duration-300 hover:scale-105 hover:after:w-full ${
+                                    className={`group relative flex cursor-pointer flex-col gap-4 md:w-[calc(calc(100%-calc(1*2.5rem))/2)] ${darkMode ? 'bg-beta hover:bg-black/5' : 'bg-gray-200 hover:bg-white'} rounded-lg border-b-8 border-transparent px-8 pt-10 pb-8 duration-300 after:absolute after:bottom-0 after:left-0 after:h-2 after:w-0 after:translate-y-full after:rounded-b-lg after:bg-alpha after:duration-300 hover:scale-105 hover:after:w-full ${
                                         selectedLanguage === 'ar' && 'text-end'
                                     }`}
                                 >
