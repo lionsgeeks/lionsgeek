@@ -2,11 +2,12 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { ChevronLeft, ChevronRight, Filter, Search, Users, CheckCircle2, XCircle } from 'lucide-react'; // Added CheckCircle2, XCircle
+import { ChevronLeft, ChevronRight, Filter, Search, Users, CheckCircle2, XCircle, Trash2 } from 'lucide-react'; // Added Trash2
 import { useMemo, useState } from 'react';
+import { router } from '@inertiajs/react';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-function Participants({ bookings, tab }) {
+function Participants({ bookings, tab, onDelete }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
     const [genderFilter, setGenderFilter] = useState('all');
@@ -104,6 +105,7 @@ function Participants({ bookings, tab }) {
                                 <th className="px-2 py-3 text-left font-medium text-muted-foreground">Sector of Activities</th>
                                 {/* <th className="px-2 py-3 text-left font-medium text-muted-foreground">Booked at</th> */}
                                 <th className="px-2 py-3 text-left font-medium text-muted-foreground">Visited</th>
+                                {onDelete && <th className="px-2 py-3 text-left font-medium text-muted-foreground">Actions</th>}
                             </tr>
                         </thead>
                         <tbody>
@@ -138,6 +140,18 @@ function Participants({ bookings, tab }) {
                                             <XCircle className="h-5 w-5 text-red-500" />
                                         )}
                                     </td> {/* Display visited status */}
+                                    {onDelete && (
+                                        <td className="px-2 py-3 text-sm">
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                onClick={() => onDelete(participant.id)}
+                                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                            >
+                                                <Trash2 className="h-4 w-4" />
+                                            </Button>
+                                        </td>
+                                    )}
                                 </tr>
                             ))}
                         </tbody>

@@ -115,4 +115,21 @@ class BookingController extends Controller
             'booking' => $booking
         ]);
     }
+
+    /**
+     * Delete a booking
+     */
+    public function destroy(Booking $booking)
+    {
+        $event = $booking->event;
+        
+        // Increment event capacity when booking is deleted
+        if ($event) {
+            $event->increment('capacity');
+        }
+        
+        $booking->delete();
+        
+        return back()->with('success', 'Participant deleted successfully.');
+    }
 }

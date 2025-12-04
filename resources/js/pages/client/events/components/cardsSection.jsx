@@ -78,7 +78,13 @@ export default function CardsSection({ events = [], IMAGEURL = 'http://127.0.0.1
                                     className={`flex w-full items-center justify-center bg-alpha py-2 font-semibold text-black transition duration-150 hover:bg-beta hover:text-alpha hover:border-alpha hover:border `}
                                     // disabled={element.capacity <= 0}
                                 >
-                                    <TransText fr="Voir tout" ar="شاهد الكل" en="See all" />
+                                    <TransText
+                                        fr="Voir plus"
+                                        ar="شاهد المزيد"
+                                        en="See more"
+                                    />
+
+
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import AppLayout from '@/layouts/app-layout';
 import { router, usePage } from '@inertiajs/react';
-import { ArrowLeft, Calendar, Clock, Edit, MapPin, Trash2, Users, Link, RefreshCcw, Lock } from 'lucide-react'; // Added Link, RefreshCcw, Lock
+import { ArrowLeft, Calendar, Clock, Edit, MapPin, Trash2, Users, Link, RefreshCcw, Lock, Download } from 'lucide-react'; // Added Link, RefreshCcw, Lock, Download
 import { useState } from 'react';
 import EditEventDialog from './partials/EditEventDialog';
 
@@ -125,6 +125,18 @@ export default function AdminEventShow() {
                             </div>
                             <div className="mb-6 flex items-center justify-end md:justify-between max-md:mb-0">
                                 <div className="flex gap-2 max-md:flex-col">
+                                    {/* <Button
+                                        onClick={() => {
+                                            window.location.href = route('admin.events.export-bookings-csv', event.id);
+                                        }}
+                                        variant="outline"
+                                        className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
+                                    >
+                                        <Download className="mr-2 h-4 w-4" />
+                                        Export CSV
+                                    </Button> */}
+
+
                                     <Button onClick={handleEdit}>
                                         <Edit className="mr-2 h-4 w-4" />
                                         Edit
@@ -163,7 +175,17 @@ export default function AdminEventShow() {
                                 />
                             </div>
 
-                            <Participants bookings={event.bookings || []} tab={tab} />
+                            <Participants
+                                bookings={event.bookings || []}
+                                tab={tab}
+                                onDelete={(bookingId) => {
+                                    if (confirm('Are you sure you want to delete this participant?')) {
+                                        router.delete(route('admin.bookings.destroy', bookingId), {
+                                            preserveScroll: true,
+                                        });
+                                    }
+                                }}
+                            />
                         </div>
 
                         <div className="space-y-6">
