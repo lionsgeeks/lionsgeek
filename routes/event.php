@@ -20,7 +20,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     Route::patch('events/change-privacy/{id}', [EventController::class, 'privacyStatus'])->name('event.privacy');
     Route::post('events/{event}/regenerate-token', [EventController::class, 'regenerateToken'])->name('event.regenerate-token');
+    Route::get('/events/{event}/export-bookings-csv', [EventController::class, 'exportBookingsCSV'])->name('events.export-bookings-csv');
+    Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('bookings.destroy');
 });
+
 
 Route::get('/event', function () {
     return Inertia::render('client/events/events');
