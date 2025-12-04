@@ -75,7 +75,7 @@ const BookingSection = ({ event, t, darkMode }) => {
                     </p>
                 </div>
                 <div className="p-4">
-                    {Math.max(0, event.capacity - (event.bookings?.length || 0)) > 0 ? (
+                    {event.capacity > 0 ? (
                         <button
                             className="w-full rounded-md bg-alpha px-4 py-2 text-black transition hover:bg-yellow-400"
                             onClick={() => switching(true)}
