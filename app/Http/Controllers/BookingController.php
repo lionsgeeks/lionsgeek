@@ -20,7 +20,7 @@ class BookingController extends Controller
             'email'    => 'required|email|max:255',
             'phone'    => 'required|string|max:20',
             'gender'   => 'required|string|in:male,female',
-            'maturite_project' => 'nullable|string|in:idéation,démarrage,en développement',
+            'maturite_project' => 'nullable|string',
             'secteur_dactivite' => 'nullable|string',
             'event_id' => 'required|exists:events,id',
         ]);
@@ -126,17 +126,17 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         $event = $booking->event;
-        
+
         // Delete the booking first
         $booking->delete();
-        
+
         // Then increment event capacity by exactly 1 using database-level update
         if ($event) {
             DB::table('events')
                 ->where('id', $event->id)
                 ->increment('capacity', 1);
         }
-        
+
         return back()->with('success', 'Participant deleted successfully.');
     }
 }

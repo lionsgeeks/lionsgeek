@@ -50,7 +50,7 @@ export default function AdminEventShow() {
 
     const handleDelete = () => {
         setIsDeleting(true);
-        
+
         if (deleteType === 'event') {
             router.delete(route('admin.events.destroy', event.id), {
                 onSuccess: () => {
@@ -150,8 +150,8 @@ export default function AdminEventShow() {
                                         <Edit className="mr-2 h-4 w-4" />
                                         Edit
                                     </Button>
-                                    <Button 
-                                        variant="destructive" 
+                                    <Button
+                                        variant="destructive"
                                         onClick={() => {
                                             setDeleteType('event');
                                             setDeleteTarget(event.id);
@@ -161,16 +161,16 @@ export default function AdminEventShow() {
                                         <Trash2 className="mr-2 h-4 w-4" />
                                         Delete
                                     </Button>
-                                     <Button
-                                        onClick={() => {
-                                            window.location.href = route('admin.events.export-bookings-csv', event.id);
-                                        }}
-                                        variant="outline"
-                                        className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
-                                    >
-                                        <Download className="mr-2 h-4 w-4" />
-                                        Export participants
-                                    </Button>
+                                   <Button
+                                            onClick={() => {
+                                                window.location.href = route('admin.events.export-bookings-csv', event.id);
+                                            }}
+                                            variant="outline"
+                                            className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
+                                        >
+                                            <Download className="mr-2 h-4 w-4" />
+                                            Export participants
+                                        </Button>
                                 </div>
                             </div>
                         </div>
@@ -324,8 +324,8 @@ export default function AdminEventShow() {
                 </main>
             </div>
 
-            <Dialog 
-                open={showDeleteDialog} 
+            <Dialog
+                open={showDeleteDialog}
                 onOpenChange={(open) => {
                     setShowDeleteDialog(open);
                     if (!open) {
@@ -353,26 +353,26 @@ export default function AdminEventShow() {
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             onClick={() => {
                                 setShowDeleteDialog(false);
                                 setDeleteType(null);
                                 setDeleteTarget(null);
-                            }} 
+                            }}
                             disabled={isDeleting}
                         >
                             Cancel
                         </Button>
-                        <Button 
-                            variant="destructive" 
-                            onClick={handleDelete} 
+                        <Button
+                            variant="destructive"
+                            onClick={handleDelete}
                             disabled={isDeleting}
                         >
-                            {isDeleting 
-                                ? 'Deleting...' 
-                                : deleteType === 'event' 
-                                    ? 'Delete Event' 
+                            {isDeleting
+                                ? 'Deleting...'
+                                : deleteType === 'event'
+                                    ? 'Delete Event'
                                     : 'Delete Participant'
                             }
                         </Button>
