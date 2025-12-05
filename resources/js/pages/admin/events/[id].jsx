@@ -14,6 +14,8 @@ import Participants from '../../../components/participants';
 export default function AdminEventShow() {
     const { event } = usePage().props;
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [deleteType, setDeleteType] = useState(null); // 'event' or 'participant'
+    const [deleteTarget, setDeleteTarget] = useState(null); // event or participant ID
     const [showEditDialog, setShowEditDialog] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const { props } = usePage();
@@ -48,17 +50,36 @@ export default function AdminEventShow() {
 
     const handleDelete = () => {
         setIsDeleting(true);
-        router.delete(route('admin.events.destroy', event.id), {
-            onSuccess: () => {
-                router.visit(route('admin.events.index'));
-            },
-            onError: () => {
-                setIsDeleting(false);
-            },
-            onFinish: () => {
-                setIsDeleting(false);
-            },
-        });
+
+        if (deleteType === 'event') {
+            router.delete(route('admin.events.destroy', event.id), {
+                onSuccess: () => {
+                    router.visit(route('admin.events.index'));
+                },
+                onError: () => {
+                    setIsDeleting(false);
+                },
+                onFinish: () => {
+                    setIsDeleting(false);
+                },
+            });
+        } else if (deleteType === 'participant' && deleteTarget) {
+            router.delete(route('admin.bookings.destroy', deleteTarget), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setShowDeleteDialog(false);
+                    setDeleteType(null);
+                    setDeleteTarget(null);
+                    setIsDeleting(false);
+                },
+                onError: () => {
+                    setIsDeleting(false);
+                },
+                onFinish: () => {
+                    setIsDeleting(false);
+                },
+            });
+        }
     };
 
     const getDisplayText = (multilingualField) => {
@@ -125,26 +146,31 @@ export default function AdminEventShow() {
                             </div>
                             <div className="mb-6 flex items-center justify-end md:justify-between max-md:mb-0">
                                 <div className="flex gap-2 max-md:flex-col">
-                                    {/* <Button
-                                        onClick={() => {
-                                            window.location.href = route('admin.events.export-bookings-csv', event.id);
-                                        }}
-                                        variant="outline"
-                                        className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
-                                    >
-                                        <Download className="mr-2 h-4 w-4" />
-                                        Export CSV
-                                    </Button> */}
-
-
                                     <Button onClick={handleEdit}>
                                         <Edit className="mr-2 h-4 w-4" />
                                         Edit
                                     </Button>
-                                    <Button variant="destructive" onClick={() => setShowDeleteDialog(true)}>
+                                    <Button
+                                        variant="destructive"
+                                        onClick={() => {
+                                            setDeleteType('event');
+                                            setDeleteTarget(event.id);
+                                            setShowDeleteDialog(true);
+                                        }}
+                                    >
                                         <Trash2 className="mr-2 h-4 w-4" />
                                         Delete
                                     </Button>
+                                   <Button
+                                            onClick={() => {
+                                                window.location.href = route('admin.events.export-bookings-csv', event.id);
+                                            }}
+                                            variant="outline"
+                                            className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
+                                        >
+                                            <Download className="mr-2 h-4 w-4" />
+                                            Export participants
+                                        </Button>
                                 </div>
                             </div>
                         </div>
@@ -179,11 +205,9 @@ export default function AdminEventShow() {
                                 bookings={event.bookings || []}
                                 tab={tab}
                                 onDelete={(bookingId) => {
-                                    if (confirm('Are you sure you want to delete this participant?')) {
-                                        router.delete(route('admin.bookings.destroy', bookingId), {
-                                            preserveScroll: true,
-                                        });
-                                    }
+                                    setDeleteType('participant');
+                                    setDeleteTarget(bookingId);
+                                    setShowDeleteDialog(true);
                                 }}
                             />
                         </div>
@@ -263,14 +287,19 @@ export default function AdminEventShow() {
                                     <div>
                                         <p className="mb-1 text-sm text-muted-foreground">Available Spots</p>
                                         <p className="text-3xl font-bold text-green-600">
-                                            {Math.max(0, event.capacity - (event.bookings?.length || 0)).toLocaleString()}
+                                            {/* {Math.max(0, event.capacity - (event.bookings?.length || 0)).toLocaleString()} */}
+                                            {event.capacity }
                                         </p>
                                     </div>
 
                                     <div>
                                         <p className="mb-1 text-sm text-muted-foreground">Registration Rate</p>
                                         <p className="text-lg font-semibold">
-                                            {event.capacity > 0 ? (((event.bookings?.length || 0) / event.capacity) * 100).toFixed(1) : 0}%
+                                            {(() => {
+                                                const bookingsCount = event.bookings?.length || 0;
+                                                const originalCapacity = event.capacity + bookingsCount;
+                                                return originalCapacity > 0 ? ((bookingsCount / originalCapacity) * 100).toFixed(1) : 0;
+                                            })()}%
                                         </p>
                                     </div>
                                 </CardContent>
@@ -295,21 +324,57 @@ export default function AdminEventShow() {
                 </main>
             </div>
 
-            <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+            <Dialog
+                open={showDeleteDialog}
+                onOpenChange={(open) => {
+                    setShowDeleteDialog(open);
+                    if (!open) {
+                        setDeleteType(null);
+                        setDeleteTarget(null);
+                    }
+                }}
+            >
                 <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-6 ">
                     <DialogHeader>
-                        <DialogTitle>Delete Event</DialogTitle>
+                        <DialogTitle>
+                            {deleteType === 'event' ? 'Delete Event' : 'Delete Participant'}
+                        </DialogTitle>
                         <DialogDescription>
-                            Are you sure you want to delete "{nameTexts.en}"? This action cannot be undone and will permanently remove the event and
-                            all associated data.
+                            {deleteType === 'event' ? (
+                                <>
+                                    Are you sure you want to delete "{nameTexts.en}"? This action cannot be undone and will permanently remove the event and
+                                    all associated data.
+                                </>
+                            ) : (
+                                <>
+                                    Are you sure you want to delete this participant? This action cannot be undone and will permanently remove the participant from this event.
+                                </>
+                            )}
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setShowDeleteDialog(false)} disabled={isDeleting}>
+                        <Button
+                            variant="outline"
+                            onClick={() => {
+                                setShowDeleteDialog(false);
+                                setDeleteType(null);
+                                setDeleteTarget(null);
+                            }}
+                            disabled={isDeleting}
+                        >
                             Cancel
                         </Button>
-                        <Button variant="destructive" onClick={handleDelete} disabled={isDeleting}>
-                            {isDeleting ? 'Deleting...' : 'Delete Event'}
+                        <Button
+                            variant="destructive"
+                            onClick={handleDelete}
+                            disabled={isDeleting}
+                        >
+                            {isDeleting
+                                ? 'Deleting...'
+                                : deleteType === 'event'
+                                    ? 'Delete Event'
+                                    : 'Delete Participant'
+                            }
                         </Button>
                     </DialogFooter>
                 </DialogContent>

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Event;
+use App\Exports\EventBookingsExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Inertia\Inertia;
 
 class EventController extends Controller
@@ -224,94 +227,34 @@ class EventController extends Controller
 
 
     /**
-     * Export event bookings to CSV
+     * Export event bookings to CSV using Maatwebsite Excel
      */
-    public function exportBookingsCSV(Event $event)
+    public function exportBookingsCsv($eventId)
     {
-        $bookings = Booking::where('event_id', $event->id)
-            ->orderBy('created_at', 'desc')
+        if (config('database.default') === 'mysql' || config('database.default') === 'mariadb') {
+            DB::statement("SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci'");
+        }
+
+        $bookings = DB::table('bookings')
+            ->where('event_id', $eventId)
+            ->orderBy('created_at', 'asc')
             ->get();
+
+        $event = Event::findOrFail($eventId);
 
         $eventName = is_array($event->name) ? ($event->name['en'] ?? $event->name['fr'] ?? 'Event') : $event->name;
         $sanitizedEventName = preg_replace('/[^A-Za-z0-9_\-]/', '_', $eventName);
         $date = now()->format('Y-m-d');
         $filename = "{$date}_{$sanitizedEventName}_participants.csv";
 
-        $headers = [
-            'Content-Type' => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
-            'Pragma' => 'no-cache',
-            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires' => '0'
-        ];
-
-        $callback = function() use ($bookings) {
-            // Create output stream
-            $output = fopen('php://output', 'w');
-            
-            // Write UTF-8 BOM - this tells Excel the file is UTF-8 encoded
-            // The BOM bytes: EF BB BF (should be invisible when Excel reads it correctly)
-            fwrite($output, "\xEF\xBB\xBF");
-            
-            // Headers - separated date and time
-            $csvHeaders = [
-                'Id',
-                'Name',
-                'Email',
-                'Phone',
-                'Gender',
-                'Project Maturity',
-                'Sector of Activities',
-                'Booked Date',
-                'Booked Time'
-            ];
-            
-            // Write headers using fputcsv with semicolon delimiter
-            fputcsv($output, $csvHeaders, ';', '"');
-
-            // Data rows
-            $index = 0;
-            foreach ($bookings as $booking) {
-                $index++;
-                
-                // Format date and time separately
-                $bookedDate = '-';
-                $bookedTime = '-';
-                if ($booking->created_at) {
-                    $bookedDate = $booking->created_at->format('Y-m-d');
-                    $bookedTime = $booking->created_at->format('H:i:s');
-                }
-                
-                // Get the exact values from database (they should match website values)
-                // These are the same values used in bookingmodal.jsx:
-                // maturite_project: 'idéation', 'démarrage', 'en développement'
-                // secteur_dactivite: 'BTP', 'Santé et action sociale', 'Finance et assurance', 
-                //                    'Numérique', 'Tourisme', 'Luxe', 'Recherche et développement',
-                //                    'Transports et logistique', 'Art et culture', 'Défense et sécurité',
-                //                    'Environnement et énergie', 'Événementiel', 'Immobilier'
-                $maturite = $booking->maturite_project ?? '-';
-                $secteur = $booking->secteur_dactivite ?? '-';
-                
-                // Format data - use exact database values (already UTF-8)
-                $row = [
-                    $index,
-                    $booking->name ?? '',
-                    $booking->email ?? '',
-                    $booking->phone ?? '',
-                    ucfirst($booking->gender ?? ''),
-                    $maturite,  // Exact value: 'idéation', 'démarrage', 'en développement'
-                    $secteur,   // Exact value: 'Événementiel', 'Défense et sécurité', etc.
-                    $bookedDate,
-                    $bookedTime,
-                ];
-                
-                // Write row using fputcsv (handles UTF-8 correctly)
-                fputcsv($output, $row, ';', '"');
-            }
-
-            fclose($output);
-        };
-
-        return response()->stream($callback, 200, $headers);
+        return Excel::download(
+            new EventBookingsExport($bookings),
+            $filename,
+            \Maatwebsite\Excel\Excel::CSV,
+            [
+                'Content-Type' => 'text/csv; charset=UTF-8',
+            ]
+        );
     }
+
 }
