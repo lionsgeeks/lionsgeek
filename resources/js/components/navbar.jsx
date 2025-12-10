@@ -212,7 +212,7 @@ const Navbar = () => {
                                     href={'/'}
                                     className="dark-mode:text-white focus:shadow-outline ml-2 rounded-lg text-lg font-semibold tracking-widest text-gray-900  focus:outline-none lg:ml-0"
                                 >
-                                    {/* <svg
+                                    <svg
                                         className={`${darkMode ? 'fill-white' : 'fill-[#0f0f0f]'}`}
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="206.551"
@@ -265,13 +265,13 @@ const Navbar = () => {
                                                 />
                                             </g>
                                         </g>
-                                    </svg> */}
+                                    </svg>
                                     {/* activism day logo here commentiwh mni nsaliw bayna an7tajoh mn be3d */}
-                                    <div className={`flex items-center gap-x-2 ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    {/* <div className={`flex items-center gap-x-2 ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''}`}>
 
                                         <img src={logo} alt="logo" className="h-10 w-10" />
                                         <h1 className="text-2xl font-bold text-alpha">LionsGeek</h1>
-                                    </div>
+                                    </div> */}
                                 </Link>
                                 {/* toggle */}
                                 <div className="flex items-center gap-x-3">
