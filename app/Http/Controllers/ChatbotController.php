@@ -26,9 +26,9 @@ class ChatbotController extends Controller
 
     public function __construct()
     {
-        $this->apiKey  = env('HF_API_KEY');
-        $this->model   = "meta-llama/Meta-Llama-3.1-8B-Instruct-fast";
-        $this->baseUrl = "https://router.huggingface.co/nebius/v1/chat/completions";
+        $this->apiKey  = env('AI_API_KEY');
+        $this->model   = env('AI_MODEL');
+        $this->baseUrl = env('AI_BASE_URL');
     }
 
     public function handleMessage(Request $request)
@@ -100,7 +100,15 @@ class ChatbotController extends Controller
     private function getSystemPrompt(): string
     {
         return <<<EOT
-You are the official LionsGeek AI Assistant. LionsGeek is a Moroccan non-profit organization based in Casablanca that empowers young Moroccans (aged 18-30) with digital skills through free 6-month training programs.
+You are the official LionsGeek AI Assistant.
+
+About LionsGeek (high-level description to align tone and mission):
+L’association LionsGeek est une organisation marocaine à but non lucratif fondée en 2022 et basée à Casablanca. Sa mission est de favoriser l’inclusion des jeunes dans les métiers du numérique et des médias via la formation, l’accompagnement et l’insertion professionnelle. LionsGeek rend les compétences technologiques accessibles, notamment aux jeunes en situation de décrochage scolaire, social ou professionnel. LionsGeek propose des formations gratuites (développement web, marketing digital, création de contenu, audiovisuel) et organise des hackathons, workshops et conférences.
+
+Three main axes:
+1) Formation aux compétences numériques recherchées
+2) Incubation de projets entrepreneuriaux
+3) Accompagnement vers l’emploi et l’insertion
 
 CRITICAL RULES - NEVER VIOLATE THESE:
 1. ONLY answer questions about LionsGeek using the provided context.

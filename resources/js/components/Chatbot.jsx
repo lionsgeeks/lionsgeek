@@ -10,10 +10,7 @@ const ChatbotIconButton = ({ isOpen, onClick, messageCount, darkMode }) => {
     return (
         <button
             onClick={onClick}
-            className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 hover:scale-110 active:scale-95 ${darkMode
-                ? 'bg-alpha text-white hover:bg-[#ff6b2a]'
-                : 'bg-alpha text-white hover:bg-[#ff6b2a]'
-                } ${isOpen ? 'opacity-0 pointer-events-none scale-0' : 'opacity-100 scale-100'} `}
+            className={`fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full shadow-2xl transition-all duration-500 hover:scale-110 active:scale-95 ${darkMode ? 'bg-beta text-alpha hover:bg-alpha hover:text-beta' : 'bg-beta text-alpha hover:bg-alpha hover:text-beta'} ${isOpen ? 'pointer-events-none scale-0 opacity-0' : 'scale-100 opacity-100'} `}
             aria-label="Open chatbot"
         >
             <svg
@@ -43,8 +40,7 @@ const ChatbotIconButton = ({ isOpen, onClick, messageCount, darkMode }) => {
 const ChatbotHeader = ({ darkMode, showGuide, onToggleGuide, onClose }) => {
     return (
         <div
-            className={`flex items-center justify-between p-4 rounded-t-2xl border-b transition-all duration-300 ${darkMode ? 'bg-dark border-gray-700' : 'bg-alpha/10 border-gray-200'
-                }`}
+            className={`flex items-center justify-between p-4 rounded-t-2xl border-b transition-all duration-300 ${darkMode ? 'bg-beta border-gray-700' : 'bg-alpha/10 border-gray-200'}`}
         >
             <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-alpha flex items-center justify-center shadow-lg animate-pulse">
@@ -126,8 +122,7 @@ const ChatbotHeader = ({ darkMode, showGuide, onToggleGuide, onClose }) => {
 const GuidePanel = ({ darkMode }) => {
     return (
         <div
-            className={`border-b transition-all duration-500 ${darkMode ? 'bg-[#212529] border-gray-700' : 'bg-alpha/5 border-gray-200'
-                }`}
+            className={`border-b transition-all duration-500 ${darkMode ? 'bg-beta border-gray-700' : 'bg-alpha/5 border-gray-200'}`}
         >
             <div className="p-4 max-h-48 overflow-y-auto custom-scrollbar">
                 <h4 className={`font-bold mb-3 text-lg ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -168,7 +163,7 @@ const MessageBubble = ({ message, darkMode, formatTime }) => {
         >
             <div
                 className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-lg transition-all duration-300 hover:scale-[1.02] ${isUser
-                    ? 'bg-alpha text-white rounded-br-sm'
+                    ? 'bg-alpha text-beta rounded-br-sm'
                     : darkMode
                         ? 'bg-[#2a2a2a] text-gray-100 rounded-bl-sm border border-gray-700'
                         : 'bg-white text-gray-900 rounded-bl-sm border border-gray-200'
@@ -257,8 +252,7 @@ const QuickActions = ({ quickActions, onQuickAction, darkMode }) => {
 const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, inputRef, isThinking, isTyping, darkMode }) => {
     return (
         <div
-            className={`p-4 border-t transition-all duration-300 ${darkMode ? 'bg-[#212529] border-gray-700' : 'bg-white border-gray-200'
-                }`}
+            className={`p-4 border-t transition-all duration-300 ${darkMode ? 'bg-beta border-gray-700' : 'bg-white border-gray-200'}`}
         >
             <div className="flex items-end gap-2">
                 <textarea
@@ -279,7 +273,7 @@ const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, input
                     onClick={onSendMessage}
                     disabled={!inputValue.trim() || isThinking || isTyping}
                     className={`p-3 rounded-xl transition-all duration-300 ${inputValue.trim() && !isThinking && !isTyping
-                        ? 'bg-alpha text-white hover:bg-[#ff6b2a] hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl'
+                        ? 'bg-beta text-alpha hover:bg-alpha hover:text-beta hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl'
                         : darkMode
                             ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
                             : 'bg-gray-200 text-gray-400 cursor-not-allowed'
@@ -502,7 +496,7 @@ const Chatbot = () => {
                     ? 'opacity-100 translate-y-0 scale-100'
                     : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
                     } ${darkMode
-                        ? 'bg-[#1a1a1a] border border-gray-800'
+                        ? 'bg-beta border border-gray-800'
                         : 'bg-white border border-gray-200'
                     }`}
             >
