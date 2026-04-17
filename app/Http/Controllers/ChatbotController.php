@@ -8,6 +8,8 @@ use App\Models\Coworking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class ChatbotController extends Controller
@@ -33,6 +35,8 @@ class ChatbotController extends Controller
 
     public function handleMessage(Request $request)
     {
+        $this->ensureChatbotNotRateLimited($request);
+
         $request->validate([
             'message' => 'required|string|max:1000',
         ]);
@@ -82,6 +86,28 @@ class ChatbotController extends Controller
             'status'  => 'success',
             'message' => $botMessage,
         ]);
+    }
+
+    private function ensureChatbotNotRateLimited(Request $request): void
+    {
+        $maxAttempts = (int) env('CHATBOT_MAX_MESSAGES', 10);
+        $decaySeconds = (int) env('CHATBOT_DECAY_SECONDS', 86400); // 24h
+        $key = $this->chatbotThrottleKey($request);
+
+        if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
+            abort(response()->json([
+                'status' => 'error',
+                'message' => 'You have reached the maximum of 10 messages for this chat session. Please try again later.',
+            ], 429));
+        }
+
+        RateLimiter::hit($key, $decaySeconds);
+    }
+
+    private function chatbotThrottleKey(Request $request): string
+    {
+        $sessionId = $request->session()?->getId() ?: 'no-session';
+        return Str::transliterate(Str::lower('chatbot|'.$sessionId.'|'.$request->ip()));
     }
 
     private function isJailbreakAttempt(string $message): bool

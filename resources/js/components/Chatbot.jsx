@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAppContext } from '@/context/appContext';
 
+const MAX_USER_MESSAGES = 10;
+
 // ============================================
 // PARTIAL COMPONENTS   kolhom m3ayat lihom l ta7t
 // ============================================
@@ -249,11 +251,16 @@ const QuickActions = ({ quickActions, onQuickAction, darkMode }) => {
 };
 
 // Input Area Partial
-const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, inputRef, isThinking, isTyping, darkMode }) => {
+const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, inputRef, isThinking, isTyping, isChatLimited, darkMode }) => {
     return (
         <div
             className={`p-4 border-t transition-all duration-300 ${darkMode ? 'bg-beta border-gray-700' : 'bg-white border-gray-200'}`}
         >
+            {isChatLimited && (
+                <div className={`mb-3 rounded-xl border px-3 py-2 text-xs ${darkMode ? 'border-gray-700 text-gray-300' : 'border-gray-200 text-gray-700'}`}>
+                    You reached the limit of {MAX_USER_MESSAGES} messages for this chat. Please try again later.
+                </div>
+            )}
             <div className="flex items-end gap-2">
                 <textarea
                     ref={inputRef}
@@ -262,16 +269,16 @@ const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, input
                     onKeyPress={onKeyPress}
                     placeholder="Type your message..."
                     rows={1}
-                    disabled={isThinking || isTyping}
+                    disabled={isThinking || isTyping || isChatLimited}
                     className={`flex-1 resize-none rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-alpha transition-all duration-300 ${darkMode
                         ? 'bg-[#1a1a1a] text-white border border-gray-700 placeholder-gray-500 focus:border-alpha'
                         : 'bg-gray-50 text-gray-900 border border-gray-300 placeholder-gray-400 focus:border-alpha'
-                        } ${isThinking || isTyping ? 'opacity-50 cursor-not-allowed' : 'hover:border-alpha/50'}`}
+                        } ${isThinking || isTyping || isChatLimited ? 'opacity-50 cursor-not-allowed' : 'hover:border-alpha/50'}`}
                     style={{ minHeight: '48px', maxHeight: '120px' }}
                 />
                 <button
                     onClick={onSendMessage}
-                    disabled={!inputValue.trim() || isThinking || isTyping}
+                    disabled={!inputValue.trim() || isThinking || isTyping || isChatLimited}
                     className={`p-3 rounded-xl transition-all duration-300 ${inputValue.trim() && !isThinking && !isTyping
                         ? 'bg-beta text-alpha hover:bg-alpha hover:text-beta hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl'
                         : darkMode
@@ -329,6 +336,7 @@ const MessagesContainer = ({ messages, isThinking, darkMode, formatTime, message
 const Chatbot = () => {
     const { darkMode } = useAppContext();
     const [isOpen, setIsOpen] = useState(false);
+    const [isChatLimited, setIsChatLimited] = useState(false);
     const [messages, setMessages] = useState([
         {
             id: 1,
@@ -386,7 +394,13 @@ const Chatbot = () => {
     };
 
     const handleSendMessage = async () => {
-        if (!inputValue.trim() || isThinking || isTyping) return;
+        if (!inputValue.trim() || isThinking || isTyping || isChatLimited) return;
+
+        const userMessagesCount = messages.filter((m) => m.sender === 'user').length;
+        if (userMessagesCount >= MAX_USER_MESSAGES) {
+            setIsChatLimited(true);
+            return;
+        }
 
         const userMessage = {
             id: Date.now(),
@@ -409,6 +423,22 @@ const Chatbot = () => {
                 },
                 body: JSON.stringify({ message: userMessage.text }),
             });
+
+            if (response.status === 429) {
+                setIsThinking(false);
+                setIsChatLimited(true);
+                const data = await response.json().catch(() => null);
+                setMessages(prev => [
+                    ...prev,
+                    {
+                        id: Date.now() + 1,
+                        text: data?.message || `You reached the limit of ${MAX_USER_MESSAGES} messages. Please try again later.`,
+                        sender: 'bot',
+                        timestamp: new Date(),
+                    },
+                ]);
+                return;
+            }
 
             const data = await response.json();
             setIsThinking(false);
@@ -533,6 +563,7 @@ const Chatbot = () => {
                     inputRef={inputRef}
                     isThinking={isThinking}
                     isTyping={isTyping}
+                    isChatLimited={isChatLimited}
                     darkMode={darkMode}
                 />
             </div>
