@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAppContext } from '@/context/appContext';
+import { TransText } from './TransText';
 
 // ============================================
 // PARTIAL COMPONENTS   kolhom m3ayat lihom l ta7t
@@ -11,8 +12,8 @@ const ChatbotIconButton = ({ isOpen, onClick, messageCount, darkMode }) => {
         <button
             onClick={onClick}
             className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 hover:scale-110 active:scale-95 ${darkMode
-                ? 'bg-alpha text-white hover:bg-[#ff6b2a]'
-                : 'bg-alpha text-white hover:bg-[#ff6b2a]'
+                ? 'bg-alpha '
+                : 'bg-alpha '
                 } ${isOpen ? 'opacity-0 pointer-events-none scale-0' : 'opacity-100 scale-100'} `}
             aria-label="Open chatbot"
         >
@@ -43,7 +44,7 @@ const ChatbotIconButton = ({ isOpen, onClick, messageCount, darkMode }) => {
 const ChatbotHeader = ({ darkMode, showGuide, onToggleGuide, onClose }) => {
     return (
         <div
-            className={`flex items-center justify-between p-4 rounded-t-2xl border-b transition-all duration-300 ${darkMode ? 'bg-dark border-gray-700' : 'bg-alpha/10 border-gray-200'
+            className={`flex items-center justify-between p-4 rounded-t-2xl border-b transition-all duration-300 ${darkMode ? 'bg-darker border-gray-700' : 'bg-white border-gray-200'
                 }`}
         >
             <div className="flex items-center gap-3">
@@ -62,7 +63,7 @@ const ChatbotHeader = ({ darkMode, showGuide, onToggleGuide, onClose }) => {
                         />
                     </svg>
                 </div>
-                <div>
+                <div className="flex flex-col gap-1" >
                     <h3 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Chat Support
                     </h3>
@@ -157,10 +158,79 @@ const GuidePanel = ({ darkMode }) => {
     );
 };
 
+// Helper function to convert URLs to clickable links
+const linkifyText = (text) => {
+    if (!text) return text;
+    
+    // URL regex pattern - matches http, https, and www URLs
+    const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9-]+\.[a-zA-Z]{2,}[^\s]*)/g;
+    
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+    let keyCounter = 0;
+    
+    while ((match = urlPattern.exec(text)) !== null) {
+        // Add text before the URL
+        if (match.index > lastIndex) {
+            const textBefore = text.substring(lastIndex, match.index);
+            if (textBefore) {
+                parts.push(textBefore);
+            }
+        }
+        
+        // Process the URL
+        let url = match[0];
+        let displayUrl = url;
+        
+        // Add protocol if missing
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+        
+        // Truncate display URL if too long
+        if (displayUrl.length > 50) {
+            displayUrl = displayUrl.substring(0, 47) + '...';
+        }
+        
+        // Create clickable link
+        parts.push(
+            <a
+                key={`link-${keyCounter++}`}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 underline break-all"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {displayUrl}
+            </a>
+        );
+        
+        lastIndex = match.index + match[0].length;
+    }
+    
+    // Add remaining text
+    if (lastIndex < text.length) {
+        const remainingText = text.substring(lastIndex);
+        if (remainingText) {
+            parts.push(remainingText);
+        }
+    }
+    
+    // If no links found, return original text
+    if (parts.length === 0) {
+        return text;
+    }
+    
+    // Return array of React elements and strings
+    return parts;
+};
+
 // Message Bubble Partial
 const MessageBubble = ({ message, darkMode, formatTime }) => {
     const isUser = message.sender === 'user';
-    
+
     return (
         <div
             className={`flex ${isUser ? 'justify-end' : 'justify-start'} animate-fade-in`}
@@ -174,7 +244,9 @@ const MessageBubble = ({ message, darkMode, formatTime }) => {
                         : 'bg-white text-gray-900 rounded-bl-sm border border-gray-200'
                     }`}
             >
-                <p className="text-sm whitespace-pre-wrap break-words leading-relaxed">{message.text}</p>
+                <p className="text-sm whitespace-pre-wrap break-words leading-relaxed">
+                    {isUser ? message.text : linkifyText(message.text)}
+                </p>
                 <p
                     className={`text-xs mt-2 ${isUser
                         ? 'text-white/70'
@@ -332,8 +404,106 @@ const MessagesContainer = ({ messages, isThinking, darkMode, formatTime, message
 // MAIN CHATBOT COMPONENT
 // ============================================
 
+// Privacy Notice Partial
+const PrivacyNotice = ({ darkMode, onAccept, show, onClose, selectedLanguage }) => {
+    if (!show) return null;
+
+    return (
+        <div
+            className=" inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-end justify-end p-4 rounded-3xl animate-fade-in"
+            onClick={(e) => {
+                // Prevent closing by clicking outside
+                e.stopPropagation();
+            }}
+        >
+            <div
+                className={`relative w-full max-w-sm p-4 rounded-2xl shadow-2xl border-2 ${darkMode
+                    ? 'bg-[#1a1a1a] border-alpha/30'
+                    : 'bg-white border-alpha/20'
+                    } animate-scale-in`}
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Close button that closes chatbot if they don't accept */}
+                <button
+                    onClick={onClose}
+                    className={`absolute top-3 right-3 p-2 rounded-lg transition-colors ${darkMode
+                        ? 'hover:bg-gray-700 text-gray-400 hover:text-white'
+                        : 'hover:bg-gray-100 text-gray-500 hover:text-gray-700'
+                        }`}
+                    aria-label="Close chatbot"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div className="flex items-center gap-3 mb-3 pr-8">
+                    <div className="w-10 h-10 rounded-full bg-alpha/10 flex items-center justify-center flex-shrink-0">
+                        <svg className="w-5 h-5 text-alpha" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <TransText
+                            en="Privacy Notice"
+                            fr="Avis de confidentialité"
+                            ar="إشعار الخصوصية"
+                        />
+                    </h3>
+                </div>
+
+                <div className={`space-y-2.5 mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <p className="text-sm leading-relaxed">
+                        <TransText
+                            en="To improve the quality of our AI assistant responses, we collect and store your conversations. This data helps us enhance the chatbot's accuracy and provide better support."
+                            fr="Pour améliorer la qualité des réponses de notre assistant IA, nous collectons et stockons vos conversations. Ces données nous aident à améliorer la précision du chatbot et à fournir un meilleur support."
+                            ar="لتحسين جودة ردود مساعدنا الذكي، نجمع ونخزن محادثاتك. تساعدنا هذه البيانات على تحسين دقة الشات بوت وتقديم دعم أفضل."
+                        />
+                    </p>
+                    <div className={`p-2.5 rounded-lg ${darkMode ? 'bg-[#2a2a2a]' : 'bg-gray-50'}`}>
+                        <p className="text-xs leading-relaxed">
+                            <strong className="text-alpha">
+                                <TransText
+                                    en="Your conversations are stored securely"
+                                    fr="Vos conversations sont stockées en toute sécurité"
+                                    ar="محادثاتك مخزنة بأمان"
+                                />
+                            </strong>{' '}
+                            <TransText
+                                en="and used solely for improving our services."
+                                fr="et utilisées uniquement pour améliorer nos services."
+                                ar="وتُستخدم فقط لتحسين خدماتنا."
+                            />
+                        </p>
+                    </div>
+                </div>
+
+                <div className="flex gap-3">
+                    <button
+                        onClick={onAccept}
+                        className="flex-1 bg-alpha text-white px-5 py-2.5 rounded-xl hover:bg-[#ff6b2a] transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+                    >
+                        <TransText
+                            en="I Understand"
+                            fr="Je comprends"
+                            ar="أفهم"
+                        />
+                    </button>
+                </div>
+
+                <p className={`text-xs text-center mt-3 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+                    <TransText
+                        en="You must accept to use the AI assistant"
+                        fr="Vous devez accepter pour utiliser l'assistant IA"
+                        ar="يجب عليك الموافقة لاستخدام المساعد الذكي"
+                    />
+                </p>
+            </div>
+        </div>
+    );
+};
+
 const Chatbot = () => {
-    const { darkMode } = useAppContext();
+    const { darkMode, selectedLanguage } = useAppContext();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         {
@@ -347,8 +517,12 @@ const Chatbot = () => {
     const [isThinking, setIsThinking] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const [showGuide, setShowGuide] = useState(false);
+    const [showPrivacyNotice, setShowPrivacyNotice] = useState(false);
+    const [privacyAccepted, setPrivacyAccepted] = useState(false);
+    const [sessionId, setSessionId] = useState(null);
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
+    const lastSyncedCountRef = useRef(0);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -363,6 +537,55 @@ const Chatbot = () => {
             inputRef.current.focus();
         }
     }, [isOpen]);
+
+    // Initialize session and check privacy acceptance
+    useEffect(() => {
+        // Check if privacy was accepted
+        const accepted = localStorage.getItem('chatbot_privacy_accepted');
+        if (accepted === 'true') {
+            setPrivacyAccepted(true);
+            setShowPrivacyNotice(false);
+        } else {
+            setPrivacyAccepted(false);
+        }
+
+        // Get or create session ID
+        let session = localStorage.getItem('chatbot_session_id');
+        if (!session) {
+            session = `chatbot_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            localStorage.setItem('chatbot_session_id', session);
+        }
+        setSessionId(session);
+
+        // Load previous messages from localStorage
+        const storedMessages = localStorage.getItem(`chatbot_messages_${session}`);
+        if (storedMessages) {
+            try {
+                const parsed = JSON.parse(storedMessages);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    setMessages(parsed);
+                }
+            } catch (e) {
+                console.error('Error loading messages from localStorage:', e);
+            }
+        }
+    }, []);
+
+    // Show privacy notice when chatbot is opened and not accepted
+    useEffect(() => {
+        if (isOpen && !privacyAccepted) {
+            setShowPrivacyNotice(true);
+        } else {
+            setShowPrivacyNotice(false);
+        }
+    }, [isOpen, privacyAccepted]);
+
+    // Save messages to localStorage whenever they change
+    useEffect(() => {
+        if (sessionId && privacyAccepted && messages.length > 1) {
+            localStorage.setItem(`chatbot_messages_${sessionId}`, JSON.stringify(messages));
+        }
+    }, [messages, sessionId, privacyAccepted]);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -382,7 +605,7 @@ const Chatbot = () => {
         }
 
         setIsTyping(false);
-        
+
         // Refocus input after bot finishes typing
         setTimeout(() => {
             if (inputRef.current) {
@@ -392,7 +615,7 @@ const Chatbot = () => {
     };
 
     const handleSendMessage = async () => {
-        if (!inputValue.trim() || isThinking || isTyping) return;
+        if (!inputValue.trim() || isThinking || isTyping || !privacyAccepted) return;
 
         const userMessage = {
             id: Date.now(),
@@ -437,6 +660,12 @@ const Chatbot = () => {
                     return updated;
                 });
             });
+
+            // Sync conversation to backend after bot responds (only if new messages)
+            if (privacyAccepted && sessionId && messages.length > lastSyncedCountRef.current) {
+                lastSyncedCountRef.current = messages.length;
+                syncConversationToBackend();
+            }
         } catch (error) {
             console.log(error);
             setIsThinking(false);
@@ -447,8 +676,8 @@ const Chatbot = () => {
                 timestamp: new Date(),
             };
             setMessages(prev => [...prev, errorMessage]);
-            
-            
+
+
             // Refocus input after error
             setTimeout(() => {
                 if (inputRef.current) {
@@ -485,9 +714,36 @@ const Chatbot = () => {
         });
     };
 
+    const handlePrivacyAccept = () => {
+        localStorage.setItem('chatbot_privacy_accepted', 'true');
+        setPrivacyAccepted(true);
+        setShowPrivacyNotice(false);
+    };
+
+    const syncConversationToBackend = async () => {
+        if (!sessionId || !privacyAccepted) return;
+
+        try {
+            await fetch('/chatbot/sync', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                body: JSON.stringify({
+                    session_id: sessionId,
+                    messages: messages,
+                }),
+            });
+        } catch (error) {
+            console.error('Error syncing conversation:', error);
+        }
+    };
+
     return (
         <>
-           
+
 
             <ChatbotIconButton
                 isOpen={isOpen}
@@ -498,32 +754,44 @@ const Chatbot = () => {
 
             {/* Chatbot Window */}
             <div
-                className={`fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-8rem)] flex flex-col rounded-3xl shadow-2xl transition-all duration-500 transform ${isOpen
-                    ? 'opacity-100 translate-y-0 scale-100'
-                    : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
-                    } ${darkMode
-                        ? 'bg-[#1a1a1a] border border-gray-800'
-                        : 'bg-white border border-gray-200'
+                className={`fixed bottom-6 right-6 left-auto z-50 w-96 max-w-[calc(100vw-3rem)] h-fit max-h-[calc(100vh-8rem)] flex flex-col rounded-3xl shadow-2xl transition-all duration-500 transform ${isOpen
+                    ? 'translate-x-0 opacity-100'
+                    : 'translate-x-full opacity-0'
                     }`}
+                style={{ right: '1.5rem', left: 'auto' }}
             >
-                <ChatbotHeader
+
+                <PrivacyNotice
                     darkMode={darkMode}
-                    showGuide={showGuide}
-                    onToggleGuide={() => setShowGuide(!showGuide)}
+                    onAccept={handlePrivacyAccept}
                     onClose={() => setIsOpen(false)}
+                    show={showPrivacyNotice && isOpen}
+                    selectedLanguage={selectedLanguage}
                 />
+                {privacyAccepted && (
+                    <ChatbotHeader
+                        darkMode={darkMode}
+                        showGuide={showGuide}
+                        onToggleGuide={() => setShowGuide(!showGuide)}
+                        onClose={() => setIsOpen(false)}
+                    />
+                )}
 
-                {showGuide && <GuidePanel darkMode={darkMode} />}
+                {privacyAccepted && (
+                    <>
+                        {showGuide && <GuidePanel darkMode={darkMode} />}
 
-                <MessagesContainer
-                    messages={messages}
-                    isThinking={isThinking}
-                    darkMode={darkMode}
-                    formatTime={formatTime}
-                    messagesEndRef={messagesEndRef}
-                />
+                        <MessagesContainer
+                            messages={messages}
+                            isThinking={isThinking}
+                            darkMode={darkMode}
+                            formatTime={formatTime}
+                            messagesEndRef={messagesEndRef}
+                        />
+                    </>
+                )}
 
-                {messages.length === 1 && (
+                {messages.length === 1 && privacyAccepted && (
                     <QuickActions
                         quickActions={quickActions}
                         onQuickAction={handleQuickAction}
@@ -531,16 +799,31 @@ const Chatbot = () => {
                     />
                 )}
 
-                <InputArea
-                    inputValue={inputValue}
-                    setInputValue={setInputValue}
-                    onSendMessage={handleSendMessage}
-                    onKeyPress={handleKeyPress}
-                    inputRef={inputRef}
-                    isThinking={isThinking}
-                    isTyping={isTyping}
-                    darkMode={darkMode}
-                />
+                {privacyAccepted ? (
+                    <InputArea
+                        inputValue={inputValue}
+                        setInputValue={setInputValue}
+                        onSendMessage={handleSendMessage}
+                        onKeyPress={handleKeyPress}
+                        inputRef={inputRef}
+                        isThinking={isThinking}
+                        isTyping={isTyping}
+                        darkMode={darkMode}
+                    />
+                ) : (
+                    <div className={`p-4 border-t ${darkMode ? 'bg-[#212529] border-gray-700' : 'bg-white border-gray-200'}`}>
+                        <div className={`text-center p-3 rounded-lg ${darkMode ? 'bg-[#2a2a2a]' : 'bg-gray-50'}`}>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                                <TransText
+                                    en="Please accept the privacy notice to use the AI assistant"
+                                    fr="Veuillez accepter l'avis de confidentialité pour utiliser l'assistant IA"
+                                    ar="يرجى قبول إشعار الخصوصية لاستخدام المساعد الذكي"
+                                />
+                            </p>
+                        </div>
+                    </div>
+                )}
+
             </div>
         </>
     );

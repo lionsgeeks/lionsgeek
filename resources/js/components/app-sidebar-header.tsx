@@ -26,7 +26,8 @@ import {
     Settings,
     ArrowRight,
     Clock,
-    Presentation
+    Presentation,
+    MessageSquare,
 } from 'lucide-react';
 import { useEffect, useState, useMemo, useRef, useCallback } from 'react';
 
@@ -98,6 +99,7 @@ export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: Breadcrum
         { name: 'Events', path: '/admin/events', icon: Calendar, category: 'Events & Sessions' },
         { name: 'Blogs', path: '/admin/blogs', icon: BookOpen, category: 'Content Management' },
         { name: 'Newsletter', path: '/admin/newsletter', icon: Mail, category: 'Communications' },
+        { name: 'AI Conversations', path: '/admin/ai-conversations', icon: MessageSquare, category: 'Communications' },
         { name: 'Coworking', path: '/admin/coworking', icon: HeartHandshake, category: 'Business & Projects' },
         { name: 'Gallery', path: '/admin/gallery', icon: GalleryHorizontalEnd, category: 'Content Management' },
         { name: 'Press', path: '/admin/press', icon: MicVocal, category: 'Content Management' },
