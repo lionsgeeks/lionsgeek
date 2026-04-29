@@ -1,7 +1,7 @@
 import NotificationModal from '@/components/NotificationModal';
 import { useAppContext } from '@/context/appContext';
-import { useEffect, useState } from 'react';
-import { useForm } from '@inertiajs/react';
+import { useEffect, useRef, useState } from 'react';
+import { router, useForm } from '@inertiajs/react';
 
 export default function BookingModal({ isOpen, onClose, event }) {
     const { selectedLanguage, darkMode } = useAppContext();
@@ -11,6 +11,7 @@ export default function BookingModal({ isOpen, onClose, event }) {
     const [showNotification, setShowNotification] = useState(false);
     const [notificationType, setNotificationType] = useState('success');
     const [notificationMessage, setNotificationMessage] = useState('');
+    const didRedirectRef = useRef(false);
 
     const normalizeKey = (key) => {
         if (!key || typeof key !== 'string') return '';
@@ -122,8 +123,25 @@ export default function BookingModal({ isOpen, onClose, event }) {
             setShowNotification(false);
             setNotificationType('success');
             setNotificationMessage('');
+            didRedirectRef.current = false;
         }
     }, [isOpen, event?.id]);
+
+    // Auto-close + redirect after a successful booking.
+    useEffect(() => {
+        if (!showNotification) return;
+        if (notificationType !== 'success') return;
+        if (didRedirectRef.current) return;
+
+        didRedirectRef.current = true;
+        // Slight delay so the user sees the success modal.
+        const t = window.setTimeout(() => {
+            setShowNotification(false);
+            onClose?.();
+            router.visit('/events', { preserveScroll: false, replace: true });
+        }, 900);
+        return () => window.clearTimeout(t);
+    }, [showNotification, notificationType, onClose]);
 
     if (!isOpen) return null;
 
@@ -160,8 +178,11 @@ export default function BookingModal({ isOpen, onClose, event }) {
     const handleNotificationClose = () => {
         setShowNotification(false);
         if (notificationType === 'success') {
-            onClose();
-            window.location.href = '/events';
+            if (!didRedirectRef.current) {
+                didRedirectRef.current = true;
+                onClose?.();
+                router.visit('/events', { preserveScroll: false, replace: true });
+            }
         }
     };
 
