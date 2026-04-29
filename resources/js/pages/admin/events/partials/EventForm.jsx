@@ -15,6 +15,7 @@ const defaultBookingForm = [
         key: 'gender',
         type: 'select',
         required: true,
+        multiple: false, // Gender behaves as single choice in the booking flow
         label: { en: 'Gender', fr: 'Genre', ar: 'الجنس' },
         options: [
             { value: 'male', label: { en: 'Male', fr: 'Homme', ar: 'ذكر' } },
@@ -158,9 +159,15 @@ export default function EventForm({ event = null, onClose, onSuccess }) {
         if (merged.type === 'select' && !Array.isArray(merged.options)) {
             merged.options = [];
         }
-        // Select is always multi-choice.
+        // Default to multi-choice for select fields unless explicitly set.
         if (merged.type === 'select') {
-            merged.multiple = true;
+            if (typeof merged.multiple !== 'boolean') merged.multiple = true;
+            // Keep gender fixed to single choice.
+            if (merged.key === 'gender') merged.multiple = false;
+        }
+        // Cleanup: for non-select fields, remove the multi flag if present.
+        if (merged.type !== 'select' && 'multiple' in merged) {
+            delete merged.multiple;
         }
         next[index] = merged;
         setData('booking_form', next);
@@ -455,8 +462,23 @@ export default function EventForm({ event = null, onClose, onSuccess }) {
                                         <div className="mt-3 space-y-2">
                                             <div className="flex items-center justify-between gap-3">
                                                 <Label>Options</Label>
-                                                <p className="text-xs text-gray-500">Multi-choice (always)</p>
+                                                {field.key === 'gender' ? (
+                                                    <p className="text-xs text-gray-500">Single choice (fixed)</p>
+                                                ) : (
+                                                    <p className="text-xs text-gray-500">{field.multiple !== false ? 'Multi-choice' : 'Single choice'}</p>
+                                                )}
                                             </div>
+
+                                            {field.key !== 'gender' && (
+                                                <label className="flex items-center gap-2 text-sm">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={field.multiple !== false}
+                                                        onChange={(e) => updateBookingField(idx, { multiple: e.target.checked })}
+                                                    />
+                                                    Multi-choice
+                                                </label>
+                                            )}
 
                                             <div className="space-y-2">
                                                 {(Array.isArray(field.options) ? field.options : []).map((opt, optIdx) => (

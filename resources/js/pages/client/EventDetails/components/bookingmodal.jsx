@@ -50,6 +50,14 @@ export default function BookingModal({ isOpen, onClose, event }) {
             type: f.type,
             required: f.required,
             options: f.type === 'select' ? (Array.isArray(byKey[f.key]?.options) ? byKey[f.key].options : f.options) : undefined,
+            multiple:
+                f.type === 'select'
+                    ? typeof byKey[f.key]?.multiple === 'boolean'
+                        ? byKey[f.key].multiple
+                        : f.multiple !== undefined
+                          ? f.multiple
+                          : true
+                    : undefined,
         }));
         const extras = arr.filter((f) => f?.key && !defaultByKey[f.key]);
         return [...mergedDefaults, ...extras];
@@ -97,7 +105,13 @@ export default function BookingModal({ isOpen, onClose, event }) {
         const initialAnswers = {};
         allFields.forEach((f) => {
             if (!f?.key) return;
-            initialAnswers[f.key] = f.type === 'select' ? [] : '';
+            const normalizedKey = normalizeKey(f.key);
+            if (f.type === 'select') {
+                // Gender is handled specially (single-choice UI but stored as an array).
+                initialAnswers[f.key] = normalizedKey === 'gender' ? [] : f.multiple === false ? null : [];
+            } else {
+                initialAnswers[f.key] = '';
+            }
         });
         setData('answers', initialAnswers);
     }, [event?.id, event?.booking_form]);
@@ -216,6 +230,7 @@ export default function BookingModal({ isOpen, onClose, event }) {
                                 const key = field?.key;
                                 if (!key) return null;
                                 const normalizedKey = normalizeKey(key);
+                                const isGender = normalizedKey === 'gender';
 
                                 const label =
                                     typeof field.label === 'string'
@@ -224,27 +239,37 @@ export default function BookingModal({ isOpen, onClose, event }) {
                                           ? t(field.label)
                                           : key;
 
-                                const value = data.answers?.[key] ?? (field.type === 'select' ? [] : '');
+                                const rawValue = data.answers?.[key];
+                                const value = rawValue ?? '';
                                 const error = errors?.[`answers.${key}`];
 
                                 if (field.type === 'select') {
                                     const options = Array.isArray(field.options) ? field.options : [];
-                                    const selectedValues = Array.isArray(value) ? value : [];
+                                    const selectedValues = Array.isArray(rawValue) ? rawValue : [];
+                                    const selectedSingleValue = !Array.isArray(rawValue) && typeof rawValue === 'string' ? rawValue : null;
 
                                     const toggleValue = (v) => {
-                                        // Gender behaves like single-choice even though selects are arrays
-                                        if (normalizedKey === 'gender') {
+                                        // Gender behaves like single-choice even though selects are arrays.
+                                        if (isGender) {
                                             const next = selectedValues.includes(v) ? [] : [v];
                                             setData('answers', { ...(data.answers || {}), [key]: next });
                                             return;
                                         }
 
+                                        if (field.multiple === false) {
+                                            // Single choice: store a scalar (or null for "none").
+                                            const next = selectedSingleValue === v ? null : v;
+                                            setData('answers', { ...(data.answers || {}), [key]: next });
+                                            return;
+                                        }
+
+                                        // Multi choice: store an array of selected values.
                                         const next = selectedValues.includes(v) ? selectedValues.filter((x) => x !== v) : [...selectedValues, v];
                                         setData('answers', { ...(data.answers || {}), [key]: next });
                                     };
 
                                     // Special clean UI for gender
-                                    if (normalizedKey === 'gender') {
+                                    if (isGender) {
                                         const genderOptions = options;
                                         return (
                                             <div key={key} className="flex w-full flex-col items-start gap-y-2">
@@ -287,6 +312,10 @@ export default function BookingModal({ isOpen, onClose, event }) {
                                             </div>
                                         );
                                     }
+
+                                    const multiple = field.multiple !== false;
+                                    const selectedCount = multiple ? selectedValues.length : selectedSingleValue ? 1 : 0;
+
                                     return (
                                         <div
                                             key={key}
@@ -309,11 +338,11 @@ export default function BookingModal({ isOpen, onClose, event }) {
                                                         {t({ en: 'Choose options', fr: 'Choisissez des options', ar: 'اختر الخيارات' })}
                                                     </span>
                                                     <span>
-                                                        {selectedValues.length
+                                                        {selectedCount
                                                             ? t({
-                                                                  en: `${selectedValues.length} selected`,
-                                                                  fr: `${selectedValues.length} sélectionné(s)`,
-                                                                  ar: `تم اختيار ${selectedValues.length}`,
+                                                                  en: `${selectedCount} selected`,
+                                                                  fr: `${selectedCount} sélectionné(s)`,
+                                                                  ar: `تم اختيار ${selectedCount}`,
                                                               })
                                                             : t({ en: 'None', fr: 'Aucun', ar: 'لا شيء' })}
                                                     </span>
@@ -335,7 +364,7 @@ export default function BookingModal({ isOpen, onClose, event }) {
                                                             return optValue;
                                                         })();
 
-                                                        const checked = selectedValues.includes(optValue);
+                                                        const checked = multiple ? selectedValues.includes(optValue) : selectedSingleValue === optValue;
 
                                                         return (
                                                             <label
@@ -346,7 +375,8 @@ export default function BookingModal({ isOpen, onClose, event }) {
                                                             >
                                                                 <span className="truncate">{optLabel}</span>
                                                                 <input
-                                                                    type="checkbox"
+                                                                    type={multiple ? 'checkbox' : 'radio'}
+                                                                    name={`select-${key}`}
                                                                     checked={checked}
                                                                     onChange={() => toggleValue(optValue)}
                                                                     className="h-4 w-4"

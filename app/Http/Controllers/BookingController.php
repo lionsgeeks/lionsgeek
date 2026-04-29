@@ -131,18 +131,36 @@ class BookingController extends Controller
                         if (is_string($val) && $val !== '') $values[] = $val;
                     }
                 }
-                // Select is always multi-choice (array of values).
-                $dynamicRules["answers.$escapedKey"] = array_filter([
-                    $required ? 'required' : 'nullable',
-                    'array',
-                    $required ? 'min:1' : null,
-                    $key === 'gender' ? 'max:1' : null,
-                ]);
 
-                if (!empty($values)) {
-                    $dynamicRules["answers.$escapedKey.*"] = ['string', 'in:' . implode(',', $values)];
+                $isGender = $key === 'gender';
+                // Multi-choice fields expect an array. Single-choice expects a scalar string.
+                $multiple = (bool)($field['multiple'] ?? true);
+                // Gender is handled as an array in the current booking flow (even if it behaves like single-choice).
+                if ($isGender) $multiple = true;
+
+                if ($multiple) {
+                    $dynamicRules["answers.$escapedKey"] = array_filter([
+                        $required ? 'required' : 'nullable',
+                        'array',
+                        $required ? 'min:1' : null,
+                        $isGender ? 'max:1' : null,
+                    ]);
+
+                    if (!empty($values)) {
+                        $dynamicRules["answers.$escapedKey.*"] = ['string', 'in:' . implode(',', $values)];
+                    } else {
+                        $dynamicRules["answers.$escapedKey.*"] = ['string'];
+                    }
                 } else {
-                    $dynamicRules["answers.$escapedKey.*"] = ['string'];
+                    $dynamicRules["answers.$escapedKey"] = array_filter([
+                        $required ? 'required' : 'nullable',
+                        'string',
+                        $required ? 'min:1' : null,
+                    ]);
+
+                    if (!empty($values)) {
+                        $dynamicRules["answers.$escapedKey"][] = 'in:' . implode(',', $values);
+                    }
                 }
                 continue;
             } else {
