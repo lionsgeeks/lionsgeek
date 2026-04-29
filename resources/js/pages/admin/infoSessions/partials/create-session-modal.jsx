@@ -7,6 +7,15 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useForm } from '@inertiajs/react';
 import { Calendar, Code2, GraduationCap, Loader2, Palette, Plus, Users, X, Lock } from 'lucide-react';
 
+const defaultChildrenForm = [
+    { key: 'child_full_name', type: 'text', required: true, group: 'child', label: 'Child full name' },
+    { key: 'child_birthday', type: 'date', required: true, group: 'child', label: 'Child birthday' },
+    { key: 'child_city', type: 'text', required: true, group: 'child', label: 'Child city' },
+    { key: 'guardian_full_name', type: 'text', required: true, group: 'guardian', label: 'Parent/guardian full name' },
+    { key: 'guardian_phone', type: 'tel', required: true, group: 'guardian', label: 'Parent/guardian phone' },
+    { key: 'guardian_email', type: 'email', required: true, group: 'guardian', label: 'Parent/guardian email' },
+];
+
 export function CreateSessionModal({ open, onOpenChange }) {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
@@ -14,6 +23,8 @@ export function CreateSessionModal({ open, onOpenChange }) {
         start_date: '',
         places: '',
         is_private: false,
+        audience: 'normal',
+        registration_form_children: defaultChildrenForm,
     });
 
     const handleSubmit = async (e) => {
@@ -26,6 +37,8 @@ export function CreateSessionModal({ open, onOpenChange }) {
                     start_date: '',
                     places: '',
                     is_private: false,
+                    audience: 'normal',
+                    registration_form_children: defaultChildrenForm,
                 });
                 onOpenChange(false);
             },
@@ -36,12 +49,42 @@ export function CreateSessionModal({ open, onOpenChange }) {
         setData((prev) => ({ ...prev, [field]: value }));
     };
 
-    const getFormationIcon = (formation) => {
-        return formation === 'Coding' ? Code : Palette;
+    const updateChildrenField = (index, patch) => {
+        setData((prev) => {
+            const current = Array.isArray(prev.registration_form_children) ? prev.registration_form_children : [];
+            const next = [...current];
+            next[index] = { ...(next[index] || {}), ...patch };
+            return { ...prev, registration_form_children: next };
+        });
     };
 
-    const getFormationColor = (formation) => {
-        return formation === 'Coding' ? 'text-blue-600 bg-blue-50 border-blue-200' : 'text-purple-600 bg-purple-50 border-purple-200';
+    const addChildrenField = () => {
+        setData((prev) => {
+            const current = Array.isArray(prev.registration_form_children) ? prev.registration_form_children : [];
+            return {
+                ...prev,
+                registration_form_children: [
+                    ...current,
+                    {
+                        key: `field_${Date.now()}`,
+                        type: 'text',
+                        required: false,
+                        group: 'child',
+                        label: 'New field',
+                    },
+                ],
+            };
+        });
+    };
+
+    const removeChildrenField = (index) => {
+        setData((prev) => {
+            const current = Array.isArray(prev.registration_form_children) ? prev.registration_form_children : [];
+            return {
+                ...prev,
+                registration_form_children: current.filter((_, i) => i !== index),
+            };
+        });
     };
 
     return (
@@ -77,6 +120,39 @@ export function CreateSessionModal({ open, onOpenChange }) {
 
                 <div className="p-6">
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Audience */}
+                        <div className="space-y-2">
+                            <Label className="text-sm font-medium text-[#212529]">
+                                Audience <span className="text-[#ff7376]">*</span>
+                            </Label>
+                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                                <button
+                                    type="button"
+                                    onClick={() => handleChange('audience', 'normal')}
+                                    className={`flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
+                                        data.audience === 'normal'
+                                            ? 'border-[#212529] bg-[#212529] text-white'
+                                            : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-100'
+                                    }`}
+                                    disabled={processing}
+                                >
+                                    Normal (18+)
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => handleChange('audience', 'children_12_17')}
+                                    className={`flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
+                                        data.audience === 'children_12_17'
+                                            ? 'border-[#212529] bg-[#212529] text-white'
+                                            : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-100'
+                                    }`}
+                                    disabled={processing}
+                                >
+                                    Children 12–17
+                                </button>
+                            </div>
+                        </div>
+
                         {/* Session Title */}
                         <div className="space-y-2">
                             <Label htmlFor="title" className="text-sm font-medium text-[#212529]">
@@ -93,6 +169,104 @@ export function CreateSessionModal({ open, onOpenChange }) {
                             />
                             {errors.name && <p className="text-sm text-[#ff7376]">{errors.name}</p>}
                         </div>
+
+                        {/* Children Registration Form Builder (only for children audience) */}
+                        {data.audience === 'children_12_17' && (
+                            <div className="space-y-3 rounded-lg border border-gray-200 p-4">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-sm font-semibold">Children registration form</p>
+                                        <p className="text-xs text-gray-500">
+                                            Configure the fields for children (12–17) and their guardians.
+                                        </p>
+                                    </div>
+                                    <Button type="button" variant="outline" onClick={addChildrenField} disabled={processing}>
+                                        Add field
+                                    </Button>
+                                </div>
+
+                                <div className="space-y-4">
+                                    {(Array.isArray(data.registration_form_children) ? data.registration_form_children : []).map((field, idx) => (
+                                        <div key={`${field.key || 'field'}-${idx}`} className="rounded-md border border-gray-200 p-3">
+                                            <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
+                                                <div className="space-y-1">
+                                                    <Label>Key</Label>
+                                                    <Input
+                                                        value={field.key || ''}
+                                                        onChange={(e) => updateChildrenField(idx, { key: e.target.value })}
+                                                        disabled={processing}
+                                                    />
+                                                </div>
+                                                <div className="space-y-1 md:col-span-2">
+                                                    <Label>Label</Label>
+                                                    <Input
+                                                        value={field.label || ''}
+                                                        onChange={(e) => updateChildrenField(idx, { label: e.target.value })}
+                                                        placeholder="Field label"
+                                                        disabled={processing}
+                                                    />
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <Label>Type</Label>
+                                                    <select
+                                                        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+                                                        value={field.type || 'text'}
+                                                        onChange={(e) =>
+                                                            updateChildrenField(idx, {
+                                                                type: e.target.value,
+                                                            })
+                                                        }
+                                                        disabled={processing}
+                                                    >
+                                                        <option value="text">Text</option>
+                                                        <option value="email">Email</option>
+                                                        <option value="tel">Phone</option>
+                                                        <option value="date">Date</option>
+                                                        <option value="textarea">Textarea</option>
+                                                        <option value="select">Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3 items-center">
+                                                <label className="flex items-center gap-2 text-sm">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={!!field.required}
+                                                        onChange={(e) => updateChildrenField(idx, { required: e.target.checked })}
+                                                        disabled={processing}
+                                                    />
+                                                    Required
+                                                </label>
+                                                <div className="space-y-1">
+                                                    <Label>Step group</Label>
+                                                    <select
+                                                        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+                                                        value={field.group || 'child'}
+                                                        onChange={(e) => updateChildrenField(idx, { group: e.target.value })}
+                                                        disabled={processing}
+                                                    >
+                                                        <option value="child">Step 1 – Child info</option>
+                                                        <option value="guardian">Step 2 – Guardian / other</option>
+                                                    </select>
+                                                </div>
+                                                <div className="flex justify-end">
+                                                    <Button
+                                                        type="button"
+                                                        variant="destructive"
+                                                        size="sm"
+                                                        onClick={() => removeChildrenField(idx)}
+                                                        disabled={processing}
+                                                    >
+                                                        Remove
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Program Type */}
                         <div className="space-y-2">

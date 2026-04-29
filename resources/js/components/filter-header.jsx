@@ -12,7 +12,7 @@ import InviteToSchool from '../pages/admin/infoSessions/partials/InviteToSchool'
 import { DialogDescription } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 const FilterHeader = ({ participants = [], infosession, infosessions = [], setFiltredParticipants, statusCounts = {} }) => {
-    const STORAGE_KEY = 'admin_participants_filters_v1';
+    const STORAGE_KEY = 'admin_participants_filters_v2';
     const { post, errors, processing, data, setData, reset } = useForm({
         step: null,
     })
@@ -22,6 +22,7 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
     const [selectedPromo, setSelectedPromo] = useState('');
     const [selectedTrack, setSelectedTrack] = useState('');
     const [selectedGender, setSelectedGender] = useState('');
+    const [selectedAudience, setSelectedAudience] = useState('');
     const [dateSort, setDateSort] = useState('');
     const [copy, setCopy] = useState(true);
     const [selectedReminderType, setSelectedReminderType] = useState(null);
@@ -33,6 +34,7 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
     const [draftPromo, setDraftPromo] = useState('');
     const [draftTrack, setDraftTrack] = useState('');
     const [draftGender, setDraftGender] = useState('');
+    const [draftAudience, setDraftAudience] = useState('');
     const [draftDateSort, setDraftDateSort] = useState('');
     const [isInviteOpen, setIsInviteOpen] = useState(false);
 
@@ -146,6 +148,11 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
                 participant?.full_name?.toLowerCase().includes(search.toLowerCase()) ||
                 participant?.email?.toLowerCase().includes(search.toLowerCase());
 
+            // Audience / application type (normal vs children)
+            const isChildren = participant?.source === 'children_form' || !!participant?.children_form_data;
+            const matchesAudience = !selectedAudience || selectedAudience === 'All' ||
+                (selectedAudience === 'children' ? isChildren : !isChildren);
+
             // Session filter
             const matchesSession = !selectedSession || selectedSession === 'All' ||
                 (selectedSession === 'No Infosession' ?
@@ -201,11 +208,11 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
                 }
             }
 
-            return matchesSearch && matchesSession && matchesPromo && matchesTrack && matchesGender && matchesStep;
+            return matchesSearch && matchesAudience && matchesSession && matchesPromo && matchesTrack && matchesGender && matchesStep;
         }) || [];
 
         return filtered;
-    }, [participants, search, selectedSession, selectedStep, selectedPromo, selectedTrack, selectedGender]);
+    }, [participants, search, selectedAudience, selectedSession, selectedStep, selectedPromo, selectedTrack, selectedGender]);
 
     const dynamicStatusCounts = useMemo(() => {
         return {
@@ -238,28 +245,9 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
         }
     }, [filtredParticipans, dateSort, setFiltredParticipants]);
 
-    // Initialize selectedStep from URL status on mount (only for status values)
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        const params = new URLSearchParams(window.location.search);
-        const urlStatus = params.get('status');
-        if (urlStatus && isStatusValue(urlStatus)) {
-            setSelectedStep(urlStatus);
-        }
-    }, []);
-
-    // Persist status selection to URL; remove when a non-status step is chosen
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        const params = new URLSearchParams(window.location.search);
-        if (selectedStep && isStatusValue(selectedStep)) {
-            params.set('status', selectedStep);
-        } else {
-            params.delete('status');
-        }
-        const newUrl = `${location.pathname}?${params.toString()}`;
-        window.history.replaceState({}, '', newUrl);
-    }, [selectedStep]);
+    // Note: we intentionally do NOT sync status filters to the URL.
+    // Keeping `?status=...` in the URL can make admins “stuck” in a filtered view,
+    // which hides newly created pending participants (like children applications).
 
     // Load saved filters on participants index only (browser-only)
     const isParticipantsIndex = Array.isArray(infosessions) && !infosession;
@@ -276,6 +264,7 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
                 if (typeof saved.selectedPromo === 'string') setSelectedPromo(saved.selectedPromo);
                 if (typeof saved.selectedTrack === 'string') setSelectedTrack(saved.selectedTrack);
                 if (typeof saved.selectedGender === 'string') setSelectedGender(saved.selectedGender);
+                if (typeof saved.selectedAudience === 'string') setSelectedAudience(saved.selectedAudience);
                 if (typeof saved.dateSort === 'string') setDateSort(saved.dateSort);
             }
         } catch (_) { }
@@ -293,13 +282,14 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
                 selectedPromo,
                 selectedTrack,
                 selectedGender,
+                selectedAudience,
                 dateSort,
             };
             localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
         } catch (_) { }
-    }, [isParticipantsIndex, search, selectedStep, selectedSession, selectedPromo, selectedTrack, selectedGender, dateSort]);
+    }, [isParticipantsIndex, search, selectedStep, selectedSession, selectedPromo, selectedTrack, selectedGender, selectedAudience, dateSort]);
 
-    const hasActiveFilters = search || selectedStep || selectedSession || selectedPromo || selectedTrack || selectedGender || dateSort;
+    const hasActiveFilters = search || selectedStep || selectedSession || selectedPromo || selectedTrack || selectedGender || selectedAudience || dateSort;
 
     // Open modal and seed drafts
     const openFilterModal = () => {
@@ -308,6 +298,7 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
         setDraftPromo(selectedPromo || '');
         setDraftTrack(selectedTrack || '');
         setDraftGender(selectedGender || '');
+        setDraftAudience(selectedAudience || '');
         setDraftDateSort(dateSort || '');
         setIsFilterOpen(true);
     };
@@ -318,6 +309,7 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
         setSelectedPromo(draftPromo);
         setSelectedTrack(draftTrack);
         setSelectedGender(draftGender);
+        setSelectedAudience(draftAudience);
         setDateSort(draftDateSort);
         setIsFilterOpen(false);
     };
@@ -329,6 +321,7 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
         setSelectedPromo('');
         setSelectedTrack('');
         setSelectedGender('');
+        setSelectedAudience('');
         setDateSort('');
 
         if (setFiltredParticipants) {
@@ -578,6 +571,20 @@ const FilterHeader = ({ participants = [], infosession, infosessions = [], setFi
                                         <SelectItem value="All">All Tracks</SelectItem>
                                         <SelectItem className="capitalize" value="coding">Coding</SelectItem>
                                         <SelectItem className="capitalize" value="media">Media</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            )}
+
+                            {/* Audience (Normal vs Children) */}
+                            {!infosession && (
+                                <Select onValueChange={setDraftAudience} value={draftAudience}>
+                                    <SelectTrigger className="w-full rounded-lg border transition-all duration-200 ease-in-out focus:border-[#212529] focus:ring-2 focus:ring-[#212529]/20">
+                                        <SelectValue placeholder="Filter By Audience" />
+                                    </SelectTrigger>
+                                    <SelectContent className="max-h-64 overflow-y-auto">
+                                        <SelectItem value="All">All Audiences</SelectItem>
+                                        <SelectItem value="normal">Normal</SelectItem>
+                                        <SelectItem value="children">Children 12–17</SelectItem>
                                     </SelectContent>
                                 </Select>
                             )}

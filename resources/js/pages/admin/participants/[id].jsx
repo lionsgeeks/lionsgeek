@@ -619,7 +619,7 @@ export default function ParticipantProfilePage() {
                                                         </div>
                                                     </div>
 
-                                                    {/* 6. Catégorie sociale */}
+                                {/* 6. Catégorie sociale */}
                                                     <div className="space-y-3 rounded-lg border p-4">
                                                         <h3 className="text-sm font-semibold text-[#212529]">6. Catégorie sociale (évaluateur LionsGEEK)</h3>
                                                         <Select value={socialForm.socialCategory} onValueChange={(v) => setSocialForm(s => ({ ...s, socialCategory: v }))}>
@@ -785,7 +785,7 @@ export default function ParticipantProfilePage() {
                 </div >
 
                 {/* Main Content */}
-                < div className="p-6 pb-3" >
+                <div className="p-6 pb-3">
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                         {/* Contact & Personal Info */}
                         <Card className="border rounded-lg bg-white shadow-sm hover:shadow-md transition-all duration-300">
@@ -878,6 +878,28 @@ export default function ParticipantProfilePage() {
                                 </div>
                             </CardContent>
                         </Card>
+
+                        {/* Children Form Data (optional) */}
+                        {participant?.children_form_data && (
+                            <Card className="border rounded-lg bg-purple-50 shadow-sm hover:shadow-md transition-all duration-300">
+                                <CardHeader className="pb-3">
+                                    <CardTitle className="flex items-center gap-2 text-[#212529]">
+                                        <Users className="w-5 h-5" />
+                                        Children Form Data
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-2 text-sm text-[#212529]">
+                                    {Object.entries(participant.children_form_data || {}).map(([key, value]) => (
+                                        <div key={key} className="flex items-start justify-between gap-4 border-b border-purple-100 pb-1 last:border-b-0">
+                                            <span className="font-medium capitalize">{key.replace(/_/g, ' ')}</span>
+                                            <span className="text-right break-all">
+                                                {Array.isArray(value) ? value.join(', ') : String(value)}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </CardContent>
+                            </Card>
+                        )}
 
                         {/* Approval Information */}
                         <Card className="border rounded-lg bg-white shadow-sm hover:shadow-md transition-all duration-300">
