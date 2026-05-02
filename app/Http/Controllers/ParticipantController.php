@@ -291,6 +291,7 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
+        
         Log::info('Participants.store: Processing registration request', [
             'email' => $request->email,
             'formation_field' => $request->formation_field,
@@ -299,17 +300,25 @@ class ParticipantController extends Controller
         ]);
 
         try {
-            // 1. Validate request data
-            $this->validateParticipantData($request);
+            $isChildren = (bool) $request->boolean('is_children', false);
 
-            // 2. Handle CV file upload
-            $cvFileName = $this->handleCvFileUpload($request);
+            if ($isChildren) {
+                
+                $this->validateChildrenParticipantData($request);
+                $participant = $this->createChildrenParticipant($request);
+            } else {
+                // 1. Validate request data
+                $this->validateParticipantData($request);
 
-            // 3. Check session capacity if applicable
-            $this->checkSessionCapacity($request);
+                // 2. Handle CV file upload
+                $cvFileName = $this->handleCvFileUpload($request);
 
-            // 4. Create participant record
-            $participant = $this->createParticipant($request, $cvFileName);
+                // 3. Check session capacity if applicable
+                $this->checkSessionCapacity($request);
+
+                // 4. Create participant record
+                $participant = $this->createParticipant($request, $cvFileName);
+            }
 
             // 5. Create related records
             $this->createRelatedRecords($participant);
@@ -358,8 +367,11 @@ class ParticipantController extends Controller
 
             return back()->withErrors($validationException->errors())->withInput();
         } catch (\Throwable $th) {
-
-
+            Log::error('Participants.store: Unhandled error', [
+                'message' => $th->getMessage(),
+                'exception' => $th,
+                'is_children' => (bool) $request->boolean('is_children', false),
+            ]);
             return $this->handleErrorResponse($request, $th);
         }
     }
@@ -449,6 +461,30 @@ class ParticipantController extends Controller
             'time_spent' => 'nullable|integer|min:0|max:86400', // Max 24 hours
             'time_spent_formatted' => 'nullable|string|max:20',
         ], $messages);
+    }
+
+    /**
+     * Validate children (12–17) registration data (simplified schema).
+     */
+    private function validateChildrenParticipantData(Request $request): void
+    {
+        $this->trimStringInputs($request);
+
+        $rules = [
+            'is_children' => 'required|boolean',
+            'children_answers' => 'required|array',
+            'formation_field' => 'required|string|in:coding,media',
+            // Core child fields – keep them in sync with defaultChildrenForm keys
+            'children_answers.child_full_name' => 'required|string',
+            // Birthday must be between 12 and 17 years ago (inclusive)
+            'children_answers.child_birthday' => 'required|date|after_or_equal:' . now()->subYears(17)->format('Y-m-d') . '|before_or_equal:' . now()->subYears(12)->format('Y-m-d'),
+            'children_answers.child_city' => 'required|string',
+            'children_answers.guardian_full_name' => 'required|string',
+            'children_answers.guardian_phone' => 'required|string',
+            'children_answers.guardian_email' => 'required|string|email',
+        ];
+
+        $request->validate($rules);
     }
 
     /**
@@ -740,6 +776,45 @@ class ParticipantController extends Controller
         ]);
     }
 
+    /**
+     * Create participant record for children 12–17 flow.
+     */
+    private function createChildrenParticipant(Request $request): Participant
+    {
+        $answers = (array) $request->input('children_answers', []);
+
+        $fullName = (string) ($answers['child_full_name'] ?? '');
+        $birthday = (string) ($answers['child_birthday'] ?? '');
+        $city = (string) ($answers['child_city'] ?? '');
+        $guardianName = (string) ($answers['guardian_full_name'] ?? '');
+        $guardianPhone = (string) ($answers['guardian_phone'] ?? '');
+        $guardianEmail = (string) ($answers['guardian_email'] ?? '');
+
+        $age = Carbon::parse($birthday)->age;
+
+        $code = $fullName . Carbon::now()->format('h:i:s');
+
+        return Participant::create([
+            'info_session_id' => null,
+            'formation_field' => $request->input('formation_field'),
+            'full_name' => $fullName,
+            'email' => $guardianEmail,
+            'birthday' => $birthday,
+            'age' => $age,
+            'phone' => $guardianPhone,
+            'city' => $city,
+            'region' => null,
+            'other_city' => null,
+            'prefecture' => '',
+            'gender' => $answers['child_gender'] ?? '',
+            'source' => 'children_form',
+            'motivation' => '',
+            'code' => $code,
+            'children_form_data' => $answers,
+            'status' => Participant::STATUS_PENDING,
+        ]);
+    }
+
 
     /**
      * Calculate game scoring metrics and final score.
@@ -837,17 +912,18 @@ class ParticipantController extends Controller
      */
     private function handleErrorResponse(Request $request, \Throwable $th)
     {
+        $debugMessage = config('app.debug') ? (' ' . $th->getMessage()) : '';
         // For Inertia requests, return back with error
         if ($request->header('X-Inertia')) {
-            return back()->withErrors(['general' => 'Submission failed. Please try again.']);
+            return back()->withErrors(['general' => 'Submission failed. Please try again.' . $debugMessage]);
         }
 
         // For AJAX/JSON requests (like from the game component)
         if ($request->expectsJson() || $request->ajax()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Submission failed. Please try again.',
-                'errors' => ['general' => 'Submission failed. Please try again.']
+                'message' => 'Submission failed. Please try again.' . $debugMessage,
+                'errors' => ['general' => 'Submission failed. Please try again.' . $debugMessage]
             ], 500);
         }
 

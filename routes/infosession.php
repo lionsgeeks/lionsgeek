@@ -28,12 +28,21 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 Route::get('/postuler', function (Request $request) {
     $formationField = $request->type;
 
+    $sessionsQuery = InfoSession::where('isAvailable', true)
+        ->where('is_private', false)
+        ->where('isFinish', false)
+        ->where('isFull', false);
+
+    // If the page is accessed from /postuler?type=coding|media,
+    // only return sessions of that formation.
+    if ($formationField) {
+        $sessionsQuery->where('formation', ucfirst($formationField));
+    }
+
+    $sessions = $sessionsQuery->get();
+
     return Inertia::render('client/infoSession/index', [
-        'sessions' => InfoSession::where('isAvailable', true)
-            ->where('is_private', false)
-            ->where('isFinish', false)
-            ->where('isFull', false)
-            ->get(),
+        'sessions' => $sessions,
         'formation_field' => $formationField, // Pass formation field to frontend
     ]);
 })->name('postuler')->middleware("infoSession");

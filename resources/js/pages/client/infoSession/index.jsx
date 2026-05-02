@@ -18,6 +18,7 @@ import Step4GoalsLearning from './partials/Step4GoalsLearning';
 import Step5BackgroundAvailability from './partials/Step5BackgroundAvailability';
 import Step6CVUpload from './partials/Step6CVUpload';
 import StepSummary from './partials/StepSummary';
+import ChildrenRegistrationWizard from './children/ChildrenRegistrationWizard';
 
 const InfoSession = ({ trainingType = 'digital' }) => {
     const { selectedLanguage, darkMode } = useAppContext();
@@ -27,7 +28,13 @@ const InfoSession = ({ trainingType = 'digital' }) => {
     // Use formation_field from session (passed from backend) or fallback to URL parameter
     const urlParams = new URLSearchParams(url.split('?')[1] || '');
     const formationType = formation_field || urlParams.get('type') || 'coding';
-    
+
+    const allSessions = Array.isArray(sessions) ? sessions : [];
+    const hasChildrenSession = allSessions.some((s) => s?.audience === 'children_12_17');
+    const [audienceSelection, setAudienceSelection] = useState(
+        hasChildrenSession ? 'children_12_17' : 'normal'
+    );
+
 
     const { data, setData, post, processing, errors } = useForm({
         // Session and formation info
@@ -337,6 +344,17 @@ const InfoSession = ({ trainingType = 'digital' }) => {
     // Determine if it's digital marketing or coding
     const isDigitalMarketing = trainingType === 'digital' || trainingType === 'media';
 
+    const selectedChildrenSchema = (() => {
+        if (!hasChildrenSession) return [];
+        // If there is a private session, we only have one session in props
+        if (privatesession && allSessions.length === 1) {
+            return allSessions[0].registration_form_children || [];
+        }
+        // Otherwise, use the first children session for schema for now
+        const childSession = allSessions.find((s) => s?.audience === 'children_12_17');
+        return childSession?.registration_form_children || [];
+    })();
+
     return (
         <AppLayout>
             <div
@@ -354,116 +372,164 @@ const InfoSession = ({ trainingType = 'digital' }) => {
                                 />
                             </h1>
                             <p className={`text-base sm:text-lg px-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                                <TransText
-                                    en="Complete your application in 6 simple steps"
-                                    fr="Complétez votre candidature en 6 étapes simples"
-                                    ar="أكمل طلبك في 6 خطوات بسيطة"
-                                />
+                                {hasChildrenSession ? (
+                                    <TransText
+                                        en="Choose the application type then complete the form"
+                                        fr="Choisissez le type de candidature puis complétez le formulaire"
+                                        ar="اختر نوع الطلب ثم أكمل النموذج"
+                                    />
+                                ) : (
+                                    <TransText
+                                        en="Complete your application in 6 simple steps"
+                                        fr="Complétez votre candidature en 6 étapes simples"
+                                        ar="أكمل طلبك في 6 خطوات بسيطة"
+                                    />
+                                )}
                             </p>
                         </div>
 
-                        {currentStep <= 6 && (
-                            <div className="mb-6 sm:mb-8">
-                                <ProgressIndicator
-                                    currentStep={currentStep}
-                                    darkMode={darkMode}
-                                    selectedLanguage={selectedLanguage}
-                                />
+                        {hasChildrenSession && (
+                            <div className="mb-6 flex justify-center">
+                                <div className="inline-flex rounded-full bg-gray-100 p-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => setAudienceSelection('normal')}
+                                        className={`px-4 py-1 text-xs sm:text-sm font-medium rounded-full ${
+                                            audienceSelection === 'normal'
+                                                ? 'bg-white text-[#212529] shadow'
+                                                : 'text-gray-600'
+                                        }`}
+                                    >
+                                        <TransText en="Normal (18+)" fr="Normal (18+)" ar="عادي (18+)" />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setAudienceSelection('children_12_17')}
+                                        className={`px-4 py-1 text-xs sm:text-sm font-medium rounded-full ${
+                                            audienceSelection === 'children_12_17'
+                                                ? 'bg-white text-[#212529] shadow'
+                                                : 'text-gray-600'
+                                        }`}
+                                    >
+                                        <TransText en="Children 12–17" fr="Enfants 12–17" ar="الأطفال 12–17" />
+                                    </button>
+                                </div>
                             </div>
                         )}
 
-                        <div className={`rounded-xl p-4 sm:p-6 md:p-8 shadow-lg transition-all duration-300 ${darkMode ? 'bg-beta border border-gray-600' : 'bg-white border border-gray-200'
-                            }`}>
-                            <form
-                                autoComplete="off"
-                                className="space-y-4 sm:space-y-6"
-                            >
-                                {/* Step Content */}
-                                <div className="step-content space-y-4 sm:space-y-6">
-                                    {currentStep === 1 && (
-                                        <Step1PersonalInfo
-                                            data={data}
-                                            handleChange={handleChange}
-                                            errors={{ ...errors, ...validationErrors }}
-                                            darkMode={darkMode}
-                                            selectedLanguage={selectedLanguage}
-                                            sessions={sessions}
-                                        />
-                                    )}
-
-                                    {currentStep === 2 && (
-                                        <Step2EducationSituation
-                                            data={data}
-                                            handleChange={handleChange}
-                                            errors={{ ...errors, ...validationErrors }}
+                        {audienceSelection === 'children_12_17' && hasChildrenSession ? (
+                            <ChildrenRegistrationWizard
+                                schema={selectedChildrenSchema}
+                                darkMode={darkMode}
+                                selectedLanguage={selectedLanguage}
+                                formationField={formationType}
+                            />
+                        ) : (
+                            <>
+                                {currentStep <= 6 && (
+                                    <div className="mb-6 sm:mb-8">
+                                        <ProgressIndicator
+                                            currentStep={currentStep}
                                             darkMode={darkMode}
                                             selectedLanguage={selectedLanguage}
                                         />
-                                    )}
-
-                                    {currentStep === 3 && (
-                                        <Step3ExperienceMotivation
-                                            data={data}
-                                            handleChange={handleChange}
-                                            errors={{ ...errors, ...validationErrors }}
-                                            darkMode={darkMode}
-                                            selectedLanguage={selectedLanguage}
-                                            trainingType={trainingType}
-                                        />
-                                    )}
-
-                                    {currentStep === 4 && (
-                                        <Step4GoalsLearning
-                                            data={data}
-                                            handleChange={handleChange}
-                                            errors={{ ...errors, ...validationErrors }}
-                                            darkMode={darkMode}
-                                            selectedLanguage={selectedLanguage}
-                                            trainingType={trainingType}
-                                        />
-                                    )}
-
-                                    {currentStep === 5 && (
-                                        <Step5BackgroundAvailability
-                                            data={data}
-                                            handleChange={handleChange}
-                                            errors={{ ...errors, ...validationErrors }}
-                                            darkMode={darkMode}
-                                            selectedLanguage={selectedLanguage}
-                                        />
-                                    )}
-
-                                    {currentStep === 6 && (
-                                        <Step6CVUpload
-                                            data={data}
-                                            handleChange={handleChange}
-                                            errors={{ ...errors, ...validationErrors }}
-                                            darkMode={darkMode}
-                                            selectedLanguage={selectedLanguage}
-                                            setData={setData}
-                                        />
-                                    )}
-                                    {currentStep === 7 && (
-                                        <StepSummary data={data} errors={{ ...errors, ...validationErrors }} setCurrentStep={setCurrentStep} darkMode={darkMode} />
-                                    )}
-                                    {currentStep === 8 && <GameIntro setCurrentStep={setCurrentStep} />}
-                                    {currentStep === 9 && <PatternGame data={data} />}
-                                </div>
-                                {/* Navigation Buttons */}
-                                {currentStep < 7 && (
-                                    <NavigationButtons
-                                        currentStep={currentStep}
-                                        darkMode={darkMode}
-                                        prevStep={prevStep}
-                                        nextStep={nextStep}
-                                        validateCurrentStep={validateCurrentStep}
-                                        errors={{ ...errors, ...validationErrors }}
-                                        onGameRedirect={handleGameRedirect}
-                                        selectedLanguage={selectedLanguage}
-                                    />
+                                    </div>
                                 )}
-                            </form>
-                        </div>
+
+                                <div className={`rounded-xl p-4 sm:p-6 md:p-8 shadow-lg transition-all duration-300 ${darkMode ? 'bg-beta border border-gray-600' : 'bg-white border border-gray-200'
+                                    }`}>
+                                    <form
+                                        autoComplete="off"
+                                        className="space-y-4 sm:space-y-6"
+                                    >
+                                        {/* Step Content */}
+                                        <div className="step-content space-y-4 sm:space-y-6">
+                                            {currentStep === 1 && (
+                                                <Step1PersonalInfo
+                                                    data={data}
+                                                    handleChange={handleChange}
+                                                    errors={{ ...errors, ...validationErrors }}
+                                                    darkMode={darkMode}
+                                                    selectedLanguage={selectedLanguage}
+                                                    sessions={sessions}
+                                                />
+                                            )}
+
+                                            {currentStep === 2 && (
+                                                <Step2EducationSituation
+                                                    data={data}
+                                                    handleChange={handleChange}
+                                                    errors={{ ...errors, ...validationErrors }}
+                                                    darkMode={darkMode}
+                                                    selectedLanguage={selectedLanguage}
+                                                />
+                                            )}
+
+                                            {currentStep === 3 && (
+                                                <Step3ExperienceMotivation
+                                                    data={data}
+                                                    handleChange={handleChange}
+                                                    errors={{ ...errors, ...validationErrors }}
+                                                    darkMode={darkMode}
+                                                    selectedLanguage={selectedLanguage}
+                                                    trainingType={trainingType}
+                                                />
+                                            )}
+
+                                            {currentStep === 4 && (
+                                                <Step4GoalsLearning
+                                                    data={data}
+                                                    handleChange={handleChange}
+                                                    errors={{ ...errors, ...validationErrors }}
+                                                    darkMode={darkMode}
+                                                    selectedLanguage={selectedLanguage}
+                                                    trainingType={trainingType}
+                                                />
+                                            )}
+
+                                            {currentStep === 5 && (
+                                                <Step5BackgroundAvailability
+                                                    data={data}
+                                                    handleChange={handleChange}
+                                                    errors={{ ...errors, ...validationErrors }}
+                                                    darkMode={darkMode}
+                                                    selectedLanguage={selectedLanguage}
+                                                />
+                                            )}
+
+                                            {currentStep === 6 && (
+                                                <Step6CVUpload
+                                                    data={data}
+                                                    handleChange={handleChange}
+                                                    errors={{ ...errors, ...validationErrors }}
+                                                    darkMode={darkMode}
+                                                    selectedLanguage={selectedLanguage}
+                                                    setData={setData}
+                                                />
+                                            )}
+                                            {currentStep === 7 && (
+                                                <StepSummary data={data} errors={{ ...errors, ...validationErrors }} setCurrentStep={setCurrentStep} darkMode={darkMode} />
+                                            )}
+                                            {currentStep === 8 && <GameIntro setCurrentStep={setCurrentStep} />}
+                                            {currentStep === 9 && <PatternGame data={data} />}
+                                        </div>
+                                        {/* Navigation Buttons */}
+                                        {currentStep < 7 && (
+                                            <NavigationButtons
+                                                currentStep={currentStep}
+                                                darkMode={darkMode}
+                                                prevStep={prevStep}
+                                                nextStep={nextStep}
+                                                validateCurrentStep={validateCurrentStep}
+                                                errors={{ ...errors, ...validationErrors }}
+                                                onGameRedirect={handleGameRedirect}
+                                                selectedLanguage={selectedLanguage}
+                                            />
+                                        )}
+                                    </form>
+                                </div>
+                            </>
+                        )}
                     </div>
                 ) : (
                     <LoadingPage />

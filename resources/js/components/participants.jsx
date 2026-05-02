@@ -1,18 +1,72 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { ChevronLeft, ChevronRight, Filter, Search, Users, CheckCircle2, XCircle, Trash2 } from 'lucide-react'; // Added Trash2
 import { useMemo, useState } from 'react';
 import { router } from '@inertiajs/react';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-function Participants({ bookings, tab, onDelete }) {
+function Participants({ bookings, bookingForm = [], tab, onDelete }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
     const [genderFilter, setGenderFilter] = useState('all');
     const [visitedFilter, setVisitedFilter] = useState('all'); // New state for visited filter
+    const [selectedParticipant, setSelectedParticipant] = useState(null);
     const itemsPerPage = 10;
+
+    const normalizeKey = (key) => {
+        if (!key || typeof key !== 'string') return '';
+        let k = key.replace(/\s+/gu, '_').replaceAll('.', '_');
+        k = k.replace(/[^A-Za-z0-9_]/gu, '_').replace(/_+/gu, '_');
+        return k.replace(/^_+|_+$/g, '');
+    };
+
+    const lang = (() => {
+        const v = (tab || '').toLowerCase();
+        if (v.includes('fr')) return 'fr';
+        if (v.includes('ar')) return 'ar';
+        return 'en';
+    })();
+
+    const labelByKey = useMemo(() => {
+        const map = {};
+        const arr = Array.isArray(bookingForm) ? bookingForm : [];
+        for (const f of arr) {
+            const rawKey = f?.key;
+            if (!rawKey) continue;
+            const k = normalizeKey(rawKey);
+            if (!k) continue;
+            const label = f?.label;
+            if (typeof label === 'string') map[k] = label;
+            else if (label && typeof label === 'object') map[k] = label[lang] || label.en || label.fr || label.ar;
+        }
+        // sensible fallbacks for defaults
+        map.name ||= 'Name';
+        map.email ||= 'Email';
+        map.phone ||= 'Phone';
+        map.gender ||= 'Gender';
+        return map;
+    }, [bookingForm, lang]);
+
+    const prettyKey = (k) => {
+        if (!k) return '';
+        const raw = labelByKey[k];
+        if (raw) return raw;
+        return k
+            .replaceAll('_', ' ')
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+    };
+
+    const formatValue = (v) => {
+        if (v === null || v === undefined) return '-';
+        if (Array.isArray(v)) return v.length ? v.join(', ') : '-';
+        if (typeof v === 'boolean') return v ? 'Yes' : 'No';
+        if (typeof v === 'object') return JSON.stringify(v);
+        const s = String(v).trim();
+        return s.length ? s : '-';
+    };
 
     const filteredParticipants = useMemo(() => {
         return bookings.filter((participant) => {
@@ -45,6 +99,7 @@ function Participants({ bookings, tab, onDelete }) {
     };
 
     return (
+        <>
         <Card className="hidden md:block">
             <CardHeader>
                 <div className="flex items-center justify-between">
@@ -101,8 +156,6 @@ function Participants({ bookings, tab, onDelete }) {
                                 <th className="px-2 py-3 text-left font-medium text-muted-foreground">Email</th>
                                 <th className="px-2 py-3 text-left font-medium text-muted-foreground">Gender</th>
                                 {/* <th className="px-2 py-3 text-left font-medium text-muted-foreground">Phone</th> */}
-                                <th className="px-2 py-3 text-left font-medium text-muted-foreground">Project Maturity</th>
-                                <th className="px-2 py-3 text-left font-medium text-muted-foreground">Sector of Activities</th>
                                 {/* <th className="px-2 py-3 text-left font-medium text-muted-foreground">Booked at</th> */}
                                 <th className="px-2 py-3 text-left font-medium text-muted-foreground">Visited</th>
                                 {onDelete && <th className="px-2 py-3 text-left font-medium text-muted-foreground">Actions</th>}
@@ -110,28 +163,17 @@ function Participants({ bookings, tab, onDelete }) {
                         </thead>
                         <tbody>
                             {paginatedParticipants.map((participant, index) => (
-                                <tr key={participant.id} className={`border-b ${participant.is_visited ? 'bg-green-50/50' : 'hover:bg-muted/50'}`}> {/* Highlight visited rows */}
+                                <tr
+                                    key={participant.id}
+                                    onClick={() => setSelectedParticipant(participant)}
+                                    className={`border-b cursor-pointer ${participant.is_visited ? 'bg-green-50/50' : 'hover:bg-muted/50'}`}
+                                >
                                     <td className="px-2 py-3 text-sm">{startIndex + index + 1}</td>
                                     <td className="px-2 py-3 font-medium">{participant.name}</td>
                                     <td className="px-2 py-3 text-sm text-muted-foreground">{participant.email}</td>
                                     <td className="px-2 py-3 text-sm capitalize">{participant.gender || '-'}</td>
                                     {/* <td className="px-2 py-3 text-sm">{participant.phone || '-'}</td> */}
-                                    <td className="px-2 py-3 text-sm">
-                                        {participant.maturite_project ? (
-                                            <Badge variant="outline" className="capitalize">
-                                                {participant.maturite_project}
-                                            </Badge>
-                                        ) : (
-                                            <span className="text-muted-foreground">-</span>
-                                        )}
-                                    </td>
-                                    <td className="px-2 py-3 text-sm">
-                                        {participant.secteur_dactivite ? (
-                                            <span className="text-xs">{participant.secteur_dactivite}</span>
-                                        ) : (
-                                            <span className="text-muted-foreground">-</span>
-                                        )}
-                                    </td>
+                                  
                                     {/* <td className="px-2 py-3 text-sm text-muted-foreground">{new Date(participant.created_at).toLocaleString()}</td> */}
                                     <td className="px-2 py-3 text-sm">
                                         {participant.is_visited ? (
@@ -145,7 +187,10 @@ function Participants({ bookings, tab, onDelete }) {
                                             <Button
                                                 variant="ghost"
                                                 size="sm"
-                                                onClick={() => onDelete(participant.id)}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    onDelete(participant.id);
+                                                }}
                                                 className="text-red-600 hover:text-red-700 hover:bg-red-50"
                                             >
                                                 <Trash2 className="h-4 w-4" />
@@ -218,6 +263,85 @@ function Participants({ bookings, tab, onDelete }) {
                 )}
             </CardContent>
         </Card>
+        <Dialog open={!!selectedParticipant} onOpenChange={(open) => !open && setSelectedParticipant(null)}>
+            <DialogContent className="sm:max-w-lg">
+                <DialogHeader>
+                    <DialogTitle>Participant details</DialogTitle>
+                    <DialogDescription>
+                        {selectedParticipant?.name ? selectedParticipant.name : 'Participant'}
+                    </DialogDescription>
+                </DialogHeader>
+
+                <div className="space-y-4">
+                    <div className="grid grid-cols-1 gap-3 rounded-lg border p-4 sm:grid-cols-2">
+                        <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground">{prettyKey('email')}</p>
+                            <p className="text-sm font-medium break-all">{selectedParticipant?.email || '-'}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground">{prettyKey('phone')}</p>
+                            <p className="text-sm font-medium">{selectedParticipant?.phone || '-'}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground">{prettyKey('gender')}</p>
+                            <p className="text-sm font-medium capitalize">{selectedParticipant?.gender || '-'}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground">Visited</p>
+                            <div className="pt-0.5">
+                                {selectedParticipant?.is_visited ? (
+                                    <Badge className="bg-green-100 text-green-700 hover:bg-green-100">Visited</Badge>
+                                ) : (
+                                    <Badge className="bg-red-100 text-red-700 hover:bg-red-100">Not visited</Badge>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <p className="text-sm font-semibold">Other information</p>
+                        <div className="max-h-72 overflow-auto rounded-lg border">
+                            {(() => {
+                                const fd = selectedParticipant?.form_data || {};
+                                const data = typeof fd === 'object' && fd ? fd : {};
+                                const excluded = new Set(['name', 'email', 'phone', 'gender']);
+                                const rows = Object.entries(data)
+                                    .filter(([k, v]) => {
+                                        const nk = normalizeKey(k);
+                                        if (!nk || excluded.has(nk)) return false;
+                                        if (v === null || v === undefined) return false;
+                                        if (Array.isArray(v) && v.length === 0) return false;
+                                        if (typeof v === 'string' && v.trim() === '') return false;
+                                        return true;
+                                    })
+                                    .sort(([a], [b]) => a.localeCompare(b));
+
+                                if (!rows.length) {
+                                    return <div className="p-4 text-sm text-muted-foreground">No extra information.</div>;
+                                }
+
+                                return (
+                                    <div className="divide-y">
+                                        {rows.map(([k, v]) => {
+                                            const nk = normalizeKey(k);
+                                            return (
+                                                <div key={k} className="flex items-start justify-between gap-4 p-4">
+                                                    <p className="text-sm font-medium">{prettyKey(nk || k)}</p>
+                                                    <p className="text-sm text-muted-foreground text-right max-w-[60%] break-words">
+                                                        {formatValue(v)}
+                                                    </p>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                );
+                            })()}
+                        </div>
+                    </div>
+                </div>
+            </DialogContent>
+        </Dialog>
+        </>
     );
 }
 export default Participants;

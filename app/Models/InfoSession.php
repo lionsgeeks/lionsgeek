@@ -12,6 +12,8 @@ class InfoSession extends Model
     protected $fillable = [
         'name',
         'formation',
+        'audience',
+        'registration_form_children',
         'start_date',
         'isAvailable',
         "isFull",
@@ -19,7 +21,7 @@ class InfoSession extends Model
         'places',
         'private_url_token',
         'is_private',
-        'token_generated_at', 
+        'token_generated_at',
     ];
 
     protected $casts = [
@@ -28,7 +30,8 @@ class InfoSession extends Model
         'isFull' => 'boolean',
         'isFinish' => 'boolean',
         'is_private' => 'boolean',
-        'token_generated_at' => 'datetime', 
+        'token_generated_at' => 'datetime',
+        'registration_form_children' => 'array',
     ];
 
     protected static function boot()

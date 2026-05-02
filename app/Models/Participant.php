@@ -51,6 +51,7 @@ class Participant extends Model
         'how_heard_about_formation',
         'current_commitments',
         'cv_file',
+        'children_form_data',
 
         // Game metrics
         'game_completed',
@@ -96,6 +97,7 @@ class Participant extends Model
         'situation_particuliere' => 'array',
         'nombre_personnes' => 'integer',
         'fratrie' => 'integer',
+        'children_form_data' => 'array',
     ];
 
     // Status constants

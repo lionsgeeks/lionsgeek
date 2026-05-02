@@ -17,6 +17,7 @@ class Event extends Model
         "is_private",
         "private_url_token",
         "token_generated_at",
+        "booking_form",
     ] ;
 
     protected $casts = [
@@ -24,6 +25,7 @@ class Event extends Model
         'description' => 'array',
         'is_private' => 'boolean',
         'token_generated_at' => 'datetime',
+        'booking_form' => 'array',
     ];
 
     protected static function boot()
