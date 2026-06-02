@@ -15,6 +15,7 @@ class InfoSessionFactory extends Factory
         return [
             'name' => $this->faker->sentence(3),
             'formation' => $this->faker->randomElement(['Coding', 'Media']),
+            'format' => $this->faker->randomElement(['long', 'short']),
             'start_date' => now()->addDays(7),
             'isAvailable' => true,
             'isFinish' => false,

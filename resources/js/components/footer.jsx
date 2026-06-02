@@ -65,16 +65,10 @@ const Footer = () => {
                                 </h1>
                                 <div className="flex flex-col gap-1">
                                     <Link
-                                        to={'/coding'}
+                                        href="/trainings"
                                         className={`cursor-pointer text-[0.9rem] text-gray-400 ${selectedLanguage == 'ar' ? 'text-end' : ''}`}
                                     >
-                                        <TransText en="Coding" fr="Codage" ar="البرمجة" />
-                                    </Link>
-                                    <Link
-                                        to={'/media'}
-                                        className={`cursor-pointer text-[0.9rem] text-gray-400 ${selectedLanguage == 'ar' ? 'text-end' : ''}`}
-                                    >
-                                        <TransText en="Media" fr="Média" ar="وسائط الإعلام" />
+                                        <TransText en="All trainings" fr="Toutes les formations" ar="جميع التكوينات" />
                                     </Link>
                                 </div>
                             </div>

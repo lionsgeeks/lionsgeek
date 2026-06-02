@@ -16,6 +16,7 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
         start_date: '',
         places: '',
         formation: '',
+        format: 'long',
         is_private: false,
     });
 
@@ -39,6 +40,7 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
                 start_date: formatDateTime(session.start_date),
                 places: session.places || '',
                 formation: session.formation || '',
+                format: session.format || 'long',
                 is_private: session.is_private || false,
             });
         }
@@ -133,6 +135,26 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
                                     </SelectContent>
                                 </Select>
                                 {errors.formation && <p className="text-sm text-[#ff7376]">{errors.formation}</p>}
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="edit-format" className="text-sm font-medium text-[#212529]">
+                                    Formation duration <span className="text-[#ff7376]">*</span>
+                                </Label>
+                                <Select
+                                    value={data.format}
+                                    onValueChange={(value) => handleChange('format', value)}
+                                    disabled={loading}
+                                >
+                                    <SelectTrigger className="rounded-lg border transition-all duration-200 ease-in-out focus:border-[#212529] focus:ring-2 focus:ring-[#212529]/20">
+                                        <SelectValue placeholder="Choose duration type" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="long">Long formation</SelectItem>
+                                        <SelectItem value="short">Short formation</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                {errors.format && <p className="text-sm text-[#ff7376]">{errors.format}</p>}
                             </div>
 
                             {/* Session Privacy */}

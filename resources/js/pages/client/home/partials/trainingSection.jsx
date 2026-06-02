@@ -22,7 +22,7 @@ const TrainingSection = () => {
 
             <div className="flex w-full flex-col gap-3">
                 <Link
-                    href={'/coding'}
+                    href={'/trainings#coding-long'}
                     className={`group/coding flex flex-col-reverse rounded-lg border-2 ${
                         selectedLanguage === 'ar' ? 'text-end md:flex-row-reverse' : 'md:flex-row'
                     }`}
@@ -111,7 +111,7 @@ const TrainingSection = () => {
                 </Link>
 
                 <Link
-                    href={'/media'}
+                    href={'/trainings#media-long'}
                     className={`group/media flex flex-col-reverse rounded-lg border-2 ${
                         selectedLanguage === 'ar' ? 'text-end md:flex-row' : 'md:flex-row-reverse'
                     }`}
@@ -206,6 +206,14 @@ const TrainingSection = () => {
                     </div>
                 </Link>
             </div>
+
+            <Link
+                href="/trainings"
+                className="mt-8 rounded-lg border-2 border-alpha px-6 py-3 text-center font-semibold transition-colors hover:bg-alpha hover:text-beta"
+                style={{ color: darkMode ? '#fee819' : '#0f0f0f' }}
+            >
+                <TransText en="View all trainings" fr="Voir toutes les formations" ar="عرض جميع التكوينات" />
+            </Link>
         </div>
     );
 };

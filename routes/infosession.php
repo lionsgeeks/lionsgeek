@@ -27,14 +27,18 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
 Route::get('/postuler', function (Request $request) {
     $formationField = $request->type;
+    $format = in_array($request->format, ['long', 'short'], true) ? $request->format : 'long';
 
     return Inertia::render('client/infoSession/index', [
         'sessions' => InfoSession::where('isAvailable', true)
             ->where('is_private', false)
             ->where('isFinish', false)
             ->where('isFull', false)
+            ->where('formation', ucfirst((string) $formationField))
+            ->where('format', $format)
             ->get(),
-        'formation_field' => $formationField, // Pass formation field to frontend
+        'formation_field' => $formationField,
+        'formation_format' => $format,
     ]);
 })->name('postuler')->middleware("infoSession");
 // Summary page after finishing the game

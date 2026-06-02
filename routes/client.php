@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
 use App\Models\InfoSession;
 use App\Models\Press;
@@ -34,17 +35,11 @@ Route::get('/about', function () {
 });
 
 
-Route::get('/coding', function () {
-    return Inertia::render('client/coding/coding', [
-        'sessions' => InfoSession::where('isAvailable', 1)->where('formation', 'Coding')->where('isFinish', 0)->where('is_private', false)->get(),
-    ]);
-})->name('coding');
+Route::get('/trainings', [TrainingController::class, 'index'])->name('trainings');
 
-Route::get('/media', function () {
-    return Inertia::render('client/media/media', [
-        'sessions' => InfoSession::where('isAvailable', 1)->where('formation', 'Media')->where('isFinish', 0)->where('is_private', false)->get(),
-    ]);
-})->name('media');
+Route::get('/coding', fn () => redirect('/trainings#coding-long'))->name('coding');
+
+Route::get('/media', fn () => redirect('/trainings#media-long'))->name('media');
 
 
 Route::get('/pro', function () {

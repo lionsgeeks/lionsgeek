@@ -17,8 +17,12 @@ class InfoSessionMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        // dd($request->type);
-        $exist = InfoSession::where("formation", ucfirst($request->type))->where("isAvailable", 1)->first();
+        $format = in_array($request->format, ['long', 'short'], true) ? $request->format : 'long';
+
+        $exist = InfoSession::where('formation', ucfirst((string) $request->type))
+            ->where('format', $format)
+            ->where('isAvailable', 1)
+            ->first();
 
         if ($exist) {
             return $next($request);

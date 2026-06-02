@@ -11,6 +11,7 @@ export function CreateSessionModal({ open, onOpenChange }) {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         formation: '',
+        format: 'long',
         start_date: '',
         places: '',
         is_private: false,
@@ -23,6 +24,7 @@ export function CreateSessionModal({ open, onOpenChange }) {
                 setData({
                     name: '',
                     formation: '',
+                    format: 'long',
                     start_date: '',
                     places: '',
                     is_private: false,
@@ -119,6 +121,22 @@ export function CreateSessionModal({ open, onOpenChange }) {
                                 </SelectContent>
                             </Select>
                             {errors.formation && <p className="text-sm text-[#ff7376]">{errors.formation}</p>}
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="format" className="text-sm font-medium text-[#212529]">
+                                Formation duration <span className="text-[#ff7376]">*</span>
+                            </Label>
+                            <Select value={data.format} onValueChange={(value) => handleChange('format', value)} disabled={processing}>
+                                <SelectTrigger className="rounded-lg border focus:border-[#212529]">
+                                    <SelectValue placeholder="Choose duration type" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="long">Long formation</SelectItem>
+                                    <SelectItem value="short">Short formation</SelectItem>
+                                </SelectContent>
+                            </Select>
+                            {errors.format && <p className="text-sm text-[#ff7376]">{errors.format}</p>}
                         </div>
 
                         {/* Date and Capacity */}
@@ -229,7 +247,7 @@ export function CreateSessionModal({ open, onOpenChange }) {
                             </Button>
                             <Button
                                 type="submit"
-                                disabled={processing || !data.name || !data.formation || !data.start_date || !data.places}
+                                disabled={processing || !data.name || !data.formation || !data.format || !data.start_date || !data.places}
                                 className="flex-1"
                             >
                                 {processing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

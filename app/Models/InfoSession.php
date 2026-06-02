@@ -12,6 +12,7 @@ class InfoSession extends Model
     protected $fillable = [
         'name',
         'formation',
+        'format',
         'start_date',
         'isAvailable',
         "isFull",
