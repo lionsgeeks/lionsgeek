@@ -40,6 +40,8 @@ Route::get('/postuler', function (Request $request) {
         $sessionsQuery->where('formation', ucfirst($formationField));
     }
 
+    $sessionsQuery->where('format', $format);
+
     $sessions = $sessionsQuery->get();
 
     return Inertia::render('client/infoSession/index', [

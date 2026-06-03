@@ -54,6 +54,30 @@ class InfoSession extends Model
         });
     }
 
+    /**
+     * Public program pages (/coding, /media).
+     * Long pages: normal (18+) only. Short pages: normal or children 12–17.
+     */
+    public function scopeForProgramPage($query, string $formation, string $format = 'long')
+    {
+        $format = in_array($format, ['long', 'short'], true) ? $format : 'long';
+
+        $query = $query
+            ->where('formation', $formation)
+            ->where('format', $format)
+            ->where('is_private', false)
+            ->where('isFinish', false)
+            ->where('isAvailable', true);
+
+        if ($format === 'long') {
+            $query->where('audience', 'normal');
+        } else {
+            $query->whereIn('audience', ['normal', 'children_12_17']);
+        }
+
+        return $query;
+    }
+
     public function participants()
     {
         return $this->hasMany(Participant::class)->where('status', Participant::STATUS_APPROVED);

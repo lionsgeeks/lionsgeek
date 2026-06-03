@@ -8,7 +8,7 @@ import { router, usePage } from '@inertiajs/react';
 import gsap from 'gsap';
 
 export const FirstSection = () => {
-    const { sessions } = usePage().props;
+    const { sessions = [], format = 'long' } = usePage().props;
     const { selectedLanguage, darkMode } = useAppContext();
     const leftside = useRef(null);
     const [loading, setLoading] = useState(true);
@@ -122,7 +122,7 @@ from camera use and lighting to editing, special effects, and digital
                     </svg>
                     <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
                         {
-                            window.location.href.includes('short') ? (
+                            format === 'short' ? (
                                 <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
                             ) : (
                                 <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
@@ -183,7 +183,7 @@ from camera use and lighting to editing, special effects, and digital
                             />
                         </div>
                     ) : (
-                        <Button onClick={() => router.visit("/postuler?type=media")}>
+                        <Button onClick={() => router.visit(`/postuler?type=media&format=${format}`)}>
                             <TransText fr="Postuler" en="Apply" ar="تقدم بطلب" />
                         </Button>
                     )}

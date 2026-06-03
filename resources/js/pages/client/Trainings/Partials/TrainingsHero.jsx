@@ -15,17 +15,17 @@ const TITLES = {
 export default function TrainingsHero({ stats = {}, programs = [] }) {
     const { selectedLanguage } = useAppContext();
     const rtl = selectedLanguage === 'ar';
-    const leftside  = useRef(null);
+    const leftside = useRef(null);
     const rightside = useRef(null);
 
     useEffect(() => {
-        gsap.fromTo(leftside.current,  { x: '-100%', opacity: 0 }, { x: '0%', duration: 0.5, delay: 0.5, opacity: 1, ease: 'power2.out' });
-        gsap.fromTo(rightside.current, { x: '100%',  opacity: 0 }, { x: '0%', duration: 0.5, delay: 0.5, opacity: 1, ease: 'power2.out' });
+        gsap.fromTo(leftside.current, { x: '-100%', opacity: 0 }, { x: '0%', duration: 0.5, delay: 0.5, opacity: 1, ease: 'power2.out' });
+        gsap.fromTo(rightside.current, { x: '100%', opacity: 0 }, { x: '0%', duration: 0.5, delay: 0.5, opacity: 1, ease: 'power2.out' });
     }, []);
 
-    const openCount    = programs.filter((p) => p.enrollment_status === 'open').length;
-    const totalCohorts = stats.total_cohorts   ?? 0;
-    const tracksCount  = stats.formations_count ?? 2;
+    const openCount = programs.filter((p) => p.enrollment_status === 'open').length;
+    const totalCohorts = stats.total_cohorts ?? 0;
+    const tracksCount = stats.formations_count ?? 2;
 
     return (
         <div className="min-h-screen w-full bg-white text-darker dark:bg-[#0f0f0f] dark:text-white">
@@ -103,22 +103,20 @@ export default function TrainingsHero({ stats = {}, programs = [] }) {
                     ref={rightside}
                     className="order-1 flex w-full items-end justify-center gap-4 lg:order-2 lg:justify-end"
                 >
-                    <div className="flex w-1/2 flex-col items-center">
-                        <img
-                            loading="lazy"
-                            src={codingIllustration}
-                            alt="coding illustration"
-                            className="w-full object-contain"
-                        />
-                    </div>
-
-                    <div className="h-28 w-px self-center bg-black opacity-20 dark:bg-white" />
-
-                    <div className="flex w-1/2 flex-col items-center">
+                    <div className="flex w-[60%] flex-col items-center">
                         <img
                             loading="lazy"
                             src={mediaIllustration}
                             alt="media illustration"
+                            className="w-full object-contain"
+                        />
+                    </div>
+
+                    <div className="flex w-[40%] flex-col items-center">
+                        <img
+                            loading="lazy"
+                            src={codingIllustration}
+                            alt="coding illustration"
                             className="w-full object-contain"
                         />
                     </div>

@@ -32,34 +32,30 @@ class InfosessionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd();
-        try {
-            $request->validate([
-                'name' => 'required',
-                'formation' => 'required',
-                'format' => 'required|in:long,short',
-                'start_date' => 'required',
-                'places' => 'required',
-                'is_private' => 'boolean',
-                'audience' => 'nullable|string|in:normal,children_12_17',
-                'registration_form_children' => 'nullable|array',
-            ]);
-            InfoSession::create([
-                'name' => strtolower($request->name),
-                'formation' => $request->formation,
-                'format' => $request->format,
-                'audience' => $request->input('audience', 'normal'),
-                'registration_form_children' => $request->input('registration_form_children') ?? null,
-                'start_date' => $request->start_date,
-                'places' => $request->places,
-                'is_private' => $request->boolean('is_private', false),
-                'isAvailable' => true, // Make sessions available by default
-            ]);
-            return back();
-        } catch (\Throwable $th) {
-            //throw $th;
-            return back();
-        }
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'formation' => 'required|in:Coding,Media',
+            'format' => 'required|in:long,short',
+            'start_date' => 'required|date',
+            'places' => 'required|integer|min:1|max:500',
+            'is_private' => 'boolean',
+            'audience' => 'nullable|string|in:normal,children_12_17',
+            'registration_form_children' => 'nullable|array',
+        ]);
+
+        InfoSession::create([
+            'name' => strtolower($validated['name']),
+            'formation' => $validated['formation'],
+            'format' => $validated['format'],
+            'audience' => $validated['audience'] ?? 'normal',
+            'registration_form_children' => $validated['registration_form_children'] ?? null,
+            'start_date' => $validated['start_date'],
+            'places' => $validated['places'],
+            'is_private' => $request->boolean('is_private', false),
+            'isAvailable' => true,
+        ]);
+
+        return back()->with('success', 'Info session created successfully.');
     }
 
     /**

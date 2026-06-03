@@ -43,11 +43,23 @@ class TrainingController extends Controller
 
     private function matchingSessions(Collection $sessions, array $program): Collection
     {
-        return $sessions->filter(
-            fn (InfoSession $s) =>
-                $s->formation === $program['formation']
-                && ($s->format ?? 'long') === $program['format']
-        );
+        return $sessions->filter(function (InfoSession $s) use ($program) {
+            if ($s->formation !== $program['formation']) {
+                return false;
+            }
+
+            if (($s->format ?? 'long') !== $program['format']) {
+                return false;
+            }
+
+            $audience = $s->audience ?? 'normal';
+
+            if ($program['format'] === 'long') {
+                return $audience === 'normal';
+            }
+
+            return in_array($audience, ['normal', 'children_12_17'], true);
+        });
     }
 
     private function resolveEnrollmentStatus(Collection $sessions, array $program): string

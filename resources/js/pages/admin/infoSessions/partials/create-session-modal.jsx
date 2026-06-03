@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { useForm } from '@inertiajs/react';
+import { router, useForm } from '@inertiajs/react';
 import { Calendar, Code2, GraduationCap, Loader2, Palette, Plus, Users, X, Lock } from 'lucide-react';
 
 const defaultChildrenForm = [
@@ -31,6 +31,7 @@ export function CreateSessionModal({ open, onOpenChange }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         post(route('infosessions.store'), {
+            preserveScroll: true,
             onSuccess: () => {
                 setData({
                     name: '',
@@ -43,6 +44,7 @@ export function CreateSessionModal({ open, onOpenChange }) {
                     registration_form_children: defaultChildrenForm,
                 });
                 onOpenChange(false);
+                router.reload({ only: ['infosessions'] });
             },
         });
     };
