@@ -61,7 +61,7 @@ const TRACK_BADGE = {
 
 const FORMAT_BADGE = {
     long: { en: 'Long — 6 months', fr: '6 mois', ar: '6 أشهر', bg: 'bg-[#fee819]/20', text: 'text-[#0f0f0f]' },
-    short: { en: 'Short — 3 weeks', fr: '3 semaines', ar: '3 أسابيع', bg: 'bg-green-100', text: 'text-green-700' },
+    short: { en: 'Short — 1 week', fr: '1 semaine', ar: '1 أسبوع', bg: 'bg-green-100', text: 'text-green-700' },
 };
 
 export default function TrainingCard({ program }) {

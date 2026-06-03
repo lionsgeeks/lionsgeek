@@ -46,7 +46,13 @@ const TrainingSection = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                                 <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                                    <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                                    {
+                                        window.location.href.includes('short') ? (
+                                            <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
+                                        ) : (
+                                            <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                                        )
+                                    }
                                 </p>
                             </div>
                             <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
@@ -135,7 +141,13 @@ const TrainingSection = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                                 <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                                    <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                                    {
+                                        window.location.href.includes('short') ? (
+                                            <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
+                                        ) : (
+                                            <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                                        )
+                                    }
                                 </p>
                             </div>
                             <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>

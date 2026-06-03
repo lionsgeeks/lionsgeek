@@ -66,9 +66,9 @@ export const PROGRAM_CONTENT = {
             ar: 'برنامج قصير ومركز لتعلم أساسيات الويب، تنفيذ مشاريع حقيقية، وبدء مسيرتك كمطور في بضعة أسابيع.',
         },
         duration: {
-            en: 'Duration: 3 weeks',
-            fr: 'Durée : 3 semaines',
-            ar: 'المدة: 3 أسابيع',
+            en: 'Duration: 1 week',
+            fr: 'Durée : 1 semaine',
+            ar: 'المدة: 1 أسبوع',
         },
         fee: {
             en: 'Fee: Free',
@@ -93,9 +93,9 @@ export const PROGRAM_CONTENT = {
             ar: 'تعلم أساسيات السرد والتصوير والمونتاج لإنتاج محتوى قصير احترافي لوسائل التواصل والويب.',
         },
         duration: {
-            en: 'Duration: 3 weeks',
-            fr: 'Durée : 3 semaines',
-            ar: 'المدة: 3 أسابيع',
+            en: 'Duration: 1 week',
+            fr: 'Durée : 1 semaine',
+            ar: 'المدة: 1 أسبوع',
         },
         fee: {
             en: 'Fee: Free',

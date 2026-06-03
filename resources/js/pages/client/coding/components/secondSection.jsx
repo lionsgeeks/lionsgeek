@@ -13,8 +13,10 @@ import { TransText } from '../../../../components/TransText';
 import { useAppContext } from '@/context/appContext';
 import gsap from 'gsap';
 
-export const SecondSection = () => {
-    const skill = ['Front-End', 'Back-End', 'Version Control', 'Shell Scripting'];
+const ALL_SKILLS = ['Front-End', 'Back-End', 'Version Control', 'Shell Scripting'];
+
+export const SecondSection = ({ format = 'long' }) => {
+    const skill = format === 'short' ? ['Front-End'] : ALL_SKILLS;
     const [hint, setHint] = useState('Front-End');
     const [activeSkill, setActiveSkill] = useState('Front-End');
     const { selectedLanguage, darkMode } = useAppContext();

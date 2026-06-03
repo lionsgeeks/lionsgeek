@@ -13,13 +13,14 @@ const TITLES = {
 };
 
 export default function TrainingsHero({ stats = {}, programs = [] }) {
-    const { selectedLanguage, darkMode } = useAppContext();
+    const { selectedLanguage } = useAppContext();
+    const rtl = selectedLanguage === 'ar';
     const leftside  = useRef(null);
     const rightside = useRef(null);
 
     useEffect(() => {
-        gsap.fromTo(leftside.current,  { x: '-100%', opacity: '0' }, { x: '0%', duration: 0.5, delay: 0.5, opacity: '1', ease: 'power2.out' });
-        gsap.fromTo(rightside.current, { x: '100%',  opacity: '0' }, { x: '0%', duration: 0.5, delay: 0.5, opacity: '1', ease: 'power2.out' });
+        gsap.fromTo(leftside.current,  { x: '-100%', opacity: 0 }, { x: '0%', duration: 0.5, delay: 0.5, opacity: 1, ease: 'power2.out' });
+        gsap.fromTo(rightside.current, { x: '100%',  opacity: 0 }, { x: '0%', duration: 0.5, delay: 0.5, opacity: 1, ease: 'power2.out' });
     }, []);
 
     const openCount    = programs.filter((p) => p.enrollment_status === 'open').length;
@@ -27,48 +28,61 @@ export default function TrainingsHero({ stats = {}, programs = [] }) {
     const tracksCount  = stats.formations_count ?? 2;
 
     return (
-        <div className={`min-h-screen w-full ${darkMode ? 'bg-[#0f0f0f] text-white' : 'bg-white text-black'}`}>
-            <div className="pt-20 px-5 grid grid-cols-1 items-center gap-10 sm:mx-10 lg:mt-10 lg:grid-cols-2 lg:gap-20">
+        <div className="min-h-screen w-full bg-white text-darker dark:bg-[#0f0f0f] dark:text-white">
+            <div className="grid grid-cols-1 items-center gap-10 px-5 pt-20 sm:mx-10 lg:mt-10 lg:grid-cols-2 lg:gap-20">
 
                 {/* ── LEFT ── */}
                 <div
                     ref={leftside}
-                    className="order-2 mt-8 w-full space-y-6 text-center sm:mt-16 sm:ml-0 sm:w-[90%] sm:space-y-8 lg:order-1 lg:ml-16 lg:w-[85%] lg:text-left"
+                    className={`
+                        order-2 mt-8 w-full space-y-6 text-center
+                        sm:ml-0 sm:mt-16 sm:w-[90%] sm:space-y-8
+                        lg:order-1 lg:ml-16 lg:w-[85%] lg:text-left
+                        ${rtl ? 'lg:text-right' : ''}
+                    `}
                 >
                     <h1
-                        className={`text-3xl font-extrabold sm:text-4xl md:text-5xl lg:text-6xl ${selectedLanguage === 'ar' ? 'text-right' : ''}`}
+                        className={`text-3xl font-extrabold sm:text-4xl md:text-5xl lg:text-6xl ${rtl ? 'text-right' : ''}`}
                         dangerouslySetInnerHTML={{ __html: TITLES[selectedLanguage] || TITLES.en }}
                     />
 
-                    <p className="text-sm sm:text-base md:text-lg">
+                    <p className="text-sm text-gray-600 dark:text-gray-300 sm:text-base md:text-lg">
                         <TransText
-                            en="Free, hands-on programs in coding and digital media. Choose between an intensive 6-month bootcamp or a targeted 3-week course — open to everyone."
-                            fr="Des programmes gratuits et pratiques en codage et médias digitaux. Choisissez entre un bootcamp intensif de 6 mois ou une formation ciblée de 3 semaines — ouverts à tous."
-                            ar="برامج مجانية وعملية في البرمجة والإعلام الرقمي. اختر بين معسكر تدريبي مكثف لمدة 6 أشهر أو دورة مستهدفة لمدة 3 أسابيع — مفتوحة للجميع."
+                            en="Free, hands-on programs in coding and digital media. Choose between an intensive 6-month bootcamp or a focused 1-week course — open to everyone."
+                            fr="Des programmes gratuits et pratiques en codage et médias digitaux. Choisissez entre un bootcamp intensif de 6 mois ou une formation ciblée d'1 semaine — ouverts à tous."
+                            ar="برامج مجانية وعملية في البرمجة والإعلام الرقمي. اختر بين معسكر تدريبي مكثف لمدة 6 أشهر أو دورة مركزة لمدة أسبوع واحد — مفتوحة للجميع."
                         />
                     </p>
 
                     {/* Live DB stats */}
-                    <div className={`flex flex-wrap justify-center gap-8 lg:justify-start ${selectedLanguage === 'ar' ? 'lg:justify-end' : ''}`}>
+                    <div
+                        className={`
+                            flex flex-wrap justify-center gap-8 lg:justify-start
+                            ${rtl ? 'lg:justify-end' : ''}
+                        `}
+                    >
                         <div className="flex flex-col items-center lg:items-start">
                             <span className="text-4xl font-extrabold text-alpha">{openCount}</span>
-                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">
                                 <TransText en="programs open" fr="programmes ouverts" ar="برنامج مفتوح" />
                             </span>
                         </div>
-                        <div className={`w-px self-stretch ${darkMode ? 'bg-white/10' : 'bg-gray-200'}`} />
+
+                        <div className="w-px self-stretch bg-gray-200 dark:bg-white/10" />
+
                         <div className="flex flex-col items-center lg:items-start">
                             <span className="text-4xl font-extrabold text-alpha">{tracksCount}</span>
-                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">
                                 <TransText en="tracks" fr="filières" ar="مسارات" />
                             </span>
                         </div>
+
                         {totalCohorts > 0 && (
                             <>
-                                <div className={`w-px self-stretch ${darkMode ? 'bg-white/10' : 'bg-gray-200'}`} />
+                                <div className="w-px self-stretch bg-gray-200 dark:bg-white/10" />
                                 <div className="flex flex-col items-center lg:items-start">
                                     <span className="text-4xl font-extrabold text-alpha">{totalCohorts}</span>
-                                    <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                    <span className="text-sm text-gray-500 dark:text-gray-400">
                                         <TransText en="cohorts" fr="cohortes" ar="فوج" />
                                     </span>
                                 </div>
@@ -78,7 +92,7 @@ export default function TrainingsHero({ stats = {}, programs = [] }) {
 
                     <Button
                         className="px-10 py-3"
-                        onClick={() => document.getElementById('long')?.scrollIntoView({ behavior: 'smooth' })}
+                        onClick={() => document.getElementById('programs-overview')?.scrollIntoView({ behavior: 'smooth' })}
                     >
                         <TransText en="Explore programs" fr="Explorer les programmes" ar="استكشف البرامج" />
                     </Button>
@@ -98,7 +112,7 @@ export default function TrainingsHero({ stats = {}, programs = [] }) {
                         />
                     </div>
 
-                    <div className={`h-28 w-px self-center opacity-20 ${darkMode ? 'bg-white' : 'bg-black'}`} />
+                    <div className="h-28 w-px self-center bg-black opacity-20 dark:bg-white" />
 
                     <div className="flex w-1/2 flex-col items-center">
                         <img
