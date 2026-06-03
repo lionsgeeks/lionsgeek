@@ -203,6 +203,7 @@ export default function AdminEventShow() {
 
                             <Participants
                                 bookings={event.bookings || []}
+                                bookingForm={event.booking_form || []}
                                 tab={tab}
                                 onDelete={(bookingId) => {
                                     setDeleteType('participant');

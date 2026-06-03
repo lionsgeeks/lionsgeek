@@ -41,6 +41,8 @@ const ParticipantCard = ({ participant }) => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [localParticipant, setLocalParticipant] = useState(participant);
 
+    const isChildrenApplicant = localParticipant?.source === 'children_form' || !!localParticipant?.children_form_data;
+
     // Formation track (coding/media)
     const formationRaw = (localParticipant?.formation_field ?? localParticipant?.info_session?.formation)?.toString().toLowerCase();
     const formationLabel = formationRaw === 'coding' ? 'Coding' : formationRaw === 'media' ? 'Media' : null;
@@ -195,6 +197,11 @@ const ParticipantCard = ({ participant }) => {
                                                     {formationLabel}
                                                 </Badge>
                                             )}
+                                            {isChildrenApplicant && (
+                                                <Badge className="rounded-lg bg-purple-600 text-xs font-medium text-white">
+                                                    Children
+                                                </Badge>
+                                            )}
                                             <Badge className="rounded-lg bg-orange-600 text-xs font-medium text-white">
                                                 <Clock className="mr-1 h-3 w-3" />
                                                 Pending Approval
@@ -205,6 +212,12 @@ const ParticipantCard = ({ participant }) => {
                                             <Badge className={`${getStepBadge(localParticipant?.current_step)} w-fit rounded-lg text-xs font-medium`}>
                                                 {localParticipant?.current_step?.replaceAll('_', ' ') || 'Unknown'}
                                             </Badge>
+
+                                            {isChildrenApplicant && (
+                                                <Badge className="rounded-lg bg-purple-600 text-xs font-medium text-white">
+                                                    Children
+                                                </Badge>
+                                            )}
 
                                             {participant?.status === 'rejected' && (
                                                 <Badge className="rounded-lg bg-[#ff7376] text-xs font-medium text-white">

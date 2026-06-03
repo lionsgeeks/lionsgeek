@@ -14,6 +14,11 @@ class Booking extends Model
         "maturite_project",
         "secteur_dactivite",
         "event_id",
+        "form_data",
+    ];
+
+    protected $casts = [
+        'form_data' => 'array',
     ];
 
     public function event()

@@ -60,7 +60,14 @@ export default function ParticipantsTable({ participants }) {
 									className="group cursor-pointer border-b border-gray-100 transition-colors hover:bg-gray-50"
 								>
 									<td className="px-6 py-4">
-										<div className="font-medium text-[#212529]">{p.full_name}</div>
+										<div className="flex flex-wrap items-center gap-2">
+											<div className="font-medium text-[#212529]">{p.full_name}</div>
+											{(p.source === 'children_form' || p.children_form_data) && (
+												<span className="inline-flex items-center rounded-full bg-purple-100 px-2 py-0.5 text-[11px] font-semibold text-purple-700">
+													Children 12–17
+												</span>
+											)}
+										</div>
 										<div className="text-xs text-gray-500 md:hidden">{p.email}</div>
 									</td>
 									<td className="hidden px-6 py-4 text-sm text-gray-600 md:table-cell">{p.email}</td>

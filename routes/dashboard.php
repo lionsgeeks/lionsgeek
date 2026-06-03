@@ -16,6 +16,7 @@ use App\Models\User;
 
 use App\Http\Controllers\CustomEmailController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\Admin\ChatbotConversationController;
 use App\Models\InfoSession;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Request;
@@ -30,4 +31,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::put('/email/markread/{message}', [ContactController::class, 'toggleRead'])->name('email.markread');
     Route::get('/getChartData/{id?}', [GeneralController::class , 'getChartData'])->name('dashboard.chart');
     Route::get('/search', [GeneralController::class, 'search'])->name('admin.search');
+
+    // AI Conversations
+    Route::get('/ai-conversations', [ChatbotConversationController::class, 'index'])->name('admin.ai-conversations.index');
+    Route::get('/ai-conversations/{id}', [ChatbotConversationController::class, 'show'])->name('admin.ai-conversations.show');
+    Route::get('/ai-conversations/export/{format?}', [ChatbotConversationController::class, 'export'])->name('admin.ai-conversations.export');
+    Route::delete('/ai-conversations/{id}', [ChatbotConversationController::class, 'destroy'])->name('admin.ai-conversations.destroy');
 });

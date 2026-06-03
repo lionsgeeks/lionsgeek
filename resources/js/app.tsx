@@ -18,7 +18,7 @@ createInertiaApp({
         root.render(
             <AppContextProvider>
                 <App {...props} />
-                {/* <Chatbot /> */}
+                <Chatbot />
             </AppContextProvider>,
         );
     },

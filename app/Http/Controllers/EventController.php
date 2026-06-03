@@ -15,6 +15,19 @@ use Inertia\Inertia;
 
 class EventController extends Controller
 {
+    private function normalizeBookingForm($bookingForm)
+    {
+        if (is_array($bookingForm)) {
+            return $bookingForm;
+        }
+
+        if (is_string($bookingForm) && $bookingForm !== '') {
+            $decoded = json_decode($bookingForm, true);
+            return is_array($decoded) ? $decoded : null;
+        }
+
+        return null;
+    }
     /**
      * Display a listing of the resource for clients.
      */
@@ -56,6 +69,7 @@ class EventController extends Controller
             'cover' => 'required|image|mimes:jpeg,png,jpg,gif',
             'location' => 'required|string',
             'is_private' => 'boolean',
+            'booking_form' => 'nullable',
         ]);
 
         if (!$request->name || !is_array($request->name) || empty(array_filter($request->name))) {
@@ -85,6 +99,7 @@ class EventController extends Controller
             'location' => $request->location,
             'cover' => $coverPath,
             'is_private' => $request->boolean('is_private', false),
+            'booking_form' => $this->normalizeBookingForm($request->booking_form),
         ]);
 
         return redirect()->route('admin.events.index');
@@ -127,6 +142,7 @@ class EventController extends Controller
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'location' => 'required|string',
             'is_private' => 'boolean',
+            'booking_form' => 'nullable',
         ]);
 
         if (!$request->name || !is_array($request->name) || empty(array_filter($request->name))) {
@@ -144,6 +160,7 @@ class EventController extends Controller
             'capacity' => $request->capacity,
             'location' => $request->location,
             'is_private' => $request->boolean('is_private'),
+            'booking_form' => $this->normalizeBookingForm($request->booking_form),
         ];
 
         if ($request->hasFile('cover')) {

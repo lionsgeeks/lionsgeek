@@ -36,8 +36,7 @@ class EventBookingsExport implements FromCollection, WithHeadings, WithMapping, 
             'Email',
             'Phone',
             'Gender',
-            'Project Maturity',
-            'Sector of Activities',
+            'Form Data',
             'Booked Date',
             'Booked Time',
         ];
@@ -83,6 +82,12 @@ class EventBookingsExport implements FromCollection, WithHeadings, WithMapping, 
         $index++;
 
         $createdAt = $booking->created_at ? \Carbon\Carbon::parse($booking->created_at) : null;
+        $formData = null;
+        try {
+            $formData = is_string($booking->form_data ?? null) ? $booking->form_data : json_encode($booking->form_data ?? null, JSON_UNESCAPED_UNICODE);
+        } catch (\Throwable $e) {
+            $formData = '';
+        }
 
         return [
             $index,
@@ -90,8 +95,7 @@ class EventBookingsExport implements FromCollection, WithHeadings, WithMapping, 
             $booking->email ?? '',
             $booking->phone ?? '',
             ucfirst($booking->gender ?? ''),
-            $this->removeAccents($booking->maturite_project ?? ''),
-            $this->removeAccents($booking->secteur_dactivite ?? ''),
+            $formData ?? '',
             $createdAt ? $createdAt->format('Y-m-d') : '',
             $createdAt ? $createdAt->format('H:i:s') : '',
         ];

@@ -14,6 +14,7 @@ import {
     Mic,
     MicVocal,
     Users,
+    MessageSquare,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -89,6 +90,11 @@ const communicationItems: NavItem[] = [
         title: 'Newsletter',
         href: '/admin/newsletter',
         icon: Mail,
+    },
+    {
+        title: 'AI Conversations',
+        href: '/admin/ai-conversations',
+        icon: MessageSquare,
     },
 ];
 

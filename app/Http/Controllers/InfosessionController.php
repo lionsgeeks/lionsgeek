@@ -41,11 +41,15 @@ class InfosessionController extends Controller
                 'start_date' => 'required',
                 'places' => 'required',
                 'is_private' => 'boolean',
+                'audience' => 'nullable|string|in:normal,children_12_17',
+                'registration_form_children' => 'nullable|array',
             ]);
             InfoSession::create([
                 'name' => strtolower($request->name),
                 'formation' => $request->formation,
                 'format' => $request->format,
+                'audience' => $request->input('audience', 'normal'),
+                'registration_form_children' => $request->input('registration_form_children') ?? null,
                 'start_date' => $request->start_date,
                 'places' => $request->places,
                 'is_private' => $request->boolean('is_private', false),
@@ -96,6 +100,8 @@ class InfosessionController extends Controller
             'start_date' => 'required',
             'places' => 'required',
             'is_private' => 'boolean',
+            'audience' => 'nullable|string|in:normal,children_12_17',
+            'registration_form_children' => 'nullable|array',
         ]);
         $infoSession->update([
             'name' => $request->name,
@@ -104,6 +110,8 @@ class InfosessionController extends Controller
             'start_date' => $request->start_date,
             'places' => $request->places,
             'is_private' => $request->boolean('is_private'),
+            'audience' => $request->input('audience', $infoSession->audience ?? 'normal'),
+            'registration_form_children' => $request->input('registration_form_children') ?? $infoSession->registration_form_children,
         ]);
         return back();
     }
@@ -196,7 +204,7 @@ class InfosessionController extends Controller
         if (!$infoSession) {
             abort(404, 'Private session not found or inactive');
         }
-    $newToken = $infoSession->regenerateTokenIfExpired();
+        $newToken = $infoSession->regenerateTokenIfExpired();
 
         return Inertia::render('client/infoSession/index', [
             'sessions' => [$infoSession],

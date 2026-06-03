@@ -29,16 +29,22 @@ Route::get('/postuler', function (Request $request) {
     $formationField = $request->type;
     $format = in_array($request->format, ['long', 'short'], true) ? $request->format : 'long';
 
+    $sessionsQuery = InfoSession::where('isAvailable', true)
+        ->where('is_private', false)
+        ->where('isFinish', false)
+        ->where('isFull', false);
+
+    // If the page is accessed from /postuler?type=coding|media,
+    // only return sessions of that formation.
+    if ($formationField) {
+        $sessionsQuery->where('formation', ucfirst($formationField));
+    }
+
+    $sessions = $sessionsQuery->get();
+
     return Inertia::render('client/infoSession/index', [
-        'sessions' => InfoSession::where('isAvailable', true)
-            ->where('is_private', false)
-            ->where('isFinish', false)
-            ->where('isFull', false)
-            ->where('formation', ucfirst((string) $formationField))
-            ->where('format', $format)
-            ->get(),
-        'formation_field' => $formationField,
-        'formation_format' => $format,
+        'sessions' => $sessions,
+        'formation_field' => $formationField, // Pass formation field to frontend
     ]);
 })->name('postuler')->middleware("infoSession");
 // Summary page after finishing the game
