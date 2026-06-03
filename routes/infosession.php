@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
 Route::get('/postuler', function (Request $request) {
     $formationField = $request->type;
+    $format = in_array($request->format, ['long', 'short'], true) ? $request->format : 'long';
 
     $sessionsQuery = InfoSession::where('isAvailable', true)
         ->where('is_private', false)

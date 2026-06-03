@@ -37,6 +37,7 @@ class InfosessionController extends Controller
             $request->validate([
                 'name' => 'required',
                 'formation' => 'required',
+                'format' => 'required|in:long,short',
                 'start_date' => 'required',
                 'places' => 'required',
                 'is_private' => 'boolean',
@@ -46,6 +47,7 @@ class InfosessionController extends Controller
             InfoSession::create([
                 'name' => strtolower($request->name),
                 'formation' => $request->formation,
+                'format' => $request->format,
                 'audience' => $request->input('audience', 'normal'),
                 'registration_form_children' => $request->input('registration_form_children') ?? null,
                 'start_date' => $request->start_date,
@@ -94,6 +96,7 @@ class InfosessionController extends Controller
         $request->validate([
             'name' => 'required',
             'formation' => 'required',
+            'format' => 'required|in:long,short',
             'start_date' => 'required',
             'places' => 'required',
             'is_private' => 'boolean',
@@ -103,6 +106,7 @@ class InfosessionController extends Controller
         $infoSession->update([
             'name' => $request->name,
             'formation' => $request->formation,
+            'format' => $request->format,
             'start_date' => $request->start_date,
             'places' => $request->places,
             'is_private' => $request->boolean('is_private'),
@@ -205,6 +209,7 @@ class InfosessionController extends Controller
         return Inertia::render('client/infoSession/index', [
             'sessions' => [$infoSession],
             'formation_field' => strtolower($infoSession->formation),
+            'formation_format' => $infoSession->format ?? 'long',
             'privatesession' => true,
             'private_token' => $token
         ]);

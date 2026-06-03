@@ -9,21 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->string('maturite_project')->nullable()->after('gender');
-            $table->string('secteur_dactivite')->nullable()->after('maturite_project');
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::table('bookings', function (Blueprint $table) {
+    //         $table->string('maturite_project')->nullable()->after('gender');
+    //         $table->string('secteur_dactivite')->nullable()->after('maturite_project');
+    //     });
+    // }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->dropColumn(['maturite_project', 'secteur_dactivite']);
-        });
-    }
+    // /**
+    //  * Reverse the migrations.
+    //  */
+    // public function down(): void
+    // {
+    //     Schema::table('bookings', function (Blueprint $table) {
+    //         $table->dropColumn(['maturite_project', 'secteur_dactivite']);
+    //     });
+    // }
 };

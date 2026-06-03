@@ -89,9 +89,8 @@ export const FirstSection = () => {
 
     return (
         <div
-            className={`mt-16 flex flex-col-reverse items-center justify-center overflow-x-hidden lg:flex-row ${
-                selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''
-            }`}
+            className={`mt-16 flex flex-col-reverse items-center justify-center overflow-x-hidden lg:flex-row ${selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''
+                }`}
             style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
         >
             <div ref={leftside} className="flex flex-col gap-4 px-7 py-16 lg:w-[50%] lg:px-16">
@@ -100,11 +99,11 @@ export const FirstSection = () => {
                 </h1>
                 <p className="text-lg" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
                     <TransText
-                        en="Master the art of video production in just 6 months. Learn everything
-          from camera use and lighting to editing, special effects, and digital
+                        en={`Master the art of video production in just ${window.location.href.includes('short') ? '1 week' : '6 months'}. Learn everything
+from camera use and lighting to editing, special effects, and digital
           marketing. Gain practical skills in live streaming, social media
           management, and website creation with guidance from professional
-          coaches."
+          coaches.`}
                         fr="Maîtrisez l'art de la production vidéo en seulement 6 mois. Apprenez tout, de l'utilisation de la caméra et de l'éclairage au montage, aux effets spéciaux et au marketing digital. Acquérez des compétences pratiques en streaming en direct, en gestion des réseaux sociaux et en création de sites web avec l'aide de coachs professionnels."
                         ar="أتقن فن إنتاج الفيديو في غضون 6 أشهر فقط. تعلم كل شيء من استخدام الكاميرا والإضاءة إلى التحرير، والمؤثرات الخاصة، والتسويق الرقمي. احصل على مهارات عملية في البث المباشر، وإدارة وسائل التواصل الاجتماعي، وإنشاء المواقع الإلكترونية بإرشاد من مدربين محترفين."
                     />
@@ -122,7 +121,13 @@ export const FirstSection = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                        <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                        {
+                            window.location.href.includes('short') ? (
+                                <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
+                            ) : (
+                                <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                            )
+                        }
                     </p>
                 </div>
                 <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>

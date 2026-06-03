@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAppContext } from '@/context/appContext';
-import { TransText } from './TransText';
 
 // ============================================
 // PARTIAL COMPONENTS   kolhom m3ayat lihom l ta7t
@@ -12,8 +11,8 @@ const ChatbotIconButton = ({ isOpen, onClick, messageCount, darkMode }) => {
         <button
             onClick={onClick}
             className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 hover:scale-110 active:scale-95 ${darkMode
-                ? 'bg-alpha '
-                : 'bg-alpha '
+                ? 'bg-alpha text-white hover:bg-[#ff6b2a]'
+                : 'bg-alpha text-white hover:bg-[#ff6b2a]'
                 } ${isOpen ? 'opacity-0 pointer-events-none scale-0' : 'opacity-100 scale-100'} `}
             aria-label="Open chatbot"
         >
@@ -44,7 +43,7 @@ const ChatbotIconButton = ({ isOpen, onClick, messageCount, darkMode }) => {
 const ChatbotHeader = ({ darkMode, showGuide, onToggleGuide, onClose }) => {
     return (
         <div
-            className={`flex items-center justify-between p-4 rounded-t-2xl border-b transition-all duration-300 ${darkMode ? 'bg-darker border-gray-700' : 'bg-white border-gray-200'
+            className={`flex items-center justify-between p-4 rounded-t-2xl border-b transition-all duration-300 ${darkMode ? 'bg-dark border-gray-700' : 'bg-alpha/10 border-gray-200'
                 }`}
         >
             <div className="flex items-center gap-3">
@@ -127,8 +126,7 @@ const ChatbotHeader = ({ darkMode, showGuide, onToggleGuide, onClose }) => {
 const GuidePanel = ({ darkMode }) => {
     return (
         <div
-            className={`border-b transition-all duration-500 ${darkMode ? 'bg-[#212529] border-gray-700' : 'bg-alpha/5 border-gray-200'
-                }`}
+            className={`border-b transition-all duration-500 ${darkMode ? 'bg-beta border-gray-700' : 'bg-alpha/5 border-gray-200'}`}
         >
             <div className="p-4 max-h-48 overflow-y-auto custom-scrollbar">
                 <h4 className={`font-bold mb-3 text-lg ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -238,7 +236,7 @@ const MessageBubble = ({ message, darkMode, formatTime }) => {
         >
             <div
                 className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-lg transition-all duration-300 hover:scale-[1.02] ${isUser
-                    ? 'bg-alpha text-white rounded-br-sm'
+                    ? 'bg-alpha text-beta rounded-br-sm'
                     : darkMode
                         ? 'bg-[#2a2a2a] text-gray-100 rounded-bl-sm border border-gray-700'
                         : 'bg-white text-gray-900 rounded-bl-sm border border-gray-200'
@@ -326,12 +324,16 @@ const QuickActions = ({ quickActions, onQuickAction, darkMode }) => {
 };
 
 // Input Area Partial
-const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, inputRef, isThinking, isTyping, darkMode }) => {
+const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, inputRef, isThinking, isTyping, isChatLimited, darkMode }) => {
     return (
         <div
-            className={`p-4 border-t transition-all duration-300 ${darkMode ? 'bg-[#212529] border-gray-700' : 'bg-white border-gray-200'
-                }`}
+            className={`p-4 border-t transition-all duration-300 ${darkMode ? 'bg-beta border-gray-700' : 'bg-white border-gray-200'}`}
         >
+            {isChatLimited && (
+                <div className={`mb-3 rounded-xl border px-3 py-2 text-xs ${darkMode ? 'border-gray-700 text-gray-300' : 'border-gray-200 text-gray-700'}`}>
+                    You reached the limit of {MAX_USER_MESSAGES} messages for this chat. Please try again later.
+                </div>
+            )}
             <div className="flex items-end gap-2">
                 <textarea
                     ref={inputRef}
@@ -340,18 +342,18 @@ const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, input
                     onKeyPress={onKeyPress}
                     placeholder="Type your message..."
                     rows={1}
-                    disabled={isThinking || isTyping}
+                    disabled={isThinking || isTyping || isChatLimited}
                     className={`flex-1 resize-none rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-alpha transition-all duration-300 ${darkMode
                         ? 'bg-[#1a1a1a] text-white border border-gray-700 placeholder-gray-500 focus:border-alpha'
                         : 'bg-gray-50 text-gray-900 border border-gray-300 placeholder-gray-400 focus:border-alpha'
-                        } ${isThinking || isTyping ? 'opacity-50 cursor-not-allowed' : 'hover:border-alpha/50'}`}
+                        } ${isThinking || isTyping || isChatLimited ? 'opacity-50 cursor-not-allowed' : 'hover:border-alpha/50'}`}
                     style={{ minHeight: '48px', maxHeight: '120px' }}
                 />
                 <button
                     onClick={onSendMessage}
-                    disabled={!inputValue.trim() || isThinking || isTyping}
+                    disabled={!inputValue.trim() || isThinking || isTyping || isChatLimited}
                     className={`p-3 rounded-xl transition-all duration-300 ${inputValue.trim() && !isThinking && !isTyping
-                        ? 'bg-alpha text-white hover:bg-[#ff6b2a] hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl'
+                        ? 'bg-beta text-alpha hover:bg-alpha hover:text-beta hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl'
                         : darkMode
                             ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
                             : 'bg-gray-200 text-gray-400 cursor-not-allowed'
@@ -505,6 +507,7 @@ const PrivacyNotice = ({ darkMode, onAccept, show, onClose, selectedLanguage }) 
 const Chatbot = () => {
     const { darkMode, selectedLanguage } = useAppContext();
     const [isOpen, setIsOpen] = useState(false);
+    const [isChatLimited, setIsChatLimited] = useState(false);
     const [messages, setMessages] = useState([
         {
             id: 1,
@@ -615,7 +618,7 @@ const Chatbot = () => {
     };
 
     const handleSendMessage = async () => {
-        if (!inputValue.trim() || isThinking || isTyping || !privacyAccepted) return;
+        if (!inputValue.trim() || isThinking || isTyping) return;
 
         const userMessage = {
             id: Date.now(),
@@ -638,6 +641,22 @@ const Chatbot = () => {
                 },
                 body: JSON.stringify({ message: userMessage.text }),
             });
+
+            if (response.status === 429) {
+                setIsThinking(false);
+                setIsChatLimited(true);
+                const data = await response.json().catch(() => null);
+                setMessages(prev => [
+                    ...prev,
+                    {
+                        id: Date.now() + 1,
+                        text: data?.message || `You reached the limit of ${MAX_USER_MESSAGES} messages. Please try again later.`,
+                        sender: 'bot',
+                        timestamp: new Date(),
+                    },
+                ]);
+                return;
+            }
 
             const data = await response.json();
             setIsThinking(false);
@@ -754,28 +773,20 @@ const Chatbot = () => {
 
             {/* Chatbot Window */}
             <div
-                className={`fixed bottom-6 right-6 left-auto z-50 w-96 max-w-[calc(100vw-3rem)] h-fit max-h-[calc(100vh-8rem)] flex flex-col rounded-3xl shadow-2xl transition-all duration-500 transform ${isOpen
-                    ? 'translate-x-0 opacity-100'
-                    : 'translate-x-full opacity-0'
+                className={`fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-8rem)] flex flex-col rounded-3xl shadow-2xl transition-all duration-500 transform ${isOpen
+                    ? 'opacity-100 translate-y-0 scale-100'
+                    : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
+                    } ${darkMode
+                        ? 'bg-[#1a1a1a] border border-gray-800'
+                        : 'bg-white border border-gray-200'
                     }`}
-                style={{ right: '1.5rem', left: 'auto' }}
             >
-
-                <PrivacyNotice
+                <ChatbotHeader
                     darkMode={darkMode}
-                    onAccept={handlePrivacyAccept}
+                    showGuide={showGuide}
+                    onToggleGuide={() => setShowGuide(!showGuide)}
                     onClose={() => setIsOpen(false)}
-                    show={showPrivacyNotice && isOpen}
-                    selectedLanguage={selectedLanguage}
                 />
-                {privacyAccepted && (
-                    <ChatbotHeader
-                        darkMode={darkMode}
-                        showGuide={showGuide}
-                        onToggleGuide={() => setShowGuide(!showGuide)}
-                        onClose={() => setIsOpen(false)}
-                    />
-                )}
 
                 {privacyAccepted && (
                     <>
@@ -799,31 +810,16 @@ const Chatbot = () => {
                     />
                 )}
 
-                {privacyAccepted ? (
-                    <InputArea
-                        inputValue={inputValue}
-                        setInputValue={setInputValue}
-                        onSendMessage={handleSendMessage}
-                        onKeyPress={handleKeyPress}
-                        inputRef={inputRef}
-                        isThinking={isThinking}
-                        isTyping={isTyping}
-                        darkMode={darkMode}
-                    />
-                ) : (
-                    <div className={`p-4 border-t ${darkMode ? 'bg-[#212529] border-gray-700' : 'bg-white border-gray-200'}`}>
-                        <div className={`text-center p-3 rounded-lg ${darkMode ? 'bg-[#2a2a2a]' : 'bg-gray-50'}`}>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                <TransText
-                                    en="Please accept the privacy notice to use the AI assistant"
-                                    fr="Veuillez accepter l'avis de confidentialité pour utiliser l'assistant IA"
-                                    ar="يرجى قبول إشعار الخصوصية لاستخدام المساعد الذكي"
-                                />
-                            </p>
-                        </div>
-                    </div>
-                )}
-
+                <InputArea
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    onSendMessage={handleSendMessage}
+                    onKeyPress={handleKeyPress}
+                    inputRef={inputRef}
+                    isThinking={isThinking}
+                    isTyping={isTyping}
+                    darkMode={darkMode}
+                />
             </div>
         </>
     );

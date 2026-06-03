@@ -22,7 +22,7 @@ const TrainingSection = () => {
 
             <div className="flex w-full flex-col gap-3">
                 <Link
-                    href={'/coding'}
+                    href={'/trainings#coding-long'}
                     className={`group/coding flex flex-col-reverse rounded-lg border-2 ${
                         selectedLanguage === 'ar' ? 'text-end md:flex-row-reverse' : 'md:flex-row'
                     }`}
@@ -46,7 +46,13 @@ const TrainingSection = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                                 <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                                    <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                                    {
+                                        window.location.href.includes('short') ? (
+                                            <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
+                                        ) : (
+                                            <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                                        )
+                                    }
                                 </p>
                             </div>
                             <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
@@ -111,7 +117,7 @@ const TrainingSection = () => {
                 </Link>
 
                 <Link
-                    href={'/media'}
+                    href={'/trainings#media-long'}
                     className={`group/media flex flex-col-reverse rounded-lg border-2 ${
                         selectedLanguage === 'ar' ? 'text-end md:flex-row' : 'md:flex-row-reverse'
                     }`}
@@ -135,7 +141,13 @@ const TrainingSection = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                                 <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                                    <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                                    {
+                                        window.location.href.includes('short') ? (
+                                            <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
+                                        ) : (
+                                            <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                                        )
+                                    }
                                 </p>
                             </div>
                             <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
@@ -206,6 +218,14 @@ const TrainingSection = () => {
                     </div>
                 </Link>
             </div>
+
+            <Link
+                href="/trainings"
+                className="mt-8 rounded-lg border-2 border-alpha px-6 py-3 text-center font-semibold transition-colors hover:bg-alpha hover:text-beta"
+                style={{ color: darkMode ? '#fee819' : '#0f0f0f' }}
+            >
+                <TransText en="View all trainings" fr="Voir toutes les formations" ar="عرض جميع التكوينات" />
+            </Link>
         </div>
     );
 };

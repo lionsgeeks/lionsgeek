@@ -1,6 +1,6 @@
 import { useAppContext } from '@/context/appContext';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Camera, CodeXml, GalleryHorizontalEnd, Languages, MessageCircleQuestion } from 'lucide-react';
+import { BookOpen, GalleryHorizontalEnd, Languages, MessageCircleQuestion } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './Button';
 import { TransText } from './TransText';
@@ -41,7 +41,6 @@ const Navbar = () => {
         { label: 'العربية', code: 'ar', flag: ar },
     ];
     const [isOpen, setIsOpen] = useState(false);
-    const [formationMenu, setFormationMenu] = useState(false);
     const [aboutMenu, setAboutMenu] = useState(false);
     const [languageIsOpen, setLanguageIsOpen] = useState(false);
 
@@ -56,7 +55,6 @@ const Navbar = () => {
         setLanguageIsOpen(next);
         if (next) {
             setAboutMenu(false);
-            setFormationMenu(false);
         }
     };
 
@@ -66,19 +64,14 @@ const Navbar = () => {
 
     const closeMore_Open = () => {
         setIsOpen(false);
-        setFormationMenu(false);
         setAboutMenu(false);
         setLanguageIsOpen(false);
     };
 
-    const formationRef = useRef(null);
     const aboutRef = useRef(null);
     const selectRef = useRef(null);
 
     const handleClickOutside = (event) => {
-        if (formationRef.current && !formationRef.current.contains(event.target)) {
-            setFormationMenu(false);
-        }
         if (aboutRef.current && !aboutRef.current.contains(event.target)) {
             setAboutMenu(false);
         }
@@ -111,30 +104,10 @@ const Navbar = () => {
             link: '/',
         },
         {
-            select: true,
-            ref: formationRef,
             eng: 'Training',
             fr: 'Formation',
             ar: 'التكوين',
-            menu: formationMenu,
-            options: [
-                {
-                    id: 'codingLink',
-                    eng: 'Learn to code',
-                    fr: 'Apprenez à coder',
-                    ar: 'تعلم البرمجة',
-                    link: '/coding',
-                    icon: CodeXml,
-                },
-                {
-                    id: 'mediaLink',
-                    eng: 'Master media arts',
-                    fr: 'Maîtriser les arts médiatiques',
-                    ar: 'إتقان فنون الإعلام',
-                    link: '/media',
-                    icon: Camera,
-                },
-            ],
+            link: '/trainings',
         },
         {
             eng: 'Coworking',
@@ -340,13 +313,8 @@ const Navbar = () => {
                                         >
                                             <button
                                                 onClick={() => {
-                                                    if (element.ref === formationRef) {
-                                                        setFormationMenu(!formationMenu);
-                                                        setAboutMenu(false);
-                                                        setLanguageIsOpen(false);
-                                                    } else if (element.ref === aboutRef) {
+                                                    if (element.ref === aboutRef) {
                                                         setAboutMenu(!aboutMenu);
-                                                        setFormationMenu(false);
                                                         setLanguageIsOpen(false);
                                                     }
                                                 }}
@@ -405,7 +373,6 @@ const Navbar = () => {
                                             href={element.link}
                                             onClick={() => {
                                                 setIsOpen(false);
-                                                setFormationMenu(false);
                                                 setAboutMenu(false);
                                                 setLanguageIsOpen(false);
                                             }}

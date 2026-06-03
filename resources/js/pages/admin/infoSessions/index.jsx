@@ -416,6 +416,9 @@ export default function InfoSessions() {
                                                     </h3>
                                                     <div className="flex items-center gap-2 mt-1">
                                                         <Badge className="w-fit bg-[#fee819] text-xs text-[#212529]">{session.formation}</Badge>
+                                                        <Badge className="w-fit bg-gray-100 text-xs text-gray-800 capitalize">
+                                                            {(session.format || 'long') === 'long' ? 'Long' : 'Short'}
+                                                        </Badge>
                                                         {session.is_private && (
                                                             <Badge className="w-fit bg-yellow-100 text-xs text-yellow-800">Private</Badge>
                                                         )}

@@ -87,9 +87,8 @@ export const FirstSection = () => {
 
     return (
         <div
-            className={`mt-16 flex flex-col-reverse items-center justify-center overflow-x-hidden lg:flex-row ${
-                selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''
-            }`}
+            className={`mt-16 flex flex-col-reverse items-center justify-center overflow-x-hidden lg:flex-row ${selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''
+                }`}
             style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
         >
             <div ref={leftside} className="flex flex-col gap-4 px-7 py-8 md:py-16 lg:w-[50%] lg:px-16">
@@ -116,7 +115,13 @@ export const FirstSection = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                        <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                        {
+                            window.location.href.includes('short') ? (
+                                <TransText fr="Durée : 1 semaines" en="Duration: 1 weeks" ar="المدة: 3 أسابيع" />
+                            ) : (
+                                <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
+                            )
+                        }
                     </p>
                 </div>
                 <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>

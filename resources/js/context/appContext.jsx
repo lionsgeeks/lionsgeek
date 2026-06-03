@@ -2,25 +2,39 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 const AppContext = createContext();
 
+const readStoredDarkMode = () => {
+    if (typeof window === 'undefined') {
+        return false;
+    }
+    const storedTheme = localStorage.getItem('darkMode');
+    return storedTheme !== null && storedTheme !== 'false';
+};
+
 export const AppContextProvider = ({ children }) => {
-    const [selectedLanguage, setSelectedLanguage] = useState('en');
-    const [darkMode, setDarkMode] = useState(false);
+    const [selectedLanguage, setSelectedLanguage] = useState(() => {
+        if (typeof window === 'undefined') {
+            return 'en';
+        }
+        return localStorage.getItem('language') || 'en';
+    });
+    const [darkMode, setDarkMode] = useState(readStoredDarkMode);
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem('language');
-        const storedTheme = localStorage.getItem('darkMode');
         if (storedLanguage) {
             setSelectedLanguage(storedLanguage);
-        }
-        if (storedTheme) {
-            setDarkMode(storedTheme == 'false' ? false : true);
         }
     }, []);
 
     useEffect(() => {
         localStorage.setItem('language', selectedLanguage);
-        localStorage.setItem('darkMode', darkMode);
+        localStorage.setItem('darkMode', String(darkMode));
     }, [selectedLanguage, darkMode]);
+
+    // Tailwind dark: variant uses @custom-variant dark (&:is(.dark *)) — sync context with <html>
+    useEffect(() => {
+        document.documentElement.classList.toggle('dark', darkMode);
+    }, [darkMode]);
 
     return <AppContext.Provider value={{ selectedLanguage, setSelectedLanguage, darkMode, setDarkMode }}>{children}</AppContext.Provider>;
 };

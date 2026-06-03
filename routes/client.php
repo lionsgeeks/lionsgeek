@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
 use App\Models\InfoSession;
 use App\Models\Press;
@@ -34,15 +35,33 @@ Route::get('/about', function () {
 });
 
 
+Route::get('/trainings', [TrainingController::class, 'index'])->name('trainings');
+
 Route::get('/coding', function () {
+    $sessions = \App\Models\InfoSession::query()
+        ->withCount('participants')
+        ->where('formation', 'Coding')
+        ->where('is_private', false)
+        ->where('isFinish', false)
+        ->get();
+
     return Inertia::render('client/coding/coding', [
-        'sessions' => InfoSession::where('isAvailable', 1)->where('formation', 'Coding')->where('isFinish', 0)->where('is_private', false)->get(),
+        'sessions' => $sessions,
+        'format'   => request('format', 'long'),
     ]);
 })->name('coding');
 
 Route::get('/media', function () {
+    $sessions = \App\Models\InfoSession::query()
+        ->withCount('participants')
+        ->where('formation', 'Media')
+        ->where('is_private', false)
+        ->where('isFinish', false)
+        ->get();
+
     return Inertia::render('client/media/media', [
-        'sessions' => InfoSession::where('isAvailable', 1)->where('formation', 'Media')->where('isFinish', 0)->where('is_private', false)->get(),
+        'sessions' => $sessions,
+        'format'   => request('format', 'long'),
     ]);
 })->name('media');
 

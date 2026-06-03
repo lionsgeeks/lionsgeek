@@ -3,6 +3,7 @@ import { Partners } from '../about/partials/partners';
 
 import { Head } from '@inertiajs/react';
 import { EventSection, GallerySection, HeroSection, ServicesSection, TrainingSection, WhoSection } from './partials';
+import Chatbot from '@/components/Chatbot';
 
 const breadcrumbs = [
     {
@@ -24,6 +25,7 @@ export default function Home() {
             {upcomingEvent && <EventSection />}
             <TrainingSection />
             <GallerySection />
+            <Chatbot />
         </AppLayout>
     );
 }
