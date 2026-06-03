@@ -9,6 +9,7 @@ import { Switch } from '@/components/ui/switch';
 import { router, useForm } from '@inertiajs/react';
 import { Calendar, Code2, GraduationCap, Loader2, Lock, Palette, Users, X } from 'lucide-react';
 import { useEffect } from 'react';
+import { formatForAudience } from './infoSessionAudience';
 
 export function EditSessionModal({ open, onOpenChange, session, loading = false }) {
     const { data, setData, put, processing, errors } = useForm({
@@ -37,14 +38,15 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
                 return `${year}-${month}-${day}T${hours}:${minutes}`;
             };
 
+            const audience = session.audience || 'normal';
             setData({
                 name: session.name || '',
                 start_date: formatDateTime(session.start_date),
                 places: session.places || '',
                 formation: session.formation || '',
-                format: session.format || 'long',
+                format: formatForAudience(audience),
                 is_private: session.is_private || false,
-                audience: session.audience || 'normal',
+                audience,
                 registration_form_children: Array.isArray(session.registration_form_children) ? session.registration_form_children : [],
             });
         }
@@ -61,6 +63,14 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
 
     const handleChange = (field, value) => {
         setData((prev) => ({ ...prev, [field]: value }));
+    };
+
+    const setAudience = (audience) => {
+        setData((prev) => ({
+            ...prev,
+            audience,
+            format: formatForAudience(audience),
+        }));
     };
 
     const updateChildrenField = (index, patch) => {
@@ -138,27 +148,35 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
                             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                                 <button
                                     type="button"
-                                    onClick={() => handleChange('audience', 'normal')}
-                                    className={`flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
+                                    onClick={() => setAudience('normal')}
+                                    className={`flex flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
                                         data.audience === 'normal'
                                             ? 'border-[#212529] bg-[#212529] text-white'
                                             : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-100'
                                     }`}
                                     disabled={loading}
                                 >
-                                    Normal (18+)
+                                    <span>Normal (18+)</span>
+                                    <span className={`mt-0.5 text-xs ${data.audience === 'normal' ? 'text-gray-300' : 'text-gray-500'}`}>
+                                        Long program (6 months)
+                                    </span>
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => handleChange('audience', 'children_12_17')}
-                                    className={`flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
+                                    onClick={() => setAudience('children_12_17')}
+                                    className={`flex flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
                                         data.audience === 'children_12_17'
                                             ? 'border-[#212529] bg-[#212529] text-white'
                                             : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-100'
                                     }`}
                                     disabled={loading}
                                 >
-                                    Children 12–17
+                                    <span>Children 12–17</span>
+                                    <span
+                                        className={`mt-0.5 text-xs ${data.audience === 'children_12_17' ? 'text-gray-300' : 'text-gray-500'}`}
+                                    >
+                                        Short program (1 week)
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -209,26 +227,6 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
                                     </SelectContent>
                                 </Select>
                                 {errors.formation && <p className="text-sm text-[#ff7376]">{errors.formation}</p>}
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="edit-format" className="text-sm font-medium text-[#212529]">
-                                    Formation duration <span className="text-[#ff7376]">*</span>
-                                </Label>
-                                <Select
-                                    value={data.format}
-                                    onValueChange={(value) => handleChange('format', value)}
-                                    disabled={loading}
-                                >
-                                    <SelectTrigger className="rounded-lg border transition-all duration-200 ease-in-out focus:border-[#212529] focus:ring-2 focus:ring-[#212529]/20">
-                                        <SelectValue placeholder="Choose duration type" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="long">Long formation</SelectItem>
-                                        <SelectItem value="short">Short formation</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                {errors.format && <p className="text-sm text-[#ff7376]">{errors.format}</p>}
                             </div>
 
                             {/* Session Privacy */}

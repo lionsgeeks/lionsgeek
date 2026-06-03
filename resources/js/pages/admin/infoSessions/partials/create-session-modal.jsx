@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { router, useForm } from '@inertiajs/react';
 import { Calendar, Code2, GraduationCap, Loader2, Palette, Plus, Users, X, Lock } from 'lucide-react';
+import { formatForAudience } from './infoSessionAudience';
 
 const defaultChildrenForm = [
     { key: 'child_full_name', type: 'text', required: true, group: 'child', label: 'Child full name' },
@@ -51,6 +52,14 @@ export function CreateSessionModal({ open, onOpenChange }) {
 
     const handleChange = (field, value) => {
         setData((prev) => ({ ...prev, [field]: value }));
+    };
+
+    const setAudience = (audience) => {
+        setData((prev) => ({
+            ...prev,
+            audience,
+            format: formatForAudience(audience),
+        }));
     };
 
     const updateChildrenField = (index, patch) => {
@@ -132,27 +141,35 @@ export function CreateSessionModal({ open, onOpenChange }) {
                             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                                 <button
                                     type="button"
-                                    onClick={() => handleChange('audience', 'normal')}
-                                    className={`flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
+                                    onClick={() => setAudience('normal')}
+                                    className={`flex flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
                                         data.audience === 'normal'
                                             ? 'border-[#212529] bg-[#212529] text-white'
                                             : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-100'
                                     }`}
                                     disabled={processing}
                                 >
-                                    Normal (18+)
+                                    <span>Normal (18+)</span>
+                                    <span className={`mt-0.5 text-xs ${data.audience === 'normal' ? 'text-gray-300' : 'text-gray-500'}`}>
+                                        Long program (6 months)
+                                    </span>
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => handleChange('audience', 'children_12_17')}
-                                    className={`flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
+                                    onClick={() => setAudience('children_12_17')}
+                                    className={`flex flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
                                         data.audience === 'children_12_17'
                                             ? 'border-[#212529] bg-[#212529] text-white'
                                             : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-100'
                                     }`}
                                     disabled={processing}
                                 >
-                                    Children 12–17
+                                    <span>Children 12–17</span>
+                                    <span
+                                        className={`mt-0.5 text-xs ${data.audience === 'children_12_17' ? 'text-gray-300' : 'text-gray-500'}`}
+                                    >
+                                        Short program (1 week)
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -299,22 +316,6 @@ export function CreateSessionModal({ open, onOpenChange }) {
                             {errors.formation && <p className="text-sm text-[#ff7376]">{errors.formation}</p>}
                         </div>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="format" className="text-sm font-medium text-[#212529]">
-                                Formation duration <span className="text-[#ff7376]">*</span>
-                            </Label>
-                            <Select value={data.format} onValueChange={(value) => handleChange('format', value)} disabled={processing}>
-                                <SelectTrigger className="rounded-lg border focus:border-[#212529]">
-                                    <SelectValue placeholder="Choose duration type" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="long">Long formation</SelectItem>
-                                    <SelectItem value="short">Short formation</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            {errors.format && <p className="text-sm text-[#ff7376]">{errors.format}</p>}
-                        </div>
-
                         {/* Date and Capacity */}
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div className="space-y-2">
@@ -403,7 +404,8 @@ export function CreateSessionModal({ open, onOpenChange }) {
                                             )}
                                         </div>
                                         <div className="text-sm text-gray-500">
-                                            {data.formation} Program {data.is_private ? '• Private Session' : '• Public Session'}
+                                            {data.formation} Program • {data.format === 'short' ? 'Short' : 'Long'}{' '}
+                                            {data.is_private ? '• Private Session' : '• Public Session'}
                                         </div>
                                     </div>
                                 </div>
@@ -423,7 +425,7 @@ export function CreateSessionModal({ open, onOpenChange }) {
                             </Button>
                             <Button
                                 type="submit"
-                                disabled={processing || !data.name || !data.formation || !data.format || !data.start_date || !data.places}
+                                disabled={processing || !data.name || !data.formation || !data.start_date || !data.places}
                                 className="flex-1"
                             >
                                 {processing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
