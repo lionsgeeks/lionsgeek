@@ -37,8 +37,8 @@ const ArrowIcon = () => (
 /* ─── Copy ───────────────────────────────────────────────────── */
 
 const SECTION_HEADER = {
-    label:    { en: 'Our programs',           fr: 'Nos programmes',              ar: 'برامجنا'              },
-    title:    { en: 'Two paths, four tracks', fr: 'Deux parcours, quatre filières', ar: 'مساران، أربع مسارات' },
+    label: { en: 'Our programs', fr: 'Nos programmes', ar: 'برامجنا' },
+    title: { en: 'Two paths, four tracks', fr: 'Deux parcours, quatre filières', ar: 'مساران، أربع مسارات' },
     subtitle: {
         en: 'Whether you have a week or six months, there is a program designed for you — in coding or digital media.',
         fr: 'Que vous ayez une semaine ou six mois, il existe un programme conçu pour vous — en coding ou en médias digitaux.',
@@ -50,7 +50,7 @@ const PROGRAMS = [
     {
         id: 'short',
         number: '01',
-        badge:    { en: 'Short program',  fr: 'Programme court',  ar: 'برنامج قصير'     },
+        badge: { en: 'Short program', fr: 'Programme court', ar: 'برنامج قصير' },
         // duration: { en: '1 week',          fr: '1 semaine',        ar: 'أسبوع واحد'       },
         title: {
             en: 'A first step into the digital world',
@@ -93,8 +93,8 @@ const PROGRAMS = [
     {
         id: 'long',
         number: '02',
-        badge:    { en: 'Normal program', fr: 'Programme normal', ar: 'البرنامج العادي' },
-        duration: { en: '6 months',       fr: '6 mois',           ar: '6 أشهر'           },
+        badge: { en: 'Normal program', fr: 'Programme normal', ar: 'البرنامج العادي' },
+        duration: { en: '6 months', fr: '6 mois', ar: '6 أشهر' },
         title: {
             en: 'A full immersion to become a professional',
             fr: 'Une immersion complète pour devenir professionnel',
@@ -142,8 +142,8 @@ const BUTTONS = {
 /* ─── Track Card (horizontal) ───────────────────────────────── */
 
 function TrackCard({ card, format, rtl }) {
-    const isCoding   = card.track === 'coding';
-    const trackUrl   = isCoding ? '/coding' : '/media';
+    const isCoding = card.track === 'coding';
+    const trackUrl = isCoding ? '/coding' : '/media';
     const detailsUrl = `${trackUrl}?format=${format}`;
 
     return (
@@ -165,11 +165,7 @@ function TrackCard({ card, format, rtl }) {
                         <span
                             className={`
                                 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold
-                                ${rtl ? 'flex-row-reverse' : ''}
-                                ${isCoding
-                                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400'
-                                    : 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-400'
-                                }
+                                ${rtl ? 'flex-row-reverse' : ''} bg-darker/80 text-alpha dark:bg-alpha/20 dark:text-alpha'    
                             `}
                         >
                             {card.icon}
@@ -242,11 +238,10 @@ function ProgramSection({ program, rtl }) {
                         <div className={`flex flex-col gap-1 ${rtl ? 'items-end' : ''}`}>
                             <div className={`flex items-center gap-2 ${rtl ? 'flex-row-reverse' : ''}`}>
                                 <span
-                                    className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest ${
-                                        program.isShort
+                                    className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest ${program.isShort
                                             ? 'bg-alpha/10 text-beta dark:bg-alpha/20 dark:text-alpha'
                                             : 'bg-alpha/20 text-beta dark:bg-alpha/20 dark:text-alpha'
-                                    }`}
+                                        }`}
                                 >
                                     <TransText {...program.badge} />
                                 </span>
