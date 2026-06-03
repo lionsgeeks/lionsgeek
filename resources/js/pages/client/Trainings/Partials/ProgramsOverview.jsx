@@ -51,7 +51,7 @@ const PROGRAMS = [
         id: 'short',
         number: '01',
         badge:    { en: 'Short program',  fr: 'Programme court',  ar: 'برنامج قصير'     },
-        duration: { en: '1 week',          fr: '1 semaine',        ar: 'أسبوع واحد'       },
+        // duration: { en: '1 week',          fr: '1 semaine',        ar: 'أسبوع واحد'       },
         title: {
             en: 'A first step into the digital world',
             fr: 'Un premier pas dans le monde digital',
@@ -244,16 +244,16 @@ function ProgramSection({ program, rtl }) {
                                 <span
                                     className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest ${
                                         program.isShort
-                                            ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400'
-                                            : 'bg-alpha/20 text-darker dark:bg-alpha/20 dark:text-alpha'
+                                            ? 'bg-alpha/10 text-beta dark:bg-alpha/20 dark:text-alpha'
+                                            : 'bg-alpha/20 text-beta dark:bg-alpha/20 dark:text-alpha'
                                     }`}
                                 >
                                     <TransText {...program.badge} />
                                 </span>
-                                <span className="flex items-center gap-1 text-sm font-bold text-alpha">
+                                {/* <span className="flex items-center gap-1 text-sm font-bold text-alpha">
                                     <ClockIcon />
                                     <TransText {...program.duration} />
-                                </span>
+                                </span> */}
                             </div>
                         </div>
                     </div>
