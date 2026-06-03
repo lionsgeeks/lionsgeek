@@ -7,7 +7,7 @@ import { Button } from '../../../../components/Button';
 import { TransText } from '../../../../components/TransText';
 
 export const FirstSection = () => {
-    const { sessions } = usePage().props;
+    const { sessions = [], format = 'long' } = usePage().props;
 
     const { selectedLanguage, darkMode } = useAppContext();
     const leftside = useRef(null);
@@ -116,7 +116,7 @@ export const FirstSection = () => {
                     </svg>
                     <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
                         {
-                            window.location.href.includes('short') ? (
+                            format === 'short' ? (
                                 <TransText fr="Durée : 1 semaines" en="Duration: 1 weeks" ar="المدة: 3 أسابيع" />
                             ) : (
                                 <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
@@ -179,7 +179,7 @@ export const FirstSection = () => {
                             />
                         </div>
                     ) : (
-                        <Button onClick={() => router.visit("/postuler?type=coding")}>
+                        <Button onClick={() => router.visit(`/postuler?type=coding&format=${format}`)}>
                             <TransText fr="Postuler" en="Apply" ar="تقدم بطلب" />
                         </Button>
                     )}

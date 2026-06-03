@@ -38,30 +38,30 @@ Route::get('/about', function () {
 Route::get('/trainings', [TrainingController::class, 'index'])->name('trainings');
 
 Route::get('/coding', function () {
-    $sessions = \App\Models\InfoSession::query()
+    $format = in_array(request('format'), ['long', 'short'], true) ? request('format') : 'long';
+
+    $sessions = InfoSession::query()
         ->withCount('participants')
-        ->where('formation', 'Coding')
-        ->where('is_private', false)
-        ->where('isFinish', false)
+        ->forProgramPage('Coding', $format)
         ->get();
 
     return Inertia::render('client/coding/coding', [
         'sessions' => $sessions,
-        'format'   => request('format', 'long'),
+        'format'   => $format,
     ]);
 })->name('coding');
 
 Route::get('/media', function () {
-    $sessions = \App\Models\InfoSession::query()
+    $format = in_array(request('format'), ['long', 'short'], true) ? request('format') : 'long';
+
+    $sessions = InfoSession::query()
         ->withCount('participants')
-        ->where('formation', 'Media')
-        ->where('is_private', false)
-        ->where('isFinish', false)
+        ->forProgramPage('Media', $format)
         ->get();
 
     return Inertia::render('client/media/media', [
         'sessions' => $sessions,
-        'format'   => request('format', 'long'),
+        'format'   => $format,
     ]);
 })->name('media');
 
