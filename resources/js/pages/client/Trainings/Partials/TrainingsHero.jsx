@@ -101,9 +101,9 @@ export default function TrainingsHero({ stats = {}, programs = [] }) {
                 {/* ── RIGHT — two storyset illustrations ── */}
                 <div
                     ref={rightside}
-                    className="order-1 flex w-full items-end justify-center gap-4 lg:order-2 lg:justify-end"
+                    className="order-1 flex w-full items-end justify-center  lg:order-2 lg:justify-end"
                 >
-                    <div className="flex w-[60%] flex-col items-center">
+                    <div className=" w-[70%] ">
                         <img
                             loading="lazy"
                             src={mediaIllustration}
@@ -112,7 +112,7 @@ export default function TrainingsHero({ stats = {}, programs = [] }) {
                         />
                     </div>
 
-                    <div className="flex w-[40%] flex-col items-center">
+                    <div className=" w-[40%]  ">
                         <img
                             loading="lazy"
                             src={codingIllustration}

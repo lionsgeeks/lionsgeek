@@ -341,8 +341,14 @@ class ParticipantController extends Controller
                 str_contains($errors['email'][0], '180 days')
             );
 
-            // For Inertia requests, return back with errors
+            // For Inertia requests, return back with errors (generic message for children form)
             if ($request->header('X-Inertia')) {
+                if ($request->boolean('is_children')) {
+                    return back()->withErrors([
+                        'general' => 'Please check your answers and try again.',
+                    ])->withInput();
+                }
+
                 return back()->withErrors($validationException->errors())->withInput();
             }
 
@@ -474,17 +480,115 @@ class ParticipantController extends Controller
             'is_children' => 'required|boolean',
             'children_answers' => 'required|array',
             'formation_field' => 'required|string|in:coding,media',
-            // Core child fields – keep them in sync with defaultChildrenForm keys
-            'children_answers.child_full_name' => 'required|string',
-            // Birthday must be between 12 and 17 years ago (inclusive)
-            'children_answers.child_birthday' => 'required|date|after_or_equal:' . now()->subYears(17)->format('Y-m-d') . '|before_or_equal:' . now()->subYears(12)->format('Y-m-d'),
-            'children_answers.child_city' => 'required|string',
-            'children_answers.guardian_full_name' => 'required|string',
-            'children_answers.guardian_phone' => 'required|string',
-            'children_answers.guardian_email' => 'required|string|email',
+            'info_session_id' => 'nullable|integer|exists:info_sessions,id',
         ];
 
+        $schema = $this->getChildrenRegistrationSchema($request);
+
+        foreach ($schema as $field) {
+            $key = $field['key'] ?? null;
+            if (!$key || !is_string($key)) {
+                continue;
+            }
+
+            $fieldRules = !empty($field['required']) ? ['required'] : ['nullable'];
+            $type = $field['type'] ?? 'text';
+
+            switch ($type) {
+                case 'email':
+                    $fieldRules[] = 'string';
+                    $fieldRules[] = 'email';
+                    break;
+                case 'date':
+                    $fieldRules[] = 'date';
+                    if (str_contains($key, 'birthday') || str_contains($key, 'birth')) {
+                        $fieldRules[] = 'after_or_equal:' . now()->subYears(17)->format('Y-m-d');
+                        $fieldRules[] = 'before_or_equal:' . now()->subYears(12)->format('Y-m-d');
+                    }
+                    break;
+                case 'tel':
+                    $fieldRules[] = 'string';
+                    break;
+                case 'select':
+                    $allowedValues = collect($field['options'] ?? [])
+                        ->pluck('value')
+                        ->filter(fn ($value) => is_string($value) && $value !== '')
+                        ->values()
+                        ->all();
+                    $fieldRules[] = 'string';
+                    if (!empty($allowedValues)) {
+                        $fieldRules[] = 'in:' . implode(',', $allowedValues);
+                    }
+                    break;
+                default:
+                    $fieldRules[] = 'string';
+                    break;
+            }
+
+            $rules["children_answers.{$key}"] = implode('|', $fieldRules);
+        }
+
         $request->validate($rules);
+    }
+
+    /**
+     * Load the admin-defined children registration schema for the selected info session.
+     */
+    private function getChildrenRegistrationSchema(Request $request): array
+    {
+        if (!$request->filled('info_session_id')) {
+            return [];
+        }
+
+        $session = InfoSession::find($request->input('info_session_id'));
+        if (!$session || !is_array($session->registration_form_children)) {
+            return [];
+        }
+
+        return $session->registration_form_children;
+    }
+
+    /**
+     * Resolve a submitted answer by preferred keys, then schema field type/group.
+     */
+    private function resolveChildrenAnswer(array $answers, array $schema, array $preferredKeys, ?string $group = null, ?string $type = null): string
+    {
+        foreach ($preferredKeys as $key) {
+            if (!empty($answers[$key])) {
+                return (string) $answers[$key];
+            }
+        }
+
+        $value = $this->resolveChildrenAnswerFromSchema($answers, $schema, $group, $type);
+        if ($value !== '') {
+            return $value;
+        }
+
+        if ($group !== null) {
+            return $this->resolveChildrenAnswerFromSchema($answers, $schema, null, $type);
+        }
+
+        return '';
+    }
+
+    private function resolveChildrenAnswerFromSchema(array $answers, array $schema, ?string $group, ?string $type): string
+    {
+        foreach ($schema as $field) {
+            $key = $field['key'] ?? '';
+            if ($key === '' || empty($answers[$key])) {
+                continue;
+            }
+            if ($group !== null && ($field['group'] ?? 'child') !== $group) {
+                continue;
+            }
+            if ($type !== null && ($field['type'] ?? 'text') !== $type) {
+                continue;
+            }
+
+            return (string) $answers[$key];
+        }
+
+        return '';
     }
 
     /**
@@ -782,37 +886,65 @@ class ParticipantController extends Controller
     private function createChildrenParticipant(Request $request): Participant
     {
         $answers = (array) $request->input('children_answers', []);
+        $schema = $this->getChildrenRegistrationSchema($request);
 
-        $fullName = (string) ($answers['child_full_name'] ?? '');
-        $birthday = (string) ($answers['child_birthday'] ?? '');
-        $city = (string) ($answers['child_city'] ?? '');
-        $guardianName = (string) ($answers['guardian_full_name'] ?? '');
-        $guardianPhone = (string) ($answers['guardian_phone'] ?? '');
-        $guardianEmail = (string) ($answers['guardian_email'] ?? '');
+        $fullName = $this->resolveChildrenAnswer($answers, $schema, ['child_full_name'], 'child', 'text')
+            ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'text');
+        $birthday = $this->resolveChildrenAnswer($answers, $schema, ['child_birthday'], 'child', 'date')
+            ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'date');
+        $city = $this->resolveChildrenAnswer($answers, $schema, ['child_city'], 'child', 'text')
+            ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'text');
+        $guardianPhone = $this->resolveChildrenAnswer($answers, $schema, ['guardian_phone'], 'guardian', 'tel')
+            ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'tel');
+        $guardianEmail = $this->resolveChildrenAnswer($answers, $schema, ['guardian_email'], 'guardian', 'email')
+            ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'email');
 
-        $age = Carbon::parse($birthday)->age;
+        $age = $birthday !== '' ? (string) Carbon::parse($birthday)->age : '';
 
-        $code = $fullName . Carbon::now()->format('h:i:s');
+        $infoSessionId = $request->filled('info_session_id')
+            ? (int) $request->input('info_session_id')
+            : null;
 
-        return Participant::create([
-            'info_session_id' => null,
-            'formation_field' => $request->input('formation_field'),
-            'full_name' => $fullName,
+        $formationField = strtolower((string) $request->input('formation_field', ''));
+        if ($infoSessionId) {
+            $session = InfoSession::find($infoSessionId);
+            if ($session?->formation) {
+                $formationField = strtolower($session->formation);
+            }
+        }
+
+        $code = ($fullName !== '' ? $fullName : 'child') . Carbon::now()->format('His');
+
+        $payload = [
+            'info_session_id' => $infoSessionId,
+            'full_name' => $fullName !== '' ? $fullName : '—',
             'email' => $guardianEmail,
-            'birthday' => $birthday,
-            'age' => $age,
-            'phone' => $guardianPhone,
-            'city' => $city,
-            'region' => null,
-            'other_city' => null,
+            'birthday' => $birthday !== '' ? $birthday : '—',
+            'age' => $age !== '' ? $age : '0',
+            'phone' => $guardianPhone !== '' ? $guardianPhone : '—',
+            'city' => $city !== '' ? $city : '—',
             'prefecture' => '',
-            'gender' => $answers['child_gender'] ?? '',
+            'gender' => $this->resolveChildrenAnswer($answers, $schema, ['child_gender'], 'child', 'select') ?: '',
             'source' => 'children_form',
             'motivation' => '',
             'code' => $code,
             'children_form_data' => $answers,
-            'status' => Participant::STATUS_PENDING,
-        ]);
+        ];
+
+        if (Schema::hasColumn('participants', 'formation_field')) {
+            $payload['formation_field'] = $formationField ?: 'coding';
+        }
+        if (Schema::hasColumn('participants', 'region')) {
+            $payload['region'] = null;
+        }
+        if (Schema::hasColumn('participants', 'other_city')) {
+            $payload['other_city'] = null;
+        }
+        if (Schema::hasColumn('participants', 'status')) {
+            $payload['status'] = Participant::STATUS_PENDING;
+        }
+
+        return Participant::create($payload);
     }
 
 
@@ -912,22 +1044,21 @@ class ParticipantController extends Controller
      */
     private function handleErrorResponse(Request $request, \Throwable $th)
     {
-        $debugMessage = config('app.debug') ? (' ' . $th->getMessage()) : '';
-        // For Inertia requests, return back with error
+        $userMessage = 'Submission failed. Please try again.';
+
         if ($request->header('X-Inertia')) {
-            return back()->withErrors(['general' => 'Submission failed. Please try again.' . $debugMessage]);
+            return back()->withErrors(['general' => $userMessage]);
         }
 
-        // For AJAX/JSON requests (like from the game component)
         if ($request->expectsJson() || $request->ajax()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Submission failed. Please try again.' . $debugMessage,
-                'errors' => ['general' => 'Submission failed. Please try again.' . $debugMessage]
+                'message' => $userMessage,
+                'errors' => ['general' => $userMessage],
             ], 500);
         }
 
-        return back();
+        return back()->withErrors(['general' => $userMessage]);
     }
 
     /**

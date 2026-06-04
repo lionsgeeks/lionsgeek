@@ -22,17 +22,31 @@ import ChildrenRegistrationWizard from './children/ChildrenRegistrationWizard';
 
 const InfoSession = ({ trainingType = 'digital' }) => {
     const { selectedLanguage, darkMode } = useAppContext();
-    const { sessions, formation_field, privatesession, private_token } = usePage().props;
+    const { sessions, formation_field, formation_format, privatesession, private_token } = usePage().props;
     const { url } = usePage();
 
-    // Use formation_field from session (passed from backend) or fallback to URL parameter
     const urlParams = new URLSearchParams(url.split('?')[1] || '');
     const formationType = formation_field || urlParams.get('type') || 'coding';
+    const programFormat =
+        formation_format || (urlParams.get('format') === 'short' ? 'short' : 'long');
 
     const allSessions = Array.isArray(sessions) ? sessions : [];
-    const hasChildrenSession = allSessions.some((s) => s?.audience === 'children_12_17');
+    const childrenSession = allSessions.find((s) => s?.audience === 'children_12_17') ?? null;
+    const hasChildrenSession = Boolean(childrenSession);
+
+    // Short program page → children form; long program page → normal (18+) form
+    const useChildrenForm = programFormat === 'short' && hasChildrenSession;
+    const useNormalForm = !useChildrenForm;
+
+    const showAudienceToggle =
+        !privatesession &&
+        programFormat !== 'short' &&
+        programFormat !== 'long' &&
+        hasChildrenSession &&
+        allSessions.some((s) => (s?.audience ?? 'normal') === 'normal');
+
     const [audienceSelection, setAudienceSelection] = useState(
-        hasChildrenSession ? 'children_12_17' : 'normal'
+        useChildrenForm ? 'children_12_17' : 'normal',
     );
 
 
@@ -345,14 +359,11 @@ const InfoSession = ({ trainingType = 'digital' }) => {
     const isDigitalMarketing = trainingType === 'digital' || trainingType === 'media';
 
     const selectedChildrenSchema = (() => {
-        if (!hasChildrenSession) return [];
-        // If there is a private session, we only have one session in props
+        if (!childrenSession) return [];
         if (privatesession && allSessions.length === 1) {
             return allSessions[0].registration_form_children || [];
         }
-        // Otherwise, use the first children session for schema for now
-        const childSession = allSessions.find((s) => s?.audience === 'children_12_17');
-        return childSession?.registration_form_children || [];
+        return childrenSession.registration_form_children || [];
     })();
 
     return (
@@ -372,7 +383,13 @@ const InfoSession = ({ trainingType = 'digital' }) => {
                                 />
                             </h1>
                             <p className={`text-base sm:text-lg px-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                                {hasChildrenSession ? (
+                                {useChildrenForm ? (
+                                    <TransText
+                                        en="Complete the short program application for children (12–17)"
+                                        fr="Complétez la candidature au programme court pour les enfants (12–17)"
+                                        ar="أكمل طلب البرنامج القصير للأطفال (12–17)"
+                                    />
+                                ) : showAudienceToggle ? (
                                     <TransText
                                         en="Choose the application type then complete the form"
                                         fr="Choisissez le type de candidature puis complétez le formulaire"
@@ -388,7 +405,7 @@ const InfoSession = ({ trainingType = 'digital' }) => {
                             </p>
                         </div>
 
-                        {hasChildrenSession && (
+                        {showAudienceToggle && (
                             <div className="mb-6 flex justify-center">
                                 <div className="inline-flex rounded-full bg-gray-100 p-1">
                                     <button
@@ -417,14 +434,16 @@ const InfoSession = ({ trainingType = 'digital' }) => {
                             </div>
                         )}
 
-                        {audienceSelection === 'children_12_17' && hasChildrenSession ? (
+                        {useChildrenForm || (audienceSelection === 'children_12_17' && hasChildrenSession) ? (
                             <ChildrenRegistrationWizard
                                 schema={selectedChildrenSchema}
                                 darkMode={darkMode}
                                 selectedLanguage={selectedLanguage}
                                 formationField={formationType}
+                                formationFormat={formationFormat}
+                                infoSessionId={childrenSession?.id ?? (allSessions.length === 1 ? allSessions[0].id : null)}
                             />
-                        ) : (
+                        ) : useNormalForm ? (
                             <>
                                 {currentStep <= 6 && (
                                     <div className="mb-6 sm:mb-8">
@@ -529,6 +548,16 @@ const InfoSession = ({ trainingType = 'digital' }) => {
                                     </form>
                                 </div>
                             </>
+                        ) : (
+                            <div
+                                className={`rounded-xl p-6 text-center ${darkMode ? 'bg-beta text-gray-200' : 'bg-white text-gray-600'}`}
+                            >
+                                <TransText
+                                    en="No open session is available for this program right now."
+                                    fr="Aucune session ouverte n'est disponible pour ce programme pour le moment."
+                                    ar="لا توجد جلسة مفتوحة لهذا البرنامج حالياً."
+                                />
+                            </div>
                         )}
                     </div>
                 ) : (

@@ -8,6 +8,11 @@ use Inertia\Inertia;
 
 class InfosessionController extends Controller
 {
+    private function formatForAudience(?string $audience): string
+    {
+        return $audience === 'children_12_17' ? 'short' : 'long';
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +40,6 @@ class InfosessionController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'formation' => 'required|in:Coding,Media',
-            'format' => 'required|in:long,short',
             'start_date' => 'required|date',
             'places' => 'required|integer|min:1|max:500',
             'is_private' => 'boolean',
@@ -43,11 +47,13 @@ class InfosessionController extends Controller
             'registration_form_children' => 'nullable|array',
         ]);
 
+        $audience = $validated['audience'] ?? 'normal';
+
         InfoSession::create([
             'name' => strtolower($validated['name']),
             'formation' => $validated['formation'],
-            'format' => $validated['format'],
-            'audience' => $validated['audience'] ?? 'normal',
+            'format' => $this->formatForAudience($audience),
+            'audience' => $audience,
             'registration_form_children' => $validated['registration_form_children'] ?? null,
             'start_date' => $validated['start_date'],
             'places' => $validated['places'],
@@ -89,24 +95,24 @@ class InfosessionController extends Controller
     public function update(Request $request,  $id)
     {
         $infoSession = InfoSession::where('id', $id)->first();
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required',
             'formation' => 'required',
-            'format' => 'required|in:long,short',
             'start_date' => 'required',
             'places' => 'required',
             'is_private' => 'boolean',
             'audience' => 'nullable|string|in:normal,children_12_17',
             'registration_form_children' => 'nullable|array',
         ]);
+        $audience = $validated['audience'] ?? $infoSession->audience ?? 'normal';
         $infoSession->update([
             'name' => $request->name,
             'formation' => $request->formation,
-            'format' => $request->format,
+            'format' => $this->formatForAudience($audience),
             'start_date' => $request->start_date,
             'places' => $request->places,
             'is_private' => $request->boolean('is_private'),
-            'audience' => $request->input('audience', $infoSession->audience ?? 'normal'),
+            'audience' => $audience,
             'registration_form_children' => $request->input('registration_form_children') ?? $infoSession->registration_form_children,
         ]);
         return back();
