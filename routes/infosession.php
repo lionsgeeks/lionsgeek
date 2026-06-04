@@ -42,11 +42,16 @@ Route::get('/postuler', function (Request $request) {
 
     $sessionsQuery->where('format', $format);
 
+    if ($format === 'long') {
+        $sessionsQuery->where('audience', 'normal');
+    }
+
     $sessions = $sessionsQuery->get();
 
     return Inertia::render('client/infoSession/index', [
         'sessions' => $sessions,
-        'formation_field' => $formationField, // Pass formation field to frontend
+        'formation_field' => $formationField,
+        'formation_format' => $format,
     ]);
 })->name('postuler')->middleware("infoSession");
 // Summary page after finishing the game

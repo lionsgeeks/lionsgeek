@@ -9,6 +9,8 @@ import { Switch } from '@/components/ui/switch';
 import { router, useForm } from '@inertiajs/react';
 import { Calendar, Code2, GraduationCap, Loader2, Lock, Palette, Users, X } from 'lucide-react';
 import { useEffect } from 'react';
+import { ChildrenFormBuilder } from './children-form-builder';
+import { normalizeChildrenForm } from './children-form-helpers';
 import { formatForAudience } from './infoSessionAudience';
 
 export function EditSessionModal({ open, onOpenChange, session, loading = false }) {
@@ -47,7 +49,7 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
                 format: formatForAudience(audience),
                 is_private: session.is_private || false,
                 audience,
-                registration_form_children: Array.isArray(session.registration_form_children) ? session.registration_form_children : [],
+                registration_form_children: normalizeChildrenForm(session.registration_form_children),
             });
         }
     }, [session]);
@@ -71,44 +73,6 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
             audience,
             format: formatForAudience(audience),
         }));
-    };
-
-    const updateChildrenField = (index, patch) => {
-        setData((prev) => {
-            const current = Array.isArray(prev.registration_form_children) ? prev.registration_form_children : [];
-            const next = [...current];
-            next[index] = { ...(next[index] || {}), ...patch };
-            return { ...prev, registration_form_children: next };
-        });
-    };
-
-    const addChildrenField = () => {
-        setData((prev) => {
-            const current = Array.isArray(prev.registration_form_children) ? prev.registration_form_children : [];
-            return {
-                ...prev,
-                registration_form_children: [
-                    ...current,
-                    {
-                        key: `field_${Date.now()}`,
-                        type: 'text',
-                        required: false,
-                        group: 'child',
-                        label: 'New field',
-                    },
-                ],
-            };
-        });
-    };
-
-    const removeChildrenField = (index) => {
-        setData((prev) => {
-            const current = Array.isArray(prev.registration_form_children) ? prev.registration_form_children : [];
-            return {
-                ...prev,
-                registration_form_children: current.filter((_, i) => i !== index),
-            };
-        });
     };
 
     if (!session) return null;
@@ -254,100 +218,11 @@ export function EditSessionModal({ open, onOpenChange, session, loading = false 
 
                         {/* Children Registration Form Builder (only for children audience) */}
                         {data.audience === 'children_12_17' && (
-                            <div className="space-y-3 rounded-lg border border-gray-200 p-4">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="text-sm font-semibold">Children registration form</p>
-                                        <p className="text-xs text-gray-500">
-                                            Configure the fields for children (12–17) and their guardians.
-                                        </p>
-                                    </div>
-                                    <Button type="button" variant="outline" onClick={addChildrenField} disabled={loading}>
-                                        Add field
-                                    </Button>
-                                </div>
-
-                                <div className="space-y-4">
-                                    {(Array.isArray(data.registration_form_children) ? data.registration_form_children : []).map((field, idx) => (
-                                        <div key={`${field.key || 'field'}-${idx}`} className="rounded-md border border-gray-200 p-3">
-                                            <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
-                                                <div className="space-y-1">
-                                                    <Label>Key</Label>
-                                                    <Input
-                                                        value={field.key || ''}
-                                                        onChange={(e) => updateChildrenField(idx, { key: e.target.value })}
-                                                        disabled={loading}
-                                                    />
-                                                </div>
-                                                <div className="space-y-1 md:col-span-2">
-                                                    <Label>Label</Label>
-                                                    <Input
-                                                        value={field.label || ''}
-                                                        onChange={(e) => updateChildrenField(idx, { label: e.target.value })}
-                                                        placeholder="Field label"
-                                                        disabled={loading}
-                                                    />
-                                                </div>
-                                                <div className="space-y-1">
-                                                    <Label>Type</Label>
-                                                    <select
-                                                        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
-                                                        value={field.type || 'text'}
-                                                        onChange={(e) =>
-                                                            updateChildrenField(idx, {
-                                                                type: e.target.value,
-                                                            })
-                                                        }
-                                                        disabled={loading}
-                                                    >
-                                                        <option value="text">Text</option>
-                                                        <option value="email">Email</option>
-                                                        <option value="tel">Phone</option>
-                                                        <option value="date">Date</option>
-                                                        <option value="textarea">Textarea</option>
-                                                        <option value="select">Select</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3 items-center">
-                                                <label className="flex items-center gap-2 text-sm">
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={!!field.required}
-                                                        onChange={(e) => updateChildrenField(idx, { required: e.target.checked })}
-                                                        disabled={loading}
-                                                    />
-                                                    Required
-                                                </label>
-                                                <div className="space-y-1">
-                                                    <Label>Step group</Label>
-                                                    <select
-                                                        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
-                                                        value={field.group || 'child'}
-                                                        onChange={(e) => updateChildrenField(idx, { group: e.target.value })}
-                                                        disabled={loading}
-                                                    >
-                                                        <option value="child">Step 1 – Child info</option>
-                                                        <option value="guardian">Step 2 – Guardian / other</option>
-                                                    </select>
-                                                </div>
-                                                <div className="flex justify-end">
-                                                    <Button
-                                                        type="button"
-                                                        variant="destructive"
-                                                        size="sm"
-                                                        onClick={() => removeChildrenField(idx)}
-                                                        disabled={loading}
-                                                    >
-                                                        Remove
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            <ChildrenFormBuilder
+                                fields={data.registration_form_children}
+                                onChange={(next) => setData('registration_form_children', next)}
+                                disabled={loading}
+                            />
                         )}
 
                         {/* Date and Capacity */}
