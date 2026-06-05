@@ -76,6 +76,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
     *,
     ::after,
     ::before,
@@ -202,6 +203,14 @@
     background-position: bottom;
 }
 
+.bg-image-coding-short {
+    background-image: url('../assets/images/codeInfo.png');
+}
+
+.bg-image-media-short {
+    background-image: url('../assets/images/mediaInfo.png');
+}
+
 .bg-image-media {
     background-image: url('../assets/images/gallery/media.jpg');
 }
@@ -272,7 +281,7 @@
     transition: 0.5s ease;
 }
 
-.projects:hover > .preview {
+.projects:hover>.preview {
     top: 0;
     transition: 0.5s ease;
 }
@@ -358,11 +367,12 @@ input[type='radio'] {
     scrollbar-width: thin;
     scrollbar-color: #c1c1c1 #f1f1f1;
 }
+
 body {
-  pointer-events: auto !important;
+    pointer-events: auto !important;
 }
 
 body:not(.modal-open) {
-  overflow: auto !important;
-  pointer-events: auto !important;
+    overflow: auto !important;
+    pointer-events: auto !important;
 }

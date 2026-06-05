@@ -4,6 +4,8 @@ import { useGSAP } from '@gsap/react';
 import { router } from '@inertiajs/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
+import codeInfoImage from '../../../../../assets/images/codeInfo.png';
+import mediaInfoImage from '../../../../../assets/images/mediaInfo.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,51 +50,8 @@ const SECTION_HEADER = {
 
 const PROGRAMS = [
     {
-        id: 'short',
-        number: '01',
-        badge: { en: 'Short program', fr: 'Programme court', ar: 'برنامج قصير' },
-        // duration: { en: '1 week',          fr: '1 semaine',        ar: 'أسبوع واحد'       },
-        title: {
-            en: 'A first step into the digital world',
-            fr: 'Un premier pas dans le monde digital',
-            ar: 'الخطوة الأولى نحو العالم الرقمي',
-        },
-        description: {
-            en: 'One intensive week to discover your chosen field. Hands-on from day one, free of charge, open to everyone.',
-            fr: "Une semaine intensive pour découvrir votre domaine. Pratique dès le premier jour, gratuite, ouverte à tous.",
-            ar: 'أسبوع مكثف لاكتشاف مجالك المختار. عملي من اليوم الأول، مجاني، مفتوح للجميع.',
-        },
-        isShort: true,
-        tracks: [
-            {
-                id: 'coding-short',
-                track: 'coding',
-                icon: <CodeIcon />,
-                trackBadge: { en: 'Coding', fr: 'Coding', ar: 'البرمجة' },
-                title: { en: 'Web Development — 1 week', fr: 'Développement Web — 1 semaine', ar: 'تطوير الويب — أسبوع واحد' },
-                description: {
-                    en: 'An introduction to web creation. Build your very first project from scratch, guided step by step — no prior experience needed.',
-                    fr: 'Une introduction à la création web. Réalisez votre tout premier projet de zéro, guidé étape par étape — sans expérience préalable.',
-                    ar: 'مقدمة في إنشاء الويب. أنشئ مشروعك الأول من الصفر، مع توجيه خطوة بخطوة — بدون خبرة مسبقة.',
-                },
-            },
-            {
-                id: 'media-short',
-                track: 'media',
-                icon: <CameraIcon />,
-                trackBadge: { en: 'Media', fr: 'Média', ar: 'الإعلام' },
-                title: { en: 'Digital Content — 1 week', fr: 'Contenu Digital — 1 semaine', ar: 'المحتوى الرقمي — أسبوع واحد' },
-                description: {
-                    en: 'Explore video creation and visual storytelling. Shoot, edit, and produce your first short content piece from day one.',
-                    fr: 'Explorez la création vidéo et le storytelling visuel. Filmez, montez et produisez votre premier contenu dès le premier jour.',
-                    ar: 'استكشف إنشاء الفيديو والسرد البصري. صور وحرر وأنتج أول محتوى لك منذ اليوم الأول.',
-                },
-            },
-        ],
-    },
-    {
         id: 'long',
-        number: '02',
+        number: '01',
         badge: { en: 'Normal program', fr: 'Programme normal', ar: 'البرنامج العادي' },
         duration: { en: '6 months', fr: '6 mois', ar: '6 أشهر' },
         title: {
@@ -133,6 +92,48 @@ const PROGRAMS = [
             },
         ],
     },
+    {
+        id: 'short',
+        number: '02',
+        badge: { en: 'Short program', fr: 'Programme court', ar: 'برنامج قصير' },
+        title: {
+            en: 'A first step into the digital world',
+            fr: 'Un premier pas dans le monde digital',
+            ar: 'الخطوة الأولى نحو العالم الرقمي',
+        },
+        description: {
+            en: 'One intensive week to discover your chosen field. Hands-on from day one, free of charge, open to everyone.',
+            fr: "Une semaine intensive pour découvrir votre domaine. Pratique dès le premier jour, gratuite, ouverte à tous.",
+            ar: 'أسبوع مكثف لاكتشاف مجالك المختار. عملي من اليوم الأول، مجاني، مفتوح للجميع.',
+        },
+        isShort: true,
+        tracks: [
+            {
+                id: 'coding-short',
+                track: 'coding',
+                icon: <CodeIcon />,
+                trackBadge: { en: 'Coding', fr: 'Coding', ar: 'البرمجة' },
+                title: { en: 'Web Development — 1 week', fr: 'Développement Web — 1 semaine', ar: 'تطوير الويب — أسبوع واحد' },
+                description: {
+                    en: 'An introduction to web creation. Build your very first project from scratch, guided step by step — no prior experience needed.',
+                    fr: 'Une introduction à la création web. Réalisez votre tout premier projet de zéro, guidé étape par étape — sans expérience préalable.',
+                    ar: 'مقدمة في إنشاء الويب. أنشئ مشروعك الأول من الصفر، مع توجيه خطوة بخطوة — بدون خبرة مسبقة.',
+                },
+            },
+            {
+                id: 'media-short',
+                track: 'media',
+                icon: <CameraIcon />,
+                trackBadge: { en: 'Media', fr: 'Média', ar: 'الإعلام' },
+                title: { en: 'Digital Content — 1 week', fr: 'Contenu Digital — 1 semaine', ar: 'المحتوى الرقمي — أسبوع واحد' },
+                description: {
+                    en: 'Explore video creation and visual storytelling. Shoot, edit, and produce your first short content piece from day one.',
+                    fr: 'Explorez la création vidéo et le storytelling visuel. Filmez, montez et produisez votre premier contenu dès le premier jour.',
+                    ar: 'استكشف إنشاء الفيديو والسرد البصري. صور وحرر وأنتج أول محتوى لك منذ اليوم الأول.',
+                },
+            },
+        ],
+    },
 ];
 
 const BUTTONS = {
@@ -141,8 +142,21 @@ const BUTTONS = {
 
 /* ─── Track Card (horizontal) ───────────────────────────────── */
 
+function trackLongImageClass(track) {
+    return track === 'coding' ? 'bg-image-coding' : 'bg-image-media';
+}
+
+function trackLongImageLayoutClass(track) {
+    return track === 'coding' ? 'bg-cover bg-bottom' : 'bg-cover bg-center';
+}
+
+function trackShortImageSrc(track) {
+    return track === 'coding' ? codeInfoImage : mediaInfoImage;
+}
+
 function TrackCard({ card, format, rtl }) {
     const isCoding = card.track === 'coding';
+    const isShort = format === 'short';
     const trackUrl = isCoding ? '/coding' : '/media';
     const detailsUrl = `${trackUrl}?format=${format}`;
 
@@ -156,16 +170,13 @@ function TrackCard({ card, format, rtl }) {
                 ${rtl ? 'flex-row-reverse' : 'flex-row'}
             `}
         >
-            {/* ── Text side ── */}
             <div className={`flex flex-1 flex-col justify-between gap-5 p-7 md:p-9 ${rtl ? 'items-end text-right' : ''}`}>
-
-                {/* Top: badges + title + description */}
                 <div className="flex flex-col gap-4">
                     <div className={`flex flex-wrap items-center gap-2 ${rtl ? 'flex-row-reverse' : ''}`}>
                         <span
                             className={`
                                 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold
-                                ${rtl ? 'flex-row-reverse' : ''} bg-darker/80 text-alpha dark:bg-alpha/20 dark:text-alpha'    
+                                ${rtl ? 'flex-row-reverse' : ''} bg-darker/80 text-alpha dark:bg-alpha/20 dark:text-alpha
                             `}
                         >
                             {card.icon}
@@ -174,7 +185,7 @@ function TrackCard({ card, format, rtl }) {
 
                         <span className="flex items-center gap-1 rounded-full bg-alpha/15 px-3 py-1 text-xs font-bold text-darker dark:text-alpha">
                             <ClockIcon />
-                            <span>{format === 'short' ? '1 week' : '6 months'}</span>
+                            <span>{isShort ? '1 week' : '6 months'}</span>
                         </span>
                     </div>
 
@@ -187,7 +198,6 @@ function TrackCard({ card, format, rtl }) {
                     </p>
                 </div>
 
-                {/* Action button */}
                 <div className={`flex ${rtl ? 'justify-end' : ''}`}>
                     <button
                         type="button"
@@ -204,14 +214,22 @@ function TrackCard({ card, format, rtl }) {
                 </div>
             </div>
 
-            {/* ── Image side ── */}
-            <div
-                className={`
-                    hidden w-2/5 flex-shrink-0 overflow-hidden sm:block
-                    ${isCoding ? 'bg-image-coding' : 'bg-image-media'}
-                `}
-            >
-                <div className="size-full bg-cover bg-center bg-inherit transition-transform duration-700 group-hover:scale-105" />
+            <div className="relative hidden min-h-[280px] w-2/5 flex-shrink-0 self-stretch overflow-hidden sm:block">
+                {isShort ? (
+                    <img
+                        src={trackShortImageSrc(card.track)}
+                        alt=""
+                        className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    />
+                ) : (
+                    <div
+                        className={`
+                            absolute inset-0 size-full
+                            ${trackLongImageLayoutClass(card.track)} ${trackLongImageClass(card.track)}
+                            transition-transform duration-700 group-hover:scale-105
+                        `}
+                    />
+                )}
             </div>
         </div>
     );
