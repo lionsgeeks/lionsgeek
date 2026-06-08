@@ -344,9 +344,12 @@ class ParticipantController extends Controller
             // For Inertia requests, return back with errors (generic message for children form)
             if ($request->header('X-Inertia')) {
                 if ($request->boolean('is_children')) {
-                    return back()->withErrors([
-                        'general' => 'Please check your answers and try again.',
-                    ])->withInput();
+                    $formatted = $this->formatChildrenValidationErrors($errors);
+                    if (empty($formatted)) {
+                        $formatted['general'] = 'Please check your answers and try again.';
+                    }
+
+                    return back()->withErrors($formatted)->withInput();
                 }
 
                 return back()->withErrors($validationException->errors())->withInput();
@@ -480,10 +483,16 @@ class ParticipantController extends Controller
             'is_children' => 'required|boolean',
             'children_answers' => 'required|array',
             'formation_field' => 'required|string|in:coding,media',
-            'info_session_id' => 'nullable|integer|exists:info_sessions,id',
+            'info_session_id' => 'required|integer|exists:info_sessions,id',
         ];
 
         $schema = $this->getChildrenRegistrationSchema($request);
+
+        if (empty($schema)) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'general' => 'Registration form is not configured for this session. Please contact LionsGeek.',
+            ]);
+        }
 
         foreach ($schema as $field) {
             $key = $field['key'] ?? null;
@@ -498,6 +507,7 @@ class ParticipantController extends Controller
                 case 'email':
                     $fieldRules[] = 'string';
                     $fieldRules[] = 'email';
+                    $fieldRules[] = 'max:255';
                     break;
                 case 'date':
                     $fieldRules[] = 'date';
@@ -508,6 +518,11 @@ class ParticipantController extends Controller
                     break;
                 case 'tel':
                     $fieldRules[] = 'string';
+                    $fieldRules[] = 'max:30';
+                    break;
+                case 'textarea':
+                    $fieldRules[] = 'string';
+                    $fieldRules[] = 'max:2000';
                     break;
                 case 'select':
                     $allowedValues = collect($field['options'] ?? [])
@@ -516,12 +531,14 @@ class ParticipantController extends Controller
                         ->values()
                         ->all();
                     $fieldRules[] = 'string';
+                    $fieldRules[] = 'max:255';
                     if (!empty($allowedValues)) {
                         $fieldRules[] = 'in:' . implode(',', $allowedValues);
                     }
                     break;
                 default:
                     $fieldRules[] = 'string';
+                    $fieldRules[] = 'max:255';
                     break;
             }
 
@@ -529,6 +546,91 @@ class ParticipantController extends Controller
         }
 
         $request->validate($rules);
+
+        $answers = (array) $request->input('children_answers', []);
+        $emailFieldKey = $this->findChildrenEmailFieldKey($schema);
+
+        if ($emailFieldKey === null) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'general' => 'This registration form must include an email field. Please contact LionsGeek.',
+            ]);
+        }
+
+        $email = $this->resolveChildrenParticipantEmail($answers, $schema);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                "children_answers.{$emailFieldKey}" => ['Please enter a valid email address.'],
+            ]);
+        }
+    }
+
+    /**
+     * Map children validation keys to flat field keys for the wizard UI.
+     */
+    private function formatChildrenValidationErrors(array $errors): array
+    {
+        $formatted = [];
+
+        foreach ($errors as $key => $messages) {
+            $message = is_array($messages) ? ($messages[0] ?? '') : (string) $messages;
+            if ($message === '') {
+                continue;
+            }
+
+            if (str_starts_with($key, 'children_answers.')) {
+                $formatted[substr($key, strlen('children_answers.'))] = $message;
+            } else {
+                $formatted[$key] = $message;
+            }
+        }
+
+        return $formatted;
+    }
+
+    /**
+     * First email field key defined in the children registration schema.
+     */
+    private function findChildrenEmailFieldKey(array $schema): ?string
+    {
+        foreach ($schema as $field) {
+            $key = $field['key'] ?? null;
+            if (($field['type'] ?? '') === 'email' && is_string($key) && $key !== '') {
+                return $key;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Resolve the guardian/contact email from children form answers.
+     */
+    private function resolveChildrenParticipantEmail(array $answers, array $schema): string
+    {
+        $email = $this->resolveChildrenAnswer(
+            $answers,
+            $schema,
+            ['guardian_email', 'parent_email', 'email', 'contact_email'],
+            'guardian',
+            'email'
+        );
+
+        if ($email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $email;
+        }
+
+        foreach ($schema as $field) {
+            if (($field['type'] ?? '') !== 'email') {
+                continue;
+            }
+            $key = $field['key'] ?? '';
+            $value = $key !== '' ? (string) ($answers[$key] ?? '') : '';
+            if ($value !== '' && filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                return $value;
+            }
+        }
+
+        return '';
     }
 
     /**
@@ -888,7 +990,7 @@ class ParticipantController extends Controller
         $answers = (array) $request->input('children_answers', []);
         $schema = $this->getChildrenRegistrationSchema($request);
 
-        $fullName = $this->resolveChildrenAnswer($answers, $schema, ['child_full_name'], 'child', 'text')
+        $fullName = $this->resolveChildrenAnswer($answers, $schema, ['child_full_name', 'child_name'], 'child', 'text')
             ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'text');
         $birthday = $this->resolveChildrenAnswer($answers, $schema, ['child_birthday'], 'child', 'date')
             ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'date');
@@ -896,8 +998,7 @@ class ParticipantController extends Controller
             ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'text');
         $guardianPhone = $this->resolveChildrenAnswer($answers, $schema, ['guardian_phone'], 'guardian', 'tel')
             ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'tel');
-        $guardianEmail = $this->resolveChildrenAnswer($answers, $schema, ['guardian_email'], 'guardian', 'email')
-            ?: $this->resolveChildrenAnswer($answers, $schema, [], null, 'email');
+        $guardianEmail = $this->resolveChildrenParticipantEmail($answers, $schema);
 
         $age = $birthday !== '' ? (string) Carbon::parse($birthday)->age : '';
 
@@ -1017,9 +1118,28 @@ class ParticipantController extends Controller
      */
     private function sendConfirmationEmail(Participant $participant): void
     {
+        if (!filter_var($participant->email, FILTER_VALIDATE_EMAIL)) {
+            Log::warning('Confirmation email skipped: invalid participant email', [
+                'participant_id' => $participant->id,
+                'email' => $participant->email,
+                'source' => $participant->source,
+            ]);
+
+            return;
+        }
+
         try {
             Mail::to($participant->email)->send(new RegistrationReceived($participant));
+            Log::info('Registration confirmation email sent', [
+                'participant_id' => $participant->id,
+                'email' => $participant->email,
+            ]);
         } catch (\Exception $emailError) {
+            Log::error('Failed to send registration confirmation email', [
+                'participant_id' => $participant->id,
+                'email' => $participant->email,
+                'message' => $emailError->getMessage(),
+            ]);
         }
     }
 
@@ -1545,6 +1665,42 @@ class ParticipantController extends Controller
     }
 
     /**
+     * Open info sessions to include in approval emails (matched to participant program type).
+     */
+    private function getApprovalSessionsForParticipant(Participant $participant)
+    {
+        $formation = strtolower((string) $participant->formation_field);
+        $todayTz = \Carbon\Carbon::now(config('app.timezone'))->toDateString();
+
+        $query = InfoSession::query()
+            ->whereRaw('LOWER(formation) = ?', [$formation === 'coding' ? 'coding' : 'media'])
+            ->where('isAvailable', true)
+            ->where('isFinish', false)
+            ->where('isFull', false)
+            ->where('is_private', false)
+            ->whereDate('start_date', '>=', $todayTz);
+
+        $session = $participant->info_session_id
+            ? InfoSession::find($participant->info_session_id)
+            : null;
+
+        if ($session) {
+            $query->where('format', $session->format ?? 'long');
+            if (($session->format ?? 'long') === 'short') {
+                $query->where('audience', $session->audience ?? 'children_12_17');
+            } else {
+                $query->where('audience', 'normal');
+            }
+        } elseif ($participant->source === 'children_form') {
+            $query->where('format', 'short')->where('audience', 'children_12_17');
+        } else {
+            $query->where('format', 'long')->where('audience', 'normal');
+        }
+
+        return $query->orderBy('start_date', 'asc')->get();
+    }
+
+    /**
      * Approve a participant
      */
     public function approve(Participant $participant)
@@ -1557,32 +1713,25 @@ class ParticipantController extends Controller
             ]);
 
             // Send formation-specific approval email
+            $emailStatus = '';
             try {
                 // Normalize formation field
                 $formation = strtolower((string) $participant->formation_field);
 
-                // Robust, timezone-aware, case-insensitive session fetch for emails
-                $todayTz = \Carbon\Carbon::now(config('app.timezone'))->toDateString();
-                $sessions = \App\Models\InfoSession::query()
-                    ->whereRaw('LOWER(formation) = ?', [$formation === 'coding' ? 'coding' : 'media'])
-                    ->where('isAvailable', true)
-                    ->where('isFinish', false)
-                    ->where('isFull', false)
-                    ->where('is_private', false)
-                    ->whereDate('start_date', '>=', $todayTz)
-                    ->orderBy('start_date', 'asc')
-                    ->get();
-                // dd($sessions);
+                $sessions = $this->getApprovalSessionsForParticipant($participant);
                 if ($formation === 'coding') {
                     Mail::to($participant->email)->send(new RegistrationApprovedCoding($participant, $sessions));
                 } elseif ($formation === 'media') {
                     Mail::to($participant->email)->send(new RegistrationApprovedMedia($participant, $sessions));
                 } else {
-                    // Fallback to generic approval email
                     Mail::to($participant->email)->send(new RegistrationApproved($participant));
                 }
                 $emailStatus = 'and email sent';
             } catch (\Exception $emailError) {
+                Log::warning('Approval email failed to send', [
+                    'participant_id' => $participant->id,
+                    'error' => $emailError->getMessage(),
+                ]);
             }
 
             // Check if session is now full (only count approved participants)
@@ -1623,10 +1772,15 @@ class ParticipantController extends Controller
             ]);
 
             // Send rejection email
+            $emailStatus = '';
             try {
                 Mail::to($participant->email)->send(new RegistrationRejected($participant));
                 $emailStatus = 'and email sent';
             } catch (\Exception $emailError) {
+                Log::warning('Rejection email failed to send', [
+                    'participant_id' => $participant->id,
+                    'error' => $emailError->getMessage(),
+                ]);
             }
 
             flash()
@@ -1667,48 +1821,34 @@ class ParticipantController extends Controller
             }
 
             // Check if already reserved any session
-            if ($participant->info_session_id) {
-                // If already reserved a different session, block
-                if ($participant->info_session_id !== $session->id) {
-                    return Inertia::render('client/infoSession/ReservationResult', [
-                        'type' => 'error',
-                        'title' => [
-                            'en' => 'Already reserved',
-                            'fr' => 'Déjà réservé',
-                            'ar' => 'تم الحجز مسبقًا',
-                        ],
-                        'message' => [
-                            'en' => 'You have already reserved an info session.',
-                            'fr' => 'Vous avez déjà réservé une séance d\'information.',
-                            'ar' => 'لقد حجزت بالفعل جلسة معلومات.'
-                        ],
-                        'redirectUrl' => config('app.url')
-                    ]);
-                }
+            $alreadyAssignedThisSession = $participant->info_session_id === $session->id;
 
-                // If already reserved THIS session, show success without sending another email
-                if ($participant->info_session_id === $session->id) {
-                    return Inertia::render('client/infoSession/ReservationResult', [
-                        'type' => 'success',
-                        'title' => [
-                            'en' => 'Already Reserved',
-                            'fr' => 'Déjà réservé',
-                            'ar' => 'تم الحجز مسبقًا',
-                        ],
-                        'message' => [
-                            'en' => 'You have already reserved this info session. Check your email for the QR code.',
-                            'fr' => 'Vous avez déjà réservé cette séance d\'information. Vérifiez votre email pour le code QR.',
-                            'ar' => 'لقد حجزت هذه الجلسة بالفعل. تحقق من بريدك الإلكتروني للحصول على رمز QR.'
-                        ],
-                        'redirectUrl' => config('app.url')
-                    ]);
-                }
+            if ($participant->info_session_id && !$alreadyAssignedThisSession) {
+                // Participant reserved a DIFFERENT session — block completely
+                return Inertia::render('client/infoSession/ReservationResult', [
+                    'type' => 'error',
+                    'title' => [
+                        'en' => 'Already reserved',
+                        'fr' => 'Déjà réservé',
+                        'ar' => 'تم الحجز مسبقًا',
+                    ],
+                    'message' => [
+                        'en' => 'You have already reserved an info session.',
+                        'fr' => 'Vous avez déjà réservé une séance d\'information.',
+                        'ar' => 'لقد حجزت بالفعل جلسة معلومات.'
+                    ],
+                    'redirectUrl' => config('app.url')
+                ]);
             }
+
+            // $alreadyAssignedThisSession = true means the session was pre-assigned at
+            // registration (children form). Skip the DB update but still send the QR email.
 
             // Validate session matches participant track and is available and upcoming
             $formation = strtolower((string) $participant->formation_field);
-            $validFormation = $session->formation === ($formation === 'coding' ? 'Coding' : 'Media');
-            $isUpcoming = \Carbon\Carbon::parse($session->start_date)->gte(now());
+            $validFormation = strcasecmp($session->formation, $formation) === 0;
+            $todayTz = \Carbon\Carbon::now(config('app.timezone'))->toDateString();
+            $isUpcoming = \Carbon\Carbon::parse($session->start_date)->toDateString() >= $todayTz;
             $isAvailable = !$session->isFull && !$session->isFinish && $session->isAvailable;
 
 
@@ -1730,27 +1870,29 @@ class ParticipantController extends Controller
                 ]);
             }
 
-            // Check capacity safely in a transaction
-            DB::transaction(function () use ($session, $participant) {
-                $approvedCount = Participant::where('info_session_id', $session->id)
-                    ->where('status', Participant::STATUS_APPROVED)
-                    ->lockForUpdate()
-                    ->count();
+            // Only run the capacity check and DB assignment for fresh reservations.
+            // Children participants already have info_session_id set at registration.
+            if (!$alreadyAssignedThisSession) {
+                DB::transaction(function () use ($session, $participant) {
+                    $approvedCount = Participant::where('info_session_id', $session->id)
+                        ->where('status', Participant::STATUS_APPROVED)
+                        ->lockForUpdate()
+                        ->count();
 
-                if ($approvedCount >= $session->places) {
-                    $session->update(['isFull' => true]);
-                    throw new \RuntimeException('full');
-                }
+                    if ($approvedCount >= $session->places) {
+                        $session->update(['isFull' => true]);
+                        throw new \RuntimeException('full');
+                    }
 
-                // Reserve
-                $participant->update(['info_session_id' => $session->id]);
-            });
+                    $participant->update(['info_session_id' => $session->id]);
+                });
+            }
 
             // Build and send QR-coded invitation email
             try {
                 $qrPayload = json_encode([
-                    "code" => $participant->code,
-                    "email" => $participant->email,
+                    'id'    => $participant->id,
+                    'email' => $participant->email,
                 ]);
 
                 // Generate QR to a temporary file to avoid binary output leaking into the response
@@ -1760,41 +1902,53 @@ class ParticipantController extends Controller
                 if (is_file($qrTempPath)) {
                     @unlink($qrTempPath);
                 }
-                $qrBase64 = base64_encode($qrBinary);
+
+                // DOMPDF uses Imagick for PNG which may be broken; convert QR to JPEG via GD
+                $qrGd = $qrBinary !== '' ? @imagecreatefromstring($qrBinary) : false;
+                if ($qrGd !== false) {
+                    ob_start();
+                    imagejpeg($qrGd, null, 95);
+                    imagedestroy($qrGd);
+                    $qrBase64 = base64_encode(ob_get_clean());
+                    $qrMime = 'image/jpeg';
+                } else {
+                    $qrBase64 = base64_encode($qrBinary);
+                    $qrMime = 'image/png';
+                }
 
                 $mailData = [
-                    'formation' => $session->formation,
+                    'formation'   => $session->formation,
                     'infosession' => $session->name,
-                    'full_name' => $participant->full_name,
-                    'time' => $session->start_date,
-                    'created_at' => now()->format('Y-m-d H:i'),
+                    'full_name'   => $participant->full_name,
+                    'time'        => $session->start_date,
+                    'created_at'  => now()->format('Y-m-d H:i'),
+                    'participant' => $participant,
                 ];
 
                 $pdf = Pdf::loadView('pdf.code', [
-                    'data' => $mailData,
-                    'image' => $qrBase64,
+                    'data'     => $mailData,
+                    'image'    => $qrBase64,
+                    'qrMime'   => $qrMime ?? 'image/jpeg',
                 ]);
 
-                // Pass pdf instance in data as expected by CodeMail
                 $mailData['pdf'] = $pdf;
                 Mail::to($participant->email)->send(new CodeMail($mailData, $qrBase64));
+
+                Log::info('QR code email sent after reservation', [
+                    'participant_id' => $participant->id,
+                    'session_id'     => $session->id,
+                    'email'          => $participant->email,
+                ]);
             } catch (\Throwable $mailError) {
+                Log::error('Failed to send QR code email after reservation', [
+                    'participant_id' => $participant->id,
+                    'session_id'     => $session->id,
+                    'error'          => $mailError->getMessage(),
+                    'trace'          => $mailError->getTraceAsString(),
+                ]);
             }
 
-            return Inertia::render('client/infoSession/ReservationResult', [
-                'type' => 'success',
-                'title' => [
-                    'en' => 'Reservation confirmed',
-                    'fr' => 'Réservation confirmée',
-                    'ar' => 'تم تأكيد الحجز',
-                ],
-                'message' => [
-                    'en' => 'Your place has been reserved successfully!',
-                    'fr' => 'Votre place a été réservée avec succès !',
-                    'ar' => 'تم حجز مكانك بنجاح!'
-                ],
-                'redirectUrl' => config('app.url')
-            ]);
+            return redirect(config('app.url'));
         } catch (\RuntimeException $re) {
             if ($re->getMessage() === 'full') {
                 return Inertia::render('client/infoSession/ReservationResult', [

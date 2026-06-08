@@ -1,122 +1,168 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="x-apple-disable-message-reformatting">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
-  <meta name="color-scheme" content="light dark">
-  <meta name="supported-color-schemes" content="light dark">
-  <!--[if mso]>
-  <noscript>
-    <xml>
-      <o:OfficeDocumentSettings xmlns:o="urn:schemas-microsoft-com:office:office">
-        <o:PixelsPerInch>96</o:PixelsPerInch>
-      </o:OfficeDocumentSettings>
-    </xml>
-  </noscript>
-  <style>
-    td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif; mso-line-height-rule: exactly;}
-  </style>
-  <![endif]-->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" media="screen">
-  <style>
-    @media (max-width: 600px) {
-      .sm-p-6 {
-        padding: 24px !important
-      }
-      .sm-px-4 {
-        padding-left: 16px !important;
-        padding-right: 16px !important
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info Session Invitation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        .session-details {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .highlight-box {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+        }
+        .divider {
+            margin: 30px 0;
+            border-top: 2px solid #e9ecef;
+        }
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .social-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 6px;
+            font-size: 13px;
+        }
+    </style>
 </head>
-<body style="margin: 0; width: 100%; background-color: #f8fafc; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word">
-  <div style="display: none">
-    Transactional email template
-    &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847;
-  </div>
-  <div role="article" aria-roledescription="email" aria-label lang="en">
-    <div class="sm-px-4" style="background-color: #f8fafc; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
-      <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
-        <tr>
-          <td style="width: 552px; max-width: 100%">
-            <div role="separator" style="line-height: 24px">&zwj;</div>
-            <table style="width: 100%" cellpadding="0" cellspacing="0" role="none">
-              <tr>
-                <td class="sm-p-6" style="border-radius: 8px; background-color: #fffffe; padding: 24px 36px; border: 1px solid #e2e8f0">
-                  <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
-                    <tr>
-                      <a class="sm-p-6" href="https://lionsgeek.ma" style="padding: 20px 36px">
-                        <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEI5pl3PyS-Eg/company-logo_200_200/company-logo_200_200/0/1734088749325/lionsgeek_logo?e=2147483647&v=beta&t=2tZP_cpgMZO4IFtfyB0GNKXIrPO5I5w6a8iUlnrhntQ" width="90" alt="LionsGeek" style="max-width: 100%; vertical-align: middle">
-                      </a>
-                    </tr>
-                  </table>
-                  <div role="separator" style="line-height: 24px">&zwj;</div>
-                  <h1 style="margin: 0 0 24px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
-                    Hello {{ $data['full_name'] }}!
-                  </h1>
-                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
-                    Thank you for your interest in our upcoming info session with LionsGeek! We’re thrilled to help you
-                    explore our
-                    programs and learn how LionsGeek can support your growth.
-                  </p>
-                  <div role="separator" style="line-height: 24px">&zwj;</div>
-                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">Here’s What You’ll Discover:</p>
-                  <ul style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
-                    <li>A personalized overview of our {{ $data['formation'] }} courses</li>
-                    <li>Insight into our experienced instructors, who bring real-world expertise in {{ $data['formation'] }} </li>
-                    <li>Information about the benefits and career opportunities that come with joining our community</li>
-                  </ul>
-                  <div role="separator" style="line-height: 24px">&zwj;</div>
-                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">Event Details:</p>
-                  <ul style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
-                    <li>Date: {{ \Carbon\Carbon::parse($data['time'])->format('Y-m-d H:i') }}</li>
-                    <li>Location: LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat, Casablanca
-                      20060, Maroc</li>
-                  </ul>
-                  <p style="font-weight: 600; margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">We've attached a PDF document
-                    with all the event details, a QR code for
-                    quick access, and
-                    a map to help you find us. Be sure to bring a copy (digital or printed) of this PDF to make check-in
-                    quick and
-                    easy.
-                  </p>
-                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">Bring any questions you might have about our programs or
-                    career guidance – we’ll be happy to help!
-                    If you have any questions before the event, reach out at contact@lionsgeek.com or call +212 522 662
-                    660.</p>
-                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">We can’t wait to see you there and help you kickstart
-                    your journey with LionsGeek!</p>
-                  <h5 style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">Warm regards,</h5>
-                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">Lionsgeek</p>
-                  <div role="separator" style="height: 1px; line-height: 1px; background-color: #cbd5e1; margin-top: 24px; margin-bottom: 24px">&zwj;</div>
-                  <div role="separator" style="line-height: 24px">&zwj;</div>
-                  <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
-                    <tr style="margin: 0 0 24px; font-size: 16px; line-height: 24px; font-weight: 700; color: #475569">
-                      <p>Join Us :</p>
-                    </tr>
-                    <tr>
-                      <td class="sm-p-6" href="https://lionsgeek.ma" style="padding: 20px 36px">
-                        <div style="font-weight: 600">
-                          <a href="https://www.instagram.com/lions_geek?igsh=MWNhb2F6eGRjOTZvcg==" style="padding: 4px">Instagram</a>
-                          <a href="https://www.facebook.com/LionsGeek?mibextid=ZbWKwL" style="padding: 4px">Facebook</a>
-                          <a href="https://x.com/LionsGeek?t=oZV_osSHbR3MV7uSV3AIIA&s=09" style="padding: 4px">X (Twitter)</a>
-                          <a href="https://www.tiktok.com/@lions_geek?_t=8sZ3ZyKrqvG&_r=1" style="padding: 4px">Tiktok</a>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
+<body>
+
+    <div class="header">
+        <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEI5pl3PyS-Eg/company-logo_200_200/company-logo_200_200/0/1734088749325/lionsgeek_logo?e=2147483647&v=beta&t=2tZP_cpgMZO4IFtfyB0GNKXIrPO5I5w6a8iUlnrhntQ"
+             width="90" alt="LionsGeek" class="logo">
+        <h1>🎉 Your Place Is Reserved!</h1>
+        <p>LionsGeek {{ $data['formation'] }} Program</p>
     </div>
-  </div>
+
+    <div class="content">
+
+        <h2>Hello {{ $data['full_name'] }}!</h2>
+
+        <p>
+            Great news — your place at our upcoming <strong>{{ $data['formation'] }} info session</strong> has been confirmed.
+            We're excited to have you join us!
+        </p>
+
+        <div class="session-details">
+            <h3>📅 Session Details</h3>
+            <p><strong>Session:</strong> {{ $data['infosession'] }}</p>
+            <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($data['time'])->format('l, F j, Y \a\t g:i A') }}</p>
+            <p><strong>Location:</strong> LionsGeek, 4th Floor, Ain Sebaa Center, Route de Rabat, Casablanca 20060, Morocco</p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>📎 Your QR Code is Attached</h3>
+            <p>
+                We've attached a <strong>PDF document</strong> to this email containing your personal QR code.
+                Please bring a copy — printed or digital — on the day of the event. It will be scanned at the entrance for check-in.
+            </p>
+        </div>
+
+        <p><strong>Important Notes:</strong></p>
+        <ul>
+            <li>Arrive on time — the session starts promptly</li>
+            <li>Bring your QR code (this PDF) on your phone or printed</li>
+            <li>Feel free to bring any questions you have about the program</li>
+        </ul>
+
+        <p>
+            If you have any questions before the event, reach us at
+            <a href="mailto:contact@lionsgeek.ma">contact@lionsgeek.ma</a> or call +212 522 662 660.
+        </p>
+
+        <p>We can't wait to see you there!</p>
+
+        <p>Warm regards,<br><strong>The LionsGeek Team</strong></p>
+
+        <div class="divider"></div>
+
+        {{-- Arabic version --}}
+        <div class="rtl">
+            <h2>مرحبًا {{ $data['full_name'] }}!</h2>
+
+            <p>
+                أخبار رائعة — لقد تم تأكيد مكانك في جلسة التعريف القادمة لبرنامج <strong>{{ $data['formation'] }}</strong>.
+                يسعدنا انضمامك إلينا!
+            </p>
+
+            <div class="session-details">
+                <h3>📅 تفاصيل الجلسة</h3>
+                <p><strong>الجلسة:</strong> {{ $data['infosession'] }}</p>
+                <p><strong>التاريخ:</strong> {{ \Carbon\Carbon::parse($data['time'])->format('l, F j, Y \a\t g:i A') }}</p>
+                <p><strong>الموقع:</strong> LionsGeek، الطابق الرابع، مركز عين السبع، طريق الرباط، الدار البيضاء 20060، المغرب</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>📎 رمز QR الخاص بك مرفق</h3>
+                <p>
+                    لقد أرفقنا <strong>ملف PDF</strong> يحتوي على رمز QR الشخصي الخاص بك.
+                    يرجى إحضار نسخة — مطبوعة أو رقمية — يوم الفعالية. سيتم مسحه عند المدخل لتسجيل الحضور.
+                </p>
+            </div>
+
+            <p>إذا كان لديك أي استفسار قبل الفعالية، تواصل معنا على
+                <a href="mailto:contact@lionsgeek.ma">contact@lionsgeek.ma</a>
+                أو اتصل بنا على +212 522 662 660.
+            </p>
+
+            <p>مع أطيب التحيات،<br><strong>فريق LionsGeek</strong></p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="social-links" style="margin-bottom: 10px;">
+            <a href="https://www.instagram.com/lions_geek">Instagram</a> ·
+            <a href="https://www.facebook.com/LionsGeek">Facebook</a> ·
+            <a href="https://x.com/LionsGeek">X (Twitter)</a> ·
+            <a href="https://www.tiktok.com/@lions_geek">TikTok</a>
+        </div>
+        <p>This is an automated message. Please do not reply to this email.</p>
+        <p>If you have any questions, contact us at <a href="mailto:contact@lionsgeek.ma">contact@lionsgeek.ma</a></p>
+        <p>&copy; {{ date('Y') }} LionsGeek. All rights reserved.</p>
+    </div>
+
 </body>
 </html>

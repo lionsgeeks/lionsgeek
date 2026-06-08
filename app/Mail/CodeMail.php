@@ -30,16 +30,16 @@ class CodeMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        // Determine the formation field from participant data
-        $formationField = $this->data['participant']->formation_field ?? 'general';
-        
+        // formation is stored as 'Coding' or 'Media' on the session; normalise to lowercase
+        $formationField = strtolower((string) ($this->data['formation'] ?? 'general'));
+
         return new Envelope(
             subject: 'Invitation to Our Info Session - ' . $this->data['infosession'],
             from: new \Illuminate\Mail\Mailables\Address(
-                $formationField === 'coding' ? 'coding@lionsgeek.ma' : 
-                ($formationField === 'media' ? 'media@lionsgeek.ma' : 'info@lionsgeek.ma'), 
-                $formationField === 'coding' ? 'LionsGeek Coding Team' : 
-                ($formationField === 'media' ? 'LionsGeek Media Team' : 'LionsGeek')
+                $formationField === 'coding' ? 'coding@lionsgeek.ma' :
+                ($formationField === 'media'  ? 'media@lionsgeek.ma'  : 'info@lionsgeek.ma'),
+                $formationField === 'coding' ? 'LionsGeek Coding Team' :
+                ($formationField === 'media'  ? 'LionsGeek Media Team'  : 'LionsGeek')
             ),
         );
     }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Mail\RegistrationReceived;
 use App\Models\InfoSession;
 use App\Models\Participant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -97,6 +98,10 @@ class ChildrenRegistrationTest extends TestCase
         $this->assertSame('media', $participant->formation_field);
         $this->assertSame('children_form', $participant->source);
         $this->assertSame('beginner', $participant->children_form_data['child_level']);
+
+        Mail::assertSent(RegistrationReceived::class, function (RegistrationReceived $mail) use ($participant) {
+            return $mail->hasTo($participant->email);
+        });
     }
 
     public function test_children_validation_returns_generic_error_without_sql_details(): void
@@ -116,7 +121,7 @@ class ChildrenRegistrationTest extends TestCase
             'X-Inertia' => 'true',
         ]);
 
-        $response->assertSessionHasErrors('general');
+        $response->assertSessionHasErrors(['child_name', 'guardian_email', 'child_level']);
         $content = json_encode(session('errors'));
         $this->assertStringNotContainsString('SQLSTATE', $content);
         $this->assertStringNotContainsString('children_answers.', $content);
