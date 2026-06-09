@@ -209,11 +209,15 @@ export default function ChildrenRegistrationWizard({
                             <div
                                 className={`rounded-lg border p-3 text-sm ${darkMode ? 'border-red-500/40 bg-red-500/10 text-red-200' : 'border-red-200 bg-red-50 text-red-700'}`}
                             >
-                                <TransText
-                                    en="Submission failed. Please check your answers and try again."
-                                    fr="Échec de l'envoi. Veuillez vérifier vos réponses et réessayer."
-                                    ar="فشل الإرسال. يرجى التحقق من إجاباتك والمحاولة مرة أخرى."
-                                />
+                                {typeof errors.general === 'string' ? (
+                                    errors.general
+                                ) : (
+                                    <TransText
+                                        en="Submission failed. Please check your answers and try again."
+                                        fr="Échec de l'envoi. Veuillez vérifier vos réponses et réessayer."
+                                        ar="فشل الإرسال. يرجى التحقق من إجاباتك والمحاولة مرة أخرى."
+                                    />
+                                )}
                             </div>
                         )}
 
@@ -248,9 +252,9 @@ export default function ChildrenRegistrationWizard({
                                             {field.required && <span className="ml-1 text-red-500">*</span>}
                                         </label>
                                         {renderField(field)}
-                                        {(localErrors[field.key] || errors?.[`children_answers.${field.key}`]) && (
+                                        {(localErrors[field.key] || errors?.[field.key] || errors?.[`children_answers.${field.key}`]) && (
                                             <span className="mt-1 block text-xs text-red-500 sm:text-sm">
-                                                {localErrors[field.key] || errors?.[`children_answers.${field.key}`]}
+                                                {localErrors[field.key] || errors?.[field.key] || errors?.[`children_answers.${field.key}`]}
                                             </span>
                                         )}
                                     </div>

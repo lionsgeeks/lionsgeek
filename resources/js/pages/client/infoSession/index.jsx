@@ -440,7 +440,7 @@ const InfoSession = ({ trainingType = 'digital' }) => {
                                 darkMode={darkMode}
                                 selectedLanguage={selectedLanguage}
                                 formationField={formationType}
-                                formationFormat={formationFormat}
+                                formationFormat={programFormat}
                                 infoSessionId={childrenSession?.id ?? (allSessions.length === 1 ? allSessions[0].id : null)}
                             />
                         ) : useNormalForm ? (

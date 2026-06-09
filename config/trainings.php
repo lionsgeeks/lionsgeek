@@ -29,7 +29,7 @@ return [
             'formation' => 'Coding',
             'format' => 'short',
             'apply_type' => 'coding',
-            'image_class' => 'bg-image-coding',
+            'image_class' => 'bg-image-coding-short',
             'layout' => 'normal',
         ],
         [
@@ -37,7 +37,7 @@ return [
             'formation' => 'Media',
             'format' => 'short',
             'apply_type' => 'media',
-            'image_class' => 'bg-image-media',
+            'image_class' => 'bg-image-media-short',
             'layout' => 'reverse',
         ],
     ],
