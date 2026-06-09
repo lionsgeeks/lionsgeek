@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAppContext } from '@/context/appContext';
+import { TransText } from '@/components/TransText';
+
+const MAX_USER_MESSAGES = 30;
 
 // ============================================
 // PARTIAL COMPONENTS   kolhom m3ayat lihom l ta7t
@@ -324,7 +327,8 @@ const QuickActions = ({ quickActions, onQuickAction, darkMode }) => {
 };
 
 // Input Area Partial
-const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, inputRef, isThinking, isTyping, isChatLimited, darkMode }) => {
+const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, inputRef, isThinking, isTyping, isChatLimited, darkMode, privacyAccepted }) => {
+    const inputDisabled = !privacyAccepted || isThinking || isTyping || isChatLimited;
     return (
         <div
             className={`p-4 border-t transition-all duration-300 ${darkMode ? 'bg-beta border-gray-700' : 'bg-white border-gray-200'}`}
@@ -340,19 +344,19 @@ const InputArea = ({ inputValue, setInputValue, onSendMessage, onKeyPress, input
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={onKeyPress}
-                    placeholder="Type your message..."
+                    placeholder={privacyAccepted ? 'Type your message...' : 'Accept the privacy notice to chat'}
                     rows={1}
-                    disabled={isThinking || isTyping || isChatLimited}
+                    disabled={inputDisabled}
                     className={`flex-1 resize-none rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-alpha transition-all duration-300 ${darkMode
                         ? 'bg-[#1a1a1a] text-white border border-gray-700 placeholder-gray-500 focus:border-alpha'
                         : 'bg-gray-50 text-gray-900 border border-gray-300 placeholder-gray-400 focus:border-alpha'
-                        } ${isThinking || isTyping || isChatLimited ? 'opacity-50 cursor-not-allowed' : 'hover:border-alpha/50'}`}
+                        } ${inputDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-alpha/50'}`}
                     style={{ minHeight: '48px', maxHeight: '120px' }}
                 />
                 <button
                     onClick={onSendMessage}
-                    disabled={!inputValue.trim() || isThinking || isTyping || isChatLimited}
-                    className={`p-3 rounded-xl transition-all duration-300 ${inputValue.trim() && !isThinking && !isTyping
+                    disabled={!privacyAccepted || !inputValue.trim() || isThinking || isTyping || isChatLimited}
+                    className={`p-3 rounded-xl transition-all duration-300 ${privacyAccepted && inputValue.trim() && !isThinking && !isTyping
                         ? 'bg-beta text-alpha hover:bg-alpha hover:text-beta hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl'
                         : darkMode
                             ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
@@ -412,7 +416,7 @@ const PrivacyNotice = ({ darkMode, onAccept, show, onClose, selectedLanguage }) 
 
     return (
         <div
-            className=" inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-end justify-end p-4 rounded-3xl animate-fade-in"
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 rounded-3xl animate-fade-in"
             onClick={(e) => {
                 // Prevent closing by clicking outside
                 e.stopPropagation();
@@ -617,15 +621,25 @@ const Chatbot = () => {
         }, 100);
     };
 
-    const handleSendMessage = async () => {
-        if (!inputValue.trim() || isThinking || isTyping) return;
+    const handleSendMessage = async (overrideText) => {
+        const messageText = (typeof overrideText === 'string' ? overrideText : inputValue).trim();
+
+        if (!privacyAccepted || !messageText || isThinking || isTyping || isChatLimited) return;
 
         const userMessage = {
             id: Date.now(),
-            text: inputValue.trim(),
+            text: messageText,
             sender: 'user',
             timestamp: new Date(),
         };
+
+        const history = messages
+            .filter((msg) => msg.text?.trim())
+            .slice(-10)
+            .map((msg) => ({
+                role: msg.sender === 'user' ? 'user' : 'assistant',
+                content: msg.text,
+            }));
 
         setMessages(prev => [...prev, userMessage]);
         setInputValue('');
@@ -639,18 +653,26 @@ const Chatbot = () => {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
                     'X-Requested-With': 'XMLHttpRequest',
                 },
-                body: JSON.stringify({ message: userMessage.text }),
+                body: JSON.stringify({
+                    message: userMessage.text,
+                    history,
+                }),
             });
 
-            if (response.status === 429) {
+            const data = await response.json().catch(() => null);
+
+            if (!response.ok) {
                 setIsThinking(false);
-                setIsChatLimited(true);
-                const data = await response.json().catch(() => null);
+
+                if (response.status === 429) {
+                    setIsChatLimited(true);
+                }
+
                 setMessages(prev => [
                     ...prev,
                     {
                         id: Date.now() + 1,
-                        text: data?.message || `You reached the limit of ${MAX_USER_MESSAGES} messages. Please try again later.`,
+                        text: data?.message || `Something went wrong (${response.status}). Please try again.`,
                         sender: 'bot',
                         timestamp: new Date(),
                     },
@@ -658,7 +680,6 @@ const Chatbot = () => {
                 return;
             }
 
-            const data = await response.json();
             setIsThinking(false);
 
             const botResponse = {
@@ -670,7 +691,8 @@ const Chatbot = () => {
 
             setMessages(prev => [...prev, botResponse]);
 
-            const responseText = data.message || data.response || data.reply || 'I apologize, but I encountered an error. Please try again.';
+            const rawText = data?.message || data?.response || data?.reply || 'I apologize, but I encountered an error. Please try again.';
+            const responseText = rawText.replace(/<((https?:\/\/)[^>]+)>/g, '$1');
 
             await typeMessage(responseText, (text) => {
                 setMessages(prev => {
@@ -721,9 +743,7 @@ const Chatbot = () => {
 
     const handleQuickAction = (text) => {
         setInputValue(text);
-        setTimeout(() => {
-            handleSendMessage();
-        }, 100);
+        handleSendMessage(text);
     };
 
     const formatTime = (date) => {
@@ -788,19 +808,15 @@ const Chatbot = () => {
                     onClose={() => setIsOpen(false)}
                 />
 
-                {privacyAccepted && (
-                    <>
-                        {showGuide && <GuidePanel darkMode={darkMode} />}
+                {showGuide && privacyAccepted && <GuidePanel darkMode={darkMode} />}
 
-                        <MessagesContainer
-                            messages={messages}
-                            isThinking={isThinking}
-                            darkMode={darkMode}
-                            formatTime={formatTime}
-                            messagesEndRef={messagesEndRef}
-                        />
-                    </>
-                )}
+                <MessagesContainer
+                    messages={messages}
+                    isThinking={isThinking}
+                    darkMode={darkMode}
+                    formatTime={formatTime}
+                    messagesEndRef={messagesEndRef}
+                />
 
                 {messages.length === 1 && privacyAccepted && (
                     <QuickActions
@@ -818,7 +834,17 @@ const Chatbot = () => {
                     inputRef={inputRef}
                     isThinking={isThinking}
                     isTyping={isTyping}
+                    isChatLimited={isChatLimited}
                     darkMode={darkMode}
+                    privacyAccepted={privacyAccepted}
+                />
+
+                <PrivacyNotice
+                    darkMode={darkMode}
+                    show={showPrivacyNotice}
+                    onAccept={handlePrivacyAccept}
+                    onClose={() => setIsOpen(false)}
+                    selectedLanguage={selectedLanguage}
                 />
             </div>
         </>
