@@ -103,6 +103,7 @@ class BookingController extends Controller
         $request->validate([
             'event_id' => 'required|exists:events,id',
             'answers' => 'nullable|array',
+            'admin_override' => 'sometimes|boolean',
         ]);
 
         $event = Event::findOrFail($request->event_id);
@@ -248,7 +249,9 @@ class BookingController extends Controller
             throw $e;
         }
 
-        if ($event->capacity <= 0) {
+        $adminOverride = $request->boolean('admin_override');
+
+        if (! $adminOverride && $event->capacity <= 0) {
             return response()->json([
                 'success' => false,
                 'message' => [
@@ -265,11 +268,18 @@ class BookingController extends Controller
                 ->first();
 
             if ($existingBooking) {
+                $duplicateMessage = 'This email is already registered for this event.';
+
                 return response()->json([
                     'success' => false,
                     'message' => [
-                        'en' => 'You have already booked this event.',
-                    ]
+                        'en' => $duplicateMessage,
+                        'fr' => 'Cet e-mail est déjà inscrit à cet événement.',
+                        'ar' => 'هذا البريد الإلكتروني مسجل بالفعل في هذا الحدث.',
+                    ],
+                    'errors' => [
+                        'answers.email' => [$duplicateMessage],
+                    ],
                 ], 422);
             }
         }
@@ -286,10 +296,12 @@ class BookingController extends Controller
             'form_data' => $formData,
         ]);
 
-        // Decrement capacity by exactly 1 using database-level update to avoid race conditions
-        DB::table('events')
-            ->where('id', $event->id)
-            ->decrement('capacity', 1);
+        // Decrement capacity when spots remain; admins may overbook at zero capacity.
+        if ($event->capacity > 0) {
+            DB::table('events')
+                ->where('id', $event->id)
+                ->decrement('capacity', 1);
+        }
 
         [$qrBase64, $qrMime] = $this->generateBookingQrImage($booking);
 
