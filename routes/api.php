@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\InfoSessionController;
 use App\Http\Controllers\Api\ParticipantController;
+use App\Http\Controllers\BookingController;
 use App\Models\General;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,8 @@ Route::get('/lionsgate/infosessions', $active['lionsgate'] ? [InfoSessionControl
 Route::get('/infosessions', $active['infosessions'] ? [InfoSessionController::class, 'index'] : $nullRoute);
 Route::put('/validate-invitation', $active['validate_invitation'] ? [InfoSessionController::class, 'validateParticipant'] : $nullRoute);
 Route::put('/validate-event-invitation', $active['validate_event_invitation'] ? [EventController::class, 'validateParticipant'] : $nullRoute);
+Route::put('/manual-event-checking', $active['manual_event_checking'] ? [EventController::class, 'manualChecking'] : $nullRoute);
+Route::post('/booking/store', $active['booking_store'] ? [BookingController::class, 'storeApi'] : $nullRoute);
 Route::put('/manual-checking', $active['manual_checking'] ? [InfoSessionController::class, 'manualChecking'] : $nullRoute);
 Route::get('/session-data', $active['session_data'] ? [InfoSessionController::class, 'infoData'] : $nullRoute);
 Route::get('/profile-data', $active['profile_data'] ? [InfoSessionController::class, 'profileData'] : $nullRoute);

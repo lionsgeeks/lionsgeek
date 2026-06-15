@@ -6,6 +6,8 @@ return array (
   'infosessions' => true,
   'validate_invitation' => true,
   'validate_event_invitation' => true,
+  'manual_event_checking' => true,
+  'booking_store' => true,
   'manual_checking' => true,
   'session_data' => true,
   'profile_data' => true,

@@ -28,6 +28,11 @@ return Application::configure(basePath: dirname(__DIR__))
             "infoSession" => InfoSessionMiddleware::class
         ]);
 
+        // Mobile app posts JSON bookings without a CSRF session token.
+        $middleware->validateCsrfTokens(except: [
+            'booking/store',
+        ]);
+
         // Add CORS middleware for API routes
         $middleware->api(prepend: [
             \Illuminate\Http\Middleware\HandleCors::class,

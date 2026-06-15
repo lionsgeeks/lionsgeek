@@ -2,14 +2,18 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
 
-// Booking routes
-Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+// Booking routes — web (Inertia) + mobile JSON (Accept: application/json).
+// CSRF is skipped so the mobile app can POST without a session token.
+Route::post('/booking/store', [BookingController::class, 'store'])
+    ->name('booking.store')
+    ->withoutMiddleware([ValidateCsrfToken::class]);
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/events', [EventController::class, 'adminIndex'])->name('events.index');

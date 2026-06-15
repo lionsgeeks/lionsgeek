@@ -15,10 +15,12 @@ class Booking extends Model
         "secteur_dactivite",
         "event_id",
         "form_data",
+        "is_visited",
     ];
 
     protected $casts = [
         'form_data' => 'array',
+        'is_visited' => 'boolean',
     ];
 
     public function event()
