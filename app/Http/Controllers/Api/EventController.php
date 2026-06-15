@@ -113,4 +113,40 @@ class EventController extends Controller
             'profile' => $participant,
         ]);
     }
+
+    public function manualChecking(Request $request): JsonResponse
+    {
+        $request->validate([
+            'id' => 'required|integer',
+            'event_id' => 'required|integer',
+        ]);
+
+        $booking = Booking::where('id', $request->id)
+            ->where('event_id', $request->event_id)
+            ->first();
+
+        if (! $booking) {
+            return response()->json([
+                'message' => 'Booking not found.',
+                'status'  => 404,
+            ], 404);
+        }
+
+        if ($booking->is_visited) {
+            return response()->json([
+                'message' => 'Already participated.',
+                'status'  => 200,
+                'profile' => $booking,
+            ]);
+        }
+
+        $booking->is_visited = true;
+        $booking->save();
+
+        return response()->json([
+            'message' => 'manual visite',
+            'status'  => 200,
+            'profile' => $booking,
+        ]);
+    }
 }
