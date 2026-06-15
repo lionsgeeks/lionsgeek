@@ -19,12 +19,14 @@ class BookingConfirmation extends Mailable
     public $booking;
     public $event;
     public $qrCodeBase64;
+    public $qrMime;
 
-    public function __construct(Booking $booking, Event $event, $qrCodeBase64)
+    public function __construct(Booking $booking, Event $event, string $qrCodeBase64, string $qrMime = 'image/jpeg')
     {
         $this->booking = $booking;
         $this->event = $event;
         $this->qrCodeBase64 = $qrCodeBase64;
+        $this->qrMime = $qrMime;
     }
 
     public function envelope(): Envelope
@@ -59,6 +61,7 @@ class BookingConfirmation extends Mailable
             'booking' => $this->booking,
             'event' => $this->event,
             'qrCode' => $this->qrCodeBase64,
+            'qrMime' => $this->qrMime,
             'eventName' => is_array($this->event->name) ? ($this->event->name['en'] ?? $this->event->name['fr'] ?? $this->event->name['ar'] ?? 'Event') : $this->event->name,
             'eventDescription' => is_array($this->event->description) ? ($this->event->description['en'] ?? $this->event->description['fr'] ?? $this->event->description['ar'] ?? 'No description') : $this->event->description,
             'eventDate' => $this->event->date,

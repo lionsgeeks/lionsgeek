@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Mail\BookingConfirmation;
 use App\Models\Booking;
 use App\Models\Event;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use LaravelQRCode\Facades\QRCode;
 
 class BookingController extends Controller
@@ -40,6 +42,63 @@ class BookingController extends Controller
     }
 
     public function store(Request $request)
+    {
+        $asJson = $request->expectsJson();
+        $result = $this->processBooking($request, $asJson);
+
+        if ($result instanceof JsonResponse) {
+            return $result;
+        }
+
+        if ($asJson) {
+            return response()->json([
+                'success' => true,
+                'message' => [
+                    'en' => 'Booking successful!',
+                    'fr' => 'Réservation réussie !',
+                    'ar' => 'تم الحجز بنجاح!',
+                ],
+                'booking' => [
+                    'id' => $result->id,
+                    'event_id' => $result->event_id,
+                    'email' => $result->email,
+                ],
+            ]);
+        }
+
+        return back()->with('success', 'Booking successful!');
+    }
+
+    /**
+     * JSON booking endpoint for the mobile app (and other API clients).
+     */
+    public function storeApi(Request $request): JsonResponse
+    {
+        $result = $this->processBooking($request, true);
+
+        if ($result instanceof JsonResponse) {
+            return $result;
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => [
+                'en' => 'Booking successful!',
+                'fr' => 'Réservation réussie !',
+                'ar' => 'تم الحجز بنجاح!',
+            ],
+            'booking' => [
+                'id' => $result->id,
+                'event_id' => $result->event_id,
+                'email' => $result->email,
+            ],
+        ]);
+    }
+
+    /**
+     * @return Booking|JsonResponse
+     */
+    private function processBooking(Request $request, bool $asJson = false)
     {
         $request->validate([
             'event_id' => 'required|exists:events,id',
@@ -172,7 +231,22 @@ class BookingController extends Controller
         }
 
         $validator = Validator::make(['answers' => $normalizedAnswers], $dynamicRules);
-        $validator->validate();
+
+        try {
+            $validator->validate();
+        } catch (ValidationException $e) {
+            if ($asJson) {
+                return response()->json([
+                    'success' => false,
+                    'message' => [
+                        'en' => collect($e->errors())->flatten()->first() ?: 'Validation failed.',
+                    ],
+                    'errors' => $e->errors(),
+                ], 422);
+            }
+
+            throw $e;
+        }
 
         if ($event->capacity <= 0) {
             return response()->json([
@@ -217,32 +291,54 @@ class BookingController extends Controller
             ->where('id', $event->id)
             ->decrement('capacity', 1);
 
-        // Generate QR code
-        $qrPayload = json_encode([
-            "email" => $booking->email,
-            "code" => $booking->event_id
-        ]);
-
-        // Generate QR code image as base64
-        ob_start();
-        QRCode::text($qrPayload)
-            ->setSize(300)
-            ->setMargin(10)
-            ->setErrorCorrectionLevel('H')
-            ->png();
-        $qrImage = ob_get_clean();
-        $qrBase64 = base64_encode($qrImage);
+        [$qrBase64, $qrMime] = $this->generateBookingQrImage($booking);
 
         // Send confirmation email
         if (is_string($booking->email) && $booking->email !== '') {
             try {
-                Mail::to($booking->email)->send(new BookingConfirmation($booking, $event, $qrBase64));
-            } catch (\Exception $e) {
+                Mail::to($booking->email)->send(new BookingConfirmation($booking, $event, $qrBase64, $qrMime));
+            } catch (\Throwable $e) {
                 Log::error('Failed to send booking confirmation email: ' . $e->getMessage());
             }
         }
 
-        return back()->with('success', 'Booking successful!');
+        return $booking;
+    }
+
+    /**
+     * Generate a QR image suitable for DomPDF (JPEG base64 avoids broken Imagick PNG on Windows).
+     *
+     * @return array{0: string, 1: string} [base64, mime]
+     */
+    private function generateBookingQrImage(Booking $booking): array
+    {
+        $qrPayload = json_encode([
+            'email' => $booking->email,
+            'code' => $booking->event_id,
+        ]);
+
+        $qrTempPath = storage_path('app/qr_booking_' . $booking->id . '_' . time() . '.png');
+        QRCode::text($qrPayload)
+            ->setOutfile($qrTempPath)
+            ->setSize(300)
+            ->setMargin(10)
+            ->setErrorCorrectionLevel('H')
+            ->png();
+
+        $qrBinary = is_file($qrTempPath) ? file_get_contents($qrTempPath) : '';
+        if (is_file($qrTempPath)) {
+            @unlink($qrTempPath);
+        }
+
+        $qrGd = $qrBinary !== '' ? @imagecreatefromstring($qrBinary) : false;
+        if ($qrGd !== false) {
+            ob_start();
+            imagejpeg($qrGd, null, 95);
+            imagedestroy($qrGd);
+            return [base64_encode(ob_get_clean()), 'image/jpeg'];
+        }
+
+        return [base64_encode($qrBinary), 'image/png'];
     }
 
     /**

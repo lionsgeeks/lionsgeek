@@ -1,3 +1,19 @@
+@php
+/**
+ * DOMPDF on Windows with a broken Imagick PNG module crashes on any PNG image.
+ * Convert local PNGs to JPEG in memory using GD, which bypasses Imagick entirely.
+ */
+if (!function_exists('pdfImageAsJpegBase64')) {
+    function pdfImageAsJpegBase64(string $path): string {
+        $gd = @imagecreatefromstring(@file_get_contents($path) ?: '');
+        if (!$gd) return '';
+        ob_start();
+        imagejpeg($gd, null, 92);
+        imagedestroy($gd);
+        return base64_encode(ob_get_clean());
+    }
+}
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -117,7 +133,7 @@
 
         <!-- Header -->
         <div class="header">
-            <img src="{{ public_path('assets/img/lg_logo.png') }}" alt="LionsGeek Logo">
+            <img src="data:image/jpeg;base64,{{ pdfImageAsJpegBase64(public_path('assets/img/lg_logo.png')) }}" alt="LionsGeek Logo">
         </div>
 
         <!-- Content -->
@@ -133,7 +149,7 @@
 
             <p style="text-align: center; font-weight: bold;">For Event Organizers</p>
             <div class="qrcode">
-                <img src="data:image/png;base64,{{ $qrCode }}" alt="QR Code">
+                <img src="data:{{ $qrMime ?? 'image/jpeg' }};base64,{{ $qrCode }}" alt="QR Code">
             </div>
         </div>
 
@@ -149,7 +165,7 @@
             <div class="map">
                 <a
                     href="https://www.google.com/maps/place/LionsGeek/@33.6036273,-7.5357722,733m/data=!3m1!1e3!4m6!3m5!1s0xda7cdb2f812837f:0xbbcfc74fbc11b2d9!8m2!3d33.6037882!4d-7.5338517!16s%2Fg%2F11jy9l0d4m?authuser=0&entry=ttu">
-                    <img src="{{ public_path('assets/img/lg_map.png') }}" alt="LionsGeek Location">
+                    <img src="data:image/jpeg;base64,{{ pdfImageAsJpegBase64(public_path('assets/img/lg_map.png')) }}" alt="LionsGeek Location">
                 </a>
                 <p class="map-remarque">Click the map to open in Google Maps</p>
             </div>
