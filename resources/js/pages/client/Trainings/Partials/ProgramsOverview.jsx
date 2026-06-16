@@ -42,9 +42,9 @@ const SECTION_HEADER = {
     label: { en: 'Our programs', fr: 'Nos programmes', ar: 'برامجنا' },
     title: { en: 'Two paths, four tracks', fr: 'Deux parcours, quatre filières', ar: 'مساران، أربع مسارات' },
     subtitle: {
-        en: 'Whether you have a week or six months, there is a program designed for you — in coding or digital media.',
-        fr: 'Que vous ayez une semaine ou six mois, il existe un programme conçu pour vous — en coding ou en médias digitaux.',
-        ar: 'سواء كان لديك أسبوع أو ستة أشهر، هناك برنامج مصمم لك — في البرمجة أو الإعلام الرقمي.',
+        en: 'Whether you have 5 days or six months, there is a program designed for you — in coding or digital media.',
+        fr: 'Que vous ayez 5 jours ou six mois, il existe un programme conçu pour vous — en coding ou en médias digitaux.',
+        ar: 'سواء كان لديك 5 أيام أو ستة أشهر، هناك برنامج مصمم لك — في البرمجة أو الإعلام الرقمي.',
     },
 };
 
@@ -95,16 +95,16 @@ const PROGRAMS = [
     {
         id: 'short',
         number: '02',
-        badge: { en: 'Short program', fr: 'Programme court', ar: 'برنامج قصير' },
+        badge: { en: 'GeekLab', fr: 'GeekLab', ar: 'GeekLab' },
         title: {
             en: 'A first step into the digital world',
             fr: 'Un premier pas dans le monde digital',
             ar: 'الخطوة الأولى نحو العالم الرقمي',
         },
         description: {
-            en: 'One intensive week to discover your chosen field. Hands-on from day one, free of charge, open to everyone.',
-            fr: "Une semaine intensive pour découvrir votre domaine. Pratique dès le premier jour, gratuite, ouverte à tous.",
-            ar: 'أسبوع مكثف لاكتشاف مجالك المختار. عملي من اليوم الأول، مجاني، مفتوح للجميع.',
+            en: 'Five intensive days to discover your chosen field. Hands-on from day one, free of charge, for middle and high school students.',
+            fr: 'Cinq jours intensifs pour découvrir ton domaine. Pratique dès le premier jour, gratuit, pour les collégiens et lycéens.',
+            ar: 'خمسة أيام مكثفة لاكتشاف مجالك. عملي من اليوم الأول، مجاني، لطلاب الإعدادي والثانوي.',
         },
         isShort: true,
         tracks: [
@@ -113,11 +113,11 @@ const PROGRAMS = [
                 track: 'coding',
                 icon: <CodeIcon />,
                 trackBadge: { en: 'Coding', fr: 'Coding', ar: 'البرمجة' },
-                title: { en: 'Web Development — 1 week', fr: 'Développement Web — 1 semaine', ar: 'تطوير الويب — أسبوع واحد' },
+                title: { en: 'Web Developer — GeekLab', fr: 'Développeur Web — GeekLab', ar: 'مطور ويب — GeekLab' },
                 description: {
-                    en: 'An introduction to web creation. Build your very first project from scratch, guided step by step — no prior experience needed.',
-                    fr: 'Une introduction à la création web. Réalisez votre tout premier projet de zéro, guidé étape par étape — sans expérience préalable.',
-                    ar: 'مقدمة في إنشاء الويب. أنشئ مشروعك الأول من الصفر، مع توجيه خطوة بخطوة — بدون خبرة مسبقة.',
+                    en: 'Build your first website in 5 days. Guided step by step by mentors — no prior experience needed.',
+                    fr: 'Construis ton premier site web en 5 jours. Guidé étape par étape par des mentors — sans expérience préalable.',
+                    ar: 'ابنِ موقعك الأول في 5 أيام. مع توجيه خطوة بخطوة من مرشدين — بدون خبرة مسبقة.',
                 },
             },
             {
@@ -125,11 +125,11 @@ const PROGRAMS = [
                 track: 'media',
                 icon: <CameraIcon />,
                 trackBadge: { en: 'Media', fr: 'Média', ar: 'الإعلام' },
-                title: { en: 'Digital Content — 1 week', fr: 'Contenu Digital — 1 semaine', ar: 'المحتوى الرقمي — أسبوع واحد' },
+                title: { en: 'Digital Content Creator — GeekLab', fr: 'Créateur de contenu digital — GeekLab', ar: 'منشئ المحتوى الرقمي — GeekLab' },
                 description: {
-                    en: 'Explore video creation and visual storytelling. Shoot, edit, and produce your first short content piece from day one.',
-                    fr: 'Explorez la création vidéo et le storytelling visuel. Filmez, montez et produisez votre premier contenu dès le premier jour.',
-                    ar: 'استكشف إنشاء الفيديو والسرد البصري. صور وحرر وأنتج أول محتوى لك منذ اليوم الأول.',
+                    en: 'Create your first media project in 5 days. From idea to finished content, guided by mentors from day one.',
+                    fr: 'Crée ton premier projet média en 5 jours. De l\'idée à la réalisation, accompagné par des mentors dès le premier jour.',
+                    ar: 'أنشئ مشروعك الإعلامي الأول في 5 أيام. من الفكرة إلى الإنجاز، برفقة مرشدين منذ اليوم الأول.',
                 },
             },
         ],
@@ -185,7 +185,7 @@ function TrackCard({ card, format, rtl }) {
 
                         <span className="flex items-center gap-1 rounded-full bg-alpha/15 px-3 py-1 text-xs font-bold text-darker dark:text-alpha">
                             <ClockIcon />
-                            <span>{isShort ? '1 week' : '6 months'}</span>
+                            <span>{isShort ? '5 days' : '6 months'}</span>
                         </span>
                     </div>
 

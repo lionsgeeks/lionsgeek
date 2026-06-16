@@ -11,14 +11,40 @@ import laravel from '../../../../../assets/icons/laravel.svg';
 import { TransText } from '../../../../components/TransText';
 
 import { useAppContext } from '@/context/appContext';
+import { GEEKLAB_CODING_MODULES } from '@/pages/client/shared/geeklabContent';
 import gsap from 'gsap';
 
 const ALL_SKILLS = ['Front-End', 'Back-End', 'Version Control', 'Shell Scripting'];
 
+const CODING_SHORT_ICONS = {
+    'how-websites-work': [htmlLogo],
+    'html-pages': [htmlLogo],
+    'css-styling': [cssLogo],
+    bootstrap: [cssLogo],
+    'final-project': [htmlLogo, cssLogo],
+};
+
+function buildGeeklabPrograme(modules, darkMode) {
+    return Object.fromEntries(
+        modules.map((module) => [
+            module.id,
+            [
+                <p key={module.id} style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
+                    <TransText {...module.description} />
+                </p>,
+                module.title,
+                CODING_SHORT_ICONS[module.id] ?? [htmlLogo],
+            ],
+        ]),
+    );
+}
+
 export const SecondSection = ({ format = 'long' }) => {
-    const skill = format === 'short' ? ['Front-End'] : ALL_SKILLS;
-    const [hint, setHint] = useState('Front-End');
-    const [activeSkill, setActiveSkill] = useState('Front-End');
+    const isShort = format === 'short';
+    const geeklabSkillIds = GEEKLAB_CODING_MODULES.map((m) => m.id);
+    const skill = isShort ? geeklabSkillIds : ALL_SKILLS;
+    const [hint, setHint] = useState(isShort ? geeklabSkillIds[0] : 'Front-End');
+    const [activeSkill, setActiveSkill] = useState(isShort ? geeklabSkillIds[0] : 'Front-End');
     const { selectedLanguage, darkMode } = useAppContext();
 
     const rightside = useRef(null);
@@ -60,7 +86,7 @@ export const SecondSection = ({ format = 'long' }) => {
         );
     }, []);
 
-    const programe = {
+    const longPrograme = {
         'Front-End': [
             [
                 <p key={'Front-End0'} className={`flex flex-col gap-2 lg:flex-row ${selectedLanguage == 'ar' ? 'flex-row-reverse' : ''}`}>
@@ -187,6 +213,8 @@ export const SecondSection = ({ format = 'long' }) => {
             [shellLogo],
         ],
     };
+
+    const programe = isShort ? buildGeeklabPrograme(GEEKLAB_CODING_MODULES, darkMode) : longPrograme;
     const [anime, setAnime] = useState(true);
     return (
         <div className="flex flex-col gap-8 bg-gray-50 px-7 py-7 lg:px-16" style={{ backgroundColor: darkMode ? '#0f0f0f' : '#f9fafb' }}>

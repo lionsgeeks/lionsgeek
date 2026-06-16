@@ -8,15 +8,20 @@ import { ThirdSection } from './components/thirdSection';
 
 const CodingPage = () => {
     const { format = 'long' } = usePage().props;
+    const isShort = format === 'short';
 
     return (
         <AppLayout>
-            <Head title="Coding" />
+            <Head title={isShort ? 'GeekLab — Coding' : 'Coding'} />
             <FirstSection />
             <SecondSection format={format} />
-            <ThirdSection />
-            <FourthSection />
-            <FifthSection />
+            {!isShort && (
+                <>
+                    <ThirdSection />
+                    <FourthSection />
+                    <FifthSection />
+                </>
+            )}
         </AppLayout>
     );
 };

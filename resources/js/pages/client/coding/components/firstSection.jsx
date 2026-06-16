@@ -1,4 +1,5 @@
 import { useAppContext } from '@/context/appContext';
+import { GEEKLAB_AUDIENCE, GEEKLAB_CODING_HERO, GEEKLAB_DURATION } from '@/pages/client/shared/geeklabContent';
 import { router, usePage } from '@inertiajs/react';
 import gsap from 'gsap';
 import { useEffect, useRef, useState } from 'react';
@@ -92,15 +93,28 @@ export const FirstSection = () => {
             style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
         >
             <div ref={leftside} className="flex flex-col gap-4 px-7 py-8 md:py-16 lg:w-[50%] lg:px-16">
+                {format === 'short' && (
+                    <p className="text-sm font-semibold uppercase tracking-wide text-alpha">
+                        <TransText {...GEEKLAB_CODING_HERO.eyebrow} />
+                    </p>
+                )}
                 <h1 className="text-2xl font-bold text-balance md:text-5xl" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                    <TransText fr="Développeur Web Full Stack." en="Full Stack Web Developer." ar="مطور ويب متكامل" />
+                    {format === 'short' ? (
+                        <TransText {...GEEKLAB_CODING_HERO.title} />
+                    ) : (
+                        <TransText fr="Développeur Web Full Stack." en="Full Stack Web Developer." ar="مطور ويب متكامل" />
+                    )}
                 </h1>
                 <p className="text-lg" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                    <TransText
-                        fr="Devenez un pro du Full Stack et créez des applications web puissantes et responsives. Notre bootcamp met l'accent sur des projets concrets pour vous aider à maîtriser les dernières technologies et frameworks."
-                        en="Become a full stack pro and build powerful, responsive web apps. Our bootcamp focuses on hands-on projects to help you master the latest technologies and frameworks ."
-                        ar="أصبح محترفًا في تطوير الويب المتكامل وطور تطبيقات ويب قوية ومتجاوبة. يركز برنامجنا التدريبي على المشاريع العملية لمساعدتك على إتقان أحدث التقنيات والأطر. "
-                    />
+                    {format === 'short' ? (
+                        <TransText {...GEEKLAB_CODING_HERO.description} />
+                    ) : (
+                        <TransText
+                            fr="Devenez un pro du Full Stack et créez des applications web puissantes et responsives. Notre bootcamp met l'accent sur des projets concrets pour vous aider à maîtriser les dernières technologies et frameworks."
+                            en="Become a full stack pro and build powerful, responsive web apps. Our bootcamp focuses on hands-on projects to help you master the latest technologies and frameworks ."
+                            ar="أصبح محترفًا في تطوير الويب المتكامل وطور تطبيقات ويب قوية ومتجاوبة. يركز برنامجنا التدريبي على المشاريع العملية لمساعدتك على إتقان أحدث التقنيات والأطر. "
+                        />
+                    )}
                 </p>
                 <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
                     <svg
@@ -115,13 +129,7 @@ export const FirstSection = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                        {
-                            format === 'short' ? (
-                                <TransText fr="Durée : 1 semaines" en="Duration: 1 weeks" ar="المدة: 3 أسابيع" />
-                            ) : (
-                                <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
-                            )
-                        }
+                        {format === 'short' ? <TransText {...GEEKLAB_DURATION} /> : <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />}
                     </p>
                 </div>
                 <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
@@ -164,6 +172,28 @@ export const FirstSection = () => {
                         <TransText fr="Engagement : 5 jours/semaine" en="Commitment: 5 days/week" ar="الالتزام:  5 أيام/ أسبوع" />
                     </p>
                 </div>
+                {format === 'short' && (
+                    <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="size-5"
+                            style={{ stroke: darkMode ? '#fee819' : '#0f0f0f' }}
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+                            />
+                        </svg>
+                        <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
+                            <TransText {...GEEKLAB_AUDIENCE} />
+                        </p>
+                    </div>
+                )}
 
                 <div
                     className={`mt-2 flex items-center justify-center rounded-lg ${loading ? 'h-10 w-44' : 'w-fit'} ${selectedLanguage === 'ar' ? 'self-end' : ''}`}

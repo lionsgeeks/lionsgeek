@@ -48,9 +48,9 @@ export default function TrainingsHero({ stats = {}, programs = [] }) {
 
                     <p className="text-sm text-gray-600 dark:text-gray-300 sm:text-base md:text-lg">
                         <TransText
-                            en="Free, hands-on programs in coding and digital media. Choose between an intensive 6-month bootcamp or a focused 1-week course — open to everyone."
-                            fr="Des programmes gratuits et pratiques en codage et médias digitaux. Choisissez entre un bootcamp intensif de 6 mois ou une formation ciblée d'1 semaine — ouverts à tous."
-                            ar="برامج مجانية وعملية في البرمجة والإعلام الرقمي. اختر بين معسكر تدريبي مكثف لمدة 6 أشهر أو دورة مركزة لمدة أسبوع واحد — مفتوحة للجميع."
+                            en="Free, hands-on programs in coding and digital media. Choose between an intensive 6-month bootcamp or a focused 5-day GeekLab course for middle and high school students."
+                            fr="Des programmes gratuits et pratiques en codage et médias digitaux. Choisissez entre un bootcamp intensif de 6 mois ou un GeekLab de 5 jours pour collégiens et lycéens."
+                            ar="برامج مجانية وعملية في البرمجة والإعلام الرقمي. اختر بين معسكر تدريبي مكثف لمدة 6 أشهر أو GeekLab لمدة 5 أيام لطلاب الإعدادي والثانوي."
                         />
                     </p>
 

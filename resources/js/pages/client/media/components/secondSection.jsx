@@ -15,14 +15,35 @@ import screen from '../../../../../assets/icons/screen-desktop-svgrepo-com.svg';
 import { TransText } from '../../../../components/TransText';
 
 import { useAppContext } from '@/context/appContext';
+import { GEEKLAB_MEDIA_MODULES } from '@/pages/client/shared/geeklabContent';
 import gsap from 'gsap';
 
-export const SecondSection = () => {
-    const { selectedLanguage, darkMode } = useAppContext();
+const LONG_SKILLS = ['Digital Marketing', 'Branding', 'Graphic Design', 'Audio Visual'];
 
-    const skill = ['Digital Marketing', 'Branding', 'Graphic Design', 'Audio Visual'];
-    const [hint, setHint] = useState('Digital Marketing');
-    const [activeSkill, setActiveSkill] = useState('Digital Marketing');
+const MEDIA_SHORT_ICONS = {
+    'content-creation': [instaLogo, facebook, tiktok],
+    storytelling: [mic],
+    'filming-editing': [camera, premierPro],
+    design: [photoshop, illustrator],
+    'develop-idea': [afterEffect, camera],
+};
+
+function buildGeeklabPrograme(modules) {
+    return Object.fromEntries(
+        modules.map((module) => [
+            module.id,
+            [module.description, module.title, MEDIA_SHORT_ICONS[module.id] ?? [camera]],
+        ]),
+    );
+}
+
+export const SecondSection = ({ format = 'long' }) => {
+    const { selectedLanguage, darkMode } = useAppContext();
+    const isShort = format === 'short';
+    const geeklabSkillIds = GEEKLAB_MEDIA_MODULES.map((m) => m.id);
+    const skill = isShort ? geeklabSkillIds : LONG_SKILLS;
+    const [hint, setHint] = useState(isShort ? geeklabSkillIds[0] : 'Digital Marketing');
+    const [activeSkill, setActiveSkill] = useState(isShort ? geeklabSkillIds[0] : 'Digital Marketing');
     const [anime, setAnime] = useState(true);
     const rightside = useRef(null);
 
@@ -59,7 +80,7 @@ export const SecondSection = () => {
         );
     }, []);
 
-    const programe = {
+    const longPrograme = {
         'Digital Marketing': [
             {
                 ar: (
@@ -161,6 +182,8 @@ export const SecondSection = () => {
             [mic, camera, screen],
         ],
     };
+
+    const programe = isShort ? buildGeeklabPrograme(GEEKLAB_MEDIA_MODULES) : longPrograme;
 
     return (
         <div className="flex flex-col gap-8 bg-gray-50 px-7 py-7 lg:px-16" style={{ backgroundColor: darkMode ? '#0f0f0f' : '#f9fafb' }}>

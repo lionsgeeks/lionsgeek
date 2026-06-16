@@ -4,6 +4,7 @@ import { Button } from '../../../../components/Button';
 import { TransText } from '../../../../components/TransText';
 
 import { useAppContext } from '@/context/appContext';
+import { GEEKLAB_AUDIENCE, GEEKLAB_DURATION, GEEKLAB_MEDIA_HERO } from '@/pages/client/shared/geeklabContent';
 import { router, usePage } from '@inertiajs/react';
 import gsap from 'gsap';
 
@@ -94,19 +95,28 @@ export const FirstSection = () => {
             style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
         >
             <div ref={leftside} className="flex flex-col gap-4 px-7 py-16 lg:w-[50%] lg:px-16">
+                {format === 'short' && (
+                    <p className="text-sm font-semibold uppercase tracking-wide text-alpha">
+                        <TransText {...GEEKLAB_MEDIA_HERO.eyebrow} />
+                    </p>
+                )}
                 <h1 className="text-2xl font-bold md:text-6xl lg:text-balance" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                    <TransText en="Digital Content Creator" fr="Créateur de contenu digital" ar="منشئ المحتوى الرقمي" />
+                    {format === 'short' ? (
+                        <TransText {...GEEKLAB_MEDIA_HERO.title} />
+                    ) : (
+                        <TransText en="Digital Content Creator" fr="Créateur de contenu digital" ar="منشئ المحتوى الرقمي" />
+                    )}
                 </h1>
                 <p className="text-lg" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                    <TransText
-                        en={`Master the art of video production in just ${window.location.href.includes('short') ? '1 week' : '6 months'}. Learn everything
-from camera use and lighting to editing, special effects, and digital
-          marketing. Gain practical skills in live streaming, social media
-          management, and website creation with guidance from professional
-          coaches.`}
-                        fr="Maîtrisez l'art de la production vidéo en seulement 6 mois. Apprenez tout, de l'utilisation de la caméra et de l'éclairage au montage, aux effets spéciaux et au marketing digital. Acquérez des compétences pratiques en streaming en direct, en gestion des réseaux sociaux et en création de sites web avec l'aide de coachs professionnels."
-                        ar="أتقن فن إنتاج الفيديو في غضون 6 أشهر فقط. تعلم كل شيء من استخدام الكاميرا والإضاءة إلى التحرير، والمؤثرات الخاصة، والتسويق الرقمي. احصل على مهارات عملية في البث المباشر، وإدارة وسائل التواصل الاجتماعي، وإنشاء المواقع الإلكترونية بإرشاد من مدربين محترفين."
-                    />
+                    {format === 'short' ? (
+                        <TransText {...GEEKLAB_MEDIA_HERO.description} />
+                    ) : (
+                        <TransText
+                            en="Master the art of video production in just 6 months. Learn everything from camera use and lighting to editing, special effects, and digital marketing. Gain practical skills in live streaming, social media management, and website creation with guidance from professional coaches."
+                            fr="Maîtrisez l'art de la production vidéo en seulement 6 mois. Apprenez tout, de l'utilisation de la caméra et de l'éclairage au montage, aux effets spéciaux et au marketing digital. Acquérez des compétences pratiques en streaming en direct, en gestion des réseaux sociaux et en création de sites web avec l'aide de coachs professionnels."
+                            ar="أتقن فن إنتاج الفيديو في غضون 6 أشهر فقط. تعلم كل شيء من استخدام الكاميرا والإضاءة إلى التحرير، والمؤثرات الخاصة، والتسويق الرقمي. احصل على مهارات عملية في البث المباشر، وإدارة وسائل التواصل الاجتماعي، وإنشاء المواقع الإلكترونية بإرشاد من مدربين محترفين."
+                        />
+                    )}
                 </p>
                 <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
                     <svg
@@ -121,13 +131,7 @@ from camera use and lighting to editing, special effects, and digital
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                        {
-                            format === 'short' ? (
-                                <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
-                            ) : (
-                                <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
-                            )
-                        }
+                        {format === 'short' ? <TransText {...GEEKLAB_DURATION} /> : <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />}
                     </p>
                 </div>
                 <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
@@ -170,6 +174,28 @@ from camera use and lighting to editing, special effects, and digital
                         <TransText fr="Engagement : 5 jours/semaine" en="Commitment: 5 days/week" ar="الالتزام: 5 أيام / أسبوع" />
                     </p>
                 </div>
+                {format === 'short' && (
+                    <div className={`flex items-center gap-4 ${selectedLanguage === 'ar' ? 'flex-row-reverse' : ''}`}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="size-5"
+                            style={{ stroke: darkMode ? '#fee819' : '#0f0f0f' }}
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+                            />
+                        </svg>
+                        <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
+                            <TransText {...GEEKLAB_AUDIENCE} />
+                        </p>
+                    </div>
+                )}
 
                 <div className={`mt-2 flex w-fit items-center justify-center rounded-lg ${selectedLanguage === 'ar' ? 'self-end' : ''}`}>
                     {checkingStatus !== 'open' ? (
