@@ -48,7 +48,7 @@ const TrainingSection = () => {
                                 <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
                                     {
                                         window.location.href.includes('short') ? (
-                                            <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
+                                            <TransText fr="Durée : 5 jours" en="Duration: 5 days" ar="المدة: 5 أيام" />
                                         ) : (
                                             <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
                                         )
@@ -143,7 +143,7 @@ const TrainingSection = () => {
                                 <p style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
                                     {
                                         window.location.href.includes('short') ? (
-                                            <TransText fr="Durée : 1 semaine" en="Duration: 1 week" ar="المدة: 1 أسبوع" />
+                                            <TransText fr="Durée : 5 jours" en="Duration: 5 days" ar="المدة: 5 أيام" />
                                         ) : (
                                             <TransText fr="Durée : 6 mois" en="Duration: 6 months" ar="المدة: 6 أشهر" />
                                         )

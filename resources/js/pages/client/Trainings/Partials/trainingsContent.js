@@ -56,19 +56,19 @@ export const PROGRAM_CONTENT = {
     },
     'coding-short': {
         title: {
-            en: 'Web Development Intensive',
-            fr: 'Intensif Développement Web',
-            ar: 'تكثيف تطوير الويب',
+            en: 'Web Developer — GeekLab',
+            fr: 'Développeur Web — GeekLab',
+            ar: 'مطور ويب — GeekLab',
         },
         description: {
-            en: 'A focused short program to learn web fundamentals, build real projects, and kick-start your developer journey in a few weeks.',
-            fr: 'Un programme court et intensif pour apprendre les bases du web, réaliser des projets concrets et lancer votre parcours de développeur en quelques semaines.',
-            ar: 'برنامج قصير ومركز لتعلم أساسيات الويب، تنفيذ مشاريع حقيقية، وبدء مسيرتك كمطور في بضعة أسابيع.',
+            en: 'Build your first website in just 5 days. An intensive GeekLab program for middle and high school students, guided by mentors from basics to a finished project.',
+            fr: "Construis ton premier site web en seulement 5 jours. Programme GeekLab intensif pour collégiens et lycéens, accompagné par des mentors, des bases du code jusqu'à ton propre projet.",
+            ar: 'ابنِ موقعك الإلكتروني الأول في 5 أيام. برنامج GeekLab مكثف لطلاب الإعدادي والثانوي، برفقة مرشدين من الأساسيات حتى مشروعك النهائي.',
         },
         duration: {
-            en: 'Duration: 1 week',
-            fr: 'Durée : 1 semaine',
-            ar: 'المدة: 1 أسبوع',
+            en: 'Duration: 5 days',
+            fr: 'Durée : 5 jours',
+            ar: 'المدة: 5 أيام',
         },
         fee: {
             en: 'Fee: Free',
@@ -76,26 +76,31 @@ export const PROGRAM_CONTENT = {
             ar: 'الرسوم: مجانية',
         },
         commitment: {
-            en: 'Commitment: 3 days/week',
-            fr: 'Engagement : 3 jours/semaine',
-            ar: 'الالتزام: 3 أيام/ أسبوع',
+            en: 'Commitment: 5 days/week',
+            fr: 'Engagement : 5 jours/semaine',
+            ar: 'الالتزام: 5 أيام/ أسبوع',
+        },
+        audience: {
+            en: 'Audience: Middle & High School Students',
+            fr: 'Public : Collégiens & Lycéens',
+            ar: 'الفئة المستهدفة: طلاب الإعدادي والثانوي',
         },
     },
     'media-short': {
         title: {
-            en: 'Digital Content Bootcamp',
-            fr: 'Bootcamp Création de Contenu',
-            ar: 'معسكر إنشاء المحتوى الرقمي',
+            en: 'Digital Content Creator — GeekLab',
+            fr: 'Créateur de contenu digital — GeekLab',
+            ar: 'منشئ المحتوى الرقمي — GeekLab',
         },
         description: {
-            en: 'Learn storytelling, shooting, and editing essentials to produce professional short-form content for social media and the web.',
-            fr: 'Apprenez les bases du storytelling, du tournage et du montage pour produire du contenu court professionnel pour les réseaux sociaux et le web.',
-            ar: 'تعلم أساسيات السرد والتصوير والمونتاج لإنتاج محتوى قصير احترافي لوسائل التواصل والويب.',
+            en: 'Create your first media project in just 5 days. An intensive GeekLab program for middle and high school students, from idea to finished digital content.',
+            fr: "Crée ton premier projet média en seulement 5 jours. Programme GeekLab intensif pour collégiens et lycéens, de l'idée à la réalisation concrète.",
+            ar: 'أنشئ مشروعك الإعلامي الأول في 5 أيام. برنامج GeekLab مكثف لطلاب الإعدادي والثانوي، من الفكرة إلى الإنجاز العملي.',
         },
         duration: {
-            en: 'Duration: 1 week',
-            fr: 'Durée : 1 semaine',
-            ar: 'المدة: 1 أسبوع',
+            en: 'Duration: 5 days',
+            fr: 'Durée : 5 jours',
+            ar: 'المدة: 5 أيام',
         },
         fee: {
             en: 'Fee: Free',
@@ -103,9 +108,14 @@ export const PROGRAM_CONTENT = {
             ar: 'الرسوم: مجانية',
         },
         commitment: {
-            en: 'Commitment: 3 days/week',
-            fr: 'Engagement : 3 jours/semaine',
-            ar: 'الالتزام: 3 أيام / أسبوع',
+            en: 'Commitment: 5 days/week',
+            fr: 'Engagement : 5 jours/semaine',
+            ar: 'الالتزام: 5 أيام / أسبوع',
+        },
+        audience: {
+            en: 'Audience: Middle & High School Students',
+            fr: 'Public : Collégiens & Lycéens',
+            ar: 'الفئة المستهدفة: طلاب الإعدادي والثانوي',
         },
     },
 };

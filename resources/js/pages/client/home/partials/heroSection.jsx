@@ -15,7 +15,7 @@ export default function HeroSection() {
             description: {
                 en: (
                     <span style={{ color: darkMode ? '#fff' : '#1f1f1f' }}>
-                        Master tech in {window.location.href.includes('short') ? '1 week' : '6 months'}! Gain the skills to thrive in the digital world. Build your career, start projects, and join a
+                        Master tech in {window.location.href.includes('short') ? '5 days' : '6 months'}! Gain the skills to thrive in the digital world. Build your career, start projects, and join a
                         community of future tech pros.
                     </span>
                 ),

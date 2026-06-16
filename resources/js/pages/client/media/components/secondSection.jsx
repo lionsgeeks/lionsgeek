@@ -15,14 +15,41 @@ import screen from '../../../../../assets/icons/screen-desktop-svgrepo-com.svg';
 import { TransText } from '../../../../components/TransText';
 
 import { useAppContext } from '@/context/appContext';
+import { GEEKLAB_MEDIA_MODULES } from '@/pages/client/shared/geeklabContent';
 import gsap from 'gsap';
 
-export const SecondSection = () => {
-    const { selectedLanguage, darkMode } = useAppContext();
+const LONG_SKILLS = ['Digital Marketing', 'Branding', 'Graphic Design', 'Audio Visual'];
 
-    const skill = ['Digital Marketing', 'Branding', 'Graphic Design', 'Audio Visual'];
-    const [hint, setHint] = useState('Digital Marketing');
-    const [activeSkill, setActiveSkill] = useState('Digital Marketing');
+const MEDIA_SHORT_ICONS = {
+    'content-creation': [instaLogo, facebook, tiktok],
+    storytelling: [mic],
+    'filming-editing': [camera, premierPro],
+    design: [photoshop, illustrator],
+    'develop-idea': [afterEffect, camera],
+};
+
+function buildGeeklabPrograme(modules) {
+    return Object.fromEntries(
+        modules.map((module) => [
+            module.id,
+            [
+                <p key={module.id}>
+                    <TransText {...module.description} />
+                </p>,
+                module.title,
+                MEDIA_SHORT_ICONS[module.id] ?? [camera],
+            ],
+        ]),
+    );
+}
+
+export const SecondSection = ({ format = 'long' }) => {
+    const { selectedLanguage, darkMode } = useAppContext();
+    const isShort = format === 'short';
+    const geeklabSkillIds = GEEKLAB_MEDIA_MODULES.map((m) => m.id);
+    const skill = isShort ? geeklabSkillIds : LONG_SKILLS;
+    const [hint, setHint] = useState(isShort ? geeklabSkillIds[0] : 'Digital Marketing');
+    const [activeSkill, setActiveSkill] = useState(isShort ? geeklabSkillIds[0] : 'Digital Marketing');
     const [anime, setAnime] = useState(true);
     const rightside = useRef(null);
 
@@ -43,23 +70,25 @@ export const SecondSection = () => {
             },
         );
 
-        gsap.fromTo(
-            rightside.current,
-            { y: '100%', opacity: '0' },
-            {
-                y: '0%',
-                duration: 1,
-                stagger: 0.2,
-                opacity: '1',
-                scrollTrigger: {
-                    trigger: rightside.current,
-                    start: 'top bottom',
+        if (!isShort && rightside.current) {
+            gsap.fromTo(
+                rightside.current,
+                { y: '100%', opacity: '0' },
+                {
+                    y: '0%',
+                    duration: 1,
+                    stagger: 0.2,
+                    opacity: '1',
+                    scrollTrigger: {
+                        trigger: rightside.current,
+                        start: 'top bottom',
+                    },
                 },
-            },
-        );
-    }, []);
+            );
+        }
+    }, [isShort]);
 
-    const programe = {
+    const longPrograme = {
         'Digital Marketing': [
             {
                 ar: (
@@ -162,6 +191,10 @@ export const SecondSection = () => {
         ],
     };
 
+    const programe = isShort ? buildGeeklabPrograme(GEEKLAB_MEDIA_MODULES) : longPrograme;
+    const detailTextClass = darkMode ? 'text-white' : 'text-darker';
+    const detailPanelClass = darkMode ? 'border border-white bg-[#0f0f0f]' : 'bg-white';
+
     return (
         <div className="flex flex-col gap-8 bg-gray-50 px-7 py-7 lg:px-16" style={{ backgroundColor: darkMode ? '#0f0f0f' : '#f9fafb' }}>
             <div className="w-full pb-10 text-center">
@@ -216,55 +249,56 @@ export const SecondSection = () => {
                                 </svg>
                             </div>
                             <div
-                                className={`${element === hint ? 'h-auto' : 'hidden h-0'} flex flex-col gap-2 bg-white p-4 lg:hidden`}
-                                style={{
-                                    backgroundColor: darkMode ? '#0f0f0f' : '#ffffff',
-                                    border: darkMode ? '1px solid #ffffff' : 'none',
-                                    color: darkMode ? '#ffffff' : '#0f0f0f',
-                                }}
+                                className={`${element === hint ? 'h-auto' : 'hidden h-0'} flex flex-col gap-2 p-4 lg:hidden ${detailPanelClass} ${detailTextClass}`}
                             >
-                                {TransText(programe[element][0])}
+                                {isShort ? programe[element][0] : TransText(programe[element][0])}
                             </div>
                         </div>
                     ))}
                 </div>
                 <div
-                    className="relative hidden overflow-hidden bg-white p-4 lg:flex lg:w-[50%]"
-                    style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff', border: darkMode ? '1px solid #ffffff' : 'none' }}
+                    className={`relative hidden overflow-hidden p-4 lg:flex ${isShort ? 'lg:w-[60%]' : 'lg:w-[50%]'} ${detailPanelClass} ${detailTextClass}`}
                 >
                     {programe[hint] && (
                         <>
-                            <p
-                                className={`absolute bg-white/25 px-5 text-xl font-medium ${selectedLanguage == 'ar' ? 'text-right' : ''}`}
-                                style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
-                            >
-                                {TransText(programe[hint][0])}
-                            </p>
+                            {isShort ? (
+                                <div
+                                    className={`relative z-10 px-5 text-xl font-medium ${selectedLanguage == 'ar' ? 'text-right' : ''}`}
+                                >
+                                    {programe[hint][0]}
+                                </div>
+                            ) : (
+                                <p
+                                    className={`absolute bg-white/25 px-5 text-xl font-medium ${selectedLanguage == 'ar' ? 'text-right' : ''}`}
+                                    style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
+                                >
+                                    {TransText(programe[hint][0])}
+                                </p>
+                            )}
                             <img
                                 loading="lazy"
                                 className={`absolute hidden size-[120%] object-cover duration-700 lg:flex ${
                                     anime ? '-right-56 -rotate-12 duration-500' : '-right-96'
-                                } -top-6 opacity-5`}
-                                style={{
-                                    opacity: darkMode ? 0.2 : undefined,
-                                }}
+                                } -top-6 ${darkMode ? 'opacity-20' : 'opacity-5'}`}
                                 src={programe[hint][2][Math.floor(Math.random() * programe[hint][2].length)]}
                                 alt=""
                             />
                         </>
                     )}
                 </div>
-                <div ref={rightside} className={`hidden w-[10%] gap-2 lg:flex lg:flex-col`}>
-                    {programe[hint][2].map((element, index) => (
-                        <img
-                            loading="lazy"
-                            key={index}
-                            className={`w-[40%] ${darkMode && ![facebook, instaLogo, premierPro, photoshop, illustrator, afterEffect].includes(element) && 'invert'}`}
-                            src={element}
-                            alt=""
-                        />
-                    ))}
-                </div>
+                {!isShort && (
+                    <div ref={rightside} className="hidden w-[10%] gap-2 lg:flex lg:flex-col">
+                        {programe[hint][2].map((element, index) => (
+                            <img
+                                loading="lazy"
+                                key={index}
+                                className={`w-[40%] ${darkMode && ![facebook, instaLogo, premierPro, photoshop, illustrator, afterEffect].includes(element) && 'invert'}`}
+                                src={element}
+                                alt=""
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );
