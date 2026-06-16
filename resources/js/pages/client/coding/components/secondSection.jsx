@@ -24,12 +24,12 @@ const CODING_SHORT_ICONS = {
     'final-project': [htmlLogo, cssLogo],
 };
 
-function buildGeeklabPrograme(modules, darkMode) {
+function buildGeeklabPrograme(modules) {
     return Object.fromEntries(
         modules.map((module) => [
             module.id,
             [
-                <p key={module.id} style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
+                <p key={module.id}>
                     <TransText {...module.description} />
                 </p>,
                 module.title,
@@ -45,6 +45,7 @@ export const SecondSection = ({ format = 'long' }) => {
     const skill = isShort ? geeklabSkillIds : ALL_SKILLS;
     const [hint, setHint] = useState(isShort ? geeklabSkillIds[0] : 'Front-End');
     const [activeSkill, setActiveSkill] = useState(isShort ? geeklabSkillIds[0] : 'Front-End');
+    const [anime, setAnime] = useState(true);
     const { selectedLanguage, darkMode } = useAppContext();
 
     const rightside = useRef(null);
@@ -66,25 +67,23 @@ export const SecondSection = ({ format = 'long' }) => {
             },
         );
 
-        gsap.fromTo(
-            rightside.current,
-            { y: '100%', opacity: '0' },
-            {
-                y: '0%',
-                duration: 1,
-                stagger: 0.2,
-                delay: 0.1,
-                opacity: '1',
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: rightside.current,
-                    start: 'top bottom',
-                    // end: "bottom 20%",
-                    // toggleActions: "play none none reverse",
+        if (!isShort && rightside.current) {
+            gsap.fromTo(
+                rightside.current,
+                { y: '100%', opacity: '0' },
+                {
+                    y: '0%',
+                    duration: 1,
+                    stagger: 0.2,
+                    opacity: '1',
+                    scrollTrigger: {
+                        trigger: rightside.current,
+                        start: 'top bottom',
+                    },
                 },
-            },
-        );
-    }, []);
+            );
+        }
+    }, [isShort]);
 
     const longPrograme = {
         'Front-End': [
@@ -214,13 +213,14 @@ export const SecondSection = ({ format = 'long' }) => {
         ],
     };
 
-    const programe = isShort ? buildGeeklabPrograme(GEEKLAB_CODING_MODULES, darkMode) : longPrograme;
-    const [anime, setAnime] = useState(true);
+    const programe = isShort ? buildGeeklabPrograme(GEEKLAB_CODING_MODULES) : longPrograme;
+    const detailTextClass = darkMode ? 'text-white' : 'text-darker';
+    const detailPanelClass = darkMode ? 'border border-white bg-[#0f0f0f]' : 'bg-white';
+
     return (
         <div className="flex flex-col gap-8 bg-gray-50 px-7 py-7 lg:px-16" style={{ backgroundColor: darkMode ? '#0f0f0f' : '#f9fafb' }}>
             <div className="w-full pb-10 text-center">
                 <h1 className="text-xl" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
-                    {' '}
                     <TransText fr="Nos cours" ar="دوراتنا" en="Our Courses" />
                 </h1>
                 <h1 className="text-5xl font-bold" style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}>
@@ -238,14 +238,14 @@ export const SecondSection = ({ format = 'long' }) => {
                                     setActiveSkill(element);
                                     setAnime(true);
                                 }}
-                                className={`leftside flex cursor-pointer items-center justify-between overflow-x-hidden bg-white p-3 pl-8 text-3xl ${
+                                className={`leftside overflow-x-hidden ${darkMode ? 'bg-beta' : 'bg-white'} flex cursor-pointer items-center justify-between p-3 pl-8 text-3xl ${
                                     selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''
                                 }`}
-                                style={{ backgroundColor: darkMode ? 'var(--color-beta)' : '#ffffff' }}
                             >
                                 <h1
-                                    className={`flex gap-3 ${selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''}`}
-                                    style={{ color: darkMode ? '#ffffff' : '#0f0f0f' }}
+                                    className={`flex gap-3 ${darkMode ? 'text-white' : 'text-black'} ${
+                                        selectedLanguage === 'ar' ? 'text-right lg:flex-row-reverse' : ''
+                                    }`}
                                 >
                                     <span className={`${activeSkill === element ? 'text-alpha' : darkMode ? 'text-white' : 'text-black'} font-bold`}>
                                         {' '}
@@ -262,16 +262,15 @@ export const SecondSection = ({ format = 'long' }) => {
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
                                     stroke="currentColor"
-                                    className={`lg:rotate-0 ${activeSkill === element ? 'stroke-alpha' : darkMode ? 'stroke-white' : 'stroke-black'} } ${element === hint ? 'rotate-90' : ''} ${
-                                        selectedLanguage === 'ar' ? 'lg:rotate-180' : ''
-                                    } size-5 font-bold`}
+                                    className={`lg:rotate-0 ${
+                                        activeSkill === element ? 'stroke-alpha' : darkMode ? 'stroke-white' : 'stroke-black'
+                                    } ${element === hint ? 'rotate-90' : ''} ${selectedLanguage === 'ar' ? 'lg:rotate-180' : ''} size-5 font-bold`}
                                 >
                                     <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                 </svg>
                             </div>
                             <div
-                                className={`${element === hint ? 'h-auto' : 'hidden h-0'} flex flex-col gap-2 bg-white p-4 lg:hidden`}
-                                style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff', border: darkMode ? '1px solid #ffffff' : 'none' }}
+                                className={`${element === hint ? 'h-auto' : 'hidden h-0'} flex flex-col gap-2 p-4 lg:hidden ${detailPanelClass} ${detailTextClass}`}
                             >
                                 {programe[element][0]}
                             </div>
@@ -279,39 +278,45 @@ export const SecondSection = ({ format = 'long' }) => {
                     ))}
                 </div>
                 <div
-                    className="relative hidden bg-white p-4 lg:flex lg:w-[50%] lg:overflow-hidden"
-                    style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff', border: darkMode ? '1px solid #ffffff' : 'none' }}
+                    className={`relative hidden overflow-hidden p-4 lg:flex ${isShort ? 'lg:w-[60%]' : 'lg:w-[50%]'} ${detailPanelClass} ${detailTextClass}`}
                 >
                     {programe[hint] && (
-                        <div
-                            className="flex flex-col gap-2 bg-white/25 px-5 font-medium duration-1000"
-                            style={{ backgroundColor: darkMode ? '#0f0f0f' : '#ffffff' }}
-                        >
-                            {programe[hint][0]}
-                        </div>
+                        <>
+                            {isShort ? (
+                                <div
+                                    className={`relative z-10 px-5 text-xl font-medium ${selectedLanguage == 'ar' ? 'text-right' : ''}`}
+                                >
+                                    {programe[hint][0]}
+                                </div>
+                            ) : (
+                                <div className="relative z-10 flex flex-col gap-2 px-5 font-medium">
+                                    {programe[hint][0]}
+                                </div>
+                            )}
+                            <img
+                                loading="lazy"
+                                className={`absolute hidden size-[120%] object-cover duration-700 lg:flex ${
+                                    anime ? '-right-56 -rotate-12 duration-500' : '-right-96'
+                                } -top-6 ${darkMode ? 'opacity-20' : 'opacity-5'}`}
+                                src={programe[hint][2][Math.floor(Math.random() * programe[hint][2].length)]}
+                                alt=""
+                            />
+                        </>
                     )}
-                    <img
-                        className={`absolute hidden size-[120%] object-cover duration-700 lg:flex ${
-                            anime ? '-right-56 -rotate-12 duration-500' : '-right-96'
-                        } -top-6 opacity-5`}
-                        style={{
-                            opacity: darkMode ? 0.2 : undefined,
-                        }}
-                        src={programe[hint][2][Math.floor(Math.random() * programe[hint][2].length)]}
-                        alt="-rotate-12 -right-56 "
-                    />
                 </div>
-                <div ref={rightside} className="hidden w-[10%] lg:flex lg:flex-col">
-                    {programe[hint][2].map((element, index) => (
-                        <img
-                            loading="lazy"
-                            key={index}
-                            className={`w-[40%] ${darkMode & (element == githubLogo) && 'invert'}`}
-                            src={element}
-                            alt=""
-                        />
-                    ))}
-                </div>
+                {!isShort && (
+                    <div ref={rightside} className="hidden w-[10%] lg:flex lg:flex-col">
+                        {programe[hint][2].map((element, index) => (
+                            <img
+                                loading="lazy"
+                                key={index}
+                                className={`w-[40%] ${darkMode & (element == githubLogo) && 'invert'}`}
+                                src={element}
+                                alt=""
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );
